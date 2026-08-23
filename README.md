@@ -38,6 +38,13 @@
 
 ---
 
+## Design, Icons & Animation Resources
+
+- **Icons**: [Lucide React](https://lucide.dev/icons/)
+- **Car Animations**: [LottieFiles Free Car Animations](https://lottiefiles.com/free-animations/car?asset=all) (For micro-interactions, loading states, and status transitions)
+
+---
+
 ## Pre-Deployment Checklist
 
 Before deploying to production, run the following security audit commands:

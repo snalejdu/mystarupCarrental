@@ -13,11 +13,12 @@ class EnsureAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user() || $request->user()->role !== 'admin') {
-            if ($request->expectsJson()) {
-                return response()->json(['message' => 'Unauthorized. Admin access required.'], 403);
-            }
-            abort(403, 'Unauthorized. Admin access required.');
+        if (!$request->user()) {
+            return redirect('/login')->with('error', 'Please log in to access the admin portal.');
+        }
+
+        if ($request->user()->role !== 'admin') {
+            return redirect('/')->with('error', 'Admin access required. Redirected to home page.');
         }
 
         return $next($request);

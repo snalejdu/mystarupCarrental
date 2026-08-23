@@ -15,11 +15,15 @@ class VehiclePhoto extends Model
         'vehicle_id',
         'path',
         'order',
+        'position_x',
+        'position_y',
         'alt_text',
     ];
 
     protected $casts = [
         'order' => 'integer',
+        'position_x' => 'integer',
+        'position_y' => 'integer',
     ];
 
     protected $appends = ['url'];
@@ -32,21 +36,14 @@ class VehiclePhoto extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    /**
-     * Get a signed temporary URL for the photo.
-     * Photos are stored outside public root for security.
-     */
     public function getUrlAttribute(): string
     {
-        if (str_starts_with($this->path, 'http') || str_starts_with($this->path, '/')) {
-            return $this->path;
+        if (empty($this->path)) {
+            return '';
         }
 
-        if (Storage::disk('private')->exists($this->path)) {
-            return Storage::disk('private')->temporaryUrl(
-                $this->path,
-                now()->addMinutes(60)
-            );
+        if (str_starts_with($this->path, 'http') || str_starts_with($this->path, '/')) {
+            return $this->path;
         }
 
         return route('vehicle.photo', ['photo' => $this->id]);

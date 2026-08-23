@@ -28,28 +28,28 @@ export default function CommissionsPage({ owners }: Props) {
             <Head title="Commission Ledger — RentBohol Admin" />
 
             {/* Banner Overview */}
-            <div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 sm:p-8 mb-8 shadow-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
-                <div className="space-y-1 relative z-10">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs font-bold border border-indigo-500/30">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 mb-8 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div className="space-y-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-700/20 text-primary-300 rounded-lg text-xs font-semibold border border-primary-700/30">
                         <Percent className="w-3.5 h-3.5" /> 4% Global Platform Rate
                     </span>
-                    <h2 className="text-3xl font-black text-white tracking-tight pt-2">
+                    <h2 className="text-3xl font-bold text-white tracking-tight pt-2">
                         {formatCurrency(totalCommissionOwed)} Total Commission
                     </h2>
-                    <p className="text-xs text-indigo-200/70 font-medium">
+                    <p className="text-xs text-slate-400 font-medium">
                         Platform earnings calculated from {formatCurrency(totalGrossRevenue)} in completed rental volume.
                     </p>
                 </div>
             </div>
 
             {/* Commissions Owed Table */}
-            <div className="bg-slate-950 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
                 <div className="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
-                        <h3 className="font-extrabold text-base text-white">Owner Commission Breakdown</h3>
+                        <h3 className="font-semibold text-base text-white">Owner Commission Breakdown</h3>
                         <p className="text-slate-400 text-xs font-medium">Earnings per registered vehicle host</p>
                     </div>
-                    <span className="text-xs font-bold text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
                         {owners.length} Registered Hosts
                     </span>
                 </div>
@@ -57,7 +57,7 @@ export default function CommissionsPage({ owners }: Props) {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="border-b border-slate-800 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+                            <tr className="border-b border-slate-800 text-[10px] font-semibold uppercase text-slate-400 tracking-wider">
                                 <th className="pb-3 px-3">Vehicle Owner</th>
                                 <th className="pb-3 px-3">Listings</th>
                                 <th className="pb-3 px-3">Completed Trips</th>
@@ -76,22 +76,22 @@ export default function CommissionsPage({ owners }: Props) {
                                 owners.map((owner) => (
                                     <tr key={owner.id} className="hover:bg-slate-900/60 transition-colors">
                                         <td className="py-4 px-3">
-                                            <p className="font-extrabold text-white text-sm">{owner.name}</p>
+                                            <p className="font-semibold text-white text-sm">{owner.name}</p>
                                             <p className="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5 font-medium">
                                                 <span>{owner.phone}</span> • <span>{owner.email}</span>
                                             </p>
                                         </td>
-                                        <td className="py-4 px-3 text-slate-300 font-bold">
+                                        <td className="py-4 px-3 text-slate-300 font-semibold">
                                             {owner.vehicles_count} vehicle{owner.vehicles_count !== 1 ? 's' : ''}
                                         </td>
                                         <td className="py-4 px-3 text-slate-300">
-                                            <span className="font-extrabold text-white">{owner.completed_bookings}</span> of {owner.total_bookings} rentals
+                                            <span className="font-semibold text-white">{owner.completed_bookings}</span> of {owner.total_bookings} rentals
                                         </td>
-                                        <td className="py-4 px-3 font-extrabold text-white">
+                                        <td className="py-4 px-3 font-semibold text-white">
                                             {formatCurrency(Number(owner.total_revenue))}
                                         </td>
                                         <td className="py-4 px-3 text-right">
-                                            <span className="font-black text-indigo-400 text-base">
+                                            <span className="font-bold text-primary-400 text-base">
                                                 {formatCurrency(Number(owner.commission_owed))}
                                             </span>
                                         </td>

@@ -15,7 +15,7 @@ class PublicVehicleController extends Controller
     public function home()
     {
         $featuredVehicles = Vehicle::active()
-            ->with(['photos' => fn ($q) => $q->orderBy('order')->limit(1)])
+            ->with(['photos' => fn ($q) => $q->orderBy('order')->limit(1), 'owner:id,name'])
             ->orderBy('avg_rating', 'desc')
             ->limit(6)
             ->get();
@@ -61,14 +61,46 @@ class PublicVehicleController extends Controller
             $query->where('price_per_day', '<=', $request->input('max_price'));
         }
 
-        // Search by title, brand, or model
+        // Search by title, brand, or model (sanitized)
         if ($request->filled('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('brand', 'like', "%{$search}%")
-                  ->orWhere('model', 'like', "%{$search}%");
-            });
+            $search = trim(strip_tags(substr((string) $request->input('search'), 0, 100)));
+            if ($search !== '') {
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('brand', 'like', "%{$search}%")
+                      ->orWhere('model', 'like', "%{$search}%");
+                });
+            }
+        }
+
+        // Filter by transmission
+        if ($request->filled('transmission') && in_array($request->input('transmission'), ['Automatic', 'Manual'])) {
+            $query->where('transmission', $request->input('transmission'));
+        }
+
+        // Real-time Date-Range Availability Filter
+        if ($request->filled('pickup_date') && $request->filled('return_date')) {
+            try {
+                $startDate = \Carbon\Carbon::parse($request->input('pickup_date'))->toDateString();
+                $endDate = \Carbon\Carbon::parse($request->input('return_date'))->toDateString();
+
+                if ($startDate <= $endDate) {
+                    // Exclude vehicles with blocked or booked calendar dates
+                    $query->whereDoesntHave('availability', function ($q) use ($startDate, $endDate) {
+                        $q->whereBetween('date', [$startDate, $endDate])
+                          ->whereIn('status', ['booked', 'blocked']);
+                    });
+
+                    // Exclude vehicles with conflicting active bookings
+                    $query->whereDoesntHave('bookings', function ($q) use ($startDate, $endDate) {
+                        $q->whereIn('status', ['pending', 'accepted'])
+                          ->where('start_date', '<=', $endDate)
+                          ->where('end_date', '>=', $startDate);
+                    });
+                }
+            } catch (\Exception $e) {
+                // Ignore invalid date formats gracefully
+            }
         }
 
         // Sorting
@@ -84,7 +116,7 @@ class PublicVehicleController extends Controller
 
         return Inertia::render('Vehicles/Index', [
             'vehicles' => $vehicles,
-            'filters' => $request->only(['location', 'type', 'min_price', 'max_price', 'search', 'sort']),
+            'filters' => $request->only(['location', 'type', 'transmission', 'min_price', 'max_price', 'search', 'sort', 'pickup_date', 'return_date']),
             'locations' => config('rentbohol.locations'),
             'vehicleTypes' => config('rentbohol.vehicle_types'),
         ]);

@@ -18,7 +18,8 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        $vehicleIds = $request->user()->vehicles()->pluck('id');
+        $user = $request->user() ?: auth()->user();
+        $vehicleIds = $user ? $user->vehicles()->pluck('id') : [];
 
         $bookings = Booking::whereIn('vehicle_id', $vehicleIds)
             ->with(['vehicle' => fn ($q) => $q->with(['photos' => fn ($p) => $p->orderBy('order')->limit(1)])])
@@ -42,6 +43,35 @@ class BookingController extends Controller
 
         return Inertia::render('Owner/Bookings/Index', [
             'bookings' => $bookings,
+        ]);
+    }
+
+    /**
+     * Host Earnings & Commission Statement.
+     */
+    public function earnings(Request $request)
+    {
+        $user = $request->user() ?: auth()->user();
+        $vehicleIds = $user ? $user->vehicles()->pluck('id') : [];
+
+        $completedBookings = Booking::whereIn('vehicle_id', $vehicleIds)
+            ->where('status', 'completed')
+            ->with('vehicle:id,title')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        $totalGrossRevenue = $completedBookings->sum('total_price');
+        $totalCommissionPaid = $completedBookings->sum('commission_amount');
+        $netPayout = $totalGrossRevenue - $totalCommissionPaid;
+
+        return Inertia::render('Owner/Earnings/Index', [
+            'earnings' => [
+                'total_gross' => $totalGrossRevenue,
+                'total_commission' => $totalCommissionPaid,
+                'net_payout' => $netPayout,
+                'completed_count' => $completedBookings->count(),
+            ],
+            'statements' => $completedBookings,
         ]);
     }
 
@@ -114,7 +144,10 @@ class BookingController extends Controller
             })
             ->update(['status' => 'declined']);
 
-        return back()->with('success', 'Booking accepted! Contact details are now visible for both parties.');
+        // Send SMS/Email alert to renter with host contact details
+        \App\Services\NotificationService::notifyRenterBookingAccepted($booking);
+
+        return back()->with('success', 'Booking accepted! Contact details are now unlocked for both parties.');
     }
 
     /**
@@ -151,6 +184,26 @@ class BookingController extends Controller
     }
 
     /**
+     * Cancel an accepted or pending booking by host.
+     */
+    public function cancel(Booking $booking)
+    {
+        Gate::authorize('decline', $booking);
+
+        $booking->update([
+            'status' => 'cancelled',
+        ]);
+
+        // Free up dates on the availability calendar if it was booked
+        VehicleAvailability::where('vehicle_id', $booking->vehicle_id)
+            ->whereBetween('date', [$booking->start_date, $booking->end_date])
+            ->where('status', 'booked')
+            ->update(['status' => 'available']);
+
+        return back()->with('success', 'Booking cancelled. The dates are now available again on the calendar.');
+    }
+
+    /**
      * Owner submits a rating for a completed booking.
      */
     public function rate(Request $request, Booking $booking)
@@ -165,7 +218,7 @@ class BookingController extends Controller
 
         $booking->ratings()->create([
             'rater_type' => 'owner',
-            'rater_identifier' => (string) $request->user()->id,
+            'rater_identifier' => (string) ($request->user()?->id ?? auth()->id()),
             'stars' => $validated['stars'],
             'comment' => $validated['comment'] ?? null,
         ]);

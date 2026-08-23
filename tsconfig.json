@@ -12,10 +12,9 @@
         "isolatedModules": true,
         "noEmit": true,
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["resources/js/*"],
-            "@modules/*": ["Modules/*"]
+            "@/*": ["./resources/js/*"],
+            "@modules/*": ["./Modules/*"]
         }
     },
     "include": [

@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="100%" height="100%">
+  <defs>
+    <!-- Ocean Teal Car Gradient -->
+    <linearGradient id="carBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="50%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#115e59"/>
+    </linearGradient>
+
+    <!-- Windshield Tint Gradient -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Headlight Beam Gradient -->
+    <linearGradient id="headlightBeam" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#fef08a" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#fef08a" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Road Glow Gradient -->
+    <linearGradient id="roadGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#0d9488" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <style>
+      /* Car Suspension Bounce */
+      @keyframes suspensionBounce {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-2px) rotate(-0.5deg); }
+        50% { transform: translateY(1px) rotate(0.3deg); }
+        75% { transform: translateY(-1.5px) rotate(-0.2deg); }
+      }
+
+      /* Wheel Spokes Rotation */
+      @keyframes wheelSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Road Lines Fast Movement */
+      @keyframes roadMove {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-80px); }
+      }
+
+      /* Dust & Speed Wind Particles */
+      @keyframes windFlow {
+        0% { opacity: 0; transform: translateX(50px) scaleX(0.5); }
+        40% { opacity: 0.8; }
+        100% { opacity: 0; transform: translateX(-120px) scaleX(1.5); }
+      }
+
+      /* Light Beam Pulsing */
+      @keyframes beamPulse {
+        0%, 100% { opacity: 0.7; transform: scaleY(1); }
+        50% { opacity: 0.95; transform: scaleY(1.06); }
+      }
+
+      /* Exhaust Smoke Puffs */
+      @keyframes exhaustPuff {
+        0% { opacity: 0; transform: translate(88px, 133px) scale(0.2); }
+        40% { opacity: 0.75; transform: translate(65px, 126px) scale(0.8); }
+        100% { opacity: 0; transform: translate(30px, 118px) scale(1.6); }
+      }
+
+      .exhaust-1 { animation: exhaustPuff 0.6s ease-out infinite; }
+      .exhaust-2 { animation: exhaustPuff 0.6s ease-out 0.2s infinite; }
+      .exhaust-3 { animation: exhaustPuff 0.6s ease-out 0.4s infinite; }
+
+      .car-chassis {
+        animation: suspensionBounce 0.65s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        transform-origin: 190px 130px;
+      }
+
+      .wheel-spokes {
+        animation: wheelSpin 0.38s linear infinite;
+        transform-origin: center center;
+      }
+
+      .road-lines {
+        animation: roadMove 0.35s linear infinite;
+      }
+
+      .wind-particle-1 { animation: windFlow 0.55s ease-out infinite; }
+      .wind-particle-2 { animation: windFlow 0.7s ease-out 0.2s infinite; }
+      .wind-particle-3 { animation: windFlow 0.48s ease-out 0.35s infinite; }
+
+      .headlight-cone {
+        animation: beamPulse 1.2s ease-in-out infinite;
+        transform-origin: 290px 125px;
+      }
+    </style>
+  </defs>
+
+  <!-- Speed Wind Lines (Background) -->
+  <g stroke="#99f6e4" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <line class="wind-particle-1" x1="160" y1="55" x2="220" y2="55" />
+    <line class="wind-particle-2" x1="120" y1="75" x2="190" y2="75" />
+    <line class="wind-particle-3" x1="90" y1="95" x2="150" y2="95" />
+  </g>
+
+  <!-- Exhaust Smoke Puffs -->
+  <g fill="#94a3b8">
+    <circle class="exhaust-1" cx="0" cy="0" r="5" />
+    <circle class="exhaust-2" cx="0" cy="0" r="6" />
+    <circle class="exhaust-3" cx="0" cy="0" r="4" />
+  </g>
+
+  <!-- Headlight Light Beam Cone (Projecting forward) -->
+  <polygon class="headlight-cone" points="292,125 395,95 400,158 292,131" fill="url(#headlightBeam)" />
+
+  <!-- Road Base -->
+  <rect x="0" y="148" width="400" height="8" rx="4" fill="#334155" />
+  <rect x="50" y="148" width="300" height="3" fill="url(#roadGlow)" />
+
+  <!-- Animated Dashed Lane Road Markings -->
+  <g class="road-lines" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round">
+    <line x1="0" y1="152" x2="40" y2="152" />
+    <line x1="80" y1="152" x2="120" y2="152" />
+    <line x1="160" y1="152" x2="200" y2="152" />
+    <line x1="240" y1="152" x2="280" y2="152" />
+    <line x1="320" y1="152" x2="360" y2="152" />
+    <line x1="400" y1="152" x2="440" y2="152" />
+    <line x1="480" y1="152" x2="520" y2="152" />
+  </g>
+
+  <!-- CAR ASSEMBLY (Bounces on suspension) -->
+  <g class="car-chassis">
+    <!-- Drop Shadow Under Car -->
+    <ellipse cx="195" cy="148" rx="105" ry="7" fill="#0f172a" opacity="0.35" />
+
+    <!-- Main Aerodynamic Body Silhouette -->
+    <path d="M 95 130 
+             L 100 115 
+             Q 105 105 120 102 
+             L 155 100 
+             L 185 70 
+             Q 195 65 210 65 
+             L 255 65 
+             Q 275 65 285 85 
+             L 300 105 
+             Q 312 110 315 122 
+             L 315 133 
+             Q 315 138 310 138 
+             L 278 138 
+             A 20 20 0 0 0 238 138 
+             L 158 138 
+             A 20 20 0 0 0 118 138 
+             L 98 138 
+             Q 95 138 95 130 Z" 
+          fill="url(#carBodyGrad)" 
+          stroke="#0f766e" 
+          stroke-width="1.5" />
+
+    <!-- Roofline / Glass Area -->
+    <path d="M 188 73 
+             L 162 99 
+             L 218 99 
+             L 218 73 
+             Q 205 72 188 73 Z" 
+          fill="url(#glassGrad)" />
+
+    <path d="M 224 73 
+             L 224 99 
+             L 290 99 
+             L 277 82 
+             Q 268 73 252 73 Z" 
+          fill="url(#glassGrad)" />
+
+    <!-- Chrome B-Pillar & Window Trim -->
+    <line x1="221" y1="72" x2="221" y2="100" stroke="#042f2e" stroke-width="3" />
+    <path d="M 158 100 L 293 100" stroke="#134e4a" stroke-width="1.5" />
+
+    <!-- Front & Rear Door Cutlines -->
+    <path d="M 221 100 L 221 136" stroke="#042f2e" stroke-width="1" opacity="0.7"/>
+    <path d="M 160 100 L 155 136" stroke="#042f2e" stroke-width="1" opacity="0.7"/>
+    <rect x="226" y="104" width="10" height="2.5" rx="1.2" fill="#042f2e" />
+
+    <!-- Headlight Unit -->
+    <path d="M 305 116 Q 314 118 314 125 L 302 125 Z" fill="#fef08a" filter="url(#glow)"/>
+
+    <!-- Taillight Unit -->
+    <path d="M 96 112 Q 95 120 98 123 L 104 123 L 102 112 Z" fill="#f43f5e" filter="url(#glow)"/>
+
+    <!-- Wheel Arch Inner Liners -->
+    <circle cx="138" cy="138" r="18" fill="#0f172a" />
+    <circle cx="258" cy="138" r="18" fill="#0f172a" />
+
+    <!-- FRONT WHEEL -->
+    <g transform="translate(258, 138)">
+      <!-- Rubber Tire -->
+      <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
+      <!-- Alloy Rim Base -->
+      <circle cx="0" cy="0" r="11" fill="#475569" />
+      <!-- Spinning Rim Spokes -->
+      <g class="wheel-spokes">
+        <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" stroke-width="1" />
+        <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" stroke-width="2" />
+        <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" stroke-width="2" />
+        <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" stroke-width="1.5" />
+        <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" stroke-width="1.5" />
+        <!-- Center Hub Cap -->
+        <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+      </g>
+    </g>
+
+    <!-- REAR WHEEL -->
+    <g transform="translate(138, 138)">
+      <!-- Rubber Tire -->
+      <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
+      <!-- Alloy Rim Base -->
+      <circle cx="0" cy="0" r="11" fill="#475569" />
+      <!-- Spinning Rim Spokes -->
+      <g class="wheel-spokes">
+        <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" stroke-width="1" />
+        <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" stroke-width="2" />
+        <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" stroke-width="2" />
+        <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" stroke-width="1.5" />
+        <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" stroke-width="1.5" />
+        <!-- Center Hub Cap -->
+        <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+      </g>
+    </g>
+  </g>
+</svg>

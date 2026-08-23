@@ -19,13 +19,26 @@ class BookingController extends Controller
      */
     public function store(Request $request, Vehicle $vehicle)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login', ['intended' => url()->previous()])
+                ->with('error', 'Please log in or create an account to reserve this vehicle.');
+        }
+
         $validated = $request->validate([
             'renter_name' => 'required|string|max:255',
             'renter_contact' => 'required|string|max:50',
             'renter_email' => 'nullable|email|max:255',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
+            'pickup_preference' => 'nullable|string',
         ]);
+
+        $user = auth()->user();
+
+        // Prevent host from booking their own vehicle
+        if ($vehicle->owner_id === $user->id) {
+            return back()->withErrors(['vehicle' => 'You cannot book your own listed vehicle.']);
+        }
 
         // Check vehicle is active
         if ($vehicle->status !== 'active') {
@@ -60,22 +73,24 @@ class BookingController extends Controller
         }
 
         $totalDays = now()->parse($validated['start_date'])->diffInDays(now()->parse($validated['end_date']));
-        $totalPrice = $totalDays * $vehicle->price_per_day;
-
-        $renterId = auth()->check() ? auth()->id() : null;
+        $withDelivery = ($validated['pickup_preference'] ?? 'host_location') !== 'host_location';
+        $quote = $vehicle->calculatePriceQuote($totalDays, $withDelivery);
 
         $booking = Booking::create([
             'vehicle_id' => $vehicle->id,
-            'renter_id' => $renterId,
-            'renter_name' => $validated['renter_name'],
-            'renter_contact' => $validated['renter_contact'], // Encrypted via model cast
-            'renter_email' => $validated['renter_email'],
+            'renter_id' => $user->id,
+            'renter_name' => $validated['renter_name'] ?: $user->name,
+            'renter_contact' => $validated['renter_contact'] ?: $user->phone, // Encrypted via model cast
+            'renter_email' => $validated['renter_email'] ?: $user->email,
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
             'total_days' => $totalDays,
-            'total_price' => $totalPrice,
+            'total_price' => $quote['final_total'],
             'status' => 'pending',
         ]);
+
+        // Send SMS/Email notification alert to host
+        \App\Services\NotificationService::notifyHostNewBooking($booking);
 
         // Log booking attempt for security monitoring
         Log::channel('security')->info('Booking request created', [

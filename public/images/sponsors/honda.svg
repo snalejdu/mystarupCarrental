@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <path fill="#E60012" d="M15 12h50v36H15z" rx="6" opacity="0"/>
+  <path fill="#E60012" d="M22 14h6v14h24V14h6v32h-6V33H28v13h-6V14zm26 2.5h-5l-4 9-4-9h-5l6.5 13.5V44h5.5V30l6.5-13.5z" opacity="0"/>
+  <path fill="#E60012" d="M20 12c-2.2 0-4 1.8-4 4v28c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4H20zm5 7h7.5l4.5 12 4.5-12H49l3.5 22h-6l-2-13.5-4.5 11.5h-3L32.5 28 30.5 41.5h-6L25 19z"/>
+  <text x="75" y="39" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="24" fill="#111827" letter-spacing="3">HONDA</text>
+</svg>

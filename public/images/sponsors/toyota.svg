@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <g fill="#EB0A1E">
+    <path d="M40 30c0-11 16-20 35-20s35 9 35 20-16 20-35 20-35-9-35-20zm70 0c0-9.4-15.7-17-35-17S40 20.6 40 30s15.7 17 35 17 35-7.6 35-17z"/>
+    <ellipse cx="75" cy="30" rx="14" ry="24" fill="none" stroke="#EB0A1E" stroke-width="4"/>
+    <ellipse cx="75" cy="18" rx="22" ry="7" fill="none" stroke="#EB0A1E" stroke-width="4"/>
+  </g>
+  <text x="120" y="38" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="22" fill="#111827" letter-spacing="2">TOYOTA</text>
+</svg>

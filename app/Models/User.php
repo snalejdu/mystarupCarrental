@@ -10,12 +10,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar'])]
+#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'driver_license_status'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * Check if renter's driver license is verified.
+     */
+    public function isLicenseVerified(): bool
+    {
+        return $this->driver_license_status === 'verified';
+    }
+
+    /**
+     * Check if renter's driver license is pending review.
+     */
+    public function isLicensePending(): bool
+    {
+        return $this->driver_license_status === 'pending';
+    }
 
     /**
      * Get the attributes that should be cast.

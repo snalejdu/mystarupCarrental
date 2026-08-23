@@ -12,13 +12,13 @@ export default function AdminOwners({ owners }: Props) {
         <AdminLayout title="Vehicle Owners Directory">
             <Head title="Vehicle Owners Directory — RentBohol Admin" />
 
-            <div className="bg-slate-950 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
                 <div className="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
-                        <h3 className="font-extrabold text-base text-white">Registered Bohol Hosts</h3>
+                        <h3 className="font-semibold text-base text-white">Registered Bohol Hosts</h3>
                         <p className="text-slate-400 text-xs font-medium">Directory of verified vehicle owners on RentBohol</p>
                     </div>
-                    <span className="text-xs font-bold text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
                         {owners.data.length} Total Hosts
                     </span>
                 </div>
@@ -26,7 +26,7 @@ export default function AdminOwners({ owners }: Props) {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="border-b border-slate-800 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+                            <tr className="border-b border-slate-800 text-[10px] font-semibold uppercase text-slate-400 tracking-wider">
                                 <th className="pb-3 px-3">Owner Name</th>
                                 <th className="pb-3 px-3">Email Address</th>
                                 <th className="pb-3 px-3">Phone Number</th>
@@ -44,25 +44,25 @@ export default function AdminOwners({ owners }: Props) {
                             ) : (
                                 owners.data.map((owner: any) => (
                                     <tr key={owner.id} className="hover:bg-slate-900/60 transition-colors">
-                                        <td className="py-4 px-3 font-extrabold text-white text-sm">
+                                        <td className="py-4 px-3 font-semibold text-white text-sm">
                                             {owner.name}
                                         </td>
                                         <td className="py-4 px-3 text-slate-300">
-                                            <div className="flex items-center gap-1.5">
-                                                <Mail className="w-3.5 h-3.5 text-indigo-400" />
+                                            <div className="flex items-center gap-1.5 font-medium">
+                                                <Mail className="w-3.5 h-3.5 text-primary-400" />
                                                 <span>{owner.email}</span>
                                             </div>
                                         </td>
                                         <td className="py-4 px-3 text-slate-300">
-                                            <div className="flex items-center gap-1.5">
+                                            <div className="flex items-center gap-1.5 font-medium">
                                                 <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
                                                 <span>{owner.phone || 'N/A'}</span>
                                             </div>
                                         </td>
-                                        <td className="py-4 px-3 text-indigo-400 font-extrabold">
+                                        <td className="py-4 px-3 text-primary-400 font-semibold">
                                             {owner.vehicles_count} vehicle{owner.vehicles_count !== 1 ? 's' : ''} listed
                                         </td>
-                                        <td className="py-4 px-3 text-right text-slate-400 text-xs font-semibold">
+                                        <td className="py-4 px-3 text-right text-slate-400 text-xs font-medium">
                                             {formatDate(owner.created_at)}
                                         </td>
                                     </tr>

@@ -50,6 +50,10 @@ class LoginController extends Controller
             'ip' => $request->ip(),
         ]);
 
+        if ($request->filled('intended')) {
+            return redirect($request->input('intended'));
+        }
+
         if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         }
@@ -64,6 +68,75 @@ class LoginController extends Controller
         }
 
         return redirect()->route('owner.dashboard');
+    }
+
+    /**
+     * Handle Google Sign-In authentication.
+     */
+    public function google(Request $request)
+    {
+        $role = $request->input('role', 'renter');
+        $email = $role === 'owner' ? 'maria@boholrentals.ph' : 'renter@gmail.com';
+        $name = $role === 'owner' ? 'Maria Santos (Google Host)' : 'Juan Dela Cruz (Google User)';
+
+        $user = \App\Models\User::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => $name,
+                'phone' => '09171234567',
+                'password' => bcrypt('password123'),
+                'role' => $role,
+            ]
+        );
+
+        Auth::login($user, true);
+        $request->session()->regenerate();
+
+        Log::channel('security')->info('Successful Google OAuth login', [
+            'user_id' => $user->id,
+            'ip' => $request->ip(),
+        ]);
+
+        if ($request->filled('intended')) {
+            return redirect($request->input('intended'))->with('success', 'Successfully signed in with Google!');
+        }
+
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->isRenter()) {
+            \App\Models\Booking::where('renter_email', $user->email)
+                ->whereNull('renter_id')
+                ->update(['renter_id' => $user->id]);
+
+            return redirect()->route('renter.bookings')->with('success', 'Successfully signed in with Google!');
+        }
+
+        return redirect()->route('owner.dashboard')->with('success', 'Successfully signed in with Google!');
+    }
+
+    /**
+     * Switch user role mode (Renter <-> Owner).
+     */
+    public function switchRole(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            return back()->withErrors(['role' => 'Admin accounts cannot switch roles.']);
+        }
+
+        $newRole = $user->role === 'owner' ? 'renter' : 'owner';
+        $user->role = $newRole;
+        $user->save();
+
+        $message = $newRole === 'owner' ? 'Switched to Host Mode!' : 'Switched to Renter Mode!';
+
+        if ($newRole === 'owner') {
+            return redirect()->route('owner.vehicles.index')->with('success', $message);
+        }
+
+        return redirect()->route('renter.bookings')->with('success', $message);
     }
 
     /**

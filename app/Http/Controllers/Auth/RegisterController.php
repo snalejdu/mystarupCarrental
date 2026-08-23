@@ -56,6 +56,11 @@ class RegisterController extends Controller
             'ip' => $request->ip(),
         ]);
 
+        if ($request->filled('intended')) {
+            return redirect($request->input('intended'))
+                ->with('success', 'Welcome to RentBohol! Complete your reservation below.');
+        }
+
         if ($user->isRenter()) {
             return redirect()->route('renter.bookings')
                 ->with('success', 'Welcome to RentBohol! You can track all your vehicle rentals here.');
