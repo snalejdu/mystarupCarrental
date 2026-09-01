@@ -1,6 +1,7 @@
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { CarFront, Eye, EyeOff, Globe, UserCheck } from 'lucide-react';
+import { Eye, EyeOff, UserCheck, CarFront } from 'lucide-react';
+import GoogleIcon from '@/Components/GoogleIcon';
 import { useState } from 'react';
 
 export default function Register() {
@@ -55,9 +56,9 @@ export default function Register() {
                                     <button
                                         type="button"
                                         onClick={() => setData('role', 'renter')}
-                                        className={`py-3 px-4 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2 ${
+                                        className={`py-3 px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer ${
                                             data.role === 'renter'
-                                                ? 'bg-primary-700 text-white shadow-sm'
+                                                ? 'glass-pill-active'
                                                 : 'text-slate-600 hover:text-slate-900'
                                         }`}
                                     >
@@ -68,9 +69,9 @@ export default function Register() {
                                     <button
                                         type="button"
                                         onClick={() => setData('role', 'owner')}
-                                        className={`py-3 px-4 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2 ${
+                                        className={`py-3 px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer ${
                                             data.role === 'owner'
-                                                ? 'bg-primary-700 text-white shadow-sm'
+                                                ? 'glass-pill-active'
                                                 : 'text-slate-600 hover:text-slate-900'
                                         }`}
                                     >
@@ -164,7 +165,7 @@ export default function Register() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full py-3.5 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-sm transition-colors disabled:opacity-50 mt-2"
+                                    className="glass-btn w-full py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 mt-2 cursor-pointer"
                                 >
                                     {processing ? 'Creating Account...' : data.role === 'renter' ? 'Create Renter Account' : 'Create Owner Account'}
                                 </button>
@@ -176,9 +177,9 @@ export default function Register() {
                                     type="button"
                                     onClick={handleGoogleSignIn}
                                     disabled={isGoogleSigningIn || processing}
-                                    className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-3 shadow-xs disabled:opacity-50 cursor-pointer"
+                                    className="glass-btn-outline-light w-full py-3 text-slate-700 rounded-lg font-semibold text-sm flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
                                 >
-                                    <Globe className="w-5 h-5 shrink-0 text-blue-600" />
+                                    <GoogleIcon className="w-5 h-5 shrink-0" />
                                     <span>{isGoogleSigningIn ? 'Signing up with Google...' : 'Continue with Google'}</span>
                                 </button>
                             </div>

@@ -57,8 +57,8 @@ export default function VehiclesIndex({ vehicles }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('all')}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                                filter === 'all' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                            className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
+                                filter === 'all' ? 'glass-pill-active' : 'text-slate-600 hover:text-slate-900'
                             }`}
                         >
                             All ({counts.all})
@@ -87,7 +87,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
 
                     <Link
                         href="/owner/vehicles/create"
-                        className="inline-flex items-center justify-center gap-2 px-3.5 py-2 bg-accent-500 hover:bg-accent-600 text-white rounded-xl text-xs font-bold transition-all shadow-xs shrink-0"
+                        className="glass-btn-accent inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold shrink-0"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Add Vehicle</span>
@@ -111,7 +111,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                     {filter === 'all' && (
                         <Link
                             href="/owner/vehicles/create"
-                            className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs transition-colors shadow-xs"
+                            className="glass-btn inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs"
                         >
                             <Plus className="w-4 h-4" />
                             <span>List Your First Vehicle</span>
@@ -333,7 +333,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                         {/* Edit Vehicle & Manage */}
                                         <Link
                                             href={`/owner/vehicles/${vehicle.slug}`}
-                                            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-bold text-xs transition-colors shadow-xs"
+                                            className="glass-btn flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs"
                                         >
                                             <Settings className="w-3.5 h-3.5" />
                                             <span>Edit Vehicle</span>

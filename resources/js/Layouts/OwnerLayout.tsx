@@ -1,6 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { Car, CarFront, CalendarDays, User, LogOut, Menu, X, Wallet } from 'lucide-react';
+import DynamicToast from '@/Components/DynamicToast';
+import BrandLogo from '@/Components/BrandLogo';
 
 interface OwnerLayoutProps {
     children: React.ReactNode;
@@ -22,18 +24,16 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-primary-700 selection:text-white">
+            {/* Global Apple Dynamic Island Toast HUD */}
+            <DynamicToast />
+
             {/* Mobile header */}
             <div className="lg:hidden sticky top-0 z-50 bg-white border-b border-slate-200 px-4 h-14 flex items-center justify-between">
-                <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                <button onClick={() => setSidebarOpen(true)} className="glass-btn-icon p-2 -ml-2 rounded-lg text-slate-700">
                     <Menu className="w-5 h-5" />
                 </button>
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="w-7 h-7 bg-primary-700 rounded-lg flex items-center justify-center">
-                        <Car className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-lg font-bold text-slate-900">
-                        Rent<span className="text-primary-700">Bohol</span> Host
-                    </span>
+                <Link href="/" className="flex items-center">
+                    <BrandLogo size="sm" subtitle="Host" />
                 </Link>
                 <div className="w-9" />
             </div>
@@ -75,16 +75,11 @@ function SidebarContent({ navItems, isActive, auth, onClose }: any) {
     return (
         <div className="flex flex-col h-full">
             <div className="p-4 flex items-center justify-between border-b border-slate-100">
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center">
-                        <Car className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-xl font-bold text-slate-900">
-                        Rent<span className="text-primary-700">Bohol</span>
-                    </span>
+                <Link href="/" className="flex items-center">
+                    <BrandLogo size="md" subtitle="Host Hub" />
                 </Link>
                 {onClose && (
-                    <button onClick={onClose} className="p-1 rounded-lg hover:bg-slate-100 text-slate-500">
+                    <button onClick={onClose} className="glass-btn-icon p-1 rounded-lg text-slate-500">
                         <X className="w-5 h-5" />
                     </button>
                 )}
@@ -95,9 +90,9 @@ function SidebarContent({ navItems, isActive, auth, onClose }: any) {
                     <Link
                         key={item.href}
                         href={item.href}
-                        className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                        className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                             isActive(item.href)
-                                ? 'bg-primary-700 text-white shadow-xs'
+                                ? 'glass-btn text-white'
                                 : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                         }`}
                     >
@@ -121,7 +116,7 @@ function SidebarContent({ navItems, isActive, auth, onClose }: any) {
                     href="/user/switch-role"
                     method="post"
                     as="button"
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors mb-2 border border-primary-200"
+                    className="glass-btn-outline-light w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold text-primary-700 rounded-lg mb-2"
                 >
                     🔄 Switch to Renter Mode
                 </Link>

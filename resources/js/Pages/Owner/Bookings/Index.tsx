@@ -334,7 +334,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                             <button
                                                 type="button"
                                                 onClick={() => handleAccept(booking.id)}
-                                                className="px-4 py-1.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white text-xs font-bold transition-colors shadow-2xs"
+                                                className="glass-btn px-4 py-1.5 rounded-xl text-xs font-bold"
                                             >
                                                 Accept Request
                                             </button>

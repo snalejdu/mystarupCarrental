@@ -326,7 +326,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="w-full py-3 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-semibold text-sm transition-colors disabled:opacity-50"
+                            className="glass-btn w-full py-3 rounded-xl font-semibold text-sm disabled:opacity-50"
                         >
                             {processing ? 'Creating Listing...' : 'Create Listing'}
                         </button>

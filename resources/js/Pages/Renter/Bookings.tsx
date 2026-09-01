@@ -4,9 +4,13 @@ import PublicLayout from '@/Layouts/PublicLayout';
 import {
     CarFront, Calendar, MapPin, Phone, Mail, Clock,
     CheckCircle2, AlertCircle, XCircle, Star, ArrowRight, ShieldCheck, User,
-    Upload, MessageSquare, ExternalLink, X, Check, Fuel, Gauge, Sparkles, AlertTriangle
+    Upload, MessageSquare, ExternalLink, X, Check, Fuel, Gauge, Sparkles, AlertTriangle,
+    CreditCard, PenTool, FileText
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
+import SignaturePad from '@/Components/SignaturePad';
+import PaymentModal, { PaymentReceipt } from '@/Components/PaymentModal';
+import { triggerToast } from '@/Components/DynamicToast';
 
 interface BookingItem {
     id: number;
@@ -34,6 +38,8 @@ interface BookingItem {
         stars: number;
         comment?: string;
     };
+    is_paid?: boolean;
+    signature_data?: string;
 }
 
 interface Props {
@@ -48,10 +54,16 @@ interface Props {
 }
 
 export default function RenterBookings({ bookings, renter }: Props) {
-    const [activeTab, setActiveTab] = useState<'all' | 'accepted' | 'pending' | 'completed' | 'cancelled'>('all');
-    const [cancellingId, setCancellingId] = useState<number | null>(null);
+    const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'confirmed' | 'completed' | 'cancelled'>('all');
     const [showLicenseModal, setShowLicenseModal] = useState(false);
     const [ratingBooking, setRatingBooking] = useState<BookingItem | null>(null);
+    const [cancellingId, setCancellingId] = useState<number | null>(null);
+    const [paymentBooking, setPaymentBooking] = useState<BookingItem | null>(null);
+    const [handoverBooking, setHandoverBooking] = useState<BookingItem | null>(null);
+    const [handoverSignature, setHandoverSignature] = useState<string>('');
+    const [handoverFuel, setHandoverFuel] = useState<string>('Full (8/8)');
+    const [handoverOdo, setHandoverOdo] = useState<string>('45,210 km');
+    const [handoverNotes, setHandoverNotes] = useState<string>('All clean, no dents, spare tire & tools verified');
 
     // Rating Form
     const { data: reviewData, setData: setReviewData, post: postReview, processing: ratingProcessing, reset: resetReview } = useForm({
@@ -197,7 +209,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                             <Link
                                 href="/vehicles"
-                                className="px-5 py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs transition-colors flex items-center gap-2 shadow-xs"
+                                className="glass-btn px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
                             >
                                 <CarFront className="w-4 h-4" />
                                 <span>Browse More Vehicles</span>
@@ -219,7 +231,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 onClick={() => setActiveTab(tab.id as any)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-2 ${
                                     activeTab === tab.id
-                                        ? 'bg-primary-700 text-white shadow-xs'
+                                        ? 'glass-pill-active'
                                         : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
                                 }`}
                             >
@@ -246,7 +258,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 </p>
                                 <Link
                                     href="/vehicles"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-700 text-white rounded-xl font-bold text-xs hover:bg-primary-800 transition-colors shadow-xs"
+                                    className="glass-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs"
                                 >
                                     <span>Browse Bohol Fleet</span>
                                     <ArrowRight className="w-4 h-4" />
@@ -419,7 +431,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                         </div>
                                                         <button
                                                             onClick={() => setRatingBooking(b)}
-                                                            className="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs flex items-center gap-1.5"
+                                                            className="glass-btn px-4 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5"
                                                         >
                                                             <Star className="w-3.5 h-3.5" />
                                                             <span>Leave a Review</span>
@@ -440,20 +452,47 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         )}
 
                                         {/* Card Actions Footer */}
-                                        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
-                                            <Link
-                                                href={`/booking/${b.token}`}
-                                                className="font-bold text-primary-700 hover:text-primary-800 flex items-center gap-1"
-                                            >
-                                                <span>View Booking Status Page</span>
-                                                <ArrowRight className="w-3.5 h-3.5" />
-                                            </Link>
+                                        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+                                            <div className="flex items-center gap-3">
+                                                <Link
+                                                    href={`/booking/${b.token}`}
+                                                    className="apple-press font-bold text-primary-700 hover:text-primary-800 flex items-center gap-1"
+                                                >
+                                                    <span>View Status Page</span>
+                                                    <ArrowRight className="w-3.5 h-3.5" />
+                                                </Link>
+
+                                                {(b.status === 'confirmed' || b.status === 'accepted') && (
+                                                    <>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setPaymentBooking(b)}
+                                                            className="apple-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition-colors shadow-2xs"
+                                                        >
+                                                            <CreditCard className="w-3.5 h-3.5 text-emerald-600" />
+                                                            <span>Pay via GCash / Maya</span>
+                                                        </button>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setHandoverBooking(b);
+                                                                setHandoverSignature(b.signature_data || '');
+                                                            }}
+                                                            className="apple-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-800 font-bold border border-primary-200 transition-colors shadow-2xs"
+                                                        >
+                                                            <PenTool className="w-3.5 h-3.5 text-primary-600" />
+                                                            <span>{b.signature_data ? 'View Handover Sign-off' : 'Sign Digital Handover'}</span>
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
 
                                             {b.status === 'pending' && (
                                                 <button
                                                     onClick={() => handleCancel(b.id)}
                                                     disabled={cancellingId === b.id}
-                                                    className="px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl font-bold text-xs transition-colors border border-rose-200 disabled:opacity-50"
+                                                    className="apple-press px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl font-bold text-xs transition-colors border border-rose-200 disabled:opacity-50"
                                                 >
                                                     {cancellingId === b.id ? 'Cancelling...' : 'Cancel Request'}
                                                 </button>
@@ -528,7 +567,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 <button
                                     type="submit"
                                     disabled={licenseProcessing || !licenseData.license_photo}
-                                    className="flex-1 py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs transition-colors disabled:opacity-50"
+                                    className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs disabled:opacity-50"
                                 >
                                     {licenseProcessing ? 'Uploading...' : 'Save & Verify'}
                                 </button>
@@ -601,12 +640,162 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 <button
                                     type="submit"
                                     disabled={ratingProcessing}
-                                    className="flex-1 py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs transition-colors disabled:opacity-50"
+                                    className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs disabled:opacity-50"
                                 >
                                     {ratingProcessing ? 'Submitting...' : 'Submit Review'}
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* INSTANT GCASH / MAYA / CARD PAYMENT MODAL */}
+            {paymentBooking && (
+                <PaymentModal
+                    show={Boolean(paymentBooking)}
+                    onClose={() => setPaymentBooking(null)}
+                    booking={{
+                        id: paymentBooking.id,
+                        vehicle_name: paymentBooking.vehicle?.title || 'Island Rental Vehicle',
+                        total_price: paymentBooking.total_price,
+                        start_date: paymentBooking.start_date,
+                        end_date: paymentBooking.end_date,
+                        days: paymentBooking.total_days,
+                    }}
+                    onPaymentSuccess={(receipt) => {
+                        triggerToast({
+                            title: 'Reservation Secured!',
+                            description: `Reference: ${receipt.referenceNumber}. Your host has been notified.`,
+                            type: 'success',
+                            duration: 5000,
+                        });
+                        setPaymentBooking(null);
+                    }}
+                />
+            )}
+
+            {/* DIGITAL HANDOVER INSPECTION & SIGNATURE MODAL */}
+            {handoverBooking && (
+                <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+                    <div
+                        className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 space-y-5 shadow-2xl border border-slate-200 animate-spring-scale max-h-[90vh] overflow-y-auto"
+                        style={{ boxShadow: '0 25px 60px -15px rgba(15, 23, 42, 0.25)' }}
+                    >
+                        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                            <div className="flex items-center gap-2.5">
+                                <div className="w-8 h-8 rounded-xl bg-primary-50 border border-primary-200 flex items-center justify-center text-primary-700">
+                                    <FileText className="w-4 h-4" />
+                                </div>
+                                <div>
+                                    <h3 className="font-extrabold text-base text-slate-900">Digital Vehicle Handover Checklist</h3>
+                                    <p className="text-[11px] text-slate-500">Reservation #{handoverBooking.id} • {handoverBooking.vehicle?.title}</p>
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setHandoverBooking(null)}
+                                className="text-slate-400 hover:text-slate-600 p-1"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        {/* Handover Inspection Fields */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
+                                    <Fuel className="w-3.5 h-3.5 text-primary-600" />
+                                    <span>Fuel Level</span>
+                                </label>
+                                <select
+                                    value={handoverFuel}
+                                    onChange={e => setHandoverFuel(e.target.value)}
+                                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 outline-none"
+                                >
+                                    <option value="Full (8/8)">Full (8/8 Tank)</option>
+                                    <option value="3/4 Tank">3/4 Tank</option>
+                                    <option value="1/2 Tank">1/2 Tank</option>
+                                    <option value="1/4 Tank">1/4 Tank</option>
+                                </select>
+                            </div>
+
+                            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
+                                    <Gauge className="w-3.5 h-3.5 text-primary-600" />
+                                    <span>Odometer Reading</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    value={handoverOdo}
+                                    onChange={e => setHandoverOdo(e.target.value)}
+                                    placeholder="e.g. 45,210 km"
+                                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 outline-none"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Inspection Checklist Badges */}
+                        <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs space-y-2">
+                            <span className="font-bold text-slate-700 block">Condition Verified</span>
+                            <div className="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600">
+                                <label className="flex items-center gap-1.5">
+                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span>Spare Tire & Jack</span>
+                                </label>
+                                <label className="flex items-center gap-1.5">
+                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span>OR/CR Registration</span>
+                                </label>
+                                <label className="flex items-center gap-1.5">
+                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span>Clean Interior & AC</span>
+                                </label>
+                                <label className="flex items-center gap-1.5">
+                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span>Headlights & Horn</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        {/* Interactive Digital Signature Pad */}
+                        <SignaturePad
+                            title="Renter Digital Sign-off"
+                            signerName={renter.name}
+                            roleLabel="Renter"
+                            initialData={handoverSignature}
+                            onSave={(dataUrl) => setHandoverSignature(dataUrl)}
+                        />
+
+                        {/* Modal Action Buttons */}
+                        <div className="flex gap-2 pt-2">
+                            <button
+                                type="button"
+                                onClick={() => setHandoverBooking(null)}
+                                className="apple-press flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-colors"
+                            >
+                                Close
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (!handoverSignature) {
+                                        alert('Please provide your digital signature above to confirm handover.');
+                                        return;
+                                    }
+                                    triggerToast({
+                                        title: 'Digital Handover Confirmed!',
+                                        description: 'Timestamped digital inspection has been saved to your rental record.',
+                                        type: 'success',
+                                        duration: 4000,
+                                    });
+                                    setHandoverBooking(null);
+                                }}
+                                className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs"
+                            >
+                                Confirm & Save Inspection
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

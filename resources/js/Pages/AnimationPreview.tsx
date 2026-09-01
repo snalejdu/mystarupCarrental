@@ -3,7 +3,14 @@ import { Head } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import CarLoadingAnimation from '@/Components/CarLoadingAnimation';
 import LoadingScreen from '@/Components/LoadingScreen';
-import { Play, Sparkles, Sliders, Layers, RefreshCw, CheckCircle2 } from 'lucide-react';
+import GlassIcons from '@/Components/GlassIcons';
+import DriftWall from '@/Components/DriftWall';
+import AccordionGallery from '@/Components/AccordionGallery';
+import { 
+    Play, Sparkles, Sliders, Layers, RefreshCw, CheckCircle2,
+    FileText, Book, Heart, Cloud, Edit, BarChart2,
+    Car, Bus, Bike, Key, ShieldCheck, Compass
+} from 'lucide-react';
 
 export default function AnimationPreview() {
     const [activeSize, setActiveSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('lg');
@@ -200,6 +207,234 @@ export default function AnimationPreview() {
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Matched to RentBohol's coastal teal palette with suspension physics, high-speed road lane markers, and night-drive headlight projections.
                         </p>
+                    </div>
+                </div>
+
+                {/* Toast Motion HQ 5-Rules Live Interactive Suite */}
+                <div className="mt-16 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                        <div>
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold uppercase tracking-wider mb-2">
+                                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+                                5-Rule Design Motion System
+                            </div>
+                            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                                Toasts Done Right Interactive Suite
+                            </h2>
+                            <p className="text-sm text-slate-500 mt-1">
+                                Desktop Bottom-Right • Mobile Top • Hover to Pause • Swipe to Dismiss • Color-Coded Accents
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                import('@/Components/DynamicToast').then(({ triggerToast }) => {
+                                    triggerToast({
+                                        title: 'File uploaded',
+                                        description: 'Cover.png — 2.4 MB (4s Auto-dismiss)',
+                                        type: 'info'
+                                    });
+                                });
+                            }}
+                            className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-sky-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block mb-1">Rule 02 • Info (4s)</span>
+                            <span className="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors block">Trigger Info Toast</span>
+                            <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                import('@/Components/DynamicToast').then(({ triggerToast }) => {
+                                    triggerToast({
+                                        title: 'Booking Confirmed',
+                                        description: 'Toyota Fortuner locked for 3 days',
+                                        type: 'success'
+                                    });
+                                });
+                            }}
+                            className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-emerald-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">Rule 02 • Success (4s)</span>
+                            <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors block">Trigger Success</span>
+                            <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                import('@/Components/DynamicToast').then(({ triggerToast }) => {
+                                    triggerToast({
+                                        title: 'Session Expiring',
+                                        description: 'Save your booking work soon (7s hold)',
+                                        type: 'warning'
+                                    });
+                                });
+                            }}
+                            className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-amber-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Rule 02 • Warning (7s)</span>
+                            <span className="text-sm font-semibold text-white group-hover:text-amber-300 transition-colors block">Trigger Warning</span>
+                            <span className="text-xs text-slate-400 mt-0.5 block">Holds longer for readability</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                import('@/Components/DynamicToast').then(({ triggerToast }) => {
+                                    triggerToast({
+                                        title: 'Payment Failed',
+                                        description: 'Waiting for user action. Please retry.',
+                                        type: 'error'
+                                    });
+                                });
+                            }}
+                            className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-rose-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 block mb-1">Rule 02 • Error (∞ Persistent)</span>
+                            <span className="text-sm font-semibold text-white group-hover:text-rose-300 transition-colors block">Trigger Error</span>
+                            <span className="text-xs text-slate-400 mt-0.5 block">Requires user close</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                import('@/Components/DynamicToast').then(({ triggerToast }) => {
+                                    triggerToast({
+                                        title: 'Payment Received',
+                                        description: '₱12,500 from Maria Lopez via Maya',
+                                        type: 'payment'
+                                    });
+                                });
+                            }}
+                            className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-teal-400 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300 block mb-1">Rule 05 • Bohol Payment</span>
+                            <span className="text-sm font-semibold text-white group-hover:text-teal-200 transition-colors block">Trigger Payment</span>
+                            <span className="text-xs text-slate-400 mt-0.5 block">Teal ocean accent</span>
+                        </button>
+                    </div>
+                </div>
+
+                {/* React Bits: GlassIcons Component Showcase */}
+                <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            React Bits UI Component
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            3D Glassmorphism Icons (<code className="text-teal-400 font-mono text-xl">&lt;GlassIcons /&gt;</code>)
+                        </h2>
+                        <p className="text-slate-400 text-sm mt-2">
+                            Interactive 3D depth, frosted glass backdrop filters, smooth hover elevation, and responsive labels.
+                        </p>
+                    </div>
+
+                    <div className="relative min-h-[480px] flex items-center justify-center p-4 bg-slate-950/60 rounded-2xl border border-slate-800/80">
+                        <GlassIcons
+                            items={[
+                                { icon: <FileText className="w-6 h-6" />, color: 'blue', label: 'Files' },
+                                { icon: <Book className="w-6 h-6" />, color: 'purple', label: 'Books' },
+                                { icon: <Heart className="w-6 h-6" />, color: 'red', label: 'Health' },
+                                { icon: <Cloud className="w-6 h-6" />, color: 'indigo', label: 'Weather' },
+                                { icon: <Edit className="w-6 h-6" />, color: 'orange', label: 'Notes' },
+                                { icon: <BarChart2 className="w-6 h-6" />, color: 'green', label: 'Stats' },
+                            ]}
+                        />
+                    </div>
+                </div>
+
+                {/* React Bits: DriftWall Component Showcase */}
+                <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            React Bits UI Component
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            3D Drifting Wall (<code className="text-teal-400 font-mono text-xl">&lt;DriftWall /&gt;</code>)
+                        </h2>
+                        <p className="text-slate-400 text-sm mt-2">
+                            Smooth infinite continuous 3D perspective drifting photo columns with parallax pointer tracking and active tile elevation.
+                        </p>
+                    </div>
+
+                    <div className="relative h-[560px] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800/80">
+                        <DriftWall
+                            items={[
+                                { image: '/images/hero/car-fleet-option1.png', title: 'Island Fleet Handshake Deal', href: '/vehicles' },
+                                { image: '/images/hero/car-fleet-option2.png', title: 'Bohol Vehicle Handover', href: '/vehicles' },
+                                { image: '/images/hero/car-fleet-option3.png', title: 'Panglao Coastal Fleet', href: '/vehicles' },
+                                { image: '/images/hero/car-fleet-option4.png', title: 'Tagbilaran Direct Pickup', href: '/vehicles' },
+                                { image: '/images/destinations/chocolate_hills.jpg', title: 'Chocolate Hills', href: '/vehicles' },
+                                { image: '/images/destinations/panglao_beach.jpg', title: 'Panglao Beach', href: '/vehicles' },
+                                { image: '/images/demo/vios.png', title: 'Toyota Vios', href: '/vehicles' },
+                                { image: '/images/destinations/tarsier_sanctuary.jpg', title: 'Tarsier Sanctuary', href: '/vehicles' },
+                                { image: '/images/demo/montero.png', title: 'Mitsubishi Montero', href: '/vehicles' },
+                                { image: '/images/destinations/loboc_river.jpg', title: 'Loboc River', href: '/vehicles' },
+                                { image: '/images/demo/urvan.png', title: 'Nissan NV350', href: '/vehicles' },
+                                { image: '/images/demo/click.png', title: 'Honda Click 125', href: '/vehicles' },
+                            ]}
+                            columns={4}
+                            tileWidth={190}
+                            tileHeight={125}
+                            gap={16}
+                            tilt={16}
+                            turn={-14}
+                            perspective={1200}
+                            depth={120}
+                            speed={42}
+                            direction="up"
+                            variance={0.45}
+                            parallax={0.6}
+                            lift={64}
+                            fade={0.6}
+                            dim={0.55}
+                            overlayColor="#060010"
+                        />
+                    </div>
+                </div>
+
+                {/* React Bits: AccordionGallery Component Showcase */}
+                <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            React Bits UI Component
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            Accordion Gallery (<code className="text-teal-400 font-mono text-xl">&lt;AccordionGallery /&gt;</code>)
+                        </h2>
+                        <p className="text-slate-400 text-sm mt-2">
+                            Smooth GSAP physics-powered interactive expanding accordion panels with 3D rotation, parallax image drift, and dynamic label reveals.
+                        </p>
+                    </div>
+
+                    <div className="w-full relative">
+                        <AccordionGallery
+                            items={[
+                                { image: '/images/destinations/chocolate_hills.jpg', label: 'Chocolate Hills — Carmen', link: '#' },
+                                { image: '/images/destinations/panglao_beach.jpg', label: 'Panglao White Beach', link: '#' },
+                                { image: '/images/demo/vios.png', label: 'Sedan Fleet — Toyota Vios', link: '#' },
+                                { image: '/images/destinations/tarsier_sanctuary.jpg', label: 'Tarsier Sanctuary — Corella', link: '#' },
+                                { image: '/images/destinations/loboc_river.jpg', label: 'Loboc River Cruise', link: '#' },
+                            ]}
+                            defaultIndex={2}
+                            expandRatio={0.52}
+                            trigger="hover"
+                            accentColor="#14b8a6"
+                            overlayColor="#090d16"
+                            textColor="#ffffff"
+                            height={480}
+                            gap={10}
+                            radius={18}
+                            bezelLess={true}
+                        />
                     </div>
                 </div>
             </div>

@@ -2,8 +2,9 @@ import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
     ShieldCheck, CheckCircle2, PhoneCall, Zap,
-    MapPin, CarFront, HeartHandshake, Users, ArrowRight
+    MapPin, CarFront, HeartHandshake, Users, ArrowRight, Award, Lock, Banknote, CalendarCheck
 } from 'lucide-react';
+import DepthCarousel from '@/Components/DepthCarousel';
 
 export default function About() {
     return (
@@ -13,28 +14,32 @@ export default function About() {
                 <meta name="description" content="Learn about RentBohol, the fast, reliable, and efficient website connecting travelers directly with local Boholano vehicle owners." />
             </Head>
 
-            {/* Header */}
-            <div className="bg-slate-50 border-b border-slate-200 py-6 sm:py-8">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+            {/* Header Banner */}
+            <div className="bg-white border-b border-slate-100 py-10 sm:py-14">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+                    <span className="inline-block px-3.5 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wider border border-primary-100">
                         About RentBohol
+                    </span>
+                    <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Empowering Bohol Tourism Direct & Fast
                     </h1>
+                    <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto font-medium">
+                        The simple, transparent, and direct marketplace connecting travelers with verified Boholano vehicle hosts.
+                    </p>
                 </div>
             </div>
 
             {/* Main Content Area */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-16 lg:space-y-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 space-y-16 lg:space-y-24">
 
-                {/* Section 1: Our Story */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-                    <div className="lg:col-span-6 space-y-8">
-                        <div className="space-y-4">
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-snug sm:leading-tight">
-                                Empowering Bohol Tourism with a Fast, Direct & Reliable Website
-                            </h2>
-                        </div>
+                {/* Section 1: Our Story + DepthCarousel */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <div className="lg:col-span-6 space-y-6">
+                        <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-snug sm:leading-tight">
+                            Empowering Bohol Tourism with a Fast, Direct & Reliable Website
+                        </h2>
 
-                        <div className="space-y-6 text-slate-600 text-base sm:text-lg leading-relaxed sm:leading-loose">
+                        <div className="space-y-5 text-slate-600 text-base leading-relaxed font-medium">
                             <p>
                                 RentBohol was created to solve a common challenge across Bohol Island: finding and booking a rental vehicle used to mean endless phone calls, unreturned social media messages, and last-minute double-booking headaches.
                             </p>
@@ -45,121 +50,158 @@ export default function About() {
                         </div>
                     </div>
 
+                    {/* Replace Static Image Frame with React Bits <DepthCarousel /> */}
                     <div className="lg:col-span-6">
-                        <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-900 relative aspect-[4/3]">
-                            <img
-                                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-                                alt="Bohol Coastal Highway"
-                                className="w-full h-full object-cover opacity-90"
+                        <div className="relative w-full h-[440px] sm:h-[480px]">
+                            <DepthCarousel
+                                items={[
+                                    { image: '/images/hero/car-fleet-option1.png', alt: 'RentBohol Fleet Handshake 1' },
+                                    { image: '/images/hero/car-fleet-option2.png', alt: 'RentBohol Fleet Handshake 2' },
+                                    { image: '/images/hero/car-fleet-option3.png', alt: 'RentBohol Fleet Handshake 3' },
+                                    { image: '/images/hero/car-fleet-option4.png', alt: 'RentBohol Fleet Handshake 4' },
+                                    { image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=1000', alt: 'Bohol Coastline' }
+                                ]}
+                                cardWidth={290}
+                                cardHeight={360}
+                                radius={20}
+                                depth={200}
+                                spread={85}
+                                tilt={20}
+                                tiltDirection="right"
+                                perspective={1300}
+                                visibleCards={4}
+                                falloff={0.2}
+                                blur={5}
+                                autoplay
+                                autoplayDelay={3200}
+                                loop
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-8 sm:p-10">
-                                <div className="text-white space-y-1">
-                                    <span className="text-xs font-semibold text-primary-300 uppercase tracking-wider">Built for Bohol</span>
-                                    <h3 className="text-xl sm:text-2xl font-bold leading-normal">Connecting Travelers & Boholano Hosts</h3>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Section 2: How We Solve The Problem */}
+                <div className="space-y-10 lg:space-y-12">
+                    <div className="text-center max-w-3xl mx-auto space-y-3">
+                        <p className="text-xs font-extrabold uppercase tracking-widest text-primary-600">
+                            Core Solution
+                        </p>
+                        <h2 className="font-heading text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
+                            How RentBohol Solves The Challenge
+                        </h2>
+                        <p className="text-slate-500 text-sm sm:text-base font-medium leading-relaxed">
+                            Eliminating communication delays and double-booking stress for everyone.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                        {/* Card 1: Fast */}
+                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                            <div className="space-y-4">
+                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
+                                <div className="glass-3d-badge mb-2">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <Zap className="w-5 h-5 text-white" />
+                                    </span>
+                                </div>
+                                <div className="space-y-2">
+                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-teal-700 transition-colors">Fast & Instant Requests</h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                        No more waiting hours for replies. Rentees submit trip dates in seconds, and vehicle hosts receive instant notifications to review and accept requests.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Card 2: Reliable */}
+                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-emerald-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                            <div className="space-y-4">
+                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
+                                <div className="glass-3d-badge glass-3d-badge--emerald mb-2">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <ShieldCheck className="w-5 h-5 text-white" />
+                                    </span>
+                                </div>
+                                <div className="space-y-2">
+                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition-colors">Reliable Host Contacts</h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                        Once a booking request is accepted, direct contact phone numbers and emails unlock immediately for 1-tap calls and easy island pickup coordination.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Card 3: Direct Pricing */}
+                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-amber-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                            <div className="space-y-4">
+                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
+                                <div className="glass-3d-badge glass-3d-badge--amber mb-2">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <HeartHandshake className="w-5 h-5 text-white" />
+                                    </span>
+                                </div>
+                                <div className="space-y-2">
+                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-amber-700 transition-colors">Direct Local Pricing</h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                        Rentees get transparent daily rates set directly by local Boholano owners with zero middleman markups or surprise booking fees.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Section 2: How We Solve The Problem */}
-                <div className="space-y-12 lg:space-y-16">
-                    <div className="text-center max-w-3xl mx-auto space-y-4">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-snug">
-                            How RentBohol Solves The Challenge
-                        </h2>
-                        <p className="text-slate-500 text-base leading-relaxed">
-                            Eliminating communication delays and double-booking stress for everyone.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Card 1: Fast */}
-                        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:shadow-md transition-shadow duration-200">
-                            <div className="w-12 h-12 rounded-lg bg-primary-700 text-white flex items-center justify-center">
-                                <Zap className="w-6 h-6" />
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="font-semibold text-lg text-slate-900">Fast & Instant Requests</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">
-                                    No more waiting hours for replies. Rentees submit trip dates in seconds, and vehicle hosts receive instant notifications to review and accept requests.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Card 2: Reliable */}
-                        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:shadow-md transition-shadow duration-200">
-                            <div className="w-12 h-12 rounded-lg bg-emerald-700 text-white flex items-center justify-center">
-                                <ShieldCheck className="w-6 h-6" />
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="font-semibold text-lg text-slate-900">Reliable Host Contacts</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">
-                                    Once a booking request is accepted, direct contact phone numbers and emails unlock immediately for 1-tap calls and easy island pickup coordination.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Card 3: Efficient */}
-                        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:shadow-md transition-shadow duration-200">
-                            <div className="w-12 h-12 rounded-lg bg-amber-600 text-white flex items-center justify-center">
-                                <HeartHandshake className="w-6 h-6" />
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="font-semibold text-lg text-slate-900">Direct Local Pricing</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">
-                                    Rentees get transparent daily rates set directly by local Boholano owners with zero middleman markups or surprise booking fees.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Section 3: Empowering Local Boholanos */}
-                <div className="bg-slate-900 rounded-2xl p-10 sm:p-14 lg:p-20 text-white shadow-lg space-y-12">
-                    <div className="max-w-3xl space-y-6">
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-snug sm:leading-tight">
+                <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 rounded-3xl p-8 sm:p-12 lg:p-16 text-white shadow-2xl border border-primary-500/30 space-y-10">
+                    <div className="max-w-3xl space-y-4 relative z-10">
+                        <p className="text-xs font-extrabold uppercase tracking-widest text-primary-400">
+                            LOCAL COMMUNITY IMPACT
+                        </p>
+                        <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
                             Helping Boholanos Build an Efficient & Reliable Rental Service
                         </h2>
-                        <p className="text-slate-300 text-base sm:text-lg leading-relaxed sm:leading-loose">
+                        <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
                             For local Boholano vehicle hosts, RentBohol provides a modern, high-speed website to showcase their vehicles without needing complicated tech setups. We empower local car, van, and scooter owners across Tagbilaran, Panglao, Dauis, Loboc, and beyond to manage their rental schedules efficiently and earn sustainable income.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm font-medium pt-8 border-t border-slate-700">
-                        <div className="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-bold pt-8 border-t border-slate-800 relative z-10">
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
+                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>100% Free for Rentees</span>
                         </div>
-                        <div className="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
+                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Airport & Port Pickup Sync</span>
                         </div>
-                        <div className="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
+                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Fast Mobile Performance</span>
                         </div>
-                        <div className="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
+                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Direct Host Communication</span>
                         </div>
                     </div>
                 </div>
 
                 {/* Section 4: Call to Action */}
-                <div className="bg-slate-50 rounded-2xl p-10 sm:p-14 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-8">
-                    <div className="space-y-3 text-center sm:text-left">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-snug">
+                <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-8">
+                    <div className="space-y-2 text-center sm:text-left">
+                        <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900">
                             Ready to explore Bohol Island?
                         </h3>
-                        <p className="text-sm sm:text-base text-slate-500">
-                            Call customer care at <span className="font-semibold text-slate-900">(038) 501-8888</span> or browse our available vehicle fleet now.
+                        <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                            Call customer care at <span className="font-bold text-slate-900">(038) 501-8888</span> or browse our available vehicle fleet now.
                         </p>
                     </div>
 
                     <Link
                         href="/vehicles"
-                        className="px-8 py-3.5 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-sm transition-colors shrink-0 flex items-center gap-2"
+                        className="glass-btn px-8 py-4 rounded-2xl font-bold text-xs shrink-0 flex items-center gap-2"
                     >
                         <span>Browse Vehicles Now</span>
                         <ArrowRight className="w-4 h-4" />
@@ -167,13 +209,13 @@ export default function About() {
                 </div>
 
                 {/* Section 5: Official Sponsor & Partner Brands — Infinite Horizontal Marquee */}
-                <div className="bg-slate-50 rounded-2xl py-8 px-4 border border-slate-200 text-center overflow-hidden space-y-4">
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                <div className="bg-white rounded-3xl py-8 px-4 border border-slate-200/90 text-center overflow-hidden space-y-4 shadow-xs">
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
                         OFFICIAL FLEET BRANDS & BOHOL TOURISM PARTNERS
                     </p>
                     <div className="relative w-full overflow-hidden flex">
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
                         <div className="flex gap-12 sm:gap-16 md:gap-20 animate-marquee items-center">
                             {[
@@ -192,7 +234,7 @@ export default function About() {
                             ].map((brand, i) => (
                                 <div
                                     key={`${brand.name}-${i}`}
-                                    className="px-7 py-3 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-center justify-center shrink-0 h-16 min-w-[200px] hover:border-slate-300 transition-all cursor-pointer"
+                                    className="px-7 py-3 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-center shrink-0 h-16 min-w-[200px] hover:border-slate-300 transition-all cursor-pointer"
                                 >
                                     <img src={brand.src} alt={brand.name} className="h-8 w-auto object-contain" />
                                 </div>

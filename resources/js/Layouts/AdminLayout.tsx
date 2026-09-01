@@ -4,6 +4,8 @@ import {
     Shield, LayoutDashboard, Percent, CalendarDays, Users, LogOut,
     Menu, X, CarFront, Search, Bell, Activity, ChevronRight
 } from 'lucide-react';
+import DynamicToast from '@/Components/DynamicToast';
+import BrandLogo from '@/Components/BrandLogo';
 
 interface AdminLayoutProps {
     children: React.ReactNode;
@@ -26,17 +28,17 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
     return (
         <div className="min-h-screen bg-slate-900 text-slate-100 flex font-sans selection:bg-primary-700 selection:text-white">
+            {/* Global Apple Dynamic Island Toast HUD */}
+            <DynamicToast />
+
             {/* Mobile Header */}
             <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-950 text-white px-4 h-16 flex items-center justify-between border-b border-slate-800">
-                <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+                <button onClick={() => setSidebarOpen(true)} className="glass-btn-icon p-2 -ml-2 rounded-xl text-slate-300">
                     <Menu className="w-5 h-5" />
                 </button>
-                <div className="flex items-center gap-2 font-bold text-lg">
-                    <div className="w-7 h-7 bg-primary-700 rounded-lg flex items-center justify-center text-white">
-                        <CarFront className="w-4 h-4" />
-                    </div>
-                    <span>Rent<span className="text-primary-400">Bohol</span> Admin</span>
-                </div>
+                <Link href="/" className="flex items-center">
+                    <BrandLogo theme="dark" size="sm" subtitle="Admin Console" />
+                </Link>
                 <div className="w-9" />
             </div>
 
@@ -78,7 +80,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
                         <div className="h-4 w-px bg-slate-800" />
 
-                        <button className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors">
+                        <button className="glass-btn-icon p-2 rounded-lg text-slate-400 hover:text-white">
                             <Bell className="w-4 h-4" />
                         </button>
                     </div>
@@ -117,21 +119,11 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
         <div className="flex flex-col h-full">
             {/* Header Brand */}
             <div className="p-6 flex items-center justify-between border-b border-slate-800/80">
-                <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 bg-primary-700 rounded-xl flex items-center justify-center text-white">
-                        <CarFront className="w-6 h-6" />
-                    </div>
-                    <div>
-                        <span className="text-lg font-bold text-white block leading-none">
-                            Rent<span className="text-primary-400">Bohol</span>
-                        </span>
-                        <span className="text-[9px] text-slate-400 uppercase tracking-widest block font-bold mt-1">
-                            Platform Console
-                        </span>
-                    </div>
+                <Link href="/" className="flex items-center">
+                    <BrandLogo theme="dark" size="md" subtitle="Platform Console" />
                 </Link>
                 {onClose && (
-                    <button onClick={onClose} className="p-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
+                    <button onClick={onClose} className="glass-btn-icon p-1.5 rounded-xl text-slate-400">
                         <X className="w-5 h-5" />
                     </button>
                 )}
@@ -151,7 +143,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                             href={item.href}
                             className={`flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
                                 active
-                                    ? 'bg-primary-700 text-white shadow-sm'
+                                    ? 'glass-btn text-white'
                                     : 'text-slate-400 hover:bg-slate-900 hover:text-white'
                             }`}
                         >

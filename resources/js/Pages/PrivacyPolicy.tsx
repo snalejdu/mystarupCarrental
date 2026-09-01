@@ -127,7 +127,7 @@ export default function PrivacyPolicy() {
                         <div className="flex flex-wrap gap-3 shrink-0">
                             <Link
                                 href="/contact"
-                                className="px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white rounded-xl font-semibold text-xs transition-colors flex items-center gap-2"
+                                className="glass-btn-accent px-6 py-3 rounded-xl font-semibold text-xs flex items-center gap-2"
                             >
                                 <span>Contact Privacy Support</span>
                                 <ArrowRight className="w-4 h-4" />

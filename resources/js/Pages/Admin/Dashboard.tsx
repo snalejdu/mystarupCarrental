@@ -213,7 +213,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             <span className="text-xs font-semibold text-white block">4.0% Global Commission Active</span>
                             <p className="text-[10px] text-slate-400 font-medium">Free listings for hosts • Platform charges 4% upon acceptance</p>
                         </div>
-                        <Link href="/admin/commissions" className="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-xs transition-colors shrink-0">
+                        <Link href="/admin/commissions" className="glass-btn px-4 py-2 rounded-lg font-semibold text-xs shrink-0">
                             Ledger & Payouts
                         </Link>
                     </div>

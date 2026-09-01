@@ -74,10 +74,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                     <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 py-2">
                         <button
                             onClick={() => applyFilter('type', null)}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
                                 !activeType
-                                    ? 'bg-primary-700 text-white'
-                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                    ? 'glass-pill-active'
+                                    : 'glass-pill text-slate-700'
                             }`}
                         >
                             <Compass className="w-4 h-4" />
@@ -86,10 +86,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                         <button
                             onClick={() => applyFilter('type', 'car')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
                                 activeType === 'car'
-                                    ? 'bg-primary-700 text-white'
-                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                    ? 'glass-pill-active'
+                                    : 'glass-pill text-slate-700'
                             }`}
                         >
                             <CarFront className="w-4 h-4" />
@@ -98,10 +98,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                         <button
                             onClick={() => applyFilter('type', 'motorbike')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
                                 activeType === 'motorbike'
-                                    ? 'bg-primary-700 text-white'
-                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                    ? 'glass-pill-active'
+                                    : 'glass-pill text-slate-700'
                             }`}
                         >
                             <Bike className="w-4 h-4" />
@@ -110,10 +110,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                         <button
                             onClick={() => applyFilter('type', 'suv')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
                                 activeType === 'suv'
-                                    ? 'bg-primary-700 text-white'
-                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                    ? 'glass-pill-active'
+                                    : 'glass-pill text-slate-700'
                             }`}
                         >
                             <CarFront className="w-4 h-4" />
@@ -122,10 +122,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                         <button
                             onClick={() => applyFilter('type', 'van')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
                                 activeType === 'van'
-                                    ? 'bg-primary-700 text-white'
-                                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                    ? 'glass-pill-active'
+                                    : 'glass-pill text-slate-700'
                             }`}
                         >
                             <Users className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                             <div className="md:col-span-1 flex gap-1.5">
                                 <button
                                     type="submit"
-                                    className="w-full py-2.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1 shrink-0 shadow-xs"
+                                    className="glass-btn w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1 shrink-0"
                                 >
                                     <span>Find</span>
                                 </button>
@@ -184,7 +184,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     <button
                                         type="button"
                                         onClick={clearDates}
-                                        className="p-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs transition-colors shrink-0"
+                                        className="glass-btn-icon p-2.5 rounded-xl text-slate-700 text-xs shrink-0"
                                         title="Clear Date Filters"
                                     >
                                         <X className="w-4 h-4" />
@@ -212,24 +212,24 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Transmission:</span>
                                 <button
                                     onClick={() => applyFilter('transmission', null)}
-                                    className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                                        !filters.transmission ? 'bg-primary-700 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                        !filters.transmission ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
                                     All
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'automatic')}
-                                    className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                                        filters.transmission === 'automatic' ? 'bg-primary-700 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                        filters.transmission === 'automatic' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
                                     Automatic
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'manual')}
-                                    className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                                        filters.transmission === 'manual' ? 'bg-primary-700 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                        filters.transmission === 'manual' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
                                     Manual
@@ -267,7 +267,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                             <p className="text-sm text-slate-500">Try searching for a different model or clearing category filters.</p>
                             <button
                                 onClick={() => router.get('/vehicles')}
-                                className="px-5 py-2.5 bg-primary-700 text-white rounded-lg text-sm font-medium hover:bg-primary-800"
+                                className="glass-btn px-5 py-2.5 rounded-lg text-sm font-medium"
                             >
                                 Clear All Filters
                             </button>
@@ -281,11 +281,11 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 <Link
                                     key={i}
                                     href={link.url || '#'}
-                                    className={`px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
+                                    className={`px-4 py-2 rounded-lg text-xs font-medium ${
                                         link.active
-                                            ? 'bg-primary-700 text-white'
+                                            ? 'glass-pill-active'
                                             : link.url
-                                            ? 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                            ? 'glass-pill text-slate-700'
                                             : 'text-slate-300 cursor-not-allowed'
                                     }`}
                                     dangerouslySetInnerHTML={{ __html: link.label }}
@@ -317,14 +317,14 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
     const airconText = vehicle.has_aircon === false ? 'Non-Aircon' : 'Aircon';
 
     return (
-        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between group">
+        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between group cursor-pointer">
             {/* Top Image Box */}
             <div className="aspect-[16/10] bg-slate-100 rounded-xl overflow-hidden mb-5 relative border border-slate-100">
                 {primaryPhoto ? (
                     <img
                         src={primaryPhoto.url}
                         alt={vehicle.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                         style={{
                             objectPosition: `${primaryPhoto.position_x ?? 50}% ${primaryPhoto.position_y ?? 50}%`,
                         }}
@@ -387,7 +387,7 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
             {/* Bottom Action Button */}
             <Link
                 href={`/vehicles/${vehicle.slug}`}
-                className="w-full py-3.5 bg-primary-700 hover:bg-primary-800 text-white rounded-xl font-semibold text-xs text-center transition-colors block"
+                className="glass-btn w-full py-3.5 rounded-xl font-semibold text-xs text-center block"
             >
                 View Details
             </Link>

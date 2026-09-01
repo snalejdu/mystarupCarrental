@@ -1,6 +1,7 @@
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { CarFront, Eye, EyeOff, Globe, Shield, UserCheck } from 'lucide-react';
+import { Eye, EyeOff, Shield, UserCheck, CarFront } from 'lucide-react';
+import GoogleIcon from '@/Components/GoogleIcon';
 import { useState } from 'react';
 
 export default function Login() {
@@ -115,7 +116,7 @@ export default function Login() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full py-3.5 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-sm transition-colors disabled:opacity-50 mt-2"
+                                    className="glass-btn w-full py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 mt-2"
                                 >
                                     {processing ? 'Signing in...' : 'Sign in'}
                                 </button>
@@ -127,9 +128,9 @@ export default function Login() {
                                     type="button"
                                     onClick={handleGoogleSignIn}
                                     disabled={isGoogleSigningIn || processing}
-                                    className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-3 shadow-xs disabled:opacity-50 cursor-pointer"
+                                    className="glass-btn-outline-light w-full py-3 text-slate-700 rounded-lg font-semibold text-sm flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
                                 >
-                                    <Globe className="w-5 h-5 shrink-0 text-blue-600" />
+                                    <GoogleIcon className="w-5 h-5 shrink-0" />
                                     <span>{isGoogleSigningIn ? 'Signing in with Google...' : 'Continue with Google'}</span>
                                 </button>
                             </div>
@@ -145,7 +146,7 @@ export default function Login() {
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('renter@gmail.com')}
-                                    className="px-2 py-2.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-1 transition-colors"
+                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
                                 >
                                     <UserCheck className="w-3.5 h-3.5 text-primary-700" /> Demo Renter
                                 </button>
@@ -153,7 +154,7 @@ export default function Login() {
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('maria@boholrentals.ph')}
-                                    className="px-2 py-2.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-1 transition-colors"
+                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
                                 >
                                     <CarFront className="w-3.5 h-3.5 text-primary-700" /> Demo Owner
                                 </button>
@@ -161,7 +162,7 @@ export default function Login() {
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('admin@rentbohol.com')}
-                                    className="px-2 py-2.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-1 transition-colors"
+                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
                                 >
                                     <Shield className="w-3.5 h-3.5 text-amber-500" /> Demo Admin
                                 </button>
@@ -177,7 +178,7 @@ export default function Login() {
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Simple branded panel with fleet photo */}
+                    {/* RIGHT COLUMN: Branded panel with fleet photo */}
                     <div className="lg:col-span-6 text-white flex flex-col justify-between rounded-2xl relative overflow-hidden m-3 lg:m-4 min-h-[500px]">
                         {/* Background Image + Dark Overlay */}
                         <div
@@ -201,7 +202,7 @@ export default function Login() {
                                 </p>
                             </div>
 
-                            {/* Simple feature list instead of fake dashboard widget */}
+                            {/* Simple feature list */}
                             <div className="space-y-3 mt-8">
                                 <div className="flex items-center gap-3 text-sm text-slate-300">
                                     <span className="w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />

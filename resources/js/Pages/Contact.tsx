@@ -128,7 +128,7 @@ export default function Contact() {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full py-3 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                                className="glass-btn w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"
                             >
                                 <Send className="w-4 h-4" />
                                 <span>{processing ? 'Sending...' : 'Send Message'}</span>
@@ -154,44 +154,56 @@ export default function Contact() {
                         </div>
 
                         {/* Contact details list */}
-                        <div className="space-y-2.5">
-                            <div className="p-3.5 rounded-xl bg-white border border-slate-200 flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
-                                    <MapPin className="w-4 h-4" />
+                        <div className="space-y-3">
+                            <div className="group p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-amber-400/60 hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                                <div className="glass-3d-badge glass-3d-badge--amber shrink-0">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <MapPin className="w-5 h-5 text-white" />
+                                    </span>
                                 </div>
-                                <div>
-                                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400 block">Address</span>
-                                    <span className="text-sm font-medium text-slate-900 block">CPG Avenue, Tagbilaran City, Bohol 6300</span>
-                                </div>
-                            </div>
-
-                            <div className="p-3.5 rounded-xl bg-white border border-slate-200 flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center shrink-0 border border-primary-200">
-                                    <Mail className="w-4 h-4" />
-                                </div>
-                                <div>
-                                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400 block">Email</span>
-                                    <span className="text-sm font-medium text-slate-900 block">support@rentbohol.ph</span>
+                                <div className="min-w-0">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Address</span>
+                                    <span className="text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">CPG Avenue, Tagbilaran City, Bohol 6300</span>
                                 </div>
                             </div>
 
-                            <div className="p-3.5 rounded-xl bg-white border border-slate-200 flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
-                                    <PhoneCall className="w-4 h-4" />
+                            <div className="group p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-400/60 hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                                <div className="glass-3d-badge shrink-0">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <Mail className="w-5 h-5 text-white" />
+                                    </span>
                                 </div>
-                                <div>
-                                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400 block">Phone & WhatsApp</span>
-                                    <span className="text-sm font-medium text-slate-900 block">(038) 501-8888 / +63 917 123 4567</span>
+                                <div className="min-w-0">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Email</span>
+                                    <a href="mailto:support@rentbohol.ph" className="text-sm font-bold text-slate-900 hover:text-teal-600 transition-colors block">support@rentbohol.ph</a>
                                 </div>
                             </div>
 
-                            <div className="p-3.5 rounded-xl bg-white border border-slate-200 flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 border border-slate-200">
-                                    <Clock className="w-4 h-4" />
+                            <div className="group p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-emerald-400/60 hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                                <div className="glass-3d-badge glass-3d-badge--emerald shrink-0">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <PhoneCall className="w-5 h-5 text-white" />
+                                    </span>
                                 </div>
-                                <div>
-                                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400 block">Opening Hours</span>
-                                    <span className="text-sm font-medium text-slate-900 block">Monday – Sunday: 7:00 AM – 10:00 PM</span>
+                                <div className="min-w-0">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Phone & WhatsApp</span>
+                                    <a href="tel:+639171234567" className="text-sm font-bold text-slate-900 hover:text-emerald-600 transition-colors block">(038) 501-8888 / +63 917 123 4567</a>
+                                </div>
+                            </div>
+
+                            <div className="group p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-400/60 hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                                <div className="glass-3d-badge shrink-0">
+                                    <span className="glass-3d-badge__back" aria-hidden="true" />
+                                    <span className="glass-3d-badge__front" aria-hidden="true">
+                                        <Clock className="w-5 h-5 text-white" />
+                                    </span>
+                                </div>
+                                <div className="min-w-0">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Opening Hours</span>
+                                    <span className="text-sm font-bold text-slate-900 block">Monday – Sunday: 7:00 AM – 10:00 PM</span>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +224,7 @@ export default function Contact() {
 
                     <Link
                         href="/vehicles"
-                        className="px-8 py-3.5 bg-primary-700 hover:bg-primary-800 text-white rounded-lg font-semibold text-sm transition-colors shrink-0 flex items-center gap-2"
+                        className="glass-btn px-8 py-3.5 rounded-lg font-semibold text-sm shrink-0 flex items-center gap-2"
                     >
                         <span>Browse Vehicles Now</span>
                         <ArrowRight className="w-4 h-4" />
