@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import './DepthCarousel.css';
 
 export interface DepthCarouselItem {
@@ -407,16 +408,7 @@ export default function DepthCarousel({
                         aria-label="Previous slide"
                         onClick={() => navigateBy(-1)}
                     >
-                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                            <path
-                                d="M15 5l-7 7 7 7"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <CaretLeft className="w-5 h-5" weight="bold" />
                     </button>
                     <button
                         type="button"
@@ -424,16 +416,7 @@ export default function DepthCarousel({
                         aria-label="Next slide"
                         onClick={() => navigateBy(1)}
                     >
-                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                            <path
-                                d="M9 5l7 7-7 7"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <CaretRight className="w-5 h-5" weight="bold" />
                     </button>
                 </>
             )}
