@@ -32,16 +32,13 @@
   "env": {
     "APP_KEY": "base64:SGe084z0okoksW0WXyFebDKAZ9umXMfWnYBVU79MTlI=",
     "APP_ENV": "production",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
     "DB_CONNECTION": "sqlite",
-    "APP_CONFIG_CACHE": "/tmp/config.php",
-    "APP_EVENTS_CACHE": "/tmp/events.php",
-    "APP_PACKAGES_CACHE": "/tmp/packages.php",
-    "APP_ROUTES_CACHE": "/tmp/routes.php",
-    "APP_SERVICES_CACHE": "/tmp/services.php",
-    "VIEW_COMPILED_PATH": "/tmp",
+    "APP_MAINTENANCE_DRIVER": "file",
     "CACHE_STORE": "array",
-    "LOG_CHANNEL": "stderr",
-    "SESSION_DRIVER": "cookie"
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "cookie",
+    "QUEUE_CONNECTION": "sync",
+    "LOG_CHANNEL": "stderr"
   }
 }

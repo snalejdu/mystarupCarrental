@@ -5,6 +5,26 @@ putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
+putenv('APP_MAINTENANCE_DRIVER=file');
+$_ENV['APP_MAINTENANCE_DRIVER'] = 'file';
+$_SERVER['APP_MAINTENANCE_DRIVER'] = 'file';
+
+putenv('SESSION_DRIVER=cookie');
+$_ENV['SESSION_DRIVER'] = 'cookie';
+$_SERVER['SESSION_DRIVER'] = 'cookie';
+
+putenv('CACHE_STORE=array');
+$_ENV['CACHE_STORE'] = 'array';
+$_SERVER['CACHE_STORE'] = 'array';
+
+putenv('CACHE_DRIVER=array');
+$_ENV['CACHE_DRIVER'] = 'array';
+$_SERVER['CACHE_DRIVER'] = 'array';
+
+putenv('QUEUE_CONNECTION=sync');
+$_ENV['QUEUE_CONNECTION'] = 'sync';
+$_SERVER['QUEUE_CONNECTION'] = 'sync';
+
 // Create writable storage structure in /tmp for Vercel
 $storageDirs = [
     '/tmp/storage',
@@ -22,14 +42,15 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// Ensure SQLite database exists in /tmp
+// Ensure SQLite database exists in /tmp and is fully populated
 $tmpDb = '/tmp/database.sqlite';
-if (!file_exists($tmpDb)) {
-    $seedDb = dirname(__DIR__) . '/database/seed.db';
+$seedDb = dirname(__DIR__) . '/database/seed.db';
+if (!file_exists($tmpDb) || (file_exists($seedDb) && filesize($tmpDb) < filesize($seedDb))) {
     if (file_exists($seedDb)) {
-        copy($seedDb, $tmpDb);
+        @copy($seedDb, $tmpDb);
+        @chmod($tmpDb, 0666);
     } else {
-        touch($tmpDb);
+        @touch($tmpDb);
     }
 }
 
