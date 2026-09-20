@@ -58,6 +58,78 @@
     --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
     --default-transition-duration: 450ms;
     --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ── Mobile-First Typography Tokens (rem-based) ── */
+    --text-caption: 0.75rem; /* 12px absolute minimum */
+    --text-body-sm: 0.875rem; /* 14px */
+    --text-body: 1rem; /* 16px base */
+    --text-title-sm: 1.125rem; /* 18px */
+    --text-title: 1.25rem; /* 20px */
+    --text-h3: 1.5rem; /* 24px */
+    --text-h2: 1.75rem; /* 28px */
+    --text-h1: 2rem; /* 32px */
+
+    /* ── Mobile Dimensions & Touch Targets ── */
+    --spacing-touch-min: 2.75rem; /* 44px WCAG floor */
+    --spacing-touch-lg: 3rem; /* 48px preferred */
+    --spacing-topbar: 3.5rem; /* 56px */
+    --spacing-bottombar: 3.75rem; /* 60px */
+}
+
+/* ============================================
+   Mobile-First Safe Area & Touch Utilities
+   ============================================ */
+.pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+}
+.pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+}
+.top-safe {
+    top: env(safe-area-inset-top, 0px);
+}
+.bottom-safe {
+    bottom: env(safe-area-inset-bottom, 0px);
+}
+.h-safe-top {
+    height: env(safe-area-inset-top, 0px);
+}
+.h-safe-bottom {
+    height: env(safe-area-inset-bottom, 0px);
+}
+
+/* Touch targets (WCAG compliant) */
+.touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.touch-target-48 {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile-first input standard: enforces 16px font to prevent iOS Safari auto-zoom */
+.input-mobile {
+    min-height: 48px;
+    font-size: 1rem !important;
+}
+
+/* Break words utility to prevent horizontal overflow */
+.break-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 /* ============================================

@@ -30,9 +30,13 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             <DynamicToast />
 
             {/* Mobile Header */}
-            <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-950 text-white px-4 h-16 flex items-center justify-between border-b border-slate-800">
-                <button onClick={() => setSidebarOpen(true)} className="glass-btn-icon p-2 -ml-2 rounded-xl text-slate-300">
-                    <List className="w-5 h-5" />
+            <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-950 text-white px-4 h-14 flex items-center justify-between border-b border-slate-800 pt-safe">
+                <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="glass-btn-icon touch-target rounded-xl text-slate-300 -ml-2"
+                    aria-label="Open Admin Menu"
+                >
+                    <List className="w-6 h-6" />
                 </button>
                 <Link href="/" className="flex items-center">
                     <BrandLogo theme="dark" size="sm" subtitle="Admin Console" />
@@ -43,8 +47,8 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             {/* Mobile Drawer Overlay */}
             {sidebarOpen && (
                 <div className="lg:hidden fixed inset-0 z-50">
-                    <div className="absolute inset-0 bg-black/60" onClick={() => setSidebarOpen(false)} />
-                    <div className="absolute left-0 top-0 bottom-0 w-72 bg-slate-950 text-white shadow-2xl border-r border-slate-800">
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={() => setSidebarOpen(false)} />
+                    <div className="absolute left-0 top-0 bottom-0 w-72 max-w-[85vw] bg-slate-950 text-white shadow-2xl border-r border-slate-800 flex flex-col pt-safe pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
                         <AdminSidebarContent navItems={navItems} isActive={isActive} auth={auth} onClose={() => setSidebarOpen(false)} />
                     </div>
                 </div>
@@ -56,7 +60,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             </aside>
 
             {/* Main Area */}
-            <div className="flex-1 lg:ml-64 min-h-screen bg-slate-900 flex flex-col pt-16 lg:pt-0">
+            <div className="flex-1 lg:ml-64 min-h-screen bg-slate-900 flex flex-col pt-[calc(3.5rem+env(safe-area-inset-top,0px))] lg:pt-0 pb-safe">
                 {/* Top Desktop Bar */}
                 <header className="hidden lg:flex h-16 bg-slate-950 border-b border-slate-800/80 px-8 items-center justify-between sticky top-0 z-20">
                     <div className="flex items-center gap-3">
@@ -78,35 +82,34 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
                         <div className="h-4 w-px bg-slate-800" />
 
-                        <button className="glass-btn-icon p-2 rounded-lg text-slate-400 hover:text-white">
+                        <button className="glass-btn-icon p-2 rounded-lg text-slate-400 hover:text-white" aria-label="Notifications">
                             <Bell className="w-4 h-4" />
                         </button>
                     </div>
                 </header>
 
-                {/* Page Content Body */}
-                <main className="flex-1 p-4 sm:p-6 lg:p-8">
+                {/* Content Container */}
+                <div className="p-4 sm:p-6 lg:p-8 flex-1">
                     {title && (
-                        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h1 className="text-2xl lg:text-3xl font-bold text-white tracking-tight flex items-center gap-3">
-                                    {title}
-                                </h1>
+                                <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{title}</h1>
                                 <p className="text-slate-400 text-xs font-medium mt-1">
                                     RentBohol Platform Management & Revenue Console
                                 </p>
                             </div>
 
                             <div className="flex items-center gap-2">
-                                <span className="px-3 py-1.5 bg-amber-400/10 border border-amber-400/30 text-amber-300 rounded-lg text-xs font-semibold flex items-center gap-1.5">
-                                    <Shield className="w-3.5 h-3.5" /> SUPERADMIN MODE
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-xs font-semibold">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    Live Sync
                                 </span>
                             </div>
                         </div>
                     )}
 
                     {children}
-                </main>
+                </div>
             </div>
         </div>
     );
@@ -116,20 +119,20 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
     return (
         <div className="flex flex-col h-full">
             {/* Header Brand */}
-            <div className="p-6 flex items-center justify-between border-b border-slate-800/80">
+            <div className="p-4 sm:p-6 flex items-center justify-between border-b border-slate-800/80">
                 <Link href="/" className="flex items-center">
                     <BrandLogo theme="dark" size="md" subtitle="Platform Console" />
                 </Link>
                 {onClose && (
-                    <button onClick={onClose} className="glass-btn-icon p-1.5 rounded-xl text-slate-400">
+                    <button onClick={onClose} className="glass-btn-icon touch-target rounded-xl text-slate-400" aria-label="Close menu">
                         <X className="w-5 h-5" />
                     </button>
                 )}
             </div>
 
             {/* Navigation items */}
-            <nav className="flex-1 px-4 py-6 space-y-1.5">
-                <div className="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+            <nav className="flex-1 px-4 py-4 sm:py-6 space-y-1.5 overflow-y-auto">
+                <div className="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Main Menu
                 </div>
                 {navItems.map((item: any) => {
@@ -139,7 +142,8 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
+                            onClick={onClose}
+                            className={`flex items-center justify-between min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
                                 active
                                     ? 'glass-btn text-white'
                                     : 'text-slate-400 hover:bg-slate-900 hover:text-white'
@@ -163,14 +167,14 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="text-xs font-bold text-white truncate">{auth.user?.name}</p>
-                        <p className="text-[10px] font-medium text-primary-400 truncate">Super Admin</p>
+                        <p className="text-xs font-medium text-primary-400 truncate">Super Admin</p>
                     </div>
                 </div>
                 <Link
                     href="/logout"
                     method="post"
                     as="button"
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 rounded-xl border border-rose-500/20 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 min-h-[44px] px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 rounded-xl border border-rose-500/20 transition-colors"
                 >
                     <SignOut className="w-3.5 h-3.5" /> Log Out
                 </Link>
