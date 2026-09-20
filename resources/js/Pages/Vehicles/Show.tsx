@@ -61,7 +61,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                         {/* Title & Price Header */}
                         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-xs flex flex-wrap items-center justify-between gap-3">
                             <div>
-                                <span className="inline-block px-2.5 py-0.5 bg-primary-50 text-primary-700 rounded-md text-[10px] font-extrabold uppercase tracking-wider mb-1 border border-primary-100">
+                                <span className="inline-block px-2.5 py-0.5 bg-primary-50 text-primary-700 rounded-md text-xs font-extrabold uppercase tracking-wider mb-1 border border-primary-100">
                                     {vehicle.type}
                                 </span>
                                 <h1 className="font-bold text-xl sm:text-2xl text-slate-900 tracking-tight">
@@ -82,7 +82,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     </span>
                                     <span className="text-xs text-slate-500 font-semibold">/ day</span>
                                 </div>
-                                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-emerald-100">
+                                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full inline-block mt-0.5 border border-emerald-100">
                                     Best Rate Guaranteed
                                 </span>
                             </div>
@@ -105,19 +105,21 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                             <>
                                                 <button
                                                     onClick={() => setCurrentPhoto(p => (p > 0 ? p - 1 : vehicle.photos.length - 1))}
-                                                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+                                                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+                                                    aria-label="Previous photo"
                                                 >
-                                                    <CaretLeft className="w-4 h-4" />
+                                                    <CaretLeft className="w-5 h-5" />
                                                 </button>
                                                 <button
                                                     onClick={() => setCurrentPhoto(p => (p < vehicle.photos.length - 1 ? p + 1 : 0))}
-                                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+                                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+                                                    aria-label="Next photo"
                                                 >
-                                                    <CaretRight className="w-4 h-4" />
+                                                    <CaretRight className="w-5 h-5" />
                                                 </button>
                                             </>
                                         )}
-                                        <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-slate-950/70 text-white text-[10px] font-bold backdrop-blur-sm">
+                                        <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-slate-950/70 text-white text-xs font-bold backdrop-blur-sm">
                                             {currentPhoto + 1} / {vehicle.photos.length} Photos
                                         </div>
                                     </>
@@ -173,9 +175,9 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     <h3 className="text-base font-bold text-slate-900 tracking-tight">
                                         Live Availability Calendar
                                     </h3>
-                                    <p className="text-[11px] text-slate-500 font-medium">Real-time schedule maintained directly by host.</p>
+                                    <p className="text-xs text-slate-500 font-medium">Real-time schedule maintained directly by host.</p>
                                 </div>
-                                <div className="flex items-center gap-3 text-[10px] font-bold">
+                                <div className="flex items-center gap-3 text-xs font-bold">
                                     <span className="flex items-center gap-1.5 text-emerald-700">
                                         <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
                                         Available
@@ -254,7 +256,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 {/* Transmission */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <CarProfile className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Transmission</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Transmission</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.transmission ? (vehicle.transmission.charAt(0).toUpperCase() + vehicle.transmission.slice(1)) : 'Automatic'}
                                     </p>
@@ -263,21 +265,21 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 {/* Fuel */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <Wind className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Fuel</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Fuel</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">{vehicle.fuel_type || 'Unleaded Gas'}</p>
                                 </div>
 
                                 {/* Pickup Location */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <MapPin className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Location</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Location</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">{vehicle.location}</p>
                                 </div>
 
                                 {/* Air Conditioner */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <Thermometer className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Air Conditioner</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Air Conditioner</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.has_aircon === false ? 'No (Non-Aircon)' : 'Yes (Cold AC)'}
                                     </p>
@@ -286,7 +288,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 {/* Seats */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <Users className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Seats</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Seats</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.seats ? `${vehicle.seats} Seats` : (vehicle.type === 'van' ? '15 Seats' : vehicle.type === 'motorbike' ? '2 Seats' : '5 Seats')}
                                     </p>
@@ -295,7 +297,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 {/* Distance */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
                                     <MapPin className="w-4 h-4 text-primary-600 mb-0.5" />
-                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Distance</p>
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Distance</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.distance_limit || 'Unlimited'}
                                     </p>
@@ -305,10 +307,10 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                             {/* Prominent "Rent a car" Button */}
                             <button
                                 onClick={scrollToBooking}
-                                className="glass-btn-accent w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs"
+                                className="glass-btn-accent w-full min-h-[48px] py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 shadow-xs"
                             >
                                 <span>{vehicle.type === 'motorbike' ? 'Rent this scooter' : 'Rent a car'}</span>
-                                <ArrowRight className="w-3.5 h-3.5" />
+                                <ArrowRight className="w-4 h-4" />
                             </button>
 
                             {/* VEHICLE EQUIPMENT & INCLUSIONS CHECKLIST */}
@@ -336,45 +338,45 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                             <div className="space-y-2 text-xs">
                                 {/* Driver License */}
-                                <div className="flex items-start gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100">
-                                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                                <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">Valid Driver's License Required</span>
-                                        <span className="text-slate-500 text-[10px]">Philippine License or International Permit at handover.</span>
+                                        <span className="text-slate-500 text-xs">Philippine License or International Permit at handover.</span>
                                     </div>
                                 </div>
 
                                 {/* Security Deposit */}
-                                <div className="flex items-start gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100">
-                                    <Tag className="w-3.5 h-3.5 text-primary-600 shrink-0 mt-0.5" />
+                                <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <Tag className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">
                                             Refundable Deposit: {vehicle.security_deposit > 0 ? formatCurrency(vehicle.security_deposit) : '₱0 (No Deposit)'}
                                         </span>
-                                        <span className="text-slate-500 text-[10px]">Held in cash upon pickup, returned upon safe vehicle return.</span>
+                                        <span className="text-slate-500 text-xs">Held in cash upon pickup, returned upon safe vehicle return.</span>
                                     </div>
                                 </div>
 
                                 {/* Fuel Policy */}
-                                <div className="flex items-start gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100">
-                                    <GasPump className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                                <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <GasPump className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">
                                             Fuel Policy: {vehicle.fuel_policy === 'full_to_full' ? 'Full-to-Full' : 'Same-to-Same'}
                                         </span>
-                                        <span className="text-slate-500 text-[10px]">Return with same fuel level received.</span>
+                                        <span className="text-slate-500 text-xs">Return with same fuel level received.</span>
                                     </div>
                                 </div>
 
                                 {/* Delivery */}
                                 {vehicle.delivery_available && (
-                                    <div className="flex items-start gap-2 p-2 bg-primary-50/70 rounded-lg border border-primary-100">
-                                        <Airplane className="w-3.5 h-3.5 text-primary-700 shrink-0 mt-0.5" />
+                                    <div className="flex items-start gap-2 p-2.5 bg-primary-50/70 rounded-lg border border-primary-100">
+                                        <Airplane className="w-4 h-4 text-primary-700 shrink-0 mt-0.5" />
                                         <div>
                                             <span className="font-bold text-primary-900 block text-xs">
                                                 Airport & Port Delivery {vehicle.delivery_fee > 0 ? `(${formatCurrency(vehicle.delivery_fee)})` : '(FREE)'}
                                             </span>
-                                            <span className="text-primary-700 text-[10px]">Direct pickup at Panglao Airport (TAG) or Tagbilaran Port.</span>
+                                            <span className="text-primary-700 text-xs">Direct pickup at Panglao Airport (TAG) or Tagbilaran Port.</span>
                                         </div>
                                     </div>
                                 )}
@@ -534,49 +536,49 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                 <h3 className="text-base font-bold text-slate-900">
                     Reserve this vehicle
                 </h3>
-                <p className="text-[11px] text-slate-500 font-medium">Direct host request with instant availability check.</p>
+                <p className="text-xs text-slate-500 font-medium">Direct host request with instant availability check.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3">
                 {/* Date Selection */}
                 <div className="grid grid-cols-2 gap-2">
                     <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Pickup Date</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Pickup Date</label>
                         <input
                             type="date"
                             value={data.start_date}
                             onChange={e => setData('start_date', e.target.value)}
                             min={new Date().toISOString().split('T')[0]}
-                            className="w-full px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
+                            className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
                             required
                         />
-                        {errors.start_date && <p className="text-[10px] text-red-500 mt-1">{errors.start_date}</p>}
+                        {errors.start_date && <p className="text-xs text-red-500 mt-1">{errors.start_date}</p>}
                     </div>
                     <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Return Date</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Return Date</label>
                         <input
                             type="date"
                             value={data.end_date}
                             onChange={e => setData('end_date', e.target.value)}
                             min={data.start_date || new Date().toISOString().split('T')[0]}
-                            className="w-full px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
+                            className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
                             required
                         />
-                        {errors.end_date && <p className="text-[10px] text-red-500 mt-1">{errors.end_date}</p>}
+                        {errors.end_date && <p className="text-xs text-red-500 mt-1">{errors.end_date}</p>}
                     </div>
                 </div>
 
                 {/* Pickup / Delivery Preference */}
                 {vehicle.delivery_available && (
                     <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1">
                             <Airplane className="w-3.5 h-3.5 text-primary-700" />
                             <span>Pickup Location Preference</span>
                         </label>
                         <select
                             value={data.pickup_preference}
                             onChange={e => setData('pickup_preference', e.target.value)}
-                            className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-800 focus:ring-1 focus:ring-primary-500"
+                            className="w-full min-h-[44px] px-3 py-2 rounded-lg border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-1 focus:ring-primary-500"
                         >
                             <option value="host_location">Pickup at Host Location ({vehicle.location})</option>
                             <option value="airport">Deliver to Panglao Airport TAG {vehicle.delivery_fee > 0 ? `(+${formatCurrency(vehicle.delivery_fee)})` : '(FREE)'}</option>
@@ -595,7 +597,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                         </div>
 
                         {discountPercent > 0 && (
-                            <div className="flex items-center justify-between text-[11px] text-emerald-700 font-bold bg-emerald-100/70 px-2 py-1 rounded-md border border-emerald-200">
+                            <div className="flex items-center justify-between text-xs text-emerald-700 font-bold bg-emerald-100/70 px-2 py-1 rounded-md border border-emerald-200">
                                 <span className="flex items-center gap-1">
                                     <Percent className="w-3 h-3" />
                                     <span>{discountPercent}% Multi-Day Vacation Discount</span>
@@ -619,40 +621,40 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                 )}
 
                 {/* Renter Information Fields */}
-                <div className="space-y-2 pt-1 border-t border-slate-100">
+                <div className="space-y-2.5 pt-1 border-t border-slate-100">
                     <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Your Full Name</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Your Full Name</label>
                         <input
                             type="text"
                             value={data.renter_name}
                             onChange={e => setData('renter_name', e.target.value)}
                             placeholder="John Doe"
-                            className="w-full px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:bg-white font-medium"
+                            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:bg-white font-medium"
                             required
                         />
-                        {errors.renter_name && <p className="text-[10px] text-red-500 mt-0.5">{errors.renter_name}</p>}
+                        {errors.renter_name && <p className="text-xs text-red-500 mt-1">{errors.renter_name}</p>}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Phone Number</label>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Phone Number</label>
                             <input
                                 type="tel"
                                 value={data.renter_contact}
                                 onChange={e => setData('renter_contact', e.target.value)}
                                 placeholder="0917 123 4567"
-                                className="w-full px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:bg-white font-medium"
+                                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:bg-white font-medium"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">Email Address</label>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Email Address</label>
                             <input
                                 type="email"
                                 value={data.renter_email}
                                 onChange={e => setData('renter_email', e.target.value)}
                                 placeholder="john@example.com"
-                                className="w-full px-2.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:bg-white font-medium"
+                                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:bg-white font-medium"
                                 required
                             />
                         </div>
@@ -662,13 +664,13 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                 <button
                     type="submit"
                     disabled={processing}
-                    className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs disabled:opacity-50"
+                    className="w-full min-h-[48px] py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs disabled:opacity-50"
                 >
-                    <PaperPlaneTilt className="w-3.5 h-3.5" />
+                    <PaperPlaneTilt className="w-4 h-4" />
                     <span>{processing ? 'Submitting Request...' : 'Send Booking Request to Host'}</span>
                 </button>
 
-                <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+                <p className="text-xs text-slate-500 text-center leading-relaxed">
                     By submitting, you agree to Bohol driver guidelines and our{' '}
                     <a href="/terms" target="_blank" rel="noreferrer" className="text-primary-700 underline font-semibold hover:text-primary-800">
                         Rental Terms
@@ -703,26 +705,26 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
     return (
         <div className="space-y-2">
             <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-slate-900">
+                <span className="font-bold text-sm text-slate-900">
                     {monthNames[month]} {year}
                 </span>
                 <div className="flex gap-1">
-                    <button onClick={prevMonth} className="p-1 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Previous month">
-                        <CaretLeft className="w-3.5 h-3.5" />
+                    <button onClick={prevMonth} className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Previous month">
+                        <CaretLeft className="w-4 h-4" />
                     </button>
-                    <button onClick={nextMonth} className="p-1 rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Next month">
-                        <CaretRight className="w-3.5 h-3.5" />
+                    <button onClick={nextMonth} className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Next month">
+                        <CaretRight className="w-4 h-4" />
                     </button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-slate-400 uppercase">
+            <div className="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 uppercase">
                 <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
             </div>
 
             <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold">
                 {Array.from({ length: firstDayIndex }).map((_, i) => (
-                    <div key={`empty-${i}`} className="h-7" />
+                    <div key={`empty-${i}`} className="h-8" />
                 ))}
                 {Array.from({ length: daysInMonth }).map((_, i) => {
                     const dayNum = i + 1;
@@ -736,7 +738,7 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
                     return (
                         <div
                             key={dayNum}
-                            className={`h-7 rounded-lg border flex items-center justify-center text-[11px] ${bgClass}`}
+                            className={`h-8 rounded-lg border flex items-center justify-center text-xs ${bgClass}`}
                         >
                             {dayNum}
                         </div>

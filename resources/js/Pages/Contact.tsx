@@ -84,27 +84,27 @@ export default function Contact() {
                     href="https://wa.me/639171234567"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
-                    <div className="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <WhatsappLogo className="w-3.5 h-3.5" weight="bold" />
+                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
+                        <WhatsappLogo className="w-4 h-4" weight="bold" />
                     </div>
                     <div className="min-w-0">
-                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">WhatsApp</div>
-                        <div className="text-[11px] font-bold text-slate-900 truncate">Chat Instantly</div>
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp</div>
+                        <div className="text-xs font-bold text-slate-900 truncate">Chat Instantly</div>
                     </div>
                 </a>
 
                 <a
                     href="mailto:support@rentbohol.ph"
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
-                    <div className="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <EnvelopeSimple className="w-3.5 h-3.5" weight="bold" />
+                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
+                        <EnvelopeSimple className="w-4 h-4" weight="bold" />
                     </div>
                     <div className="min-w-0">
-                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Email</div>
-                        <div className="text-[11px] font-bold text-slate-900 truncate">support@rentbohol.ph</div>
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email</div>
+                        <div className="text-xs font-bold text-slate-900 truncate">support@rentbohol.ph</div>
                     </div>
                 </a>
             </div>
@@ -239,9 +239,9 @@ export default function Contact() {
                             </div>
 
                             <button
-                                type="submit"
-                                disabled={processing}
-                                className="glass-btn w-full py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-teal-700/10 active:scale-[0.99] transition-all"
+                                 type="submit"
+                                 disabled={processing}
+                                 className="glass-btn w-full min-h-[48px] py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-teal-700/10 active:scale-[0.99] transition-all"
                             >
                                 <PaperPlaneTilt className="w-4 h-4" weight="bold" />
                                 <span>{processing ? 'Sending...' : 'Send Message'}</span>
@@ -260,7 +260,7 @@ export default function Contact() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex items-end p-3.5 sm:p-5">
                                 <div className="text-white space-y-0.5">
-                                    <span className="text-[10px] sm:text-xs font-semibold text-teal-300 uppercase tracking-wider block">Headquarters</span>
+                                    <span className="text-xs font-semibold text-teal-300 uppercase tracking-wider block">Headquarters</span>
                                     <h3 className="text-sm sm:text-lg font-bold leading-tight">Tagbilaran City & Panglao Island</h3>
                                 </div>
                             </div>
@@ -273,8 +273,8 @@ export default function Contact() {
                                     <MapPin className="w-4 h-4 text-amber-600" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 block">Address</span>
-                                    <span className="text-[11px] sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">CPG Ave, Tagbilaran</span>
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Address</span>
+                                    <span className="text-xs sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">CPG Ave, Tagbilaran</span>
                                 </div>
                             </div>
 
@@ -283,8 +283,8 @@ export default function Contact() {
                                     <EnvelopeSimple className="w-4 h-4 text-teal-600" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 block">Email</span>
-                                    <a href="mailto:support@rentbohol.ph" className="text-[11px] sm:text-sm font-bold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@rentbohol.ph</a>
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Email</span>
+                                    <a href="mailto:support@rentbohol.ph" className="text-xs sm:text-sm font-bold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@rentbohol.ph</a>
                                 </div>
                             </div>
 
@@ -293,8 +293,8 @@ export default function Contact() {
                                     <PhoneCall className="w-4 h-4 text-emerald-600" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hotline</span>
-                                    <a href="tel:+639171234567" className="text-[11px] sm:text-sm font-bold text-slate-900 hover:text-emerald-600 transition-colors block truncate">(038) 501-8888</a>
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hotline</span>
+                                    <a href="tel:+639171234567" className="text-xs sm:text-sm font-bold text-slate-900 hover:text-emerald-600 transition-colors block truncate">(038) 501-8888</a>
                                 </div>
                             </div>
 
@@ -303,8 +303,8 @@ export default function Contact() {
                                     <Clock className="w-4 h-4 text-teal-600" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hours</span>
-                                    <span className="text-[11px] sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">7:00 AM – 10:00 PM</span>
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hours</span>
+                                    <span className="text-xs sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">7:00 AM – 10:00 PM</span>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +325,7 @@ export default function Contact() {
 
                     <Link
                         href="/vehicles"
-                        className="glass-btn px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm shrink-0 flex items-center gap-2 w-full sm:w-auto justify-center"
+                        className="glass-btn min-h-[48px] px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl font-semibold text-sm shrink-0 flex items-center gap-2 w-full sm:w-auto justify-center"
                     >
                         <span>Browse Vehicles Now</span>
                         <ArrowRight className="w-4 h-4" />
