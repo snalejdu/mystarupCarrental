@@ -77,22 +77,35 @@ putenv("VIEW_COMPILED_PATH={$viewCompiledPath}");
 $_ENV['VIEW_COMPILED_PATH'] = $viewCompiledPath;
 $_SERVER['VIEW_COMPILED_PATH'] = $viewCompiledPath;
 
-// Copy package and service manifests to writable /tmp
+// Copy and sanitize package manifest to writable /tmp
 $tmpPackages = '/tmp/packages.php';
-if (!file_exists($tmpPackages) && file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
-    @copy(__DIR__ . '/../bootstrap/cache/packages.php', $tmpPackages);
-}
-if (file_exists($tmpPackages)) {
+$srcPackages = __DIR__ . '/../bootstrap/cache/packages.php';
+if (file_exists($srcPackages)) {
+    $raw = require $srcPackages;
+    $filtered = [];
+    foreach ($raw as $pkg => $cfg) {
+        $filteredCfg = $cfg;
+        if (!empty($cfg['providers'])) {
+            $filteredCfg['providers'] = array_values(array_filter(
+                $cfg['providers'],
+                fn($p) => class_exists($p)
+            ));
+            if (empty($filteredCfg['providers'])) {
+                continue;
+            }
+        }
+        $filtered[$pkg] = $filteredCfg;
+    }
+    @file_put_contents($tmpPackages, '<?php return ' . var_export($filtered, true) . ';');
     putenv("APP_PACKAGES_CACHE={$tmpPackages}");
     $_ENV['APP_PACKAGES_CACHE'] = $tmpPackages;
     $_SERVER['APP_PACKAGES_CACHE'] = $tmpPackages;
 }
 
 $tmpServices = '/tmp/services.php';
-if (!file_exists($tmpServices) && file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
-    @copy(__DIR__ . '/../bootstrap/cache/services.php', $tmpServices);
-}
-if (file_exists($tmpServices)) {
+$srcServices = __DIR__ . '/../bootstrap/cache/services.php';
+if (file_exists($srcServices)) {
+    @copy($srcServices, $tmpServices);
     putenv("APP_SERVICES_CACHE={$tmpServices}");
     $_ENV['APP_SERVICES_CACHE'] = $tmpServices;
     $_SERVER['APP_SERVICES_CACHE'] = $tmpServices;
