@@ -41,6 +41,16 @@ $app = Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*'),
         );
 
+        if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
+            $exceptions->render(function (\Throwable $e, Request $request) {
+                return response(
+                    "<h1>Original Exception on Vercel</h1><p><strong>" . get_class($e) . "</strong>: " . htmlspecialchars($e->getMessage()) . "</p><p>" . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p><pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>",
+                    500,
+                    ['Content-Type' => 'text/html']
+                );
+            });
+        }
+
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             if (in_array($response->getStatusCode(), [401, 403, 419]) && !$request->is('api/*')) {
                 return redirect('/')->with('error', 'Session changed. Redirected to home page.');
