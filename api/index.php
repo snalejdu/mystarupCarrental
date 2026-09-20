@@ -1,5 +1,33 @@
 <?php
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error !== null && in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE])) {
+        http_response_code(500);
+        header('Content-Type: text/html');
+        echo "<h1>PHP Fatal Error on Vercel</h1>";
+        echo "<pre>" . print_r($error, true) . "</pre>";
+    }
+});
+
+// Diagnostic check
+if (isset($_GET['diag'])) {
+    header('Content-Type: text/plain');
+    echo "=== PHP DIAGNOSTICS ===\n";
+    echo "PHP Version: " . PHP_VERSION . "\n";
+    echo "PDO Drivers: " . implode(', ', PDO::getAvailableDrivers()) . "\n";
+    echo "pdo_sqlite: " . (extension_loaded('pdo_sqlite') ? 'yes' : 'no') . "\n";
+    echo "sqlite3: " . (extension_loaded('sqlite3') ? 'yes' : 'no') . "\n";
+    echo "tmp directory writable: " . (is_writable('/tmp') ? 'yes' : 'no') . "\n";
+    echo "seed.db exists: " . (file_exists(dirname(__DIR__) . '/database/seed.db') ? 'yes (' . filesize(dirname(__DIR__) . '/database/seed.db') . ' bytes)' : 'no') . "\n";
+    echo "public/index.php exists: " . (file_exists(__DIR__ . '/../public/index.php') ? 'yes' : 'no') . "\n";
+    exit;
+}
+
 // Forward all incoming Vercel serverless requests to Laravel's public entrypoint
 putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
@@ -67,4 +95,12 @@ putenv('LOG_CHANNEL=stderr');
 $_ENV['LOG_CHANNEL'] = 'stderr';
 $_SERVER['LOG_CHANNEL'] = 'stderr';
 
-require __DIR__ . '/../public/index.php';
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    http_response_code(500);
+    header('Content-Type: text/html');
+    echo "<h1>Unhandled Exception in public/index.php</h1>";
+    echo "<p><strong>" . get_class($e) . "</strong>: " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+}
