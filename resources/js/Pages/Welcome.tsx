@@ -65,6 +65,14 @@ const SPONSOR_LOGOS = [
     { name: 'Panglao Island Tourism', src: '/images/sponsors/panglao_tourism.svg' },
 ];
 
+const BOHOL_DESTINATIONS = [
+    { image: '/images/destinations/chocolate_hills.jpg', label: 'Chocolate Hills — Carmen', tag: 'Famous Landmark', alt: 'Chocolate Hills Carmen Bohol' },
+    { image: '/images/destinations/panglao_beach.jpg', label: 'Panglao White Beach', tag: 'Beach & Diving', alt: 'Panglao Island Beach' },
+    { image: '/images/destinations/abatan_river.jpg', label: 'Abatan River Fireflies', tag: 'Night Cruise', alt: 'Abatan River Bohol' },
+    { image: '/images/destinations/tarsier_sanctuary.jpg', label: 'Tarsier Sanctuary — Corella', tag: 'Eco Wildlife', alt: 'Corella Tarsier Sanctuary' },
+    { image: '/images/destinations/loboc_river.jpg', label: 'Loboc River Cruise', tag: 'River Dining', alt: 'Loboc River Bohol' },
+];
+
 export default function Welcome({ featuredVehicles, stats, locations, vehicleTypes }: Props) {
     const [bookingType, setBookingType] = useState('');
     const [pickupLoc, setPickupLoc] = useState('');
@@ -75,6 +83,27 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
 
     const [spotIndex, setSpotIndex] = useState(0);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const [activeSpotMobile, setActiveSpotMobile] = useState(0);
+    const spotsScrollRef = useRef<HTMLDivElement | null>(null);
+
+    const handleSpotScroll = () => {
+        if (!spotsScrollRef.current) return;
+        const el = spotsScrollRef.current;
+        const scrollLeft = el.scrollLeft;
+        const cardWidth = el.firstElementChild?.clientWidth || 280;
+        const index = Math.round(scrollLeft / (cardWidth + 12));
+        setActiveSpotMobile(Math.min(Math.max(index, 0), BOHOL_DESTINATIONS.length - 1));
+    };
+
+    const scrollToSpot = (index: number) => {
+        if (!spotsScrollRef.current) return;
+        const el = spotsScrollRef.current;
+        const card = el.children[index] as HTMLElement;
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+    };
 
     const startAutoRotate = useCallback(() => {
         if (intervalRef.current) clearInterval(intervalRef.current);
@@ -561,13 +590,12 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                     {/* Desktop: Wide Bezel-Less Accordion Gallery Showcase */}
                     <div className="hidden md:block w-full relative">
                         <AccordionGallery
-                            items={[
-                                { image: '/images/destinations/chocolate_hills.jpg', label: 'Chocolate Hills — Carmen', link: '/vehicles', alt: 'Chocolate Hills Carmen Bohol' },
-                                { image: '/images/destinations/panglao_beach.jpg', label: 'Panglao White Beach', link: '/vehicles', alt: 'Panglao Island Beach' },
-                                { image: '/images/destinations/abatan_river.jpg', label: 'Abatan River — Firefly Tour', link: '/vehicles', alt: 'Abatan River Bohol' },
-                                { image: '/images/destinations/tarsier_sanctuary.jpg', label: 'Tarsier Sanctuary — Corella', link: '/vehicles', alt: 'Corella Tarsier Sanctuary' },
-                                { image: '/images/destinations/loboc_river.jpg', label: 'Loboc River Cruise', link: '/vehicles', alt: 'Loboc River Bohol' },
-                            ]}
+                            items={BOHOL_DESTINATIONS.map(d => ({
+                                image: d.image,
+                                label: d.label,
+                                link: '/vehicles',
+                                alt: d.alt,
+                            }))}
                             defaultIndex={0}
                             expandRatio={0.52}
                             trigger="hover"
@@ -585,20 +613,18 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         />
                     </div>
 
-                    {/* Mobile: Compact, Comfortable Horizontal Destination Carousel (Takes only ~190px vs 550px stacked) */}
+                    {/* Mobile: Seamless Destination Hero Carousel with Zero Scrollbar and Active Indicator Pills */}
                     <div className="block md:hidden w-full -mx-4 px-4">
-                        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory py-1 px-1 no-scrollbar">
-                            {[
-                                { image: '/images/destinations/chocolate_hills.jpg', label: 'Chocolate Hills — Carmen', tag: 'Famous Landmark' },
-                                { image: '/images/destinations/panglao_beach.jpg', label: 'Panglao White Beach', tag: 'Beach & Diving' },
-                                { image: '/images/destinations/abatan_river.jpg', label: 'Abatan River Fireflies', tag: 'Night Cruise' },
-                                { image: '/images/destinations/tarsier_sanctuary.jpg', label: 'Tarsier Sanctuary', tag: 'Eco Wildlife' },
-                                { image: '/images/destinations/loboc_river.jpg', label: 'Loboc River Cruise', tag: 'River Dining' },
-                            ].map((spot, idx) => (
+                        <div
+                            ref={spotsScrollRef}
+                            onScroll={handleSpotScroll}
+                            className="flex gap-3 overflow-x-auto snap-x snap-mandatory py-1 px-4 -mx-4 no-scrollbar scroll-smooth"
+                        >
+                            {BOHOL_DESTINATIONS.map((spot, idx) => (
                                 <Link
                                     key={idx}
                                     href="/vehicles"
-                                    className="snap-start shrink-0 w-[220px] h-[170px] rounded-2xl relative overflow-hidden shadow-xs border border-slate-200/90 active:scale-[0.98] transition-transform block"
+                                    className="snap-center shrink-0 w-[84vw] max-w-[320px] h-[185px] rounded-2xl relative overflow-hidden shadow-xs border border-slate-200/90 active:scale-[0.98] transition-transform block"
                                 >
                                     <img
                                         src={spot.image}
@@ -606,12 +632,12 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                         className="w-full h-full object-cover"
                                         loading="lazy"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
-                                    <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-teal-600/90 text-white text-[9px] font-bold tracking-wide shadow-xs">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent pointer-events-none" />
+                                    <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-md bg-teal-600/90 text-white text-[10px] font-bold tracking-wide shadow-xs">
                                         {spot.tag}
                                     </span>
-                                    <div className="absolute bottom-2.5 left-2.5 right-2.5">
-                                        <div className="flex items-center gap-1 text-white font-bold text-xs truncate">
+                                    <div className="absolute bottom-3 left-3 right-3">
+                                        <div className="flex items-center gap-1.5 text-white font-bold text-xs truncate">
                                             <MapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                                             <span className="truncate">{spot.label}</span>
                                         </div>
@@ -619,9 +645,26 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 </Link>
                             ))}
                         </div>
-                        <div className="flex items-center justify-center gap-1.5 pt-2 text-[10px] text-slate-400 font-medium">
-                            <span>← Swipe to explore Bohol destinations →</span>
+
+                        {/* Interactive Pagination Dots */}
+                        <div className="flex items-center justify-center gap-1.5 pt-3">
+                            {BOHOL_DESTINATIONS.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={() => scrollToSpot(idx)}
+                                    className={`transition-all duration-300 rounded-full cursor-pointer ${
+                                        activeSpotMobile === idx
+                                            ? 'w-6 h-1.5 bg-teal-600 shadow-xs'
+                                            : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-400'
+                                    }`}
+                                    aria-label={`View destination ${idx + 1}`}
+                                />
+                            ))}
                         </div>
+                        <p className="text-[10px] text-slate-400 font-medium text-center pt-1">
+                            Swipe to explore Bohol destinations
+                        </p>
                     </div>
 
                     {/* 4 Feature Pillars Grid (2x2 on Mobile, 4-Cols on Desktop) */}

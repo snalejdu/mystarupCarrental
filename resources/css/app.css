@@ -132,6 +132,15 @@
     word-break: break-word;
 }
 
+/* Hide scrollbar utility for clean mobile carousels */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 /* ============================================
    Base Styles (Ultra-Fast 60/120fps Native Scrolling)
    ============================================ */
