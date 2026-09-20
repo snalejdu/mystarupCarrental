@@ -222,15 +222,15 @@ export default function AnimationPreview() {
                             onClick={() => {
                                 import('@/Components/DynamicToast').then(({ triggerToast }) => {
                                     triggerToast({
-                                        title: 'File uploaded',
-                                        description: 'Cover.png — 2.4 MB (4s Auto-dismiss)',
+                                        title: 'Island Fleet Status',
+                                        description: 'Syncing live vehicle availability across Bohol',
                                         type: 'info'
                                     });
                                 });
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-sky-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block mb-1">Rule 02 • Info (4s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-sky-400 block mb-1">Rule 02 • Info (4s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors block">Trigger Info Toast</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
                         </button>
@@ -248,7 +248,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-emerald-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">Rule 02 • Success (4s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block mb-1">Rule 02 • Success (4s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors block">Trigger Success</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
                         </button>
@@ -266,7 +266,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-amber-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Rule 02 • Warning (7s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-1">Rule 02 • Warning (7s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-amber-300 transition-colors block">Trigger Warning</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Holds longer for readability</span>
                         </button>
@@ -284,7 +284,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-rose-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 block mb-1">Rule 02 • Error (∞ Persistent)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-rose-400 block mb-1">Rule 02 • Error (∞ Persistent)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-rose-300 transition-colors block">Trigger Error</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Requires user close</span>
                         </button>
@@ -302,7 +302,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-teal-400 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300 block mb-1">Rule 05 • Bohol Payment</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-teal-300 block mb-1">Rule 05 • Bohol Payment</span>
                             <span className="text-sm font-semibold text-white group-hover:text-teal-200 transition-colors block">Trigger Payment</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Teal ocean accent</span>
                         </button>

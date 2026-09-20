@@ -56,7 +56,7 @@ export default function Contact() {
             <div className="sm:hidden px-4 pt-3.5 pb-1">
                 <div className="flex items-center justify-between">
                     <div>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200/70 text-teal-700 text-[10px] font-bold tracking-wide uppercase">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200/70 text-teal-700 text-xs font-bold tracking-wide uppercase">
                             <Sparkle className="w-3 h-3 text-teal-600" weight="fill" />
                             24/7 Island Care
                         </span>

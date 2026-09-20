@@ -196,7 +196,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                             <span className="inline-flex items-center gap-1 text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-2.5 py-0.5 rounded-md border border-accent-500/30">
                                                 <MapPin className="w-3 h-3" /> {TOURIST_SPOTS[spotIndex].location}
                                             </span>
-                                            <span className="text-[11px] font-semibold text-slate-300">
+                                            <span className="text-xs font-semibold text-slate-300">
                                                 {spotIndex + 1} / {TOURIST_SPOTS.length}
                                             </span>
                                         </div>

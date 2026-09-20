@@ -193,7 +193,7 @@ export default function About() {
 
                 {/* Section 5: Official Sponsor & Partner Brands — Infinite Horizontal Marquee */}
                 <div className="bg-white rounded-3xl py-8 px-4 border border-slate-200/90 text-center overflow-hidden space-y-4 shadow-xs">
-                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+                    <p className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
                         OFFICIAL FLEET BRANDS & BOHOL TOURISM PARTNERS
                     </p>
                     <div className="relative w-full overflow-hidden flex">
