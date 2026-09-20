@@ -7,10 +7,7 @@ import GlassIcons from '@/Components/GlassIcons';
 import DriftWall from '@/Components/DriftWall';
 import AccordionGallery from '@/Components/AccordionGallery';
 import { 
-    Play, Sparkles, Sliders, Layers, RefreshCw, CheckCircle2,
-    FileText, Book, Heart, Cloud, Edit, BarChart2,
-    Car, Bus, Bike, Key, ShieldCheck, Compass
-} from 'lucide-react';
+    Play, Sliders, Stack, ArrowsClockwise, CheckCircle, FileText, Book, Heart, Cloud, PencilSimple, ChartBar, Car, Bus, Motorcycle, Key, ShieldCheck, Compass } from '@phosphor-icons/react';
 
 export default function AnimationPreview() {
     const [activeSize, setActiveSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('lg');
@@ -40,10 +37,6 @@ export default function AnimationPreview() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {/* Hero Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 text-xs font-semibold uppercase tracking-wider mb-4">
-                        <Sparkles className="w-4 h-4 text-teal-600" />
-                        Animation & Loading Showcase
-                    </div>
                     <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                         RentBohol Animated Car Loader
                     </h1>
@@ -162,7 +155,7 @@ export default function AnimationPreview() {
                         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-teal-50 text-teal-600 rounded-xl">
-                                    <Layers className="w-6 h-6" />
+                                    <Stack className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-slate-800 text-sm">Direct SVG Vector Asset</h3>
@@ -186,7 +179,7 @@ export default function AnimationPreview() {
                 {/* Features & Best Practices */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle2 className="w-5 h-5 text-teal-600 mb-2" />
+                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Infinite Vector Crispness</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Crafted in pure scalable vector format with embedded keyframes. Stays sharp on 4K & mobile Retina displays at zero bandwidth overhead (&lt;3KB).
@@ -194,7 +187,7 @@ export default function AnimationPreview() {
                     </div>
 
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle2 className="w-5 h-5 text-teal-600 mb-2" />
+                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Zero Dependencies</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Runs on native CSS animations without heavy external Lottie Web player scripts, ensuring instant page load speed and smooth 60fps rendering.
@@ -202,7 +195,7 @@ export default function AnimationPreview() {
                     </div>
 
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle2 className="w-5 h-5 text-teal-600 mb-2" />
+                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Bohol Theme Synergy</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Matched to RentBohol's coastal teal palette with suspension physics, high-speed road lane markers, and night-drive headlight projections.
@@ -214,10 +207,6 @@ export default function AnimationPreview() {
                 <div className="mt-16 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                         <div>
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold uppercase tracking-wider mb-2">
-                                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-                                5-Rule Design Motion System
-                            </div>
                             <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                                 Toasts Done Right Interactive Suite
                             </h2>
@@ -233,15 +222,15 @@ export default function AnimationPreview() {
                             onClick={() => {
                                 import('@/Components/DynamicToast').then(({ triggerToast }) => {
                                     triggerToast({
-                                        title: 'File uploaded',
-                                        description: 'Cover.png — 2.4 MB (4s Auto-dismiss)',
+                                        title: 'Island Fleet Status',
+                                        description: 'Syncing live vehicle availability across Bohol',
                                         type: 'info'
                                     });
                                 });
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-sky-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400 block mb-1">Rule 02 • Info (4s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-sky-400 block mb-1">Rule 02 • Info (4s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors block">Trigger Info Toast</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
                         </button>
@@ -259,7 +248,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-emerald-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">Rule 02 • Success (4s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block mb-1">Rule 02 • Success (4s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors block">Trigger Success</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Auto-dismiss in 4 seconds</span>
                         </button>
@@ -277,7 +266,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-amber-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Rule 02 • Warning (7s)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-1">Rule 02 • Warning (7s)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-amber-300 transition-colors block">Trigger Warning</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Holds longer for readability</span>
                         </button>
@@ -295,7 +284,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-rose-500 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 block mb-1">Rule 02 • Error (∞ Persistent)</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-rose-400 block mb-1">Rule 02 • Error (∞ Persistent)</span>
                             <span className="text-sm font-semibold text-white group-hover:text-rose-300 transition-colors block">Trigger Error</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Requires user close</span>
                         </button>
@@ -313,7 +302,7 @@ export default function AnimationPreview() {
                             }}
                             className="p-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-left border-l-4 border-l-teal-400 border border-slate-800 shadow-sm transition-transform active:scale-95 group cursor-pointer"
                         >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300 block mb-1">Rule 05 • Bohol Payment</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-teal-300 block mb-1">Rule 05 • Bohol Payment</span>
                             <span className="text-sm font-semibold text-white group-hover:text-teal-200 transition-colors block">Trigger Payment</span>
                             <span className="text-xs text-slate-400 mt-0.5 block">Teal ocean accent</span>
                         </button>
@@ -323,10 +312,6 @@ export default function AnimationPreview() {
                 {/* React Bits: GlassIcons Component Showcase */}
                 <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
                     <div className="text-center max-w-2xl mx-auto mb-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            React Bits UI Component
-                        </div>
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                             3D Glassmorphism Icons (<code className="text-teal-400 font-mono text-xl">&lt;GlassIcons /&gt;</code>)
                         </h2>
@@ -342,8 +327,8 @@ export default function AnimationPreview() {
                                 { icon: <Book className="w-6 h-6" />, color: 'purple', label: 'Books' },
                                 { icon: <Heart className="w-6 h-6" />, color: 'red', label: 'Health' },
                                 { icon: <Cloud className="w-6 h-6" />, color: 'indigo', label: 'Weather' },
-                                { icon: <Edit className="w-6 h-6" />, color: 'orange', label: 'Notes' },
-                                { icon: <BarChart2 className="w-6 h-6" />, color: 'green', label: 'Stats' },
+                                { icon: <PencilSimple className="w-6 h-6" />, color: 'orange', label: 'Notes' },
+                                { icon: <ChartBar className="w-6 h-6" />, color: 'green', label: 'Stats' },
                             ]}
                         />
                     </div>
@@ -352,10 +337,6 @@ export default function AnimationPreview() {
                 {/* React Bits: DriftWall Component Showcase */}
                 <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
                     <div className="text-center max-w-2xl mx-auto mb-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            React Bits UI Component
-                        </div>
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                             3D Drifting Wall (<code className="text-teal-400 font-mono text-xl">&lt;DriftWall /&gt;</code>)
                         </h2>
@@ -403,10 +384,6 @@ export default function AnimationPreview() {
                 {/* React Bits: AccordionGallery Component Showcase */}
                 <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800">
                     <div className="text-center max-w-2xl mx-auto mb-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            React Bits UI Component
-                        </div>
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                             Accordion Gallery (<code className="text-teal-400 font-mono text-xl">&lt;AccordionGallery /&gt;</code>)
                         </h2>

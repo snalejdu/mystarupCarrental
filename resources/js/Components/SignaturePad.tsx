@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { RotateCcw, Check, PenTool, ShieldCheck } from 'lucide-react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { ArrowCounterClockwise, Check, Pen, ShieldCheck } from '@phosphor-icons/react';
 
 interface SignaturePadProps {
     onSave: (dataUrl: string) => void;
@@ -19,21 +19,24 @@ export default function SignaturePad({
     initialData = '',
 }: SignaturePadProps) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [hasSignature, setHasSignature] = useState(Boolean(initialData));
-    const [history, setHistory] = useState<string[]>(initialData ? [initialData] : []);
+    const lastPoint = useRef<{ x: number; y: number } | null>(null);
+    const currentSignatureRef = useRef<string>(initialData);
 
-    // Set up canvas with high DPI scaling
-    useEffect(() => {
+    const setupCanvas = useCallback(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const ratio = Math.max(window.devicePixelRatio || 1, 2);
-        const rect = canvas.getBoundingClientRect();
+        const rect = container.getBoundingClientRect();
+        if (rect.width === 0) return;
 
+        const ratio = Math.max(window.devicePixelRatio || 1, 2);
         canvas.width = rect.width * ratio;
         canvas.height = rect.height * ratio;
         ctx.scale(ratio, ratio);
@@ -43,76 +46,94 @@ export default function SignaturePad({
         ctx.strokeStyle = '#0f172a'; // Deep slate ink
         ctx.lineWidth = 2.5;
 
-        // If initial signature data exists, draw it
-        if (initialData) {
+        // Restore existing signature if any
+        if (currentSignatureRef.current) {
             const img = new Image();
             img.onload = () => {
                 ctx.drawImage(img, 0, 0, rect.width, rect.height);
             };
-            img.src = initialData;
+            img.src = currentSignatureRef.current;
         }
     }, []);
 
-    const getCanvasCoordinates = (e: React.MouseEvent | React.TouchEvent) => {
+    // Set up canvas and handle resize / orientation changes
+    useEffect(() => {
+        setupCanvas();
+
+        const container = containerRef.current;
+        if (!container) return;
+
+        const resizeObserver = new ResizeObserver(() => {
+            setupCanvas();
+        });
+        resizeObserver.observe(container);
+
+        return () => resizeObserver.disconnect();
+    }, [setupCanvas]);
+
+    const getCanvasCoordinates = (e: React.PointerEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
         if (!canvas) return { x: 0, y: 0 };
-
         const rect = canvas.getBoundingClientRect();
-        if ('touches' in e) {
-            const touch = e.touches[0] || e.changedTouches[0];
-            return {
-                x: touch.clientX - rect.left,
-                y: touch.clientY - rect.top,
-            };
-        }
         return {
-            x: (e as React.MouseEvent).clientX - rect.left,
-            y: (e as React.MouseEvent).clientY - rect.top,
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
         };
     };
 
-    const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
-        if ('touches' in e) {
-            // Prevent scroll on touch devices while drawing
-            e.stopPropagation();
-        }
+    const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+        e.preventDefault();
         const canvas = canvasRef.current;
         if (!canvas) return;
+
+        try {
+            canvas.setPointerCapture(e.pointerId);
+        } catch {
+            // Ignore if pointer capture fails
+        }
+
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const { x, y } = getCanvasCoordinates(e);
+        const coords = getCanvasCoordinates(e);
         ctx.beginPath();
-        ctx.moveTo(x, y);
+        ctx.moveTo(coords.x, coords.y);
+        lastPoint.current = coords;
         setIsDrawing(true);
     };
 
-    const draw = (e: React.MouseEvent | React.TouchEvent) => {
+    const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
         if (!isDrawing) return;
-        if ('touches' in e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+        e.preventDefault();
 
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const { x, y } = getCanvasCoordinates(e);
-        ctx.lineTo(x, y);
+        const coords = getCanvasCoordinates(e);
+        ctx.lineTo(coords.x, coords.y);
         ctx.stroke();
+        lastPoint.current = coords;
         setHasSignature(true);
     };
 
-    const stopDrawing = () => {
+    const handlePointerUp = (e: React.PointerEvent<HTMLCanvasElement>) => {
         if (!isDrawing) return;
+        e.preventDefault();
         setIsDrawing(false);
+        lastPoint.current = null;
 
         const canvas = canvasRef.current;
         if (canvas) {
+            try {
+                canvas.releasePointerCapture(e.pointerId);
+            } catch {
+                // Ignore if already released
+            }
+
             const dataUrl = canvas.toDataURL('image/png');
-            setHistory(prev => [...prev, dataUrl]);
+            currentSignatureRef.current = dataUrl;
             onSave(dataUrl);
         }
     };
@@ -124,50 +145,52 @@ export default function SignaturePad({
         if (!ctx) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        currentSignatureRef.current = '';
         setHasSignature(false);
-        setHistory([]);
         if (onClear) onClear();
         onSave('');
     };
 
     return (
-        <div className="bg-slate-50/80 rounded-2xl border border-slate-200 p-4 sm:p-5 space-y-3">
+        <div className="bg-slate-50/90 rounded-2xl border border-slate-200 p-3.5 sm:p-5 space-y-3">
             {/* Header with Title and Signer Identity */}
             <div className="flex items-center justify-between">
                 <div>
                     <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-                        <PenTool className="w-3.5 h-3.5 text-primary-700" />
+                        <Pen className="w-3.5 h-3.5 text-primary-700" />
                         <span>{title}</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5 font-medium">
                         Signing as <span className="font-semibold text-slate-700">{signerName}</span> ({roleLabel})
                     </p>
                 </div>
 
                 {hasSignature && (
-                    <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                        <Check className="w-3 h-3 text-emerald-600" />
+                    <div className="flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
                         <span>Signed</span>
                     </div>
                 )}
             </div>
 
-            {/* Interactive Signature Canvas Box */}
-            <div className="relative bg-white rounded-xl border-2 border-dashed border-slate-300 overflow-hidden shadow-inner touch-none">
+            {/* Interactive Signature Canvas Box (touch-action: none prevents scrolling) */}
+            <div
+                ref={containerRef}
+                className="relative bg-white rounded-xl border-2 border-dashed border-slate-300 overflow-hidden shadow-inner h-36 sm:h-40"
+                style={{ touchAction: 'none' }}
+            >
                 <canvas
                     ref={canvasRef}
-                    onMouseDown={startDrawing}
-                    onMouseMove={draw}
-                    onMouseUp={stopDrawing}
-                    onMouseLeave={stopDrawing}
-                    onTouchStart={startDrawing}
-                    onTouchMove={draw}
-                    onTouchEnd={stopDrawing}
-                    className="w-full h-36 cursor-crosshair block"
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    onPointerCancel={handlePointerUp}
+                    className="w-full h-full cursor-crosshair block select-none"
+                    style={{ touchAction: 'none' }}
                 />
 
                 {/* Subtle baseline indicator */}
-                <div className="absolute bottom-6 left-6 right-6 border-b border-slate-200 pointer-events-none flex justify-between text-[10px] text-slate-400 select-none">
+                <div className="absolute bottom-5 left-4 right-4 border-b border-slate-200 pointer-events-none flex justify-between text-xs text-slate-400 select-none">
                     <span>X</span>
                     <span>Sign above this line</span>
                 </div>
@@ -175,8 +198,8 @@ export default function SignaturePad({
 
             {/* Footer with Legal Tag & Action Controls */}
             <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                <div className="flex items-center gap-1 text-[10px] text-slate-400">
-                    <ShieldCheck className="w-3.5 h-3.5 text-primary-600 shrink-0" />
+                <div className="flex items-center gap-1 text-xs text-slate-400 font-medium">
+                    <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
                     <span>Cryptographically timestamped handover signature</span>
                 </div>
 
@@ -185,9 +208,9 @@ export default function SignaturePad({
                         type="button"
                         onClick={clearCanvas}
                         disabled={!hasSignature}
-                        className="apple-press px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold flex items-center gap-1 disabled:opacity-40"
+                        className="apple-press touch-target px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 disabled:opacity-40 cursor-pointer shadow-2xs"
                     >
-                        <RotateCcw className="w-3 h-3" />
+                        <ArrowCounterClockwise className="w-3.5 h-3.5" />
                         <span>Clear</span>
                     </button>
                 </div>

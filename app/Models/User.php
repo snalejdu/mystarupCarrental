@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'driver_license_status'])]
-#[Hidden(['password', 'remember_token'])]
+#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'google_id'])]
+#[Hidden(['password', 'remember_token', 'driver_license_path', 'google_id'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */

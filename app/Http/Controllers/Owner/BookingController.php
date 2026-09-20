@@ -216,9 +216,11 @@ class BookingController extends Controller
 
         $validated = $request->validate(Rating::rules());
 
+        $userId = $request->user()?->id ?? auth()->id();
         $booking->ratings()->create([
+            'rater_id' => $userId,
             'rater_type' => 'owner',
-            'rater_identifier' => (string) ($request->user()?->id ?? auth()->id()),
+            'rater_identifier' => (string) $userId,
             'stars' => $validated['stars'],
             'comment' => $validated['comment'] ?? null,
         ]);

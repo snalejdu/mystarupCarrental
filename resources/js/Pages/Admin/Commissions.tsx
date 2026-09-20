@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { DollarSign, PhoneCall, Mail, CarFront, CheckCircle2, Percent, TrendingUp } from 'lucide-react';
+import { CurrencyDollar, PhoneCall, EnvelopeSimple, CarProfile, CheckCircle, Percent, TrendUp } from '@phosphor-icons/react';
 import { formatCurrency } from '@/lib/utils';
 
 interface OwnerCommission {
@@ -28,12 +28,12 @@ export default function CommissionsPage({ owners }: Props) {
             <Head title="Commission Ledger — RentBohol Admin" />
 
             {/* Banner Overview */}
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 mb-8 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 sm:p-8 mb-6 sm:mb-8 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
                 <div className="space-y-1">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-700/20 text-primary-300 rounded-lg text-xs font-semibold border border-primary-700/30">
                         <Percent className="w-3.5 h-3.5" /> 4% Global Platform Rate
                     </span>
-                    <h2 className="text-3xl font-bold text-white tracking-tight pt-2">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight pt-2">
                         {formatCurrency(totalCommissionOwed)} Total Commission
                     </h2>
                     <p className="text-xs text-slate-400 font-medium">
@@ -43,21 +43,21 @@ export default function CommissionsPage({ owners }: Props) {
             </div>
 
             {/* Commissions Owed Table */}
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
-                <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
                     <div>
                         <h3 className="font-semibold text-base text-white">Owner Commission Breakdown</h3>
                         <p className="text-slate-400 text-xs font-medium">Earnings per registered vehicle host</p>
                     </div>
-                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 self-start sm:self-auto">
                         {owners.length} Registered Hosts
                     </span>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                    <table className="w-full text-left border-collapse min-w-[560px]">
                         <thead>
-                            <tr className="border-b border-slate-800 text-[10px] font-semibold uppercase text-slate-400 tracking-wider">
+                            <tr className="border-b border-slate-800 text-xs font-semibold uppercase text-slate-400 tracking-wider">
                                 <th className="pb-3 px-3">Vehicle Owner</th>
                                 <th className="pb-3 px-3">Listings</th>
                                 <th className="pb-3 px-3">Completed Trips</th>
@@ -77,7 +77,7 @@ export default function CommissionsPage({ owners }: Props) {
                                     <tr key={owner.id} className="hover:bg-slate-900/60 transition-colors">
                                         <td className="py-4 px-3">
                                             <p className="font-semibold text-white text-sm">{owner.name}</p>
-                                            <p className="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5 font-medium">
+                                            <p className="text-xs text-slate-400 flex items-center gap-2 mt-0.5 font-medium flex-wrap">
                                                 <span>{owner.phone}</span> • <span>{owner.email}</span>
                                             </p>
                                         </td>

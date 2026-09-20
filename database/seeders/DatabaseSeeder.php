@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        \Illuminate\Database\Eloquent\Model::unguard();
+
         // 1. Create Admin User
         $admin = User::create([
             'name' => 'RentBohol Admin',
@@ -203,5 +205,7 @@ class DatabaseSeeder extends Seeder
             'contact_unlocked_at' => now(),
             'accepted_at' => now(),
         ]);
+
+        \Illuminate\Database\Eloquent\Model::reguard();
     }
 }

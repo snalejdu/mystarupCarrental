@@ -39,7 +39,7 @@ export default function SpotlightCard({
             ref={divRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={cn('relative overflow-hidden rounded-2xl transition-all duration-300', className)}
+            className={cn('relative overflow-hidden rounded-2xl transition-all duration-500 ease-out', className)}
             style={{
                 ['--spotlight-opacity' as any]: '0',
                 ['--spotlight-x' as any]: '0px',
@@ -49,7 +49,7 @@ export default function SpotlightCard({
         >
             {/* Dynamic Spotlight Glow Overlay */}
             <div
-                className="pointer-events-none absolute -inset-px transition-opacity duration-300 rounded-[inherit]"
+                className="pointer-events-none absolute -inset-px transition-opacity duration-500 ease-out rounded-[inherit]"
                 style={{
                     opacity: 'var(--spotlight-opacity, 0)',
                     background: `radial-gradient(500px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), ${spotlightColor}, transparent 45%)`,

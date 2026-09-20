@@ -61,6 +61,7 @@ class VehicleController extends Controller
             'transmission' => 'required|in:automatic,manual',
             'seats' => 'required|integer|min:1|max:60',
             'has_aircon' => 'required|boolean',
+            'distance_limit' => 'nullable|string|max:100',
             'price_per_day' => 'required|numeric|min:100|max:100000',
             'security_deposit' => 'nullable|numeric|min:0|max:50000',
             'fuel_policy' => 'nullable|string|in:same_to_same,full_to_full',
@@ -70,6 +71,9 @@ class VehicleController extends Controller
             'discount_weekly' => 'nullable|integer|min:0|max:50',
             'helmets_included' => 'nullable|boolean',
             'driver_available' => 'nullable|boolean',
+            'fuel_type' => 'nullable|string|max:50',
+            'features' => 'nullable|array',
+            'features.*' => 'string|max:100',
             'location' => 'required|in:' . implode(',', config('rentbohol.locations')),
         ]);
 
@@ -88,6 +92,8 @@ class VehicleController extends Controller
 
         $vehicle = $user->vehicles()->create([
             ...$validated,
+            'fuel_type' => $validated['fuel_type'] ?? 'Unleaded Gas',
+            'features' => $validated['features'] ?? [],
             'security_deposit' => $validated['security_deposit'] ?? 0,
             'fuel_policy' => $validated['fuel_policy'] ?? 'same_to_same',
             'delivery_available' => $validated['delivery_available'] ?? false,
@@ -163,6 +169,10 @@ class VehicleController extends Controller
             'transmission' => 'required|in:automatic,manual',
             'seats' => 'required|integer|min:1|max:60',
             'has_aircon' => 'required|boolean',
+            'distance_limit' => 'nullable|string|max:100',
+            'fuel_type' => 'nullable|string|max:50',
+            'features' => 'nullable|array',
+            'features.*' => 'string|max:100',
             'price_per_day' => 'required|numeric|min:100|max:100000',
             'security_deposit' => 'nullable|numeric|min:0|max:50000',
             'fuel_policy' => 'nullable|string|in:same_to_same,full_to_full',
@@ -176,6 +186,7 @@ class VehicleController extends Controller
             'status' => 'sometimes|in:active,inactive,maintenance',
         ]);
 
+        $validated['features'] = $validated['features'] ?? [];
         $vehicle->update($validated);
 
         return back()->with('success', 'Vehicle updated successfully.');

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface BrandLogoProps {
     /**
@@ -56,8 +57,8 @@ export default function BrandLogo({
     };
 
     const subtitleSizeMap = {
-        sm: 'text-[9px] tracking-wider',
-        md: 'text-[10px] tracking-widest',
+        sm: 'text-xs tracking-wider',
+        md: 'text-xs tracking-widest',
         lg: 'text-xs tracking-widest',
         xl: 'text-sm tracking-widest',
     };
@@ -90,9 +91,11 @@ export default function BrandLogo({
 
     return (
         <div
-            className={`inline-flex items-center gap-3 select-none ${
-                interactive ? 'group cursor-pointer' : ''
-            } ${className}`}
+            className={cn(
+                'inline-flex items-center gap-3 select-none',
+                interactive && 'group cursor-pointer',
+                className
+            )}
         >
             {/* Option 1 Tourist Van Emblem Badge (Transparent Circle) */}
             <div
@@ -138,7 +141,7 @@ export default function BrandLogo({
                         </div>
                     ) : (
                         <span
-                            className={`text-slate-400 font-semibold tracking-wide text-[9px] uppercase hidden sm:block`}
+                            className={`text-slate-400 font-semibold tracking-wide text-xs uppercase hidden sm:block`}
                         >
                             All Vehicle Rentals
                         </span>

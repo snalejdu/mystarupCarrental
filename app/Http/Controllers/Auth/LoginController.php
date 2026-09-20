@@ -51,7 +51,11 @@ class LoginController extends Controller
         ]);
 
         if ($request->filled('intended')) {
-            return redirect($request->input('intended'));
+            $intended = $request->input('intended');
+            // Prevent open redirect: only allow safe local paths
+            if (str_starts_with($intended, '/') && !str_starts_with($intended, '//') && !str_contains($intended, '\\')) {
+                return redirect($intended);
+            }
         }
 
         if ($user->isAdmin()) {
@@ -71,23 +75,53 @@ class LoginController extends Controller
     }
 
     /**
-     * Handle Google Sign-In authentication.
+     * Redirect the user to Google's OAuth consent screen.
      */
-    public function google(Request $request)
+    public function redirectToGoogle()
     {
-        $role = $request->input('role', 'renter');
-        $email = $role === 'owner' ? 'maria@boholrentals.ph' : 'renter@gmail.com';
-        $name = $role === 'owner' ? 'Maria Santos (Google Host)' : 'Juan Dela Cruz (Google User)';
+        return \Laravel\Socialite\Facades\Socialite::driver('google')
+            ->redirect();
+    }
 
-        $user = \App\Models\User::firstOrCreate(
-            ['email' => $email],
-            [
-                'name' => $name,
-                'phone' => '09171234567',
-                'password' => bcrypt('password123'),
-                'role' => $role,
-            ]
-        );
+    /**
+     * Handle the callback from Google after authentication.
+     */
+    public function handleGoogleCallback(Request $request)
+    {
+        try {
+            $googleUser = \Laravel\Socialite\Facades\Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            Log::channel('security')->warning('Google OAuth callback failed', [
+                'error' => $e->getMessage(),
+                'ip' => $request->ip(),
+            ]);
+
+            return redirect()->route('login')->withErrors([
+                'email' => 'Google sign-in failed. Please try again.',
+            ]);
+        }
+
+        // Try to find an existing user by google_id first, then by email
+        $user = \App\Models\User::where('google_id', $googleUser->getId())->first()
+             ?? \App\Models\User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            // Link Google account if not already linked
+            $user->update([
+                'google_id' => $googleUser->getId(),
+                'avatar' => $googleUser->getAvatar() ?? $user->avatar,
+            ]);
+        } else {
+            // Create a new user (defaults to renter role)
+            $user = \App\Models\User::create([
+                'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
+                'google_id' => $googleUser->getId(),
+                'avatar' => $googleUser->getAvatar(),
+                'role' => 'renter',
+                'password' => null,
+            ]);
+        }
 
         Auth::login($user, true);
         $request->session()->regenerate();
@@ -97,15 +131,12 @@ class LoginController extends Controller
             'ip' => $request->ip(),
         ]);
 
-        if ($request->filled('intended')) {
-            return redirect($request->input('intended'))->with('success', 'Successfully signed in with Google!');
-        }
-
         if ($user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         }
 
         if ($user->isRenter()) {
+            // Auto-link past guest bookings matching this email
             \App\Models\Booking::where('renter_email', $user->email)
                 ->whereNull('renter_id')
                 ->update(['renter_id' => $user->id]);

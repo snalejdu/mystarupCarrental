@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Booking extends Model
@@ -18,13 +19,10 @@ class Booking extends Model
         'renter_name',
         'renter_contact',
         'renter_email',
-        'token',
         'start_date',
         'end_date',
         'total_days',
         'total_price',
-        'commission_rate',
-        'commission_amount',
         'status',
         'checkin_odometer',
         'checkin_fuel',
@@ -80,6 +78,45 @@ class Booking extends Model
                 $booking->commission_amount = $booking->total_price * ($booking->commission_rate / 100);
             }
         });
+
+        // Automatically sync handover inspections into normalized `booking_handovers` table
+        static::saved(function ($booking) {
+            $handoverFields = [
+                'checkin_odometer', 'checkin_fuel', 'checkin_notes',
+                'checkout_odometer', 'checkout_fuel', 'checkout_deposit_refunded'
+            ];
+            $hasHandoverData = false;
+            foreach ($handoverFields as $f) {
+                if ($booking->$f !== null) {
+                    $hasHandoverData = true;
+                    break;
+                }
+            }
+
+            if ($hasHandoverData) {
+                BookingHandover::updateOrCreate(
+                    ['booking_id' => $booking->id],
+                    [
+                        'checkin_odometer' => $booking->checkin_odometer,
+                        'checkin_fuel' => $booking->checkin_fuel,
+                        'checkin_notes' => $booking->checkin_notes,
+                        'checkin_verified_at' => ($booking->checkin_odometer || $booking->checkin_fuel) ? now() : null,
+                        'checkout_odometer' => $booking->checkout_odometer,
+                        'checkout_fuel' => $booking->checkout_fuel,
+                        'checkout_deposit_refunded' => (bool) $booking->checkout_deposit_refunded,
+                        'checkout_verified_at' => ($booking->checkout_odometer || $booking->checkout_fuel) ? now() : null,
+                    ]
+                );
+            }
+        });
+    }
+
+    /**
+     * Get the handover inspection record (3NF relation).
+     */
+    public function handover(): HasOne
+    {
+        return $this->hasOne(BookingHandover::class);
     }
 
     /**

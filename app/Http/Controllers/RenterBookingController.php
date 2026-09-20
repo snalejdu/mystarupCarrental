@@ -63,7 +63,7 @@ class RenterBookingController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'phone' => $user->phone,
-                'driver_license_path' => $user->driver_license_path ? asset('storage/' . $user->driver_license_path) : null,
+                'driver_license_path' => $user->driver_license_path ? route('renter.license.photo') : null,
                 'driver_license_status' => $user->driver_license_status ?? 'unverified',
             ],
         ]);
@@ -71,6 +71,7 @@ class RenterBookingController extends Controller
 
     /**
      * Upload / Update Renter Driver's License.
+     * Stores on the private disk to prevent unauthenticated access to government PII.
      */
     public function uploadLicense(Request $request)
     {
@@ -84,16 +85,20 @@ class RenterBookingController extends Controller
         }
 
         if ($request->hasFile('license_photo')) {
-            // Delete old file if exists
-            if ($user->driver_license_path && Storage::disk('public')->exists($user->driver_license_path)) {
-                Storage::disk('public')->delete($user->driver_license_path);
+            // Delete old file if exists (check both private and legacy public disk)
+            if ($user->driver_license_path) {
+                if (Storage::disk('private')->exists($user->driver_license_path)) {
+                    Storage::disk('private')->delete($user->driver_license_path);
+                } elseif (Storage::disk('public')->exists($user->driver_license_path)) {
+                    Storage::disk('public')->delete($user->driver_license_path);
+                }
             }
 
-            $path = $request->file('license_photo')->store('licenses', 'public');
-            $user->update([
-                'driver_license_path' => $path,
-                'driver_license_status' => 'verified', // Auto-verified for seamless UX
-            ]);
+            // Store on private disk — not web-accessible
+            $path = $request->file('license_photo')->store('licenses', 'private');
+            $user->driver_license_path = $path;
+            $user->driver_license_status = 'verified'; // Auto-verified for seamless UX
+            $user->save();
         }
 
         return back()->with('success', 'Driver\'s license uploaded and verified successfully! 🪪');
@@ -123,6 +128,7 @@ class RenterBookingController extends Controller
                 'rater_type' => 'renter',
             ],
             [
+                'rater_id' => auth()->id(),
                 'rater_identifier' => auth()->user()->name,
                 'stars' => $validated['stars'],
                 'comment' => $validated['comment'] ?? null,

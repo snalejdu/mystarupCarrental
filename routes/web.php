@@ -25,6 +25,7 @@ Route::get('/vehicles/{vehicle}', [PublicVehicleController::class, 'show'])->nam
 Route::get('/about', fn () => \Inertia\Inertia::render('About'))->name('about');
 Route::get('/contact', fn () => \Inertia\Inertia::render('Contact'))->name('contact');
 Route::get('/privacy-policy', fn () => \Inertia\Inertia::render('PrivacyPolicy'))->name('privacy');
+Route::get('/terms', fn () => \Inertia\Inertia::render('Terms'))->name('terms');
 Route::get('/animation-preview', fn () => \Inertia\Inertia::render('AnimationPreview'))->name('animation.preview');
 
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
@@ -43,8 +44,14 @@ Route::middleware('throttle:booking')->group(function () {
 });
 
 // Renter status page — accessed via UUID token
-Route::get('/booking/{token}', [BookingController::class, 'renterStatus'])->name('booking.status');
-Route::post('/booking/{token}/rate', [BookingController::class, 'renterRate'])->name('booking.renter-rate')->middleware('throttle:rating');
+Route::get('/booking/{token}', [BookingController::class, 'renterStatus'])
+    ->name('booking.status')
+    ->whereUuid('token');
+
+Route::post('/booking/{token}/rate', [BookingController::class, 'renterRate'])
+    ->name('booking.renter-rate')
+    ->middleware('throttle:rating')
+    ->whereUuid('token');
 
 // Photo serving route (for local dev without signed URLs)
 Route::get('/photos/{photo}', function (App\Models\VehiclePhoto $photo) {
@@ -62,7 +69,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store'])->middleware('throttle:register');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:login');
-    Route::post('/login/google', [LoginController::class, 'google'])->name('login.google');
+    Route::get('/auth/google/redirect', [LoginController::class, 'redirectToGoogle'])->name('auth.google.redirect');
+    Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 });
 
 Route::middleware(['auth', 'throttle:global'])->group(function () {
@@ -78,6 +86,26 @@ Route::middleware(['auth', 'throttle:global'])->group(function () {
 Route::middleware(['auth', 'throttle:global'])->prefix('renter')->name('renter.')->group(function () {
     Route::get('/bookings', [\App\Http\Controllers\RenterBookingController::class, 'index'])->name('bookings');
     Route::post('/license/upload', [\App\Http\Controllers\RenterBookingController::class, 'uploadLicense'])->name('license.upload')->middleware('throttle:upload');
+
+    // Secure license photo serving — only the authenticated license owner can view
+    Route::get('/license/photo', function (\Illuminate\Http\Request $request) {
+        $user = $request->user();
+        if (!$user || !$user->driver_license_path) {
+            abort(404);
+        }
+        $disk = \Illuminate\Support\Facades\Storage::disk('private');
+        if (!$disk->exists($user->driver_license_path)) {
+            // Fallback: check legacy public disk for pre-migration files
+            $disk = \Illuminate\Support\Facades\Storage::disk('public');
+            if (!$disk->exists($user->driver_license_path)) {
+                abort(404);
+            }
+        }
+        return response()->file($disk->path($user->driver_license_path), [
+            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        ]);
+    })->name('license.photo');
+
     Route::post('/bookings/{booking}/rate', [\App\Http\Controllers\RenterBookingController::class, 'rate'])->name('bookings.rate')->middleware('throttle:rating');
     Route::post('/bookings/{booking}/handover', [\App\Http\Controllers\RenterBookingController::class, 'updateHandover'])->name('bookings.handover');
     Route::post('/bookings/{booking}/cancel', [\App\Http\Controllers\RenterBookingController::class, 'cancel'])->name('bookings.cancel');
@@ -134,3 +162,4 @@ Route::middleware(['auth', 'admin', 'throttle:global'])->prefix('admin')->name('
     Route::get('/bookings', [AdminDashboardController::class, 'bookings'])->name('bookings');
     Route::get('/owners', [AdminDashboardController::class, 'owners'])->name('owners');
 });
+

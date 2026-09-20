@@ -21,10 +21,9 @@ class PublicVehicleController extends Controller
             ->get();
 
         $stats = [
-            'total_vehicles' => Vehicle::active()->count() ?: 50,
-            'total_owners' => \App\Models\User::where('role', 'owner')->count() ?: 20,
+            'total_vehicles' => Vehicle::active()->count(),
+            'total_owners' => \App\Models\User::where('role', 'owner')->count(),
             'locations_count' => count(config('rentbohol.locations')),
-            'avg_rating' => 4.9,
         ];
 
         return Inertia::render('Welcome', [
@@ -43,32 +42,40 @@ class PublicVehicleController extends Controller
             ->with(['photos' => fn ($q) => $q->orderBy('order')->limit(1)])
             ->withCount('bookings');
 
-        // Filter by location
+        // Filter by location (strictly whitelist validated)
         if ($request->filled('location')) {
-            $query->inLocation($request->input('location'));
+            $location = (string) $request->input('location');
+            if (in_array($location, config('rentbohol.locations', []), true)) {
+                $query->inLocation($location);
+            }
         }
 
-        // Filter by type
+        // Filter by type (strictly whitelist validated)
         if ($request->filled('type')) {
-            $query->ofType($request->input('type'));
+            $type = (string) $request->input('type');
+            if (in_array($type, config('rentbohol.vehicle_types', []), true)) {
+                $query->ofType($type);
+            }
         }
 
-        // Filter by price range
-        if ($request->filled('min_price')) {
-            $query->where('price_per_day', '>=', $request->input('min_price'));
+        // Filter by price range (strictly numeric and clamped)
+        if ($request->filled('min_price') && is_numeric($request->input('min_price'))) {
+            $query->where('price_per_day', '>=', max(0, (float) $request->input('min_price')));
         }
-        if ($request->filled('max_price')) {
-            $query->where('price_per_day', '<=', $request->input('max_price'));
+        if ($request->filled('max_price') && is_numeric($request->input('max_price'))) {
+            $query->where('price_per_day', '<=', min(1000000, (float) $request->input('max_price')));
         }
 
-        // Search by title, brand, or model (sanitized)
+        // Search by title, brand, or model (sanitized against SQL wildcard injection)
         if ($request->filled('search')) {
-            $search = trim(strip_tags(substr((string) $request->input('search'), 0, 100)));
-            if ($search !== '') {
-                $query->where(function ($q) use ($search) {
-                    $q->where('title', 'like', "%{$search}%")
-                      ->orWhere('brand', 'like', "%{$search}%")
-                      ->orWhere('model', 'like', "%{$search}%");
+            $rawSearch = trim(strip_tags(substr((string) $request->input('search'), 0, 100)));
+            if ($rawSearch !== '') {
+                // Escape SQL LIKE wildcard characters (% and _) to prevent wildcard expansion DoS
+                $escapedSearch = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $rawSearch);
+                $query->where(function ($q) use ($escapedSearch) {
+                    $q->where('title', 'like', "%{$escapedSearch}%")
+                      ->orWhere('brand', 'like', "%{$escapedSearch}%")
+                      ->orWhere('model', 'like', "%{$escapedSearch}%");
                 });
             }
         }
@@ -147,16 +154,23 @@ class PublicVehicleController extends Controller
                 'status' => $a->status,
             ]);
 
-        // Get ratings via completed bookings
+        // Get ratings via completed bookings — scoped to renter reviews only with safe field mapping
         $ratings = $vehicle->bookings()
             ->where('status', 'completed')
-            ->with('ratings')
+            ->with(['ratings' => fn ($q) => $q->where('rater_type', 'renter')])
             ->get()
             ->pluck('ratings')
             ->flatten()
             ->sortByDesc('created_at')
             ->take(10)
-            ->values();
+            ->values()
+            ->map(fn ($r) => [
+                'id' => $r->id,
+                'rater_identifier' => $r->rater_identifier,
+                'stars' => $r->stars,
+                'comment' => $r->comment,
+                'created_at' => $r->created_at->toISOString(),
+            ]);
 
         $otherVehicles = Vehicle::active()
             ->where('id', '!=', $vehicle->id)

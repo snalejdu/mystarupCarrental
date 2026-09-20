@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { Lock, ShieldCheck, EyeOff, FileText, Database, PhoneCall, Mail, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Lock, ShieldCheck, EyeSlash, FileText, Database, PhoneCall, EnvelopeSimple, CheckCircle, ArrowRight } from '@phosphor-icons/react';
 
 export default function PrivacyPolicy() {
     return (
@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-primary-700 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center shrink-0 border border-primary-100">
-                                <EyeOff className="w-5 h-5" />
+                                <EyeSlash className="w-5 h-5" />
                             </div>
                             <h2>1. Renter Contact Privacy Guarantee</h2>
                         </div>
@@ -42,15 +42,15 @@ export default function PrivacyPolicy() {
                         </p>
                         <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-2 border-primary-500">
                             <li className="flex items-start gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Your mobile phone number and email are <strong>encrypted and hidden from vehicle hosts</strong> while your request is pending review.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Host contact details and renter contact details are <strong>only unlocked</strong> after the host explicitly accepts your booking request.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>If a host declines your request, your contact information is never disclosed to them.</span>
                             </li>
                         </ul>

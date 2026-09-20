@@ -159,6 +159,7 @@ class BookingController extends Controller
         $validated = $request->validate(Rating::rules());
 
         $booking->ratings()->create([
+            'rater_id' => $booking->renter_id ?: auth()->id(),
             'rater_type' => 'renter',
             'rater_identifier' => $booking->renter_name,
             'stars' => $validated['stars'],
@@ -179,9 +180,8 @@ class BookingController extends Controller
         $vehicle = Vehicle::findOrFail($vehicleId);
         $ratings = Rating::whereHas('booking', fn ($q) => $q->where('vehicle_id', $vehicleId))->get();
 
-        $vehicle->update([
-            'avg_rating' => $ratings->avg('stars') ?? 0,
-            'total_reviews' => $ratings->count(),
-        ]);
+        $vehicle->avg_rating = $ratings->avg('stars') ?? 0;
+        $vehicle->total_reviews = $ratings->count();
+        $vehicle->save();
     }
 }

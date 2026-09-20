@@ -1,9 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
 import {
-    Calendar, CheckCircle2, XCircle, Clock, MapPin, Phone, Mail, User,
-    ShieldCheck, Ban, ArrowRight, Check, AlertCircle, Sparkles, MessageSquare
-} from 'lucide-react';
+    Calendar, CheckCircle, XCircle, Clock, MapPin, Phone, EnvelopeSimple, User, ShieldCheck, Prohibit, ArrowRight, Check, WarningCircle, ChatCircle } from '@phosphor-icons/react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -69,11 +67,11 @@ export default function BookingsIndex({ bookings }: Props) {
                     </div>
 
                     {/* Filter Tabs */}
-                    <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 -mx-1 px-1">
                         <button
                             type="button"
                             onClick={() => setFilter('all')}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 inline-flex items-center justify-center ${
                                 filter === 'all'
                                     ? 'bg-primary-700 text-white shadow-xs'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -84,7 +82,7 @@ export default function BookingsIndex({ bookings }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('pending')}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
+                            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 inline-flex items-center justify-center gap-1.5 ${
                                 filter === 'pending'
                                     ? 'bg-amber-600 text-white shadow-2xs'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -92,7 +90,7 @@ export default function BookingsIndex({ bookings }: Props) {
                         >
                             <span>Pending</span>
                             {counts.pending > 0 && (
-                                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${filter === 'pending' ? 'bg-white text-amber-700' : 'bg-amber-200 text-amber-800'}`}>
+                                <span className={`px-1.5 py-0.5 rounded-full text-xs font-bold ${filter === 'pending' ? 'bg-white text-amber-700' : 'bg-amber-200 text-amber-800'}`}>
                                     {counts.pending}
                                 </span>
                             )}
@@ -100,7 +98,7 @@ export default function BookingsIndex({ bookings }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('accepted')}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 inline-flex items-center justify-center ${
                                 filter === 'accepted'
                                     ? 'bg-emerald-700 text-white shadow-2xs'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -111,7 +109,7 @@ export default function BookingsIndex({ bookings }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('completed')}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 inline-flex items-center justify-center ${
                                 filter === 'completed'
                                     ? 'bg-primary-700 text-white shadow-2xs'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -122,7 +120,7 @@ export default function BookingsIndex({ bookings }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('cancelled')}
-                            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 inline-flex items-center justify-center ${
                                 filter === 'cancelled'
                                     ? 'bg-rose-700 text-white shadow-2xs'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -164,12 +162,12 @@ export default function BookingsIndex({ bookings }: Props) {
                                     <div className="flex items-center gap-3 min-w-0">
                                         {booking.vehicle?.photos?.[0] ? (
                                             <img
-                                                src={booking.vehicle.photos[0].url}
-                                                alt=""
-                                                className="w-14 h-11 rounded-xl object-cover border border-slate-200 shrink-0"
-                                            />
+                                                 src={booking.vehicle.photos[0].url}
+                                                 alt=""
+                                                 className="w-14 h-11 rounded-xl object-cover border border-slate-200 shrink-0"
+                                             />
                                         ) : (
-                                            <div className="w-14 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] text-slate-400 font-semibold shrink-0">
+                                            <div className="w-14 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-xs text-slate-400 font-semibold shrink-0">
                                                 No photo
                                             </div>
                                         )}
@@ -186,7 +184,7 @@ export default function BookingsIndex({ bookings }: Props) {
 
                                     {/* Status Badge */}
                                     <span
-                                        className={`shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold tracking-wide flex items-center gap-1.5 border uppercase ${
+                                        className={`shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold tracking-wide flex items-center gap-1.5 border uppercase ${
                                             isPending
                                                 ? 'bg-amber-50 text-amber-800 border-amber-200'
                                                 : isAccepted
@@ -215,7 +213,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 bg-slate-50/80 p-3 rounded-xl border border-slate-100 text-xs">
                                     {/* Renter Name */}
                                     <div>
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Renter</span>
+                                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Renter</span>
                                         <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5 truncate">
                                             <User className="w-3 h-3 text-slate-400 shrink-0" />
                                             <span className="truncate">{booking.renter_display_name}</span>
@@ -224,17 +222,17 @@ export default function BookingsIndex({ bookings }: Props) {
 
                                     {/* Dates & Duration */}
                                     <div>
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Rental Dates</span>
+                                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Rental Dates</span>
                                         <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5">
                                             <Calendar className="w-3 h-3 text-primary-600 shrink-0" />
                                             <span>{formatDate(booking.start_date)} – {formatDate(booking.end_date)}</span>
                                         </span>
-                                        <span className="text-[10px] text-slate-500 font-medium">({booking.total_days} {booking.total_days === 1 ? 'day' : 'days'})</span>
+                                        <span className="text-xs text-slate-500 font-medium">({booking.total_days} {booking.total_days === 1 ? 'day' : 'days'})</span>
                                     </div>
 
                                     {/* Total Price */}
                                     <div>
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Total Price</span>
+                                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Total Price</span>
                                         <span className="font-extrabold text-primary-700 text-sm mt-0.5 block">
                                             {formatCurrency(Number(booking.total_price))}
                                         </span>
@@ -242,11 +240,11 @@ export default function BookingsIndex({ bookings }: Props) {
 
                                     {/* Net Earnings & Fee */}
                                     <div>
-                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Net Host Payout</span>
+                                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Net Host Payout</span>
                                         <span className="font-bold text-emerald-700 mt-0.5 block">
                                             {formatCurrency(netEarnings)}
                                         </span>
-                                        <span className="text-[10px] text-slate-400">({booking.commission_rate}% platform fee: {formatCurrency(Number(booking.commission_amount))})</span>
+                                        <span className="text-xs text-slate-400">({booking.commission_rate}% platform fee: {formatCurrency(Number(booking.commission_amount))})</span>
                                     </div>
                                 </div>
 
@@ -268,10 +266,10 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     })()}?text=${encodeURIComponent(`Hi ${booking.renter_display_name}, I am your host on RentBohol for your ${booking.vehicle?.title || 'rental vehicle'} booking!`)}`}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-bold transition-colors bg-emerald-100 hover:bg-emerald-200 px-2.5 py-1 rounded-lg border border-emerald-300 shadow-2xs"
+                                                    className="min-h-[44px] inline-flex items-center gap-1.5 text-emerald-800 hover:text-emerald-950 font-bold transition-colors bg-emerald-100 hover:bg-emerald-200 px-3 py-2 rounded-xl border border-emerald-300 shadow-2xs"
                                                     title="Chat with renter on WhatsApp"
                                                 >
-                                                    <MessageSquare className="w-3 h-3 text-emerald-700" />
+                                                    <ChatCircle className="w-4 h-4 text-emerald-700" />
                                                     <span>WhatsApp</span>
                                                 </a>
                                             )}
@@ -280,10 +278,10 @@ export default function BookingsIndex({ bookings }: Props) {
                                             {booking.renter_phone && (
                                                 <a
                                                     href={`tel:${booking.renter_phone}`}
-                                                    className="inline-flex items-center gap-1 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shadow-2xs"
+                                                    className="min-h-[44px] inline-flex items-center gap-1.5 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-2xs"
                                                     title="Direct Phone Call"
                                                 >
-                                                    <Phone className="w-3 h-3 text-emerald-600" />
+                                                    <Phone className="w-4 h-4 text-emerald-600" />
                                                     <span>{booking.renter_phone}</span>
                                                 </a>
                                             )}
@@ -292,11 +290,11 @@ export default function BookingsIndex({ bookings }: Props) {
                                             {booking.renter_email && (
                                                 <a
                                                     href={`mailto:${booking.renter_email}`}
-                                                    className="inline-flex items-center gap-1 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shadow-2xs"
+                                                    className="min-h-[44px] inline-flex items-center gap-1.5 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-2xs"
                                                     title="Send Email"
                                                 >
-                                                    <Mail className="w-3 h-3 text-emerald-600" />
-                                                    <span>{booking.renter_email}</span>
+                                                    <EnvelopeSimple className="w-4 h-4 text-emerald-600" />
+                                                    <span className="truncate max-w-[200px]">{booking.renter_email}</span>
                                                 </a>
                                             )}
                                         </div>
@@ -307,7 +305,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 {isCancelled && (
                                     <div className="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 flex items-center justify-between gap-2">
                                         <div className="flex items-center gap-1.5">
-                                            <Ban className="w-3.5 h-3.5 text-rose-500" />
+                                            <Prohibit className="w-3.5 h-3.5 text-rose-500" />
                                             <span className="font-semibold text-slate-700">
                                                 {booking.status === 'declined' ? 'Booking request declined' : 'Booking was cancelled'}
                                             </span>
@@ -318,23 +316,23 @@ export default function BookingsIndex({ bookings }: Props) {
 
                                 {/* Action Buttons Strip */}
                                 {isPending && (
-                                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2 border-t border-slate-100">
                                         <span className="text-xs text-amber-700 font-medium flex items-center gap-1">
-                                            <Clock className="w-3.5 h-3.5" />
+                                            <Clock className="w-3.5 h-3.5 shrink-0" />
                                             <span>Accepting unlocks verified phone & email</span>
                                         </span>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 w-full sm:w-auto">
                                             <button
                                                 type="button"
                                                 onClick={() => handleDecline(booking.id)}
-                                                className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors"
+                                                className="flex-1 sm:flex-initial min-h-[44px] px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors inline-flex items-center justify-center"
                                             >
                                                 Decline
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={() => handleAccept(booking.id)}
-                                                className="glass-btn px-4 py-1.5 rounded-xl text-xs font-bold"
+                                                className="flex-1 sm:flex-initial min-h-[48px] glass-btn px-4 py-2.5 rounded-xl text-xs font-bold inline-flex items-center justify-center"
                                             >
                                                 Accept Request
                                             </button>
@@ -343,18 +341,18 @@ export default function BookingsIndex({ bookings }: Props) {
                                 )}
 
                                 {isAccepted && (
-                                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2 border-t border-slate-100">
                                         <button
                                             type="button"
                                             onClick={() => handleCancel(booking.id)}
-                                            className="text-xs font-bold text-slate-500 hover:text-rose-600 transition-colors"
+                                            className="min-h-[44px] inline-flex items-center text-xs font-bold text-slate-500 hover:text-rose-600 transition-colors"
                                         >
                                             Cancel Booking
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => handleComplete(booking.id)}
-                                            className="px-4 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-colors shadow-2xs flex items-center gap-1.5"
+                                            className="w-full sm:w-auto min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-colors shadow-2xs flex items-center justify-center gap-1.5"
                                         >
                                             <Check className="w-3.5 h-3.5" />
                                             <span>Mark Rental Completed</span>

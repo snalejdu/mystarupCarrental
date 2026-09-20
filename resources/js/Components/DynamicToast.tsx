@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { CheckCircle2, AlertCircle, AlertTriangle, Info, X, CreditCard, Sparkles } from 'lucide-react';
+import { CheckCircle, WarningCircle, Warning, Info, X, CreditCard } from '@phosphor-icons/react';
 
 export interface ToastMessage {
     id: string;
@@ -131,21 +131,21 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                 return {
                     borderLeft: 'border-l-emerald-500',
                     iconBg: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                    icon: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />,
+                    icon: <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />,
                     badge: 'bg-emerald-500/20 text-emerald-300',
                 };
             case 'warning':
                 return {
                     borderLeft: 'border-l-amber-500',
                     iconBg: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-                    icon: <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />,
+                    icon: <Warning className="w-5 h-5 text-amber-400 shrink-0" />,
                     badge: 'bg-amber-500/20 text-amber-300',
                 };
             case 'error':
                 return {
                     borderLeft: 'border-l-rose-500',
                     iconBg: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-                    icon: <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />,
+                    icon: <WarningCircle className="w-5 h-5 text-rose-400 shrink-0" />,
                     badge: 'bg-rose-500/20 text-rose-300',
                 };
             case 'payment':
@@ -200,29 +200,29 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                         </span>
                         {/* Subtle Hover Paused Indicator */}
                         {isHovered && duration !== Infinity && duration > 0 && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded text-center">
+                            <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded text-center">
                                 Paused
                             </span>
                         )}
                         {toast.type === 'error' && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-300 bg-rose-500/20 px-1.5 py-0.5 rounded">
+                            <span className="text-xs font-bold uppercase tracking-wider text-rose-300 bg-rose-500/20 px-1.5 py-0.5 rounded">
                                 Action Required
                             </span>
                         )}
                     </div>
                     {toast.description && (
-                        <div className="text-[11px] sm:text-xs text-slate-300 font-normal truncate mt-0.5">
+                        <div className="text-xs text-slate-300 font-normal truncate mt-0.5">
                             {toast.description}
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Close Button (Rule 04: Always offer a way out) */}
+            {/* Close Button (Rule 04: Always offer a way out, min 44x44px touch area) */}
             <button
                 type="button"
                 onClick={handleDismiss}
-                className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors shrink-0 focus:outline-none focus:ring-1 focus:ring-slate-400"
+                className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors shrink-0 focus:outline-none focus:ring-1 focus:ring-slate-400"
                 title="Dismiss notification"
                 aria-label="Close notification"
             >
@@ -234,7 +234,7 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
 
 /**
  * Toast Container adhering to the 5 rules:
- * 1. Position: Desktop Bottom-Right, Mobile Top, Never Center
+ * 1. Position: Desktop Bottom-Right, Mobile Top with safe area, Never Center
  * 2. Timing: Info/Success 4s, Warning 7s, Error Infinite
  * 3. Stacking: Max 3 visible, Spring physics
  * 4. Dismissible: Close button, Swipe on mobile, Hover to pause
@@ -266,11 +266,11 @@ export default function DynamicToast() {
     if (toasts.length === 0) return null;
 
     return (
-        /* Rule 01: Mobile = Top (top-4 inset-x-4), Desktop = Bottom-Right (sm:top-auto sm:bottom-6 sm:right-6 sm:left-auto) */
+        /* Rule 01: Mobile = Top (top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-4), Desktop = Bottom-Right (sm:top-auto sm:bottom-6 sm:right-6 sm:left-auto) */
         <aside
             aria-label="Notifications"
             className="fixed z-[999999] pointer-events-none flex flex-col gap-2.5 
-                       top-4 left-4 right-4 sm:top-auto sm:left-auto sm:bottom-6 sm:right-6 sm:w-auto"
+                       top-[calc(1rem+env(safe-area-inset-top,0px))] left-4 right-4 sm:top-auto sm:left-auto sm:bottom-6 sm:right-6 sm:w-auto"
         >
             {toasts.map(toast => (
                 <ToastCard key={toast.id} toast={toast} onDismiss={removeToast} />

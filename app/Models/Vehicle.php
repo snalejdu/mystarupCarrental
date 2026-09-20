@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
+
 class Vehicle extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'owner_id',
         'title',
         'slug',
         'description',
@@ -22,6 +24,9 @@ class Vehicle extends Model
         'transmission',
         'seats',
         'has_aircon',
+        'distance_limit',
+        'fuel_type',
+        'features',
         'price_per_day',
         'security_deposit',
         'fuel_policy',
@@ -33,8 +38,6 @@ class Vehicle extends Model
         'driver_available',
         'location',
         'status',
-        'avg_rating',
-        'total_reviews',
     ];
 
     protected $casts = [
@@ -50,7 +53,59 @@ class Vehicle extends Model
         'total_reviews' => 'integer',
         'seats' => 'integer',
         'has_aircon' => 'boolean',
+        'features' => 'array',
     ];
+
+    /**
+     * Booted method to maintain automatic synchronization between
+     * the cached features array and the normalized `vehicle_feature` pivot table.
+     */
+    protected static function booted(): void
+    {
+        static::saved(function (Vehicle $vehicle) {
+            if ($vehicle->wasChanged('features') || $vehicle->wasRecentlyCreated) {
+                $vehicle->syncNormalizedFeatures();
+            }
+        });
+    }
+
+    /**
+     * Synchronize feature tags into normalized `features` and `vehicle_feature` tables (3NF).
+     */
+    public function syncNormalizedFeatures(): void
+    {
+        $features = $this->features;
+        if (!is_array($features)) {
+            return;
+        }
+
+        $featureIds = [];
+        foreach ($features as $featureName) {
+            if (!is_string($featureName) || trim($featureName) === '') {
+                continue;
+            }
+            $slug = Str::slug(trim($featureName));
+            $feature = Feature::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => trim($featureName),
+                    'category' => 'general',
+                    'vehicle_type' => $this->type === 'motorbike' ? 'motorbike' : 'car',
+                ]
+            );
+            $featureIds[] = $feature->id;
+        }
+
+        $this->featuresRel()->sync($featureIds);
+    }
+
+    /**
+     * Get the normalized features (3NF relation).
+     */
+    public function featuresRel(): BelongsToMany
+    {
+        return $this->belongsToMany(Feature::class, 'vehicle_feature')->withTimestamps();
+    }
 
     /**
      * Get the owner of this vehicle.

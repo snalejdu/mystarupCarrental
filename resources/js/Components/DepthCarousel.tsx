@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import './DepthCarousel.css';
 
 export interface DepthCarouselItem {
@@ -94,7 +95,7 @@ export default function DepthCarousel({
         id: number;
     } | null>(null);
 
-    const wheelTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const autoTimerRef = useRef<number | null>(null);
     const reducedRef = useRef(false);
 
@@ -228,28 +229,7 @@ export default function DepthCarousel({
         return () => ro.disconnect();
     }, [layout]);
 
-    useEffect(() => {
-        const el = rootRef.current;
-        if (!el) return;
-        const onWheel = (e: WheelEvent) => {
-            const cfg = cfgRef.current;
-            if (cfg.count < 2) return;
-            e.preventDefault();
-            tweenRef.current?.kill();
-            const raw = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-            const delta = e.deltaMode === 1 ? raw * 24 : raw;
-            const step = clamp(delta / (cfg.cardWidth * 0.9), -0.6, 0.6);
-            posRef.current += step;
-            layout(posRef.current);
-            if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
-            wheelTimerRef.current = setTimeout(() => setFocus(Math.round(posRef.current), true), 130);
-        };
-        el.addEventListener('wheel', onWheel, { passive: false });
-        return () => {
-            el.removeEventListener('wheel', onWheel);
-            if (wheelTimerRef.current) clearTimeout(wheelTimerRef.current);
-        };
-    }, [layout, setFocus]);
+    // Wheel-scroll image cycling intentionally disabled
 
     const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
         const cfg = cfgRef.current;
@@ -428,16 +408,7 @@ export default function DepthCarousel({
                         aria-label="Previous slide"
                         onClick={() => navigateBy(-1)}
                     >
-                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                            <path
-                                d="M15 5l-7 7 7 7"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <CaretLeft className="w-5 h-5" weight="bold" />
                     </button>
                     <button
                         type="button"
@@ -445,16 +416,7 @@ export default function DepthCarousel({
                         aria-label="Next slide"
                         onClick={() => navigateBy(1)}
                     >
-                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                            <path
-                                d="M9 5l7 7-7 7"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <CaretRight className="w-5 h-5" weight="bold" />
                     </button>
                 </>
             )}
