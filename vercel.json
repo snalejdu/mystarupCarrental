@@ -35,6 +35,7 @@
     "APP_DEBUG": "false",
     "DB_CONNECTION": "sqlite",
     "APP_MAINTENANCE_DRIVER": "file",
+    "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",

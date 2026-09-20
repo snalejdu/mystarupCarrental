@@ -42,6 +42,11 @@ foreach ($storageDirs as $dir) {
     }
 }
 
+$viewCompiledPath = '/tmp/storage/framework/views';
+putenv("VIEW_COMPILED_PATH={$viewCompiledPath}");
+$_ENV['VIEW_COMPILED_PATH'] = $viewCompiledPath;
+$_SERVER['VIEW_COMPILED_PATH'] = $viewCompiledPath;
+
 // Ensure SQLite database exists in /tmp and is fully populated
 $tmpDb = '/tmp/database.sqlite';
 $seedDb = dirname(__DIR__) . '/database/seed.db';
