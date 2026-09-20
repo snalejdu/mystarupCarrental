@@ -58,7 +58,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('all')}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
+                            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold cursor-pointer ${
                                 filter === 'all' ? 'glass-pill-active' : 'text-slate-600 hover:text-slate-900'
                             }`}
                         >
@@ -67,28 +67,28 @@ export default function VehiclesIndex({ vehicles }: Props) {
                         <button
                             type="button"
                             onClick={() => setFilter('active')}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
                                 filter === 'active' ? 'bg-emerald-600 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
                             }`}
                         >
                             <span>Active</span>
-                            <span className="text-[10px] opacity-80">({counts.active})</span>
+                            <span className="text-xs opacity-90">({counts.active})</span>
                         </button>
                         <button
                             type="button"
                             onClick={() => setFilter('maintenance')}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
                                 filter === 'maintenance' ? 'bg-amber-600 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
                             }`}
                         >
                             <span>Maintenance</span>
-                            <span className="text-[10px] opacity-80">({counts.maintenance})</span>
+                            <span className="text-xs opacity-90">({counts.maintenance})</span>
                         </button>
                     </div>
 
                     <Link
                         href="/owner/vehicles/create"
-                        className="glass-btn-accent inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold shrink-0"
+                        className="glass-btn-accent min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold shrink-0"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Add Vehicle</span>
@@ -177,7 +177,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                     </div>
 
                                     {/* Top-Left: Vehicle Type Badge */}
-                                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[11px] font-extrabold text-slate-900 capitalize shadow-xs border border-white/40 pointer-events-none">
+                                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-extrabold text-slate-900 capitalize shadow-xs border border-white/40 pointer-events-none">
                                         {vehicle.type}
                                     </div>
 
@@ -187,7 +187,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                             type="button"
                                             onClick={() => setOpenMenuId(isMenuOpen ? null : vehicle.id)}
                                             disabled={isUpdating}
-                                            className={`px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide flex items-center gap-1.5 shadow-md border uppercase transition-transform active:scale-95 ${
+                                            className={`min-h-[44px] px-3.5 py-2 rounded-full text-xs font-bold tracking-wide flex items-center gap-1.5 shadow-md border uppercase transition-transform active:scale-95 cursor-pointer ${
                                                 isActive
                                                     ? 'bg-emerald-500 text-white border-emerald-400'
                                                     : isMaintenance
@@ -197,18 +197,18 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                             title="Click to toggle status (Active, Maintenance, Inactive)"
                                         >
                                             {isUpdating ? (
-                                                <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                                <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                                             ) : isMaintenance ? (
-                                                <Wrench className="w-3 h-3 text-amber-100" />
+                                                <Wrench className="w-3.5 h-3.5 text-amber-100" />
                                             ) : (
                                                 <span
-                                                    className={`w-1.5 h-1.5 rounded-full ${
+                                                    className={`w-2 h-2 rounded-full ${
                                                         isActive ? 'bg-white animate-pulse' : 'bg-white'
                                                     }`}
                                                 />
                                             )}
                                             <span>{vehicle.status}</span>
-                                            <CaretDown className="w-3 h-3 opacity-75" />
+                                            <CaretDown className="w-3.5 h-3.5 opacity-75" />
                                         </button>
 
                                         {/* Status Switcher Popover Menu */}
@@ -220,8 +220,8 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                                     onClick={() => setOpenMenuId(null)}
                                                 />
 
-                                                <div className="absolute right-0 top-full mt-1.5 w-52 bg-white rounded-2xl shadow-2xl border border-slate-200 py-1.5 z-50 text-xs animate-fadeIn">
-                                                    <div className="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                                                <div className="absolute right-0 top-full mt-1.5 w-56 bg-white rounded-2xl shadow-2xl border border-slate-200 py-1.5 z-50 text-xs animate-fadeIn">
+                                                    <div className="px-3 py-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
                                                         Change Vehicle Status
                                                     </div>
 
@@ -229,54 +229,54 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleStatusChange(vehicle.slug, vehicle.id, 'active')}
-                                                        className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-emerald-50 transition-colors ${
+                                                        className={`w-full min-h-[44px] text-left px-3.5 py-2.5 flex items-center justify-between hover:bg-emerald-50 transition-colors cursor-pointer ${
                                                             isActive ? 'bg-emerald-50 font-bold text-emerald-800' : 'text-slate-700'
                                                         }`}
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                                                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
                                                             <div>
                                                                 <span className="block font-bold">Active</span>
-                                                                <span className="text-[10px] text-slate-400 block font-normal">Visible to renters & bookable</span>
+                                                                <span className="text-xs text-slate-400 block font-normal">Visible to renters & bookable</span>
                                                             </div>
                                                         </div>
-                                                        {isActive && <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
+                                                        {isActive && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
                                                     </button>
 
                                                     {/* Maintenance Option */}
                                                     <button
                                                         type="button"
                                                         onClick={() => handleStatusChange(vehicle.slug, vehicle.id, 'maintenance')}
-                                                        className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-amber-50 transition-colors ${
+                                                        className={`w-full min-h-[44px] text-left px-3.5 py-2.5 flex items-center justify-between hover:bg-amber-50 transition-colors cursor-pointer ${
                                                             isMaintenance ? 'bg-amber-50 font-bold text-amber-900' : 'text-slate-700'
                                                         }`}
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <Wrench className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                                                            <Wrench className="w-4 h-4 text-amber-500 shrink-0" />
                                                             <div>
                                                                 <span className="block font-bold">Under Maintenance</span>
-                                                                <span className="text-[10px] text-slate-400 block font-normal">Hidden from renters, no bookings</span>
+                                                                <span className="text-xs text-slate-400 block font-normal">Hidden from renters, no bookings</span>
                                                             </div>
                                                         </div>
-                                                        {isMaintenance && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0" />}
+                                                        {isMaintenance && <Check className="w-4 h-4 text-amber-600 shrink-0" />}
                                                     </button>
 
                                                     {/* Inactive Option */}
                                                     <button
                                                         type="button"
                                                         onClick={() => handleStatusChange(vehicle.slug, vehicle.id, 'inactive')}
-                                                        className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-slate-50 transition-colors ${
+                                                        className={`w-full min-h-[44px] text-left px-3.5 py-2.5 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer ${
                                                             isInactive ? 'bg-slate-50 font-bold text-slate-900' : 'text-slate-700'
                                                         }`}
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <PauseCircle className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                                            <PauseCircle className="w-4 h-4 text-slate-400 shrink-0" />
                                                             <div>
                                                                 <span className="block font-bold">Inactive (Paused)</span>
-                                                                <span className="text-[10px] text-slate-400 block font-normal">Temporarily taken offline</span>
+                                                                <span className="text-xs text-slate-400 block font-normal">Temporarily taken offline</span>
                                                             </div>
                                                         </div>
-                                                        {isInactive && <Check className="w-3.5 h-3.5 text-slate-600 shrink-0" />}
+                                                        {isInactive && <Check className="w-4 h-4 text-slate-600 shrink-0" />}
                                                     </button>
                                                 </div>
                                             </>
@@ -286,7 +286,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                     {/* Bottom-Right: Price Tag Overlay */}
                                     <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-950/85 backdrop-blur-xs text-white text-xs font-black tracking-tight shadow-md border border-white/10 pointer-events-none">
                                         {formatCurrency(Number(vehicle.price_per_day))}
-                                        <span className="text-[10px] font-normal text-slate-300">/day</span>
+                                        <span className="text-xs font-normal text-slate-300">/day</span>
                                     </div>
                                 </div>
 
@@ -309,7 +309,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                     {isMaintenance && (
                                         <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
                                             <Wrench className="w-4 h-4 text-amber-600 shrink-0" />
-                                            <span className="font-medium text-[11px] leading-tight">
+                                            <span className="font-medium text-xs leading-tight">
                                                 Hidden from renter POV while undergoing maintenance. Switch to <b>Active</b> when ready to rent.
                                             </span>
                                         </div>
@@ -336,8 +336,8 @@ export default function VehiclesIndex({ vehicles }: Props) {
 
                                     {/* Pending Alert Chip (If any) */}
                                     {hasPending && (
-                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold animate-pulse">
-                                            <WarningCircle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                                        <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold animate-pulse">
+                                            <WarningCircle className="w-4 h-4 text-amber-600 shrink-0" />
                                             <span>{vehicle.pending_bookings_count} pending booking {vehicle.pending_bookings_count === 1 ? 'request' : 'requests'}</span>
                                         </div>
                                     )}
@@ -347,9 +347,9 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                         {/* Edit Vehicle & Manage */}
                                         <Link
                                             href={`/owner/vehicles/${vehicle.slug}`}
-                                            className="glass-btn flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs"
+                                            className="glass-btn flex-1 min-h-[44px] inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl font-bold text-xs"
                                         >
-                                            <Gear className="w-3.5 h-3.5" />
+                                            <Gear className="w-4 h-4" />
                                             <span>Edit Vehicle</span>
                                         </Link>
 
@@ -359,21 +359,21 @@ export default function VehiclesIndex({ vehicles }: Props) {
                                                 href={`/vehicles/${vehicle.slug}`}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
+                                                className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer"
                                                 title="View Live Listing as a Renter"
                                             >
-                                                <Eye className="w-3.5 h-3.5 text-emerald-600" />
+                                                <Eye className="w-4 h-4 text-emerald-600" />
                                                 <span className="hidden sm:inline">Renter POV</span>
-                                                <ArrowSquareOut className="w-3 h-3 text-slate-400" />
+                                                <ArrowSquareOut className="w-3.5 h-3.5 text-slate-400" />
                                             </a>
                                         ) : (
                                             <button
                                                 type="button"
                                                 onClick={() => handleStatusChange(vehicle.slug, vehicle.id, 'active')}
-                                                className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs transition-colors border border-emerald-200"
+                                                className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs transition-colors border border-emerald-200 cursor-pointer"
                                                 title="Make vehicle active and open to renters"
                                             >
-                                                <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                                                <CheckCircle className="w-4 h-4 text-emerald-600" />
                                                 <span>Publish</span>
                                             </button>
                                         )}

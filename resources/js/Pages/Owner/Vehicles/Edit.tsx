@@ -236,36 +236,36 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                     <h2 className="font-semibold text-slate-900 text-lg mb-4">Vehicle Details</h2>
                     <form id="vehicle-edit-form" onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Listing Title</label>
-                            <input type="text" value={data.title} onChange={e => setData('title', e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
+                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Listing Title</label>
+                            <input type="text" value={data.title} onChange={e => setData('title', e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
                             {errors.title && <p className="text-xs text-rose-500 mt-1 font-medium">{errors.title}</p>}
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Type</label>
-                                <select value={data.type} onChange={e => handleTypeChange(e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required>
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Type</label>
+                                <select value={data.type} onChange={e => handleTypeChange(e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white" required>
                                     {vehicleTypes.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Location</label>
-                                <select value={data.location} onChange={e => setData('location', e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required>
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Location</label>
+                                <select value={data.location} onChange={e => setData('location', e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white" required>
                                     {locations.map(l => <option key={l} value={l}>{l}</option>)}
                                 </select>
                             </div>
                         </div>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Brand</label>
-                                <input type="text" value={data.brand} onChange={e => setData('brand', e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Brand</label>
+                                <input type="text" value={data.brand} onChange={e => setData('brand', e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Model</label>
-                                <input type="text" value={data.model} onChange={e => setData('model', e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Model</label>
+                                <input type="text" value={data.model} onChange={e => setData('model', e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Price/Day (â‚±)</label>
-                                <input type="number" value={data.price_per_day} onChange={e => setData('price_per_day', e.target.value)} min="100" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Price/Day (₱)</label>
+                                <input type="number" value={data.price_per_day} onChange={e => setData('price_per_day', e.target.value)} min="100" className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors" required />
                             </div>
                         </div>
 
@@ -276,8 +276,8 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     Key Specifications
                                 </span>
                                 {isMotorbike && (
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
-                                        <Prohibit className="w-3 h-3 text-slate-400" />
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
+                                        <Prohibit className="w-3.5 h-3.5 text-slate-400" />
                                         <span>AC N/A for Motorbikes</span>
                                     </span>
                                 )}
@@ -293,7 +293,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     <select
                                         value={data.transmission}
                                         onChange={e => setData('transmission', e.target.value)}
-                                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
+                                        className="w-full h-11 sm:h-10 px-3 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
                                         required
                                     >
                                         <option value="automatic">Automatic</option>
@@ -310,7 +310,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     <select
                                         value={data.fuel_type}
                                         onChange={e => setData('fuel_type', e.target.value)}
-                                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
+                                        className="w-full h-11 sm:h-10 px-3 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
                                         required
                                     >
                                         <option value="Unleaded Gas">Unleaded Gas</option>
@@ -332,7 +332,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                         onChange={e => setData('seats', parseInt(e.target.value) || 1)}
                                         min="1"
                                         max="60"
-                                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
+                                        className="w-full h-11 sm:h-10 px-3 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
                                         required
                                     />
                                 </div>
@@ -347,15 +347,15 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                         value={data.has_aircon ? '1' : '0'}
                                         onChange={e => setData('has_aircon', e.target.value === '1')}
                                         disabled={isMotorbike}
-                                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors disabled:bg-slate-100 disabled:text-slate-500 disabled:border-slate-200 disabled:cursor-not-allowed font-medium"
+                                        className="w-full h-11 sm:h-10 px-3 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors disabled:bg-slate-100 disabled:text-slate-500 disabled:border-slate-200 disabled:cursor-not-allowed font-medium bg-white"
                                         required
                                     >
                                         <option value="1">Air Conditioned</option>
                                         <option value="0">Non-Aircon</option>
                                     </select>
                                     {isMotorbike ? (
-                                        <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1 font-medium">
-                                            <Info className="w-3 h-3 text-slate-400 shrink-0" />
+                                        <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 font-medium">
+                                            <Info className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                                             <span>Open-air vehicle</span>
                                         </p>
                                     ) : (
@@ -378,7 +378,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                                 setData('distance_limit', '150 km / day');
                                             }
                                         }}
-                                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
+                                        className="w-full h-11 sm:h-10 px-3 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors bg-white font-medium"
                                         required
                                     >
                                         <option value="Unlimited">Unlimited Mileage</option>
@@ -396,7 +396,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                             value={data.distance_limit}
                                             onChange={e => setData('distance_limit', e.target.value)}
                                             placeholder="e.g. 180 km / day"
-                                            className="w-full mt-1.5 px-3 py-1.5 rounded-lg border border-primary-300 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200 bg-primary-50/40"
+                                            className="w-full mt-1.5 h-10 px-3 rounded-lg border border-primary-300 text-base sm:text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200 bg-primary-50/40"
                                         />
                                     )}
                                 </div>
@@ -410,7 +410,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                                         Vehicle Equipment & Inclusions
                                     </label>
-                                    <p className="text-[11px] text-slate-500 font-medium">
+                                    <p className="text-xs text-slate-500 font-medium">
                                         Check all features available on this {isMotorbike ? 'motorbike' : 'vehicle'} for renters.
                                     </p>
                                 </div>
@@ -427,19 +427,19 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                             key={feature}
                                             type="button"
                                             onClick={() => toggleFeature(feature)}
-                                            className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                                            className={`min-h-[48px] p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
                                                 isChecked
                                                     ? 'bg-primary-50/70 border-primary-300 text-primary-950 font-semibold shadow-2xs'
                                                     : 'bg-slate-50/60 border-slate-200/80 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                                             }`}
                                         >
-                                            <span className="text-xs">{feature}</span>
-                                            <div className={`w-4 h-4 rounded flex items-center justify-center border transition-colors ${
+                                            <span className="text-xs font-medium">{feature}</span>
+                                            <div className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${
                                                 isChecked
                                                     ? 'bg-primary-600 border-primary-600 text-white'
                                                     : 'border-slate-300 bg-white'
                                             }`}>
-                                                {isChecked && <CheckCircle className="w-3.5 h-3.5 text-white" />}
+                                                {isChecked && <CheckCircle className="w-4 h-4 text-white" />}
                                             </div>
                                         </button>
                                     );
@@ -453,7 +453,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     <ShieldCheck className="w-4 h-4 text-primary-700" />
                                     Delivery, Discounts & Host Policies
                                 </span>
-                                <span className="text-[11px] text-slate-500 font-medium">Bohol Tourist Perks</span>
+                                <span className="text-xs text-slate-500 font-medium">Bohol Tourist Perks</span>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -471,10 +471,10 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                             className="w-4 h-4 text-primary-700 rounded border-slate-300 focus:ring-primary-500 cursor-pointer"
                                         />
                                     </div>
-                                    <p className="text-[11px] text-slate-500">Deliver vehicle to Panglao Airport (TAG) or Tagbilaran Port.</p>
+                                    <p className="text-xs text-slate-500">Deliver vehicle to Panglao Airport (TAG) or Tagbilaran Port.</p>
                                     {data.delivery_available && (
                                         <div className="pt-2 border-t border-slate-100">
-                                            <label className="block text-[10px] font-bold text-slate-500 uppercase">Delivery Fee (₱0 = Free)</label>
+                                            <label className="block text-xs font-bold text-slate-500 uppercase">Delivery Fee (₱0 = Free)</label>
                                             <input
                                                 type="number"
                                                 value={data.delivery_fee}
@@ -482,7 +482,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                                 min="0"
                                                 step="50"
                                                 placeholder="0 for Free Delivery"
-                                                className="w-full mt-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
+                                                className="w-full mt-1 h-11 sm:h-9 px-3 rounded-lg border border-slate-200 text-base sm:text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
                                             />
                                         </div>
                                     )}
@@ -494,9 +494,9 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                         <ShieldCheck className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Refundable Security Deposit</span>
                                     </label>
-                                    <p className="text-[11px] text-slate-500">Cash deposit returned to renter upon safe vehicle return.</p>
+                                    <p className="text-xs text-slate-500">Cash deposit returned to renter upon safe vehicle return.</p>
                                     <div className="pt-1">
-                                        <label className="block text-[10px] font-bold text-slate-500 uppercase">Deposit Amount (₱)</label>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase">Deposit Amount (₱)</label>
                                         <input
                                             type="number"
                                             value={data.security_deposit}
@@ -504,7 +504,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                             min="0"
                                             step="500"
                                             placeholder="e.g. 1000 or 2000"
-                                            className="w-full mt-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
+                                            className="w-full mt-1 h-11 sm:h-9 px-3 rounded-lg border border-slate-200 text-base sm:text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
                                         />
                                     </div>
                                 </div>
@@ -515,10 +515,10 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                         <Percent className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Multi-Day Vacation Discounts</span>
                                     </label>
-                                    <p className="text-[11px] text-slate-500">Incentivize tourists to book longer island stays.</p>
+                                    <p className="text-xs text-slate-500">Incentivize tourists to book longer island stays.</p>
                                     <div className="grid grid-cols-2 gap-2 pt-1">
                                         <div>
-                                            <label className="block text-[10px] font-bold text-slate-500 uppercase">3+ Days (% off)</label>
+                                            <label className="block text-xs font-bold text-slate-500 uppercase">3+ Days (% off)</label>
                                             <input
                                                 type="number"
                                                 value={data.discount_three_days}
@@ -526,11 +526,11 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                                 min="0"
                                                 max="50"
                                                 placeholder="e.g. 5%"
-                                                className="w-full mt-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
+                                                className="w-full mt-1 h-11 sm:h-9 px-3 rounded-lg border border-slate-200 text-base sm:text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[10px] font-bold text-slate-500 uppercase">7+ Days / Week (% off)</label>
+                                            <label className="block text-xs font-bold text-slate-500 uppercase">7+ Days / Week (% off)</label>
                                             <input
                                                 type="number"
                                                 value={data.discount_weekly}
@@ -538,7 +538,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                                 min="0"
                                                 max="50"
                                                 placeholder="e.g. 10%"
-                                                className="w-full mt-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
+                                                className="w-full mt-1 h-11 sm:h-9 px-3 rounded-lg border border-slate-200 text-base sm:text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-primary-200"
                                             />
                                         </div>
                                     </div>
@@ -553,30 +553,30 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                                     <select
                                         value={data.fuel_policy}
                                         onChange={e => setData('fuel_policy', e.target.value)}
-                                        className="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-primary-200"
+                                        className="w-full h-11 sm:h-9 px-3 rounded-lg border border-slate-200 text-base sm:text-xs font-medium text-slate-900 focus:ring-2 focus:ring-primary-200 bg-white"
                                     >
                                         <option value="same_to_same">Same-to-Same (Return at same level)</option>
                                         <option value="full_to_full">Full-to-Full (Full tank handover)</option>
                                     </select>
                                     <div className="pt-2 space-y-1.5">
                                         {isMotorbike && (
-                                            <label className="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                            <label className="min-h-[44px] flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
                                                 <input
                                                     type="checkbox"
                                                     checked={data.helmets_included}
                                                     onChange={e => setData('helmets_included', e.target.checked)}
-                                                    className="w-3.5 h-3.5 text-primary-700 rounded border-slate-300"
+                                                    className="w-4 h-4 text-primary-700 rounded border-slate-300"
                                                 />
                                                 <span>2 Free Standard Helmets Included</span>
                                             </label>
                                         )}
                                         {!isMotorbike && (
-                                            <label className="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                            <label className="min-h-[44px] flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
                                                 <input
                                                     type="checkbox"
                                                     checked={data.driver_available}
                                                     onChange={e => setData('driver_available', e.target.checked)}
-                                                    className="w-3.5 h-3.5 text-primary-700 rounded border-slate-300"
+                                                    className="w-4 h-4 text-primary-700 rounded border-slate-300"
                                                 />
                                                 <span>With Professional Driver Available</span>
                                             </label>
@@ -587,12 +587,12 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Description</label>
-                            <textarea value={data.description} onChange={e => setData('description', e.target.value)} rows={3} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors resize-none" />
+                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Description</label>
+                            <textarea value={data.description} onChange={e => setData('description', e.target.value)} rows={3} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors resize-none" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Status</label>
-                            <select value={data.status} onChange={e => setData('status', e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors font-medium bg-white">
+                            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Status</label>
+                            <select value={data.status} onChange={e => setData('status', e.target.value)} className="w-full h-11 sm:h-10 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors font-medium bg-white">
                                 <option value="active">🟢 Active (Visible to renters & accepting bookings)</option>
                                 <option value="maintenance">🔧 Under Maintenance (Hidden from renters, no bookings allowed)</option>
                                 <option value="inactive">⚪ Inactive (Paused listing)</option>
@@ -628,10 +628,10 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
                         <Link
                             href="/owner/vehicles"
-                            className="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+                            className="min-h-[44px] flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
                         >
                             Back to Vehicles
                         </Link>
@@ -639,7 +639,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                             type="submit"
                             form="vehicle-edit-form"
                             disabled={processing || savingCalendar}
-                            className="glass-btn px-6 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 disabled:opacity-50 min-w-[140px]"
+                            className="glass-btn min-h-[44px] flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 disabled:opacity-50 min-w-[140px] cursor-pointer"
                         >
                             {processing || savingCalendar ? (
                                 <>
@@ -700,8 +700,9 @@ function SaveSuccessModal({
                 <button
                     type="button"
                     onClick={onClose}
-                    className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors"
+                    className="absolute top-4 right-4 min-w-[44px] min-h-[44px] rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
                     title="Close"
+                    aria-label="Close modal"
                 >
                     <X className="w-4 h-4" />
                 </button>
@@ -749,11 +750,11 @@ function SaveSuccessModal({
                             <h4 className="text-xs font-bold text-slate-900 truncate">
                                 {vehicleTitle}
                             </h4>
-                            <p className="text-[11px] text-slate-500 capitalize truncate">
+                            <p className="text-xs text-slate-500 capitalize truncate">
                                 {vehicleBrand} {vehicleModel} • {formatCurrency(Number(pricePerDay))}/day
                             </p>
                         </div>
-                        <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase shrink-0 border border-emerald-200">
+                        <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase shrink-0 border border-emerald-200">
                             {status}
                         </span>
                     </div>
@@ -763,7 +764,7 @@ function SaveSuccessModal({
                         {/* Primary Button: Go Back to My Vehicles */}
                         <Link
                             href="/owner/vehicles"
-                            className="glass-btn w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform"
+                            className="glass-btn w-full min-h-[48px] py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform"
                         >
                             <CarProfile className="w-4 h-4" />
                             <span>Go Back to My Vehicles</span>
@@ -900,23 +901,23 @@ function PhotoManager({ vehicle }: { vehicle: any }) {
                             ) : (
                                 <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-400 p-2 text-center">
                                     <ImageIcon className="w-6 h-6 mb-1 text-slate-300" />
-                                    <span className="text-[10px] font-medium">Image Preview</span>
+                                    <span className="text-xs font-medium">Image Preview</span>
                                 </div>
                             )}
 
                             {/* Cover Badge */}
                             {isCover ? (
-                                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-primary-700 text-white text-[10px] font-extrabold shadow-xs flex items-center gap-1">
-                                    <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
+                                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-primary-700 text-white text-xs font-extrabold shadow-xs flex items-center gap-1">
+                                    <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
                                     <span>COVER PHOTO</span>
                                 </div>
                             ) : (
                                 <button
                                     type="button"
                                     onClick={() => setAsCover(photo.id)}
-                                    className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-slate-900/85 hover:bg-slate-900 text-white text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-xs"
+                                    className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-xs"
                                 >
-                                    <Star className="w-2.5 h-2.5 text-amber-300" />
+                                    <Star className="w-3 h-3 text-amber-300" />
                                     <span>Set Cover</span>
                                 </button>
                             )}
@@ -928,7 +929,7 @@ function PhotoManager({ vehicle }: { vehicle: any }) {
                                         type="button"
                                         onClick={() => setEditingPhoto(photo)}
                                         title="Edit Photo"
-                                        className="px-2 py-1 bg-white/20 hover:bg-white text-white hover:text-slate-900 rounded-lg text-[10px] font-bold backdrop-blur-xs transition-colors"
+                                        className="px-2.5 py-1 bg-white/20 hover:bg-white text-white hover:text-slate-900 rounded-lg text-xs font-bold backdrop-blur-xs transition-colors"
                                     >
                                         Edit Photo
                                     </button>
@@ -972,7 +973,7 @@ function PhotoManager({ vehicle }: { vehicle: any }) {
                     type="button"
                     onClick={() => fileInput.current?.click()}
                     disabled={uploading}
-                    className="aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-primary-400 hover:text-primary-600 hover:bg-primary-50/20 transition-all group"
+                    className="aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-primary-400 hover:text-primary-600 hover:bg-primary-50/20 transition-all group cursor-pointer"
                 >
                     {uploading ? (
                         <span className="text-xs font-semibold text-primary-600">Uploading...</span>
@@ -980,7 +981,7 @@ function PhotoManager({ vehicle }: { vehicle: any }) {
                         <>
                             <Upload className="w-6 h-6 mb-1 text-slate-400 group-hover:text-primary-600" />
                             <span className="text-xs font-bold text-slate-700 group-hover:text-primary-700">Add Photo</span>
-                            <span className="text-[10px] text-slate-400 mt-0.5">JPG, PNG, WebP</span>
+                            <span className="text-xs text-slate-400 mt-0.5">JPG, PNG, WebP</span>
                         </>
                     )}
                 </button>
@@ -1178,34 +1179,34 @@ function ImageCropModal({ photo, currentPos, onClose, onSave }: { photo: any; cu
                     <div>
                         <div className="flex items-center gap-2">
                             <h3 className="font-bold text-slate-900 text-base">Fit Photo to Card Frame</h3>
-                            <span className="px-2 py-0.5 rounded-md bg-primary-50 text-primary-700 text-[10px] font-extrabold border border-primary-100">16:10 Listing Size</span>
+                            <span className="px-2 py-0.5 rounded-md bg-primary-50 text-primary-700 text-xs font-extrabold border border-primary-100">16:10 Listing Size</span>
                         </div>
                         <p className="text-xs text-slate-500 mt-0.5">Drag to reposition or zoom to fit your vehicle inside the frame.</p>
                     </div>
-                    <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
-                        <X className="w-4 h-4" />
+                    <button onClick={onClose} className="min-w-[44px] min-h-[44px] rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer" aria-label="Close modal">
+                        <X className="w-5 h-5" />
                     </button>
                 </div>
 
                 {/* Fixed-Size Frame Viewport */}
                 <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] font-bold text-slate-600">
+                    <div className="flex items-center justify-between text-xs font-bold text-slate-600">
                         <span className="flex items-center gap-1.5">
-                            <ArrowsOutCardinal className="w-3.5 h-3.5 text-primary-600" />
+                            <ArrowsOutCardinal className="w-4 h-4 text-primary-600" />
                             <span>Fixed Frame Viewport</span>
                         </span>
                         <div className="flex items-center gap-2">
                             <button
                                 type="button"
                                 onClick={() => setShowGrid(!showGrid)}
-                                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] font-bold border transition-colors ${
+                                className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
                                     showGrid ? 'bg-primary-700 text-white border-primary-700' : 'bg-slate-50 text-slate-600 border-slate-200'
                                 }`}
                             >
-                                <SquaresFour className="w-3 h-3" />
+                                <SquaresFour className="w-3.5 h-3.5" />
                                 <span>Grid {showGrid ? 'On' : 'Off'}</span>
                             </button>
-                            <span className="text-[10px] text-slate-400 font-medium">Drag to pan • Scroll to zoom</span>
+                            <span className="text-xs text-slate-400 font-medium hidden sm:inline">Drag to pan • Scroll to zoom</span>
                         </div>
                     </div>
 
@@ -1259,7 +1260,7 @@ function ImageCropModal({ photo, currentPos, onClose, onSave }: { photo: any; cu
                         )}
 
                         {/* Top-Right Active Zoom Tag */}
-                        <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold tracking-wide pointer-events-none">
+                        <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-md bg-slate-900/80 backdrop-blur-xs text-white text-xs font-bold tracking-wide pointer-events-none">
                             {Math.round(zoom * 100)}%
                         </div>
                     </div>
@@ -1404,14 +1405,14 @@ function RenterPOVModal({ vehicle, onClose }: { vehicle: any; onClose: () => voi
                                         <ImageIcon className="w-7 h-7 text-primary-700" />
                                     </div>
                                     <span className="text-xs font-bold text-slate-600 capitalize">{vehicle.brand || 'RentBohol'} {vehicle.model || vehicle.type}</span>
-                                    <span className="text-[11px] text-slate-400 font-medium">Upload photos to display listing image</span>
+                                    <span className="text-xs text-slate-400 font-medium">Upload photos to display listing image</span>
                                 </div>
                             )}
                             <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-xs font-bold text-slate-900 capitalize shadow-xs">
                                 {vehicle.type}
                             </div>
                             <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-primary-900/90 backdrop-blur-xs text-xs font-extrabold text-white">
-                                â‚±{Number(vehicle.price_per_day).toLocaleString()}<span className="text-[10px] font-normal text-slate-200">/day</span>
+                                ₱{Number(vehicle.price_per_day).toLocaleString()}<span className="text-xs font-normal text-slate-200">/day</span>
                             </div>
                         </div>
 
