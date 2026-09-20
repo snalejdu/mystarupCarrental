@@ -24,6 +24,8 @@ if (isset($_GET['diag'])) {
     echo "sqlite3: " . (extension_loaded('sqlite3') ? 'yes' : 'no') . "\n";
     echo "tmp directory writable: " . (is_writable('/tmp') ? 'yes' : 'no') . "\n";
     echo "seed.db exists: " . (file_exists(dirname(__DIR__) . '/database/seed.db') ? 'yes (' . filesize(dirname(__DIR__) . '/database/seed.db') . ' bytes)' : 'no') . "\n";
+    echo "packages.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/packages.php') ? 'yes' : 'no') . "\n";
+    echo "services.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/services.php') ? 'yes' : 'no') . "\n";
     echo "public/index.php exists: " . (file_exists(__DIR__ . '/../public/index.php') ? 'yes' : 'no') . "\n";
     exit;
 }
@@ -74,6 +76,27 @@ $viewCompiledPath = '/tmp/storage/framework/views';
 putenv("VIEW_COMPILED_PATH={$viewCompiledPath}");
 $_ENV['VIEW_COMPILED_PATH'] = $viewCompiledPath;
 $_SERVER['VIEW_COMPILED_PATH'] = $viewCompiledPath;
+
+// Copy package and service manifests to writable /tmp
+$tmpPackages = '/tmp/packages.php';
+if (!file_exists($tmpPackages) && file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
+    @copy(__DIR__ . '/../bootstrap/cache/packages.php', $tmpPackages);
+}
+if (file_exists($tmpPackages)) {
+    putenv("APP_PACKAGES_CACHE={$tmpPackages}");
+    $_ENV['APP_PACKAGES_CACHE'] = $tmpPackages;
+    $_SERVER['APP_PACKAGES_CACHE'] = $tmpPackages;
+}
+
+$tmpServices = '/tmp/services.php';
+if (!file_exists($tmpServices) && file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
+    @copy(__DIR__ . '/../bootstrap/cache/services.php', $tmpServices);
+}
+if (file_exists($tmpServices)) {
+    putenv("APP_SERVICES_CACHE={$tmpServices}");
+    $_ENV['APP_SERVICES_CACHE'] = $tmpServices;
+    $_SERVER['APP_SERVICES_CACHE'] = $tmpServices;
+}
 
 // Ensure SQLite database exists in /tmp and is fully populated
 $tmpDb = '/tmp/database.sqlite';
