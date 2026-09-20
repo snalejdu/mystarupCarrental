@@ -48,3 +48,10 @@ return Application::configure(basePath: dirname(__DIR__))
             return $response;
         });
     })->create();
+
+// If running in serverless environment (e.g. Vercel), redirect storage to writable /tmp
+if (isset($_ENV['VERCEL']) || getenv('VERCEL') || env('VERCEL')) {
+    $app->useStoragePath('/tmp/storage');
+}
+
+return $app;
