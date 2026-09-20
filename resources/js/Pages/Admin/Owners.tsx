@@ -12,21 +12,21 @@ export default function AdminOwners({ owners }: Props) {
         <AdminLayout title="Vehicle Owners Directory">
             <Head title="Vehicle Owners Directory — RentBohol Admin" />
 
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
-                <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
                     <div>
                         <h3 className="font-semibold text-base text-white">Registered Bohol Hosts</h3>
                         <p className="text-slate-400 text-xs font-medium">Directory of verified vehicle owners on RentBohol</p>
                     </div>
-                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 self-start sm:self-auto">
                         {owners.data.length} Total Hosts
                     </span>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                    <table className="w-full text-left border-collapse min-w-[560px]">
                         <thead>
-                            <tr className="border-b border-slate-800 text-[10px] font-semibold uppercase text-slate-400 tracking-wider">
+                            <tr className="border-b border-slate-800 text-xs font-semibold uppercase text-slate-400 tracking-wider">
                                 <th className="pb-3 px-3">Owner Name</th>
                                 <th className="pb-3 px-3">Email Address</th>
                                 <th className="pb-3 px-3">Phone Number</th>
