@@ -143,31 +143,31 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Search by vehicle name (e.g. Toyota Vios, NMAX)..."
-                                    className="w-full min-h-[44px] pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
+                                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
                                 />
                             </div>
 
                             {/* Pickup Date */}
                             <div className="md:col-span-3 relative">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Pickup Date</label>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Pickup Date</label>
                                 <input
                                     type="date"
                                     value={pickupDate}
                                     min={new Date().toISOString().split('T')[0]}
                                     onChange={(e) => setPickupDate(e.target.value)}
-                                    className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
+                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
                                 />
                             </div>
 
                             {/* Return Date */}
                             <div className="md:col-span-3 relative">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Return Date</label>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Return Date</label>
                                 <input
                                     type="date"
                                     value={returnDate}
                                     min={pickupDate || new Date().toISOString().split('T')[0]}
                                     onChange={(e) => setReturnDate(e.target.value)}
-                                    className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
+                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
                                 />
                             </div>
 
@@ -175,7 +175,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                             <div className="md:col-span-1 flex gap-1.5">
                                 <button
                                     type="submit"
-                                    className="glass-btn w-full min-h-[44px] py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-1 shrink-0"
+                                    className="glass-btn w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1 shrink-0"
                                 >
                                     <span>Find</span>
                                 </button>
@@ -183,7 +183,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     <button
                                         type="button"
                                         onClick={clearDates}
-                                        className="glass-btn-icon min-h-[44px] min-w-[44px] p-2.5 rounded-xl text-slate-700 text-xs shrink-0 flex items-center justify-center"
+                                        className="glass-btn-icon p-2.5 rounded-xl text-slate-700 text-xs shrink-0"
                                         title="Clear Date Filters"
                                     >
                                         <X className="w-4 h-4" />
@@ -199,7 +199,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 <span>
                                     Filtering available vehicles for: <b>{filters.pickup_date || 'Any'}</b> to <b>{filters.return_date || 'Any'}</b>
                                 </span>
-                                <button onClick={clearDates} className="ml-auto text-primary-600 hover:text-primary-800 text-xs underline">
+                                <button onClick={clearDates} className="ml-auto text-primary-600 hover:text-primary-800 text-[11px] underline">
                                     Reset Dates
                                 </button>
                             </div>
@@ -208,10 +208,10 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200/80 text-xs">
                             {/* Transmission Pills */}
                             <div className="flex items-center gap-2">
-                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-xs">Transmission:</span>
+                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Transmission:</span>
                                 <button
                                     onClick={() => applyFilter('transmission', null)}
-                                    className={`px-3 py-1 rounded-md font-semibold min-h-[36px] ${
+                                    className={`px-3 py-1 rounded-md font-semibold ${
                                         !filters.transmission ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -219,7 +219,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'automatic')}
-                                    className={`px-3 py-1 rounded-md font-semibold min-h-[36px] ${
+                                    className={`px-3 py-1 rounded-md font-semibold ${
                                         filters.transmission === 'automatic' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -227,7 +227,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'manual')}
-                                    className={`px-3 py-1 rounded-md font-semibold min-h-[36px] ${
+                                    className={`px-3 py-1 rounded-md font-semibold ${
                                         filters.transmission === 'manual' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -237,11 +237,11 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                             {/* Sort Dropdown */}
                             <div className="flex items-center gap-2">
-                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-xs">Sort By:</span>
+                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Sort By:</span>
                                 <select
                                     value={filters.sort || 'newest'}
                                     onChange={(e) => applyFilter('sort', e.target.value)}
-                                    className="px-3 py-1.5 rounded-md border border-slate-200 bg-white text-base sm:text-xs text-slate-700 font-semibold focus:outline-none focus:ring-1 focus:ring-primary-500 min-h-[36px]"
+                                    className="px-3 py-1.5 rounded-md border border-slate-200 bg-white text-xs text-slate-700 font-semibold focus:outline-none focus:ring-1 focus:ring-primary-500"
                                 >
                                     <option value="newest">Newly Listed</option>
                                     <option value="rating">Highest Rated ⭐</option>
@@ -252,9 +252,9 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         </div>
                     </div>
 
-                    {/* Vehicle Cards Grid (1-col on phone, 2-col on sm, 3-col on md+) */}
+                    {/* Vehicle Cards Grid */}
                     {vehicles.data.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-4">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-8 pt-4">
                             {vehicles.data.map((vehicle: any) => (
                                 <ReferenceVehicleCard key={vehicle.id} vehicle={vehicle} />
                             ))}
@@ -316,9 +316,9 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
     const airconText = vehicle.has_aircon === false ? 'Non-Aircon' : 'Aircon';
 
     return (
-        <div className="bg-slate-50 rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-xs hover:shadow-md transition-shadow duration-200 flex flex-col justify-between group cursor-pointer h-full">
+        <div className="bg-slate-50 rounded-xl sm:rounded-2xl p-2.5 sm:p-6 border border-slate-200 shadow-xs hover:shadow-md transition-shadow duration-200 flex flex-col justify-between group cursor-pointer h-full">
             {/* Top Image Box */}
-            <div className="aspect-[16/10] bg-slate-100 rounded-xl overflow-hidden mb-3 sm:mb-5 relative border border-slate-100">
+            <div className="aspect-[4/3] sm:aspect-[16/10] bg-slate-100 rounded-lg sm:rounded-xl overflow-hidden mb-2 sm:mb-5 relative border border-slate-100">
                 {primaryPhoto ? (
                     <img
                         src={primaryPhoto.url}
@@ -331,33 +331,33 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-slate-300">
-                        <CarProfile className="w-12 sm:w-16 h-12 sm:h-16" />
+                        <CarProfile className="w-10 sm:w-16 h-10 sm:h-16" />
                     </div>
                 )}
 
                 {/* Rating Chip */}
                 {vehicle.avg_rating > 0 && (
-                    <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 flex items-center gap-1 px-2 py-0.5 bg-slate-900/80 text-amber-400 rounded-md text-xs font-semibold shadow-xs">
-                        <Star className="w-3 h-3 fill-amber-400" />
+                    <div className="absolute top-1.5 right-1.5 sm:top-3 sm:right-3 flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 bg-slate-900/80 text-amber-400 rounded-md text-[9px] sm:text-xs font-semibold shadow-xs">
+                        <Star className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-amber-400" />
                         <span>{Number(vehicle.avg_rating).toFixed(1)}</span>
                     </div>
                 )}
             </div>
 
-            {/* Title & Price Header Row */}
-            <div className="space-y-1 mb-3">
+            {/* Title & Price Header Row — Desktop */}
+            <div className="hidden sm:block space-y-1 mb-4">
                 <div className="flex items-start justify-between gap-2">
                     <div>
-                        <h3 className="font-bold text-base sm:text-lg text-slate-900 leading-snug line-clamp-1 group-hover:text-primary-700 transition-colors">
+                        <h3 className="font-bold text-lg text-slate-900 leading-snug line-clamp-1 group-hover:text-primary-700 transition-colors">
                             {vehicle.title}
                         </h3>
-                        <p className="text-xs text-slate-500 capitalize mt-0.5">
+                        <p className="text-xs text-slate-400 capitalize">
                             {vehicle.type} • {vehicle.location}, Bohol
                         </p>
                     </div>
 
                     <div className="text-right shrink-0">
-                        <span className="text-lg sm:text-xl font-bold text-primary-700 block leading-tight">
+                        <span className="text-xl font-bold text-primary-700 block leading-tight">
                             {formatCurrency(vehicle.price_per_day)}
                         </span>
                         <span className="text-xs text-slate-400 block">per day</span>
@@ -365,31 +365,58 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
                 </div>
             </div>
 
-            {/* Specs Row — Unified for Mobile & Desktop */}
-            <div className="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-200 my-2 text-xs font-semibold text-slate-600">
-                <div className="flex items-center gap-1.5 justify-center">
-                    <Gauge className="w-3.5 h-3.5 text-primary-600 shrink-0" />
-                    <span className="truncate">{transmissionText}</span>
-                </div>
-
-                <div className="flex items-center gap-1.5 justify-center">
-                    <Users className="w-3.5 h-3.5 text-primary-600 shrink-0" />
-                    <span className="truncate">{capacityText}</span>
-                </div>
-
-                <div className="flex items-center gap-1.5 justify-center">
-                    <Wind className="w-3.5 h-3.5 text-primary-600 shrink-0" />
-                    <span className="truncate">{airconText}</span>
+            {/* Title & Price Header Row — Mobile */}
+            <div className="block sm:hidden mb-1.5">
+                <h3 className="font-bold text-xs text-slate-900 leading-snug line-clamp-2 min-h-[2rem] group-hover:text-primary-700 transition-colors">
+                    {vehicle.title}
+                </h3>
+                <p className="text-[10px] text-slate-400 capitalize truncate mt-0.5">
+                    {vehicle.location}, Bohol
+                </p>
+                <div className="flex items-baseline justify-between mt-1 pt-1 border-t border-slate-100">
+                    <div>
+                        <span className="text-xs font-extrabold text-primary-700 block leading-tight">
+                            {formatCurrency(vehicle.price_per_day)}
+                        </span>
+                        <span className="text-[8px] text-slate-400 block -mt-0.5">/day</span>
+                    </div>
+                    <span className="text-[9px] font-semibold text-slate-500 capitalize">{vehicle.type}</span>
                 </div>
             </div>
 
-            {/* Bottom Action Button (Min 48px high on phone) */}
-            <div className="pt-3">
+            {/* Specs Row — Desktop */}
+            <div className="hidden sm:grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-200 my-4 text-xs font-semibold text-slate-600">
+                <div className="flex items-center gap-1.5 justify-center">
+                    <Gauge className="w-3.5 h-3.5 text-primary-600" />
+                    <span>{transmissionText}</span>
+                </div>
+
+                <div className="flex items-center gap-1.5 justify-center">
+                    <Users className="w-3.5 h-3.5 text-primary-600" />
+                    <span>{capacityText}</span>
+                </div>
+
+                <div className="flex items-center gap-1.5 justify-center">
+                    <Wind className="w-3.5 h-3.5 text-primary-600" />
+                    <span>{airconText}</span>
+                </div>
+            </div>
+
+            {/* Specs Row — Mobile */}
+            <div className="flex sm:hidden items-center gap-1.5 py-1 border-t border-b border-slate-200/70 my-1 text-[9px] text-slate-500 font-medium">
+                <span className="truncate">{capacityText}</span>
+                <span>•</span>
+                <span className="truncate">{transmissionText}</span>
+            </div>
+
+            {/* Bottom Action Button */}
+            <div className="pt-1.5 sm:pt-0">
                 <Link
                     href={`/vehicles/${vehicle.slug}`}
-                    className="glass-btn w-full min-h-[48px] py-3 rounded-xl font-semibold text-sm text-center flex items-center justify-center"
+                    className="glass-btn w-full py-1.5 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-xs text-center block"
                 >
-                    View Details
+                    <span className="hidden sm:inline">View Details</span>
+                    <span className="sm:hidden">View</span>
                 </Link>
             </div>
         </div>
