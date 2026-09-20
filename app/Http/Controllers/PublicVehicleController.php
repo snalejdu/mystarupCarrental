@@ -154,16 +154,23 @@ class PublicVehicleController extends Controller
                 'status' => $a->status,
             ]);
 
-        // Get ratings via completed bookings
+        // Get ratings via completed bookings — scoped to renter reviews only with safe field mapping
         $ratings = $vehicle->bookings()
             ->where('status', 'completed')
-            ->with('ratings')
+            ->with(['ratings' => fn ($q) => $q->where('rater_type', 'renter')])
             ->get()
             ->pluck('ratings')
             ->flatten()
             ->sortByDesc('created_at')
             ->take(10)
-            ->values();
+            ->values()
+            ->map(fn ($r) => [
+                'id' => $r->id,
+                'rater_identifier' => $r->rater_identifier,
+                'stars' => $r->stars,
+                'comment' => $r->comment,
+                'created_at' => $r->created_at->toISOString(),
+            ]);
 
         $otherVehicles = Vehicle::active()
             ->where('id', '!=', $vehicle->id)

@@ -51,7 +51,11 @@ class LoginController extends Controller
         ]);
 
         if ($request->filled('intended')) {
-            return redirect($request->input('intended'));
+            $intended = $request->input('intended');
+            // Prevent open redirect: only allow safe local paths
+            if (str_starts_with($intended, '/') && !str_starts_with($intended, '//') && !str_contains($intended, '\\')) {
+                return redirect($intended);
+            }
         }
 
         if ($user->isAdmin()) {

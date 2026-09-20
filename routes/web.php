@@ -86,6 +86,26 @@ Route::middleware(['auth', 'throttle:global'])->group(function () {
 Route::middleware(['auth', 'throttle:global'])->prefix('renter')->name('renter.')->group(function () {
     Route::get('/bookings', [\App\Http\Controllers\RenterBookingController::class, 'index'])->name('bookings');
     Route::post('/license/upload', [\App\Http\Controllers\RenterBookingController::class, 'uploadLicense'])->name('license.upload')->middleware('throttle:upload');
+
+    // Secure license photo serving — only the authenticated license owner can view
+    Route::get('/license/photo', function (\Illuminate\Http\Request $request) {
+        $user = $request->user();
+        if (!$user || !$user->driver_license_path) {
+            abort(404);
+        }
+        $disk = \Illuminate\Support\Facades\Storage::disk('private');
+        if (!$disk->exists($user->driver_license_path)) {
+            // Fallback: check legacy public disk for pre-migration files
+            $disk = \Illuminate\Support\Facades\Storage::disk('public');
+            if (!$disk->exists($user->driver_license_path)) {
+                abort(404);
+            }
+        }
+        return response()->file($disk->path($user->driver_license_path), [
+            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        ]);
+    })->name('license.photo');
+
     Route::post('/bookings/{booking}/rate', [\App\Http\Controllers\RenterBookingController::class, 'rate'])->name('bookings.rate')->middleware('throttle:rating');
     Route::post('/bookings/{booking}/handover', [\App\Http\Controllers\RenterBookingController::class, 'updateHandover'])->name('bookings.handover');
     Route::post('/bookings/{booking}/cancel', [\App\Http\Controllers\RenterBookingController::class, 'cancel'])->name('bookings.cancel');
