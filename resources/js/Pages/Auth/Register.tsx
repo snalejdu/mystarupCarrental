@@ -48,12 +48,12 @@ export default function Register() {
 
                             {/* Role Selector Pills */}
                             <div className="mb-4 sm:mb-6">
-                                <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 sm:mb-2">Account Type</label>
+                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Account Type</label>
                                 <div className="grid grid-cols-2 gap-2 sm:gap-3 p-1.5 bg-slate-100 rounded-xl border border-slate-200">
                                     <button
                                         type="button"
                                         onClick={() => setData('role', 'renter')}
-                                        className={`py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all ${
+                                        className={`min-h-[48px] py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all ${
                                             data.role === 'renter'
                                                 ? 'glass-pill-active'
                                                 : 'text-slate-600 hover:text-slate-900'
@@ -66,7 +66,7 @@ export default function Register() {
                                     <button
                                         type="button"
                                         onClick={() => setData('role', 'owner')}
-                                        className={`py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all ${
+                                        className={`min-h-[48px] py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer transition-all ${
                                             data.role === 'owner'
                                                 ? 'glass-pill-active'
                                                 : 'text-slate-600 hover:text-slate-900'
@@ -82,12 +82,12 @@ export default function Register() {
                             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                                 {/* Full Name */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Full Name</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Full Name</label>
                                     <input
                                         type="text"
                                         value={data.name}
                                         onChange={e => setData('name', e.target.value)}
-                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
+                                        className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="Juan Dela Cruz"
                                         required
                                     />
@@ -96,12 +96,12 @@ export default function Register() {
 
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Email Address</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Email Address</label>
                                     <input
                                         type="email"
                                         value={data.email}
                                         onChange={e => setData('email', e.target.value)}
-                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
+                                        className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="you@email.com"
                                         required
                                     />
@@ -110,12 +110,12 @@ export default function Register() {
 
                                 {/* Phone */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Mobile Phone Number</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Mobile Phone Number</label>
                                     <input
                                         type="tel"
                                         value={data.phone}
                                         onChange={e => setData('phone', e.target.value)}
-                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
+                                        className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="0917 123 4567"
                                         required
                                     />
@@ -124,22 +124,23 @@ export default function Register() {
 
                                 {/* Password */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Password</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Password</label>
                                     <div className="relative">
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             value={data.password}
                                             onChange={e => setData('password', e.target.value)}
-                                            className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors pr-10"
+                                            className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors pr-11"
                                             placeholder="At least 8 characters"
                                             required
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                                            className="w-11 h-11 flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                                            aria-label={showPassword ? 'Hide password' : 'Show password'}
                                         >
-                                            {showPassword ? <EyeSlash className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                            {showPassword ? <EyeSlash className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                         </button>
                                     </div>
                                     {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
@@ -147,19 +148,19 @@ export default function Register() {
 
                                 {/* Confirm Password */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Confirm Password</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Confirm Password</label>
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={data.password_confirmation}
                                         onChange={e => setData('password_confirmation', e.target.value)}
-                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
+                                        className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="Confirm your password"
                                         required
                                     />
                                 </div>
 
                                 {/* Terms Notice */}
-                                <p className="text-[11px] text-slate-500 pt-0.5 leading-relaxed">
+                                <p className="text-xs text-slate-500 pt-0.5 leading-relaxed">
                                     By registering, you agree to RentBohol's{' '}
                                     <Link href="/terms" className="text-teal-600 font-semibold hover:underline">
                                         Terms & Conditions
@@ -174,7 +175,7 @@ export default function Register() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="glass-btn w-full py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm disabled:opacity-50 mt-1 sm:mt-2 cursor-pointer"
+                                    className="glass-btn w-full min-h-[48px] py-3 rounded-xl font-semibold text-sm sm:text-base disabled:opacity-50 mt-1 sm:mt-2 cursor-pointer"
                                 >
                                     {processing ? 'Creating account...' : 'Create Account'}
                                 </button>
@@ -186,18 +187,18 @@ export default function Register() {
                                     type="button"
                                     onClick={handleGoogleSignIn}
                                     disabled={isGoogleSigningIn || processing}
-                                    className="glass-btn-outline-light w-full py-2 sm:py-3 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
+                                    className="glass-btn-outline-light w-full min-h-[48px] py-3 text-slate-700 rounded-xl font-semibold text-sm sm:text-base flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                                 >
-                                    <GoogleIcon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                                    <GoogleIcon className="w-5 h-5 shrink-0" />
                                     <span>{isGoogleSigningIn ? 'Signing up with Google...' : 'Continue with Google'}</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Footer */}
-                        <div className="mt-5 sm:mt-8 pt-2 sm:pt-4 text-center text-xs text-slate-500">
+                        <div className="mt-6 sm:mt-8 pt-2 sm:pt-4 text-center text-xs text-slate-500">
                             Already have an account?{' '}
-                            <Link href="/login" className="font-semibold text-teal-600 hover:underline">
+                            <Link href="/login" className="min-h-[44px] inline-flex items-center font-semibold text-teal-600 hover:underline">
                                 Sign in
                             </Link>
                         </div>

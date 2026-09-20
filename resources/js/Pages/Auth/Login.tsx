@@ -57,12 +57,12 @@ export default function Login() {
                             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Email</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Email</label>
                                     <input
                                         type="email"
                                         value={data.email}
                                         onChange={e => setData('email', e.target.value)}
-                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
+                                        className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="Enter your email"
                                         required
                                         autoFocus
@@ -72,22 +72,23 @@ export default function Login() {
 
                                 {/* Password */}
                                 <div>
-                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Password</label>
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Password</label>
                                     <div className="relative">
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             value={data.password}
                                             onChange={e => setData('password', e.target.value)}
-                                            className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors pr-10"
+                                            className="w-full h-11 sm:h-12 px-3.5 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors pr-11"
                                             placeholder="••••••••"
                                             required
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                            className="w-11 h-11 flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                                            aria-label={showPassword ? 'Hide password' : 'Show password'}
                                         >
-                                            {showPassword ? <EyeSlash className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                            {showPassword ? <EyeSlash className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                         </button>
                                     </div>
                                     {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
@@ -95,7 +96,7 @@ export default function Login() {
 
                                 {/* Remember me & Forgot password */}
                                 <div className="flex items-center justify-between text-xs pt-0.5 gap-2">
-                                    <label className="flex items-center gap-1.5 text-slate-600 cursor-pointer select-none">
+                                    <label className="min-h-[44px] inline-flex items-center gap-2 text-slate-600 cursor-pointer select-none">
                                         <input
                                             type="checkbox"
                                             checked={data.remember}
@@ -103,10 +104,14 @@ export default function Login() {
                                             className="w-4 h-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500"
                                         />
                                         <span className="sm:hidden text-xs">Remember me</span>
-                                        <span className="hidden sm:inline">Remember for 30 Days</span>
+                                        <span className="hidden sm:inline text-xs">Remember for 30 Days</span>
                                     </label>
 
-                                    <a href="#" onClick={(e) => { e.preventDefault(); alert('Password reset link sent to host email.'); }} className="font-semibold text-teal-600 hover:underline shrink-0 text-xs">
+                                    <a
+                                        href="#"
+                                        onClick={(e) => { e.preventDefault(); alert('Password reset link sent to host email.'); }}
+                                        className="min-h-[44px] inline-flex items-center font-semibold text-teal-600 hover:underline shrink-0 text-xs"
+                                    >
                                         Forgot password?
                                     </a>
                                 </div>
@@ -115,7 +120,7 @@ export default function Login() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="glass-btn w-full py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm disabled:opacity-50 mt-1 sm:mt-2"
+                                    className="glass-btn w-full min-h-[48px] py-3 rounded-xl font-semibold text-sm sm:text-base disabled:opacity-50 mt-1 sm:mt-2 cursor-pointer"
                                 >
                                     {processing ? 'Signing in...' : 'Sign in'}
                                 </button>
@@ -127,54 +132,54 @@ export default function Login() {
                                     type="button"
                                     onClick={handleGoogleSignIn}
                                     disabled={isGoogleSigningIn || processing}
-                                    className="glass-btn-outline-light w-full py-2 sm:py-3 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
+                                    className="glass-btn-outline-light w-full min-h-[48px] py-3 text-slate-700 rounded-xl font-semibold text-sm sm:text-base flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                                 >
-                                    <GoogleIcon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                                    <GoogleIcon className="w-5 h-5 shrink-0" />
                                     <span>{isGoogleSigningIn ? 'Signing in with Google...' : 'Continue with Google'}</span>
                                 </button>
                             </div>
 
                             {/* Divider */}
-                            <div className="relative my-3.5 sm:my-6 text-center">
+                            <div className="relative my-4 sm:my-6 text-center">
                                 <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200" /></div>
-                                <span className="relative px-3 bg-white text-[10px] sm:text-xs uppercase font-semibold text-slate-400">OR DEMO ACCOUNTS</span>
+                                <span className="relative px-3 bg-white text-xs uppercase font-semibold text-slate-400">OR DEMO ACCOUNTS</span>
                             </div>
 
                             {/* Quick Demo Login Pills */}
-                            <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('renter@gmail.com')}
-                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
+                                    className="glass-pill min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 flex items-center justify-center gap-2 active:scale-98 transition-transform cursor-pointer"
                                 >
-                                    <UserCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-                                    <span className="truncate">Demo Renter</span>
+                                    <UserCheck className="w-4 h-4 text-teal-600 shrink-0" />
+                                    <span>Demo Renter</span>
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('maria@boholrentals.ph')}
-                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
+                                    className="glass-pill min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 flex items-center justify-center gap-2 active:scale-98 transition-transform cursor-pointer"
                                 >
-                                    <CarProfile className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-                                    <span className="truncate">Demo Owner</span>
+                                    <CarProfile className="w-4 h-4 text-teal-600 shrink-0" />
+                                    <span>Demo Owner</span>
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('admin@rentbohol.com')}
-                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
+                                    className="glass-pill min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 flex items-center justify-center gap-2 active:scale-98 transition-transform cursor-pointer"
                                 >
-                                    <Shield className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                                    <span className="truncate">Demo Admin</span>
+                                    <Shield className="w-4 h-4 text-amber-500 shrink-0" />
+                                    <span>Demo Admin</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Footer */}
-                        <div className="mt-5 sm:mt-8 pt-2 sm:pt-4 text-center text-xs text-slate-500">
+                        <div className="mt-6 sm:mt-8 pt-2 sm:pt-4 text-center text-xs text-slate-500">
                             Don't have an account?{' '}
-                            <Link href="/register" className="font-semibold text-teal-600 hover:underline">
+                            <Link href="/register" className="min-h-[44px] inline-flex items-center font-semibold text-teal-600 hover:underline">
                                 Sign up
                             </Link>
                         </div>
