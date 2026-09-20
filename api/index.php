@@ -14,6 +14,8 @@ register_shutdown_function(function() {
     }
 });
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 // Diagnostic check
 if (isset($_GET['diag'])) {
     header('Content-Type: text/plain');

@@ -34,6 +34,7 @@
     30 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     31 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
     32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'Inertia\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,6 +55,7 @@
     14 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     15 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
     16 => 'App\\Providers\\AppServiceProvider',
+    17 => 'Inertia\\ServiceProvider',
   ),
   'deferred' => 
   array (
