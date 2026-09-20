@@ -87,9 +87,9 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                                 <button
                                     type="button"
                                     onClick={copyTrackingLink}
-                                    className="glass-btn-outline-light inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-slate-700 text-xs font-semibold"
+                                    className="glass-btn-outline-light min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-slate-700 text-xs font-semibold cursor-pointer"
                                 >
-                                    <Copy className="w-3.5 h-3.5" />
+                                    <Copy className="w-4 h-4" />
                                     <span>Copy Link</span>
                                 </button>
                             </div>
@@ -100,17 +100,17 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
 
                 {/* Instant Payment Banner for Accepted Bookings */}
                 {booking.status === 'accepted' && (
-                    <div className="apple-card bg-gradient-to-br from-emerald-500 to-teal-700 rounded-3xl p-6 mb-6 text-white shadow-xl relative overflow-hidden">
+                    <div className="apple-card bg-gradient-to-br from-emerald-500 to-teal-700 rounded-3xl p-5 sm:p-6 mb-6 text-white shadow-xl relative overflow-hidden">
                         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
-                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider mb-2">
-                                    <CheckCircle className="w-3 h-3 text-emerald-200" />
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-wider mb-2">
+                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-200" />
                                     {isPaid ? 'Payment Confirmed' : 'Payment Ready'}
                                 </span>
-                                <h3 className="text-lg font-bold">
+                                <h3 className="text-base sm:text-lg font-bold">
                                     {isPaid ? 'Your Trip Is Fully Guaranteed!' : 'Secure Your Reservation'}
                                 </h3>
-                                <p className="text-xs text-emerald-100 mt-0.5">
+                                <p className="text-xs text-emerald-100 mt-1 leading-relaxed">
                                     {isPaid
                                         ? 'Payment verified via GCash/Card. Present your ID during pickup.'
                                         : 'Pay via GCash, Maya, or Card for instant 1-click rental confirmation.'}
@@ -121,7 +121,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                                 <button
                                     type="button"
                                     onClick={() => setShowPaymentModal(true)}
-                                    className="glass-btn-accent px-6 py-3 font-bold rounded-2xl text-xs shrink-0 flex items-center justify-center gap-2"
+                                    className="glass-btn-accent min-h-[48px] px-6 py-3 font-bold rounded-2xl text-xs sm:text-sm shrink-0 flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                                 >
                                     <CreditCard className="w-4 h-4 text-white" />
                                     <span>Pay {formatCurrency(Number(booking.total_price))}</span>
@@ -133,24 +133,24 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
 
                 {/* Owner Contact (only shown after acceptance) */}
                 {ownerContact && (
-                    <div className="apple-card bg-white rounded-3xl border border-slate-200/80 p-6 mb-6 shadow-xs">
+                    <div className="apple-card bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 mb-6 shadow-xs">
                         <h2 className="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
                             <User className="w-4 h-4 text-primary-700" />
                             Verified Host Contact Details
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
                                 <User className="w-4 h-4 text-slate-400 shrink-0" />
                                 <div>
-                                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Vehicle Host</span>
+                                    <span className="text-xs text-slate-400 uppercase font-semibold block">Vehicle Host</span>
                                     <span className="text-xs font-bold text-slate-800">{ownerContact.name}</span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
                                 <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
                                 <div>
-                                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Direct Mobile / Viber</span>
-                                    <a href={`tel:${ownerContact.phone}`} className="text-xs font-bold text-primary-700 hover:underline">
+                                    <span className="text-xs text-slate-400 uppercase font-semibold block">Direct Mobile / Viber</span>
+                                    <a href={`tel:${ownerContact.phone}`} className="min-h-[44px] inline-flex items-center text-xs font-bold text-primary-700 hover:underline">
                                         {ownerContact.phone}
                                     </a>
                                 </div>
@@ -160,49 +160,49 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                 )}
 
                 {/* Booking Details */}
-                <div className="bg-white rounded-2xl border border-[var(--color-sand-200)] p-6 mb-6">
+                <div className="bg-white rounded-2xl border border-[var(--color-sand-200)] p-5 sm:p-6 mb-6">
                     <h2 className="font-semibold text-[var(--color-primary-900)] mb-4">Booking Details</h2>
 
                     {booking.vehicle && (
-                        <div className="flex gap-4 mb-4 pb-4 border-b border-[var(--color-sand-100)]">
+                        <div className="flex items-center gap-4 mb-4 pb-4 border-b border-[var(--color-sand-100)]">
                             {booking.vehicle.photos?.[0] && (
                                 <img
                                     src={booking.vehicle.photos[0].url}
                                     alt={booking.vehicle.title}
-                                    className="w-24 h-18 rounded-xl object-cover"
+                                    className="w-20 h-16 sm:w-24 sm:h-18 rounded-xl object-cover shrink-0"
                                 />
                             )}
                             <div>
-                                <h3 className="font-semibold text-[var(--color-primary-900)]">{booking.vehicle.title}</h3>
-                                <p className="text-sm text-[var(--color-sand-500)] flex items-center gap-1 mt-0.5">
-                                    <MapPin className="w-3.5 h-3.5" /> {booking.vehicle.location}, Bohol
+                                <h3 className="font-semibold text-sm sm:text-base text-[var(--color-primary-900)]">{booking.vehicle.title}</h3>
+                                <p className="text-xs sm:text-sm text-[var(--color-sand-500)] flex items-center gap-1 mt-0.5">
+                                    <MapPin className="w-3.5 h-3.5 shrink-0" /> {booking.vehicle.location}, Bohol
                                 </p>
                             </div>
                         </div>
                     )}
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Pickup Date</p>
-                            <p className="font-medium flex items-center gap-1.5 mt-0.5">
-                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)]" />
+                            <p className="font-medium text-xs sm:text-sm flex items-center gap-1.5 mt-0.5">
+                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
                                 {formatDate(booking.start_date)}
                             </p>
                         </div>
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Return Date</p>
-                            <p className="font-medium flex items-center gap-1.5 mt-0.5">
-                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)]" />
+                            <p className="font-medium text-xs sm:text-sm flex items-center gap-1.5 mt-0.5">
+                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
                                 {formatDate(booking.end_date)}
                             </p>
                         </div>
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Duration</p>
-                            <p className="font-medium mt-0.5">{booking.total_days} day{booking.total_days !== 1 ? 's' : ''}</p>
+                            <p className="font-medium text-xs sm:text-sm mt-0.5">{booking.total_days} day{booking.total_days !== 1 ? 's' : ''}</p>
                         </div>
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Total Price</p>
-                            <p className="font-bold text-[var(--color-primary-600)] text-lg mt-0.5">{formatCurrency(Number(booking.total_price))}</p>
+                            <p className="font-bold text-[var(--color-primary-600)] text-base sm:text-lg mt-0.5">{formatCurrency(Number(booking.total_price))}</p>
                         </div>
                     </div>
                 </div>
@@ -263,10 +263,11 @@ function RatingForm({ token }: { token: string }) {
                                 key={star}
                                 type="button"
                                 onClick={() => setData('stars', star)}
-                                className="focus:outline-none"
+                                className="min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none cursor-pointer"
+                                aria-label={`${star} star rating`}
                             >
                                 <Star
-                                    className={`w-8 h-8 transition-colors ${
+                                    className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors ${
                                         star <= data.stars
                                             ? 'text-yellow-400 fill-yellow-400'
                                             : 'text-[var(--color-sand-300)] hover:text-yellow-300'
@@ -284,7 +285,7 @@ function RatingForm({ token }: { token: string }) {
                         value={data.comment}
                         onChange={e => setData('comment', e.target.value)}
                         rows={3}
-                        className="w-full px-3 py-2 rounded-xl border border-[var(--color-sand-300)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] resize-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--color-sand-300)] text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] resize-none"
                         placeholder="How was your experience?"
                     />
                 </div>
@@ -292,7 +293,7 @@ function RatingForm({ token }: { token: string }) {
                 <button
                     type="submit"
                     disabled={processing || data.stars === 0}
-                    className="glass-btn px-6 py-2.5 rounded-xl font-semibold text-sm disabled:opacity-50"
+                    className="glass-btn min-h-[48px] px-6 py-3 rounded-xl font-semibold text-sm sm:text-base disabled:opacity-50 cursor-pointer w-full sm:w-auto"
                 >
                     {processing ? 'Submitting...' : 'Submit Rating'}
                 </button>

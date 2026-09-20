@@ -165,22 +165,22 @@ export default function RenterBookings({ bookings, renter }: Props) {
                     <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xs border border-slate-200/80 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div className="space-y-2">
                             <div className="flex items-center gap-2">
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary-50 text-primary-800 rounded-lg text-[11px] font-bold border border-primary-200/60">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-800 rounded-xl text-xs font-bold border border-primary-200/60">
                                     <User className="w-3.5 h-3.5" /> Registered Bohol Renter
                                 </span>
 
                                 {/* Driver's License Status Pill */}
                                 {renter.driver_license_status === 'verified' ? (
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-emerald-800 rounded-lg text-[11px] font-bold border border-emerald-200">
-                                        <Check className="w-3 h-3 text-emerald-600" />
+                                    <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
+                                        <Check className="w-3.5 h-3.5 text-emerald-600" />
                                         <span>Verified Driver</span>
                                     </span>
                                 ) : (
                                     <button
                                         onClick={() => setShowLicenseModal(true)}
-                                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-lg text-[11px] font-bold border border-amber-200 transition-colors cursor-pointer"
+                                        className="inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-xl text-xs font-bold border border-amber-200 transition-colors cursor-pointer"
                                     >
-                                        <UploadSimple className="w-3 h-3 text-amber-700" />
+                                        <UploadSimple className="w-4 h-4 text-amber-700" />
                                         <span>Upload Driver's License</span>
                                     </button>
                                 )}
@@ -197,7 +197,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="flex flex-wrap gap-2.5">
                             <button
                                 onClick={() => setShowLicenseModal(true)}
-                                className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-1.5"
+                                className="min-h-[44px] px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 cursor-pointer"
                             >
                                 <ShieldCheck className="w-4 h-4 text-slate-600" />
                                 <span>{renter.driver_license_status === 'verified' ? 'Driver License 🪪' : 'Upload License'}</span>
@@ -205,7 +205,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                             <Link
                                 href="/vehicles"
-                                className="glass-btn px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
+                                className="glass-btn min-h-[44px] px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
                             >
                                 <CarProfile className="w-4 h-4" />
                                 <span>Browse More Vehicles</span>
@@ -214,7 +214,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                     </div>
 
                     {/* Filter Tabs */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
                         {[
                             { id: 'all', label: 'All Trips', count: counts.all },
                             { id: 'accepted', label: 'Confirmed', count: counts.accepted },
@@ -225,14 +225,14 @@ export default function RenterBookings({ bookings, renter }: Props) {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as any)}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-2 ${
+                                className={`min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-2 cursor-pointer ${
                                     activeTab === tab.id
                                         ? 'glass-pill-active'
                                         : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
                                 }`}
                             >
                                 <span>{tab.label}</span>
-                                <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-extrabold ${
+                                <span className={`px-2 py-0.5 rounded-full text-xs font-extrabold ${
                                     activeTab === tab.id ? 'bg-primary-800 text-white' : 'bg-slate-100 text-slate-600'
                                 }`}>
                                     {tab.count}
@@ -307,7 +307,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         {/* Dates & Pricing Summary */}
                                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50/80 p-4 rounded-2xl border border-slate-100 text-xs">
                                             <div>
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Pickup Date</span>
+                                                <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Pickup Date</span>
                                                 <div className="font-bold text-slate-800 flex items-center gap-1.5">
                                                     <Calendar className="w-4 h-4 text-primary-700" />
                                                     {b.start_date}
@@ -315,7 +315,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             </div>
 
                                             <div>
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Return Date</span>
+                                                <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Return Date</span>
                                                 <div className="font-bold text-slate-800 flex items-center gap-1.5">
                                                     <Calendar className="w-4 h-4 text-primary-700" />
                                                     {b.end_date} ({b.total_days} {b.total_days === 1 ? 'day' : 'days'})
@@ -323,7 +323,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             </div>
 
                                             <div>
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Total Price</span>
+                                                <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Total Price</span>
                                                 <div className="font-black text-base text-primary-700">
                                                     {formatCurrency(b.total_price)}
                                                 </div>
@@ -338,7 +338,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                         <CheckCircle className="w-4 h-4 text-emerald-600" />
                                                         Host Contact Details Unlocked!
                                                     </span>
-                                                    <span className="text-[11px] font-semibold text-emerald-700">Coordinate Handover</span>
+                                                    <span className="text-xs font-semibold text-emerald-700">Coordinate Handover</span>
                                                 </div>
 
                                                 <div className="flex flex-wrap items-center gap-2 pt-1">
@@ -348,9 +348,9 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             href={`https://wa.me/${formatPhone(b.owner_contact.phone)}?text=${encodeURIComponent(`Hi ${b.owner_contact.name}, I am your renter on RentBohol for ${b.vehicle?.title || 'the vehicle'} from ${b.start_date} to ${b.end_date}!`)}`}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs"
+                                                            className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <ChatCircle className="w-3.5 h-3.5" />
+                                                            <ChatCircle className="w-4 h-4" />
                                                             <span>WhatsApp Host</span>
                                                         </a>
                                                     )}
@@ -359,9 +359,9 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     {b.owner_contact.phone && (
                                                         <a
                                                             href={`tel:${b.owner_contact.phone}`}
-                                                            className="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs"
+                                                            className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs cursor-pointer"
                                                         >
-                                                            <Phone className="w-3.5 h-3.5 text-emerald-600" />
+                                                            <Phone className="w-4 h-4 text-emerald-600" />
                                                             <span>Call ({b.owner_contact.phone})</span>
                                                         </a>
                                                     )}
@@ -371,11 +371,11 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((b.vehicle?.location || 'Panglao') + ', Bohol, Philippines')}`}
                                                         target="_blank"
                                                         rel="noreferrer"
-                                                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs"
+                                                        className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs cursor-pointer"
                                                     >
-                                                        <MapPin className="w-3.5 h-3.5 text-primary-700" />
+                                                        <MapPin className="w-4 h-4 text-primary-700" />
                                                         <span>Open Pickup on Google Maps</span>
-                                                        <ArrowSquareOut className="w-3 h-3 text-slate-400" />
+                                                        <ArrowSquareOut className="w-3.5 h-3.5 text-slate-400" />
                                                     </a>
                                                 </div>
                                             </div>
@@ -384,20 +384,20 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         {/* Digital Handover Checklist Info (If Available) */}
                                         {(b.checkin_odometer || b.checkin_fuel) && (
                                             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs space-y-1.5">
-                                                <span className="font-bold text-slate-700 block text-[11px] uppercase tracking-wider">
+                                                <span className="font-bold text-slate-700 block text-xs uppercase tracking-wider">
                                                     Digital Handover Inspection
                                                 </span>
                                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-slate-600">
                                                     <div>
-                                                        <span className="text-[10px] text-slate-400 block">Check-in Odometer</span>
+                                                        <span className="text-xs text-slate-400 block">Check-in Odometer</span>
                                                         <span className="font-semibold">{b.checkin_odometer || 'Recorded at handover'}</span>
                                                     </div>
                                                     <div>
-                                                        <span className="text-[10px] text-slate-400 block">Check-in Fuel</span>
+                                                        <span className="text-xs text-slate-400 block">Check-in Fuel</span>
                                                         <span className="font-semibold">{b.checkin_fuel || 'Full'}</span>
                                                     </div>
                                                     <div>
-                                                        <span className="text-[10px] text-slate-400 block">Return Deposit</span>
+                                                        <span className="text-xs text-slate-400 block">Return Deposit</span>
                                                         <span className="font-semibold">{b.checkout_deposit_refunded ? '✅ Refunded' : 'Pending Return'}</span>
                                                     </div>
                                                 </div>
@@ -406,7 +406,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                                         {/* Review / Rating Status for Completed Trip */}
                                         {b.status === 'completed' && (
-                                            <div className="p-3 bg-primary-50/70 border border-primary-200/70 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                                            <div className="p-3.5 bg-primary-50/70 border border-primary-200/70 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
                                                 {b.renter_rating ? (
                                                     <div className="flex items-center gap-2 text-primary-900 font-bold">
                                                         <div className="flex items-center text-amber-500">
@@ -423,13 +423,13 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     <>
                                                         <div>
                                                             <span className="font-bold text-primary-950 block">How was your Bohol trip?</span>
-                                                            <span className="text-primary-700 text-[11px]">Share your rating to help other travelers rent with confidence.</span>
+                                                            <span className="text-primary-700 text-xs">Share your rating to help other travelers rent with confidence.</span>
                                                         </div>
                                                         <button
                                                             onClick={() => setRatingBooking(b)}
-                                                            className="glass-btn px-4 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5"
+                                                            className="glass-btn min-h-[44px] px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer"
                                                         >
-                                                            <Star className="w-3.5 h-3.5" />
+                                                            <Star className="w-4 h-4" />
                                                             <span>Leave a Review</span>
                                                         </button>
                                                     </>
@@ -449,13 +449,13 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                                         {/* Card Actions Footer */}
                                         <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                                 <Link
                                                     href={`/booking/${b.token}`}
-                                                    className="apple-press font-bold text-primary-700 hover:text-primary-800 flex items-center gap-1"
+                                                    className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 font-bold text-primary-700 hover:text-primary-800 rounded-xl bg-slate-50 sm:bg-transparent"
                                                 >
                                                     <span>View Status Page</span>
-                                                    <ArrowRight className="w-3.5 h-3.5" />
+                                                    <ArrowRight className="w-4 h-4" />
                                                 </Link>
 
                                                 {(b.status === 'confirmed' || b.status === 'accepted') && (
@@ -463,9 +463,9 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                         <button
                                                             type="button"
                                                             onClick={() => setPaymentBooking(b)}
-                                                            className="apple-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition-colors shadow-2xs"
+                                                            className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <CreditCard className="w-3.5 h-3.5 text-emerald-600" />
+                                                            <CreditCard className="w-4 h-4 text-emerald-600" />
                                                             <span>Pay via GCash / Maya</span>
                                                         </button>
 
@@ -475,9 +475,9 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                                 setHandoverBooking(b);
                                                                 setHandoverSignature(b.signature_data || '');
                                                             }}
-                                                            className="apple-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-800 font-bold border border-primary-200 transition-colors shadow-2xs"
+                                                            className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-800 font-bold border border-primary-200 transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <Pen className="w-3.5 h-3.5 text-primary-600" />
+                                                            <Pen className="w-4 h-4 text-primary-600" />
                                                             <span>{b.signature_data ? 'View Handover Sign-off' : 'Sign Digital Handover'}</span>
                                                         </button>
                                                     </>
@@ -488,7 +488,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                 <button
                                                     onClick={() => handleCancel(b.id)}
                                                     disabled={cancellingId === b.id}
-                                                    className="apple-press px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl font-bold text-xs transition-colors border border-rose-200 disabled:opacity-50"
+                                                    className="apple-press min-h-[44px] inline-flex items-center px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl font-bold text-xs transition-colors border border-rose-200 disabled:opacity-50 cursor-pointer"
                                                 >
                                                     {cancellingId === b.id ? 'Cancelling...' : 'Cancel Request'}
                                                 </button>
@@ -526,7 +526,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 <img src={renter.driver_license_path} alt="License" className="w-16 h-12 object-cover rounded-lg border border-emerald-300" />
                                 <div>
                                     <span className="font-bold text-emerald-950 block">Current License on File</span>
-                                    <span className="text-[11px] text-emerald-700">Verified for all Bohol rentals</span>
+                                    <span className="text-xs text-emerald-700">Verified for all Bohol rentals</span>
                                 </div>
                             </div>
                         )}
@@ -544,7 +544,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         required
                                     />
                                 </label>
-                                <p className="text-[10px] text-slate-400">JPG, PNG, or WebP up to 5MB</p>
+                                <p className="text-xs text-slate-400">JPG, PNG, or WebP up to 5MB</p>
                                 {licenseData.license_photo && (
                                     <p className="text-xs font-bold text-emerald-700 pt-1">
                                         Selected: {licenseData.license_photo.name}
@@ -556,14 +556,14 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 <button
                                     type="button"
                                     onClick={() => setShowLicenseModal(false)}
-                                    className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-colors"
+                                    className="flex-1 min-h-[48px] py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs sm:text-sm transition-colors cursor-pointer"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={licenseProcessing || !licenseData.license_photo}
-                                    className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs disabled:opacity-50"
+                                    className="glass-btn flex-1 min-h-[48px] py-3 rounded-xl font-bold text-xs sm:text-sm disabled:opacity-50 cursor-pointer"
                                 >
                                     {licenseProcessing ? 'Uploading...' : 'Save & Verify'}
                                 </button>
@@ -599,7 +599,8 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         type="button"
                                         key={star}
                                         onClick={() => setReviewData('stars', star)}
-                                        className="p-1 hover:scale-110 transition-transform"
+                                        className="min-w-[44px] min-h-[44px] flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
+                                        aria-label={`${star} stars`}
                                     >
                                         <Star
                                             className={`w-8 h-8 ${
@@ -621,7 +622,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                     onChange={e => setReviewData('comment', e.target.value)}
                                     placeholder="e.g. Smooth pickup at Panglao airport, clean car, very friendly host!"
                                     rows={3}
-                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-primary-200 resize-none"
+                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-base sm:text-xs font-medium text-slate-900 focus:ring-2 focus:ring-primary-200 resize-none"
                                 />
                             </div>
 
@@ -629,14 +630,14 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 <button
                                     type="button"
                                     onClick={() => setRatingBooking(null)}
-                                    className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-colors"
+                                    className="flex-1 min-h-[48px] py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs sm:text-sm transition-colors cursor-pointer"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={ratingProcessing}
-                                    className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs disabled:opacity-50"
+                                    className="glass-btn flex-1 min-h-[48px] py-3 rounded-xl font-bold text-xs sm:text-sm disabled:opacity-50 cursor-pointer"
                                 >
                                     {ratingProcessing ? 'Submitting...' : 'Submit Review'}
                                 </button>
@@ -685,13 +686,14 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 </div>
                                 <div>
                                     <h3 className="font-extrabold text-base text-slate-900">Digital Vehicle Handover Checklist</h3>
-                                    <p className="text-[11px] text-slate-500">Reservation #{handoverBooking.id} • {handoverBooking.vehicle?.title}</p>
+                                    <p className="text-xs text-slate-500">Reservation #{handoverBooking.id} • {handoverBooking.vehicle?.title}</p>
                                 </div>
                             </div>
                             <button
                                 type="button"
                                 onClick={() => setHandoverBooking(null)}
-                                className="text-slate-400 hover:text-slate-600 p-1"
+                                className="text-slate-400 hover:text-slate-600 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
+                                aria-label="Close modal"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -701,13 +703,13 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                             <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                                 <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
-                                    <GasPump className="w-3.5 h-3.5 text-primary-600" />
+                                    <GasPump className="w-4 h-4 text-primary-600" />
                                     <span>Fuel Level</span>
                                 </label>
                                 <select
                                     value={handoverFuel}
                                     onChange={e => setHandoverFuel(e.target.value)}
-                                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 outline-none"
+                                    className="w-full h-11 sm:h-9 bg-white border border-slate-200 rounded-lg px-2.5 text-base sm:text-xs text-slate-800 outline-none"
                                 >
                                     <option value="Full (8/8)">Full (8/8 Tank)</option>
                                     <option value="3/4 Tank">3/4 Tank</option>
@@ -718,7 +720,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                             <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                                 <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
-                                    <Gauge className="w-3.5 h-3.5 text-primary-600" />
+                                    <Gauge className="w-4 h-4 text-primary-600" />
                                     <span>Odometer Reading</span>
                                 </label>
                                 <input
@@ -726,29 +728,29 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                     value={handoverOdo}
                                     onChange={e => setHandoverOdo(e.target.value)}
                                     placeholder="e.g. 45,210 km"
-                                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 outline-none"
+                                    className="w-full h-11 sm:h-9 bg-white border border-slate-200 rounded-lg px-2.5 text-base sm:text-xs text-slate-800 outline-none"
                                 />
                             </div>
                         </div>
 
                         {/* Inspection Checklist Badges */}
                         <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs space-y-2">
-                            <span className="font-bold text-slate-700 block">Condition Verified</span>
-                            <div className="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600">
+                            <span className="font-bold text-slate-700 block text-xs">Condition Verified</span>
+                            <div className="grid grid-cols-2 gap-2 text-xs text-slate-600">
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Spare Tire & Jack</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>OR/CR Registration</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Clean Interior & AC</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Headlights & Horn</span>
                                 </label>
                             </div>
@@ -768,7 +770,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                             <button
                                 type="button"
                                 onClick={() => setHandoverBooking(null)}
-                                className="apple-press flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-colors"
+                                className="apple-press flex-1 min-h-[48px] py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs sm:text-sm transition-colors cursor-pointer"
                             >
                                 Close
                             </button>
@@ -787,7 +789,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                     });
                                     setHandoverBooking(null);
                                 }}
-                                className="glass-btn flex-1 py-2.5 rounded-xl font-bold text-xs"
+                                className="glass-btn flex-1 min-h-[48px] py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer"
                             >
                                 Confirm & Save Inspection
                             </button>
