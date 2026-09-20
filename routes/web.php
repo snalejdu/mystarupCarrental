@@ -25,6 +25,7 @@ Route::get('/vehicles/{vehicle}', [PublicVehicleController::class, 'show'])->nam
 Route::get('/about', fn () => \Inertia\Inertia::render('About'))->name('about');
 Route::get('/contact', fn () => \Inertia\Inertia::render('Contact'))->name('contact');
 Route::get('/privacy-policy', fn () => \Inertia\Inertia::render('PrivacyPolicy'))->name('privacy');
+Route::get('/terms', fn () => \Inertia\Inertia::render('Terms'))->name('terms');
 Route::get('/animation-preview', fn () => \Inertia\Inertia::render('AnimationPreview'))->name('animation.preview');
 
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
@@ -43,8 +44,14 @@ Route::middleware('throttle:booking')->group(function () {
 });
 
 // Renter status page — accessed via UUID token
-Route::get('/booking/{token}', [BookingController::class, 'renterStatus'])->name('booking.status');
-Route::post('/booking/{token}/rate', [BookingController::class, 'renterRate'])->name('booking.renter-rate')->middleware('throttle:rating');
+Route::get('/booking/{token}', [BookingController::class, 'renterStatus'])
+    ->name('booking.status')
+    ->whereUuid('token');
+
+Route::post('/booking/{token}/rate', [BookingController::class, 'renterRate'])
+    ->name('booking.renter-rate')
+    ->middleware('throttle:rating')
+    ->whereUuid('token');
 
 // Photo serving route (for local dev without signed URLs)
 Route::get('/photos/{photo}', function (App\Models\VehiclePhoto $photo) {
@@ -62,7 +69,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store'])->middleware('throttle:register');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:login');
-    Route::post('/login/google', [LoginController::class, 'google'])->name('login.google');
+    Route::get('/auth/google/redirect', [LoginController::class, 'redirectToGoogle'])->name('auth.google.redirect');
+    Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 });
 
 Route::middleware(['auth', 'throttle:global'])->group(function () {
@@ -134,3 +142,4 @@ Route::middleware(['auth', 'admin', 'throttle:global'])->prefix('admin')->name('
     Route::get('/bookings', [AdminDashboardController::class, 'bookings'])->name('bookings');
     Route::get('/owners', [AdminDashboardController::class, 'owners'])->name('owners');
 });
+

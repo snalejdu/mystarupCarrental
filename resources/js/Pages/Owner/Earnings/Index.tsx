@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
-import { DollarSign, Percent, TrendingUp, CheckCircle2, CalendarDays, Wallet } from 'lucide-react';
+import { CurrencyDollar, Percent, TrendUp, CheckCircle, CalendarBlank, Wallet } from '@phosphor-icons/react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
@@ -45,7 +45,7 @@ export default function OwnerEarnings({ earnings, statements }: Props) {
                             Gross Rental Value
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center border border-primary-100">
-                            <TrendingUp className="w-5 h-5" />
+                            <TrendUp className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-3xl font-bold text-slate-900 tracking-tight">

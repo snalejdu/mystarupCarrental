@@ -1,9 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    ShieldCheck, CheckCircle2, PhoneCall, Zap,
-    MapPin, CarFront, HeartHandshake, Users, ArrowRight, Award, Lock, Banknote, CalendarCheck
-} from 'lucide-react';
+    UserCircle, CheckCircle, PhoneCall, Lightning, MapPin, CarProfile, Tag, Users, ArrowRight, Medal, LockSimple, Money, CalendarCheck } from '@phosphor-icons/react';
 import DepthCarousel from '@/Components/DepthCarousel';
 
 export default function About() {
@@ -17,9 +15,6 @@ export default function About() {
             {/* Header Banner */}
             <div className="bg-white border-b border-slate-100 py-10 sm:py-14">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-                    <span className="inline-block px-3.5 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wider border border-primary-100">
-                        About RentBohol
-                    </span>
                     <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
                         Empowering Bohol Tourism Direct & Fast
                     </h1>
@@ -96,17 +91,13 @@ export default function About() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                         {/* Card 1: Fast */}
-                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
-                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
-                                <div className="glass-3d-badge mb-2">
-                                    <span className="glass-3d-badge__back" aria-hidden="true" />
-                                    <span className="glass-3d-badge__front" aria-hidden="true">
-                                        <Zap className="w-5 h-5 text-white" />
-                                    </span>
+                                <div className="w-12 h-12 rounded-xl bg-teal-600 flex items-center justify-center text-white mb-2">
+                                    <Lightning className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-teal-700 transition-colors">Fast & Instant Requests</h3>
+                                    <h3 className="font-heading font-bold text-lg text-slate-900">Fast & Instant Requests</h3>
                                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                                         No more waiting hours for replies. Rentees submit trip dates in seconds, and vehicle hosts receive instant notifications to review and accept requests.
                                     </p>
@@ -115,17 +106,13 @@ export default function About() {
                         </div>
 
                         {/* Card 2: Reliable */}
-                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-emerald-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
-                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
-                                <div className="glass-3d-badge glass-3d-badge--emerald mb-2">
-                                    <span className="glass-3d-badge__back" aria-hidden="true" />
-                                    <span className="glass-3d-badge__front" aria-hidden="true">
-                                        <ShieldCheck className="w-5 h-5 text-white" />
-                                    </span>
+                                <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white mb-2">
+                                    <UserCircle className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition-colors">Reliable Host Contacts</h3>
+                                    <h3 className="font-heading font-bold text-lg text-slate-900">Reliable Host Contacts</h3>
                                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                                         Once a booking request is accepted, direct contact phone numbers and emails unlock immediately for 1-tap calls and easy island pickup coordination.
                                     </p>
@@ -134,17 +121,13 @@ export default function About() {
                         </div>
 
                         {/* Card 3: Direct Pricing */}
-                        <div className="group p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-amber-400/60 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
-                                {/* 3D Dual-Layer Squircle Glass Icon Badge */}
-                                <div className="glass-3d-badge glass-3d-badge--amber mb-2">
-                                    <span className="glass-3d-badge__back" aria-hidden="true" />
-                                    <span className="glass-3d-badge__front" aria-hidden="true">
-                                        <HeartHandshake className="w-5 h-5 text-white" />
-                                    </span>
+                                <div className="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center text-white mb-2">
+                                    <Tag className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900 group-hover:text-amber-700 transition-colors">Direct Local Pricing</h3>
+                                    <h3 className="font-heading font-bold text-lg text-slate-900">Direct Local Pricing</h3>
                                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                                         Rentees get transparent daily rates set directly by local Boholano owners with zero middleman markups or surprise booking fees.
                                     </p>
@@ -170,19 +153,19 @@ export default function About() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-bold pt-8 border-t border-slate-800 relative z-10">
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>100% Free for Rentees</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Airport & Port Pickup Sync</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Fast Mobile Performance</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle2 className="w-5 h-5 text-primary-400 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Direct Host Communication</span>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { CalendarDays, Filter, User } from 'lucide-react';
+import { CalendarBlank, Funnel, User } from '@phosphor-icons/react';
 
 interface Props {
     bookings: any;
@@ -20,7 +20,7 @@ export default function AdminBookings({ bookings, filters }: Props) {
             {/* Filter Pills */}
             <div className="flex flex-wrap items-center gap-2 mb-6 bg-slate-950 p-2 rounded-xl border border-slate-800">
                 <span className="text-xs font-semibold text-slate-400 px-3 flex items-center gap-1.5">
-                    <Filter className="w-3.5 h-3.5 text-primary-400" /> Filter:
+                    <Funnel className="w-3.5 h-3.5 text-primary-400" /> Filter:
                 </span>
                 {['', 'pending', 'accepted', 'completed', 'declined'].map((s) => (
                     <button

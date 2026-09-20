@@ -1,9 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import {
-    Users, CarFront, CalendarCheck, DollarSign, TrendingUp, Clock,
-    CheckCircle2, ArrowUpRight, Shield, MapPin, ArrowRight
-} from 'lucide-react';
+    Users, CarProfile, CalendarCheck, CurrencyDollar, TrendUp, Clock, CheckCircle, ArrowUpRight, Shield, MapPin, ArrowRight } from '@phosphor-icons/react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
@@ -36,7 +34,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Total Commission (4%)
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-primary-700/20 text-primary-300 flex items-center justify-center border border-primary-700/30">
-                            <DollarSign className="w-5 h-5" />
+                            <CurrencyDollar className="w-5 h-5" />
                         </div>
                     </div>
                     <div className="flex items-baseline justify-between">
@@ -59,7 +57,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Completed Volume
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                            <TrendingUp className="w-5 h-5" />
+                            <TrendUp className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-3xl font-bold text-white tracking-tight">
@@ -95,7 +93,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Active Fleet
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20">
-                            <CarFront className="w-5 h-5" />
+                            <CarProfile className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-3xl font-bold text-white tracking-tight">
@@ -159,7 +157,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                         <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-primary-700/20 text-primary-300 flex items-center justify-center border border-primary-700/30">
-                                    <CheckCircle2 className="w-4 h-4" />
+                                    <CheckCircle className="w-4 h-4" />
                                 </div>
                                 <div>
                                     <span className="font-semibold text-xs text-white block">Completed Trips</span>

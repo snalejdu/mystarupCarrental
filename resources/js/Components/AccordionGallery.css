@@ -56,12 +56,13 @@
   box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.8);
   -webkit-tap-highlight-color: transparent;
   transition:
-    box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    flex-grow 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    flex-grow 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid rgba(255, 255, 255, 0.08);
   will-change: flex-grow, transform;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .ag-panel--active {
@@ -93,8 +94,10 @@
   width: var(--ag-media-size);
   height: 100%;
   filter: grayscale(var(--ag-gray));
-  will-change: transform;
+  will-change: transform, filter;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .accordion-gallery--vertical .ag-panel__media {
@@ -109,7 +112,9 @@
   display: block;
   user-select: none;
   -webkit-user-drag: none;
-  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Inactive panels stay softly dimmed */
@@ -127,7 +132,9 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   background: linear-gradient(180deg, transparent 65%, rgba(0, 0, 0, 0.65) 100%);
 }
 
@@ -175,14 +182,50 @@
     flex-direction: column;
     perspective: none;
     height: auto !important;
+    gap: 6px;
   }
+
   .ag-panel {
-    min-height: 84px;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    min-height: 0;
+    height: 64px;
     transform: none !important;
+    transition:
+      height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: height;
   }
+
+  .ag-panel--active {
+    height: 260px;
+  }
+
   .accordion-gallery .ag-panel__media {
     width: 100%;
-    height: var(--ag-media-size);
+    height: 100%;
+    min-height: 260px;
+  }
+
+  .ag-panel__media img {
+    object-position: center 30%;
+  }
+
+  .ag-panel__label {
+    left: 14px;
+    bottom: 12px;
+    right: 14px;
+    gap: 8px;
+  }
+
+  .ag-panel__bar {
+    height: 22px;
+    width: 3px;
+  }
+
+  .ag-panel__text {
+    font-size: 0.95rem;
   }
 }
 

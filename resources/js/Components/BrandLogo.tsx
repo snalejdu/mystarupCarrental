@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface BrandLogoProps {
     /**
@@ -90,9 +91,11 @@ export default function BrandLogo({
 
     return (
         <div
-            className={`inline-flex items-center gap-3 select-none ${
-                interactive ? 'group cursor-pointer' : ''
-            } ${className}`}
+            className={cn(
+                'inline-flex items-center gap-3 select-none',
+                interactive && 'group cursor-pointer',
+                className
+            )}
         >
             {/* Option 1 Tourist Van Emblem Badge (Transparent Circle) */}
             <div

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { CheckCircle, Clock, XCircle, Star, MapPin, Calendar, Phone, Mail, User, CreditCard, Share2, Copy, Sparkles, ShieldCheck } from 'lucide-react';
+import { CheckCircle, Clock, XCircle, Star, MapPin, Calendar, Phone, EnvelopeSimple, User, CreditCard, ShareNetwork, Copy, ShieldCheck } from '@phosphor-icons/react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import PaymentModal from '@/Components/PaymentModal';
 import { triggerToast } from '@/Components/DynamicToast';
@@ -104,7 +104,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider mb-2">
-                                    <Sparkles className="w-3 h-3 text-amber-300" />
+                                    <CheckCircle className="w-3 h-3 text-emerald-200" />
                                     {isPaid ? 'Payment Confirmed' : 'Payment Ready'}
                                 </span>
                                 <h3 className="text-lg font-bold">

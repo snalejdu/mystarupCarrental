@@ -51,11 +51,11 @@ const AccordionGallery: React.FC<AccordionGalleryProps> = ({
   radius = 16,
   expandRatio = 0.52,
   orientation = 'horizontal',
-  duration = 0.75,
-  ease = 'power2.out',
+  duration = 0.85,
+  ease = 'expo.out',
   parallax = 0.45,
   tilt = 6,
-  stagger = 0.04,
+  stagger = 0.025,
   trigger = 'hover',
   showLabels = true,
   grayscale = false,
@@ -102,7 +102,7 @@ const AccordionGallery: React.FC<AccordionGalleryProps> = ({
           flexGrow: isActive ? grow : 1,
           ...rotProp,
           duration: dur,
-          ease: 'power2.out',
+          ease,
           overwrite: 'auto',
           force3D: true
         });
@@ -117,10 +117,11 @@ const AccordionGallery: React.FC<AccordionGalleryProps> = ({
             yPercent: -50,
             x: vertical ? 0 : isActive ? 0 : shift,
             y: vertical ? (isActive ? 0 : shift) : 0,
+            scale: isActive ? 1.0 : 0.97,
             '--ag-gray': gray,
             '--ag-dim': isActive ? 0 : 0.35,
-            duration: dur,
-            ease: 'power2.out',
+            duration: dur * 1.1,
+            ease,
             overwrite: 'auto',
             force3D: true
           });
@@ -131,17 +132,18 @@ const AccordionGallery: React.FC<AccordionGalleryProps> = ({
             gsap.to([bar, text], {
               opacity: 1,
               x: 0,
-              duration: dur * 0.8,
-              ease: 'power2.out',
+              duration: dur * 0.9,
+              ease,
               stagger: prefersReduced ? 0 : stagger,
+              delay: dur * 0.15,
               overwrite: 'auto'
             });
           } else {
             gsap.to([bar, text], {
               opacity: 0,
               x: -12,
-              duration: dur * 0.5,
-              ease: 'power2.out',
+              duration: dur * 0.45,
+              ease: 'power3.in',
               overwrite: 'auto'
             });
           }

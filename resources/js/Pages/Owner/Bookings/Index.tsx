@@ -1,9 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
 import {
-    Calendar, CheckCircle2, XCircle, Clock, MapPin, Phone, Mail, User,
-    ShieldCheck, Ban, ArrowRight, Check, AlertCircle, Sparkles, MessageSquare
-} from 'lucide-react';
+    Calendar, CheckCircle, XCircle, Clock, MapPin, Phone, EnvelopeSimple, User, ShieldCheck, Prohibit, ArrowRight, Check, WarningCircle, ChatCircle } from '@phosphor-icons/react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -271,7 +269,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-bold transition-colors bg-emerald-100 hover:bg-emerald-200 px-2.5 py-1 rounded-lg border border-emerald-300 shadow-2xs"
                                                     title="Chat with renter on WhatsApp"
                                                 >
-                                                    <MessageSquare className="w-3 h-3 text-emerald-700" />
+                                                    <ChatCircle className="w-3 h-3 text-emerald-700" />
                                                     <span>WhatsApp</span>
                                                 </a>
                                             )}
@@ -295,7 +293,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     className="inline-flex items-center gap-1 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shadow-2xs"
                                                     title="Send Email"
                                                 >
-                                                    <Mail className="w-3 h-3 text-emerald-600" />
+                                                    <EnvelopeSimple className="w-3 h-3 text-emerald-600" />
                                                     <span>{booking.renter_email}</span>
                                                 </a>
                                             )}
@@ -307,7 +305,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 {isCancelled && (
                                     <div className="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 flex items-center justify-between gap-2">
                                         <div className="flex items-center gap-1.5">
-                                            <Ban className="w-3.5 h-3.5 text-rose-500" />
+                                            <Prohibit className="w-3.5 h-3.5 text-rose-500" />
                                             <span className="font-semibold text-slate-700">
                                                 {booking.status === 'declined' ? 'Booking request declined' : 'Booking was cancelled'}
                                             </span>

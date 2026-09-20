@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { CheckCircle2, AlertCircle, AlertTriangle, Info, X, CreditCard, Sparkles } from 'lucide-react';
+import { CheckCircle, WarningCircle, Warning, Info, X, CreditCard } from '@phosphor-icons/react';
 
 export interface ToastMessage {
     id: string;
@@ -131,21 +131,21 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                 return {
                     borderLeft: 'border-l-emerald-500',
                     iconBg: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                    icon: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />,
+                    icon: <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />,
                     badge: 'bg-emerald-500/20 text-emerald-300',
                 };
             case 'warning':
                 return {
                     borderLeft: 'border-l-amber-500',
                     iconBg: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-                    icon: <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />,
+                    icon: <Warning className="w-5 h-5 text-amber-400 shrink-0" />,
                     badge: 'bg-amber-500/20 text-amber-300',
                 };
             case 'error':
                 return {
                     borderLeft: 'border-l-rose-500',
                     iconBg: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-                    icon: <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />,
+                    icon: <WarningCircle className="w-5 h-5 text-rose-400 shrink-0" />,
                     badge: 'bg-rose-500/20 text-rose-300',
                 };
             case 'payment':

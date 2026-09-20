@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   gap: 3.5em 4.5em;
-  padding: 2em 1em;
+  padding: 2.8em 1.5em 3.5em 1.5em;
   overflow: visible;
 }
 
@@ -39,9 +39,9 @@
 .icon-btn__front,
 .icon-btn__label {
   transition:
-    opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .icon-btn__back,
@@ -127,3 +127,53 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* Mobile-friendly horizontal scrollable glass icons — zero overlap */
+@media (max-width: 640px) {
+  .icon-btns-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2.2em 1.25rem 3.5em 1.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .icon-btns-flex::-webkit-scrollbar {
+    display: none;
+  }
+
+  .icon-btns-flex .icon-btn {
+    flex: 0 0 auto;
+    width: 3.4em;
+    height: 3.4em;
+    margin: 0;
+  }
+
+  .icon-btns-flex .icon-btn__back,
+  .icon-btns-flex .icon-btn__front {
+    border-radius: 1em;
+  }
+
+  .icon-btns-flex .icon-btn__icon {
+    width: 1.3em;
+    height: 1.3em;
+  }
+
+  .icon-btns-flex .icon-btn__label {
+    font-size: 0.72em;
+    top: 108%;
+    right: -1.4em;
+    left: -1.4em;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+}
+

@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { formatDate } from '@/lib/utils';
-import { Users, CarFront, PhoneCall, Mail } from 'lucide-react';
+import { Users, CarProfile, PhoneCall, EnvelopeSimple } from '@phosphor-icons/react';
 
 interface Props {
     owners: any;
@@ -49,7 +49,7 @@ export default function AdminOwners({ owners }: Props) {
                                         </td>
                                         <td className="py-4 px-3 text-slate-300">
                                             <div className="flex items-center gap-1.5 font-medium">
-                                                <Mail className="w-3.5 h-3.5 text-primary-400" />
+                                                <EnvelopeSimple className="w-3.5 h-3.5 text-primary-400" />
                                                 <span>{owner.email}</span>
                                             </div>
                                         </td>

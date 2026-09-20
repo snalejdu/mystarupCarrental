@@ -90,10 +90,9 @@ class RenterBookingController extends Controller
             }
 
             $path = $request->file('license_photo')->store('licenses', 'public');
-            $user->update([
-                'driver_license_path' => $path,
-                'driver_license_status' => 'verified', // Auto-verified for seamless UX
-            ]);
+            $user->driver_license_path = $path;
+            $user->driver_license_status = 'verified'; // Auto-verified for seamless UX
+            $user->save();
         }
 
         return back()->with('success', 'Driver\'s license uploaded and verified successfully! 🪪');
@@ -123,6 +122,7 @@ class RenterBookingController extends Controller
                 'rater_type' => 'renter',
             ],
             [
+                'rater_id' => auth()->id(),
                 'rater_identifier' => auth()->user()->name,
                 'stars' => $validated['stars'],
                 'comment' => $validated['comment'] ?? null,

@@ -2,11 +2,7 @@ import { useState, useMemo } from 'react';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    CarFront, Calendar, MapPin, Phone, Mail, Clock,
-    CheckCircle2, AlertCircle, XCircle, Star, ArrowRight, ShieldCheck, User,
-    Upload, MessageSquare, ExternalLink, X, Check, Fuel, Gauge, Sparkles, AlertTriangle,
-    CreditCard, PenTool, FileText
-} from 'lucide-react';
+    CarProfile, Calendar, MapPin, Phone, EnvelopeSimple, Clock, CheckCircle, WarningCircle, XCircle, Star, ArrowRight, ShieldCheck, User, UploadSimple, ChatCircle, ArrowSquareOut, X, Check, GasPump, Gauge, Warning, CreditCard, Pen, FileText } from '@phosphor-icons/react';
 import { formatCurrency } from '@/lib/utils';
 import SignaturePad from '@/Components/SignaturePad';
 import PaymentModal, { PaymentReceipt } from '@/Components/PaymentModal';
@@ -138,7 +134,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
             case 'accepted':
                 return (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> CONFIRMED & READY
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> CONFIRMED & READY
                     </span>
                 );
             case 'completed':
@@ -184,7 +180,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         onClick={() => setShowLicenseModal(true)}
                                         className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-lg text-[11px] font-bold border border-amber-200 transition-colors cursor-pointer"
                                     >
-                                        <Upload className="w-3 h-3 text-amber-700" />
+                                        <UploadSimple className="w-3 h-3 text-amber-700" />
                                         <span>Upload Driver's License</span>
                                     </button>
                                 )}
@@ -211,7 +207,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 href="/vehicles"
                                 className="glass-btn px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
                             >
-                                <CarFront className="w-4 h-4" />
+                                <CarProfile className="w-4 h-4" />
                                 <span>Browse More Vehicles</span>
                             </Link>
                         </div>
@@ -250,7 +246,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         {filteredBookings.length === 0 ? (
                             <div className="bg-white rounded-3xl p-12 text-center border border-slate-200/80 shadow-xs space-y-4">
                                 <div className="w-16 h-16 bg-primary-50 text-primary-700 rounded-2xl flex items-center justify-center mx-auto shadow-2xs">
-                                    <CarFront className="w-8 h-8" />
+                                    <CarProfile className="w-8 h-8" />
                                 </div>
                                 <h3 className="font-bold text-slate-900 text-lg">No {activeTab !== 'all' ? activeTab : ''} Rental Trips</h3>
                                 <p className="text-slate-500 text-xs max-w-sm mx-auto font-medium">
@@ -282,7 +278,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     />
                                                 ) : (
                                                     <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 shrink-0">
-                                                        <CarFront className="w-8 h-8" />
+                                                        <CarProfile className="w-8 h-8" />
                                                     </div>
                                                 )}
                                                 <div>
@@ -339,7 +335,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 space-y-3">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
-                                                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                                        <CheckCircle className="w-4 h-4 text-emerald-600" />
                                                         Host Contact Details Unlocked!
                                                     </span>
                                                     <span className="text-[11px] font-semibold text-emerald-700">Coordinate Handover</span>
@@ -354,7 +350,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             rel="noreferrer"
                                                             className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs"
                                                         >
-                                                            <MessageSquare className="w-3.5 h-3.5" />
+                                                            <ChatCircle className="w-3.5 h-3.5" />
                                                             <span>WhatsApp Host</span>
                                                         </a>
                                                     )}
@@ -379,7 +375,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     >
                                                         <MapPin className="w-3.5 h-3.5 text-primary-700" />
                                                         <span>Open Pickup on Google Maps</span>
-                                                        <ExternalLink className="w-3 h-3 text-slate-400" />
+                                                        <ArrowSquareOut className="w-3 h-3 text-slate-400" />
                                                     </a>
                                                 </div>
                                             </div>
@@ -444,7 +440,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         {/* Pending Status Explanation */}
                                         {b.status === 'pending' && (
                                             <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3">
-                                                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                                <WarningCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                                 <p className="text-xs text-amber-900 font-medium leading-relaxed">
                                                     The vehicle owner has been notified via SMS/Email and is reviewing your dates. Once accepted, their direct WhatsApp and phone number will unlock here!
                                                 </p>
@@ -481,7 +477,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             }}
                                                             className="apple-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-800 font-bold border border-primary-200 transition-colors shadow-2xs"
                                                         >
-                                                            <PenTool className="w-3.5 h-3.5 text-primary-600" />
+                                                            <Pen className="w-3.5 h-3.5 text-primary-600" />
                                                             <span>{b.signature_data ? 'View Handover Sign-off' : 'Sign Digital Handover'}</span>
                                                         </button>
                                                     </>
@@ -537,7 +533,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                         <form onSubmit={handleLicenseSubmit} className="space-y-4">
                             <div className="border-2 border-dashed border-slate-200 hover:border-primary-400 rounded-2xl p-6 text-center space-y-2 cursor-pointer transition-colors bg-slate-50/50">
-                                <Upload className="w-8 h-8 text-primary-700 mx-auto" />
+                                <UploadSimple className="w-8 h-8 text-primary-700 mx-auto" />
                                 <label className="block text-xs font-bold text-slate-700 cursor-pointer">
                                     <span>Select License Photo</span>
                                     <input
@@ -705,7 +701,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                             <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                                 <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
-                                    <Fuel className="w-3.5 h-3.5 text-primary-600" />
+                                    <GasPump className="w-3.5 h-3.5 text-primary-600" />
                                     <span>Fuel Level</span>
                                 </label>
                                 <select

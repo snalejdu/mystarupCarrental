@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { RotateCcw, Check, PenTool, ShieldCheck } from 'lucide-react';
+import { ArrowCounterClockwise, Check, Pen, ShieldCheck } from '@phosphor-icons/react';
 
 interface SignaturePadProps {
     onSave: (dataUrl: string) => void;
@@ -136,7 +136,7 @@ export default function SignaturePad({
             <div className="flex items-center justify-between">
                 <div>
                     <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-                        <PenTool className="w-3.5 h-3.5 text-primary-700" />
+                        <Pen className="w-3.5 h-3.5 text-primary-700" />
                         <span>{title}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 mt-0.5">
@@ -187,7 +187,7 @@ export default function SignaturePad({
                         disabled={!hasSignature}
                         className="apple-press px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold flex items-center gap-1 disabled:opacity-40"
                     >
-                        <RotateCcw className="w-3 h-3" />
+                        <ArrowCounterClockwise className="w-3 h-3" />
                         <span>Clear</span>
                     </button>
                 </div>

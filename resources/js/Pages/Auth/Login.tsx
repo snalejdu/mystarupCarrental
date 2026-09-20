@@ -1,6 +1,6 @@
-import { Head, Link, useForm, router } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { Eye, EyeOff, Shield, UserCheck, CarFront } from 'lucide-react';
+import { Eye, EyeSlash, Shield, UserCheck, CarProfile } from '@phosphor-icons/react';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { useState } from 'react';
 
@@ -20,9 +20,7 @@ export default function Login() {
 
     const handleGoogleSignIn = () => {
         setIsGoogleSigningIn(true);
-        router.post('/login/google', { role: 'renter' }, {
-            onFinish: () => setIsGoogleSigningIn(false),
-        });
+        window.location.href = '/auth/google/redirect';
     };
 
     // Quick demo login fill helper
@@ -38,33 +36,33 @@ export default function Login() {
         <PublicLayout>
             <Head title="Sign In — RentBohol" />
 
-            <div className="py-8 sm:py-12 bg-slate-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
+            <div className="py-4 sm:py-12 bg-slate-50 sm:bg-slate-100 flex items-center justify-center p-3 sm:p-6 lg:p-8 font-sans min-h-[calc(100vh-140px)]">
                 {/* Split Screen Card Container */}
-                <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+                <div className="w-full max-w-6xl bg-white rounded-2xl sm:rounded-3xl shadow-sm sm:shadow-lg border border-slate-200/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-0 lg:min-h-[640px]">
 
                     {/* LEFT COLUMN: Sign In Form */}
-                    <div className="lg:col-span-6 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-white">
+                    <div className="lg:col-span-6 p-5 sm:p-10 lg:p-14 flex flex-col justify-between bg-white">
                         <div>
                             {/* Title & Subtitle */}
-                            <div className="mb-8">
-                                <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+                            <div className="mb-4 sm:mb-8">
+                                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                                     Sign In
                                 </h1>
-                                <p className="text-slate-500 text-sm mt-1">
+                                <p className="text-slate-500 text-xs sm:text-sm mt-0.5 sm:mt-1">
                                     Welcome back! Please enter your details
                                 </p>
                             </div>
 
                             {/* Form */}
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Email</label>
+                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Email</label>
                                     <input
                                         type="email"
                                         value={data.email}
                                         onChange={e => setData('email', e.target.value)}
-                                        className="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors"
+                                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors"
                                         placeholder="Enter your email"
                                         required
                                         autoFocus
@@ -74,13 +72,13 @@ export default function Login() {
 
                                 {/* Password */}
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Password</label>
+                                    <label className="block text-[10px] sm:text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 sm:mb-1.5">Password</label>
                                     <div className="relative">
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             value={data.password}
                                             onChange={e => setData('password', e.target.value)}
-                                            className="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 transition-colors pr-10"
+                                            className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50/50 sm:bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-colors pr-10"
                                             placeholder="••••••••"
                                             required
                                         />
@@ -89,26 +87,27 @@ export default function Login() {
                                             onClick={() => setShowPassword(!showPassword)}
                                             className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                                         >
-                                            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                            {showPassword ? <EyeSlash className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                         </button>
                                     </div>
                                     {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
                                 </div>
 
                                 {/* Remember me & Forgot password */}
-                                <div className="flex items-center justify-between text-xs pt-1">
-                                    <label className="flex items-center gap-2 text-slate-600 cursor-pointer">
+                                <div className="flex items-center justify-between text-xs pt-0.5 gap-2">
+                                    <label className="flex items-center gap-1.5 text-slate-600 cursor-pointer select-none">
                                         <input
                                             type="checkbox"
                                             checked={data.remember}
                                             onChange={e => setData('remember', e.target.checked)}
-                                            className="w-4 h-4 rounded border-slate-300 text-primary-700 focus:ring-primary-500"
+                                            className="w-4 h-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500"
                                         />
-                                        <span>Remember for 30 Days</span>
+                                        <span className="sm:hidden text-xs">Remember me</span>
+                                        <span className="hidden sm:inline">Remember for 30 Days</span>
                                     </label>
 
-                                    <a href="#" onClick={(e) => { e.preventDefault(); alert('Password reset link sent to host email.'); }} className="font-semibold text-primary-700 hover:underline">
-                                        Forgot password
+                                    <a href="#" onClick={(e) => { e.preventDefault(); alert('Password reset link sent to host email.'); }} className="font-semibold text-teal-600 hover:underline shrink-0 text-xs">
+                                        Forgot password?
                                     </a>
                                 </div>
 
@@ -116,70 +115,73 @@ export default function Login() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="glass-btn w-full py-3.5 rounded-lg font-semibold text-sm disabled:opacity-50 mt-2"
+                                    className="glass-btn w-full py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm disabled:opacity-50 mt-1 sm:mt-2"
                                 >
                                     {processing ? 'Signing in...' : 'Sign in'}
                                 </button>
                             </form>
 
                             {/* Google Sign-In Button */}
-                            <div className="mt-4">
+                            <div className="mt-2.5 sm:mt-4">
                                 <button
                                     type="button"
                                     onClick={handleGoogleSignIn}
                                     disabled={isGoogleSigningIn || processing}
-                                    className="glass-btn-outline-light w-full py-3 text-slate-700 rounded-lg font-semibold text-sm flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
+                                    className="glass-btn-outline-light w-full py-2 sm:py-3 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                                 >
-                                    <GoogleIcon className="w-5 h-5 shrink-0" />
+                                    <GoogleIcon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                     <span>{isGoogleSigningIn ? 'Signing in with Google...' : 'Continue with Google'}</span>
                                 </button>
                             </div>
 
                             {/* Divider */}
-                            <div className="relative my-6 text-center">
+                            <div className="relative my-3.5 sm:my-6 text-center">
                                 <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200" /></div>
-                                <span className="relative px-3 bg-white text-xs uppercase font-semibold text-slate-400">OR DEMO ACCOUNTS</span>
+                                <span className="relative px-3 bg-white text-[10px] sm:text-xs uppercase font-semibold text-slate-400">OR DEMO ACCOUNTS</span>
                             </div>
 
                             {/* Quick Demo Login Pills */}
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('renter@gmail.com')}
-                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
+                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <UserCheck className="w-3.5 h-3.5 text-primary-700" /> Demo Renter
+                                    <UserCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                                    <span className="truncate">Demo Renter</span>
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('maria@boholrentals.ph')}
-                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
+                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <CarFront className="w-3.5 h-3.5 text-primary-700" /> Demo Owner
+                                    <CarProfile className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                                    <span className="truncate">Demo Owner</span>
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={() => fillDemoUser('admin@rentbohol.com')}
-                                    className="glass-pill px-2 py-2.5 rounded-lg text-xs font-medium text-slate-700 flex items-center justify-center gap-1"
+                                    className="glass-pill px-1.5 py-2 sm:px-2 sm:py-2.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-700 flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <Shield className="w-3.5 h-3.5 text-amber-500" /> Demo Admin
+                                    <Shield className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                                    <span className="truncate">Demo Admin</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Footer */}
-                        <div className="mt-8 pt-4 text-center text-xs text-slate-500">
+                        <div className="mt-5 sm:mt-8 pt-2 sm:pt-4 text-center text-xs text-slate-500">
                             Don't have an account?{' '}
-                            <Link href="/register" className="font-semibold text-primary-700 hover:underline">
+                            <Link href="/register" className="font-semibold text-teal-600 hover:underline">
                                 Sign up
                             </Link>
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Branded panel with fleet photo */}
-                    <div className="lg:col-span-6 text-white flex flex-col justify-between rounded-2xl relative overflow-hidden m-3 lg:m-4 min-h-[500px]">
+                    {/* RIGHT COLUMN: Branded panel with fleet photo (Desktop Only) */}
+                    <div className="hidden lg:flex lg:col-span-6 text-white flex-col justify-between rounded-2xl relative overflow-hidden m-3 lg:m-4 min-h-[500px]">
                         {/* Background Image + Dark Overlay */}
                         <div
                             className="absolute inset-0"

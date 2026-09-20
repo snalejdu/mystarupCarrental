@@ -9,6 +9,7 @@ class Rating extends Model
 {
     protected $fillable = [
         'booking_id',
+        'rater_id',
         'rater_type',
         'rater_identifier',
         'stars',
@@ -18,6 +19,14 @@ class Rating extends Model
     protected $casts = [
         'stars' => 'integer',
     ];
+
+    /**
+     * Get the user who submitted this rating (3NF relation).
+     */
+    public function rater(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'rater_id');
+    }
 
     /**
      * Get the booking this rating belongs to.

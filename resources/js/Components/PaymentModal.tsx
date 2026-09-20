@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, ShieldCheck, CreditCard, QrCode, Smartphone, ArrowRight, Download, Copy, Sparkles, Building } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, CreditCard, QrCode, DeviceMobile, ArrowRight, DownloadSimple, Copy, Buildings } from '@phosphor-icons/react';
 import { triggerToast } from './DynamicToast';
 
 interface PaymentModalProps {
@@ -119,7 +119,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                     /* ── SUCCESS RECEIPT SCREEN ── */
                     <div className="p-6 sm:p-8 space-y-6 text-center">
                         <div className="w-16 h-16 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center mx-auto text-emerald-600 animate-spring-scale">
-                            <CheckCircle2 className="w-8 h-8" />
+                            <CheckCircle className="w-8 h-8" />
                         </div>
 
                         <div>
@@ -207,7 +207,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                             : 'glass-pill text-slate-700'
                                     }`}
                                 >
-                                    <Smartphone className="w-4 h-4" />
+                                    <DeviceMobile className="w-4 h-4" />
                                     <span className="text-xs font-bold">GCash</span>
                                 </button>
 
@@ -254,7 +254,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-mono text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
                                 />
                                 <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                                    <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                                    <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                                     <span>You will receive an instant OTP authorization SMS.</span>
                                 </div>
                             </div>

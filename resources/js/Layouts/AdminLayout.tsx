@@ -1,9 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import {
-    Shield, LayoutDashboard, Percent, CalendarDays, Users, LogOut,
-    Menu, X, CarFront, Search, Bell, Activity, ChevronRight
-} from 'lucide-react';
+    Shield, SquaresFour, Percent, CalendarBlank, Users, SignOut, List, X, CarProfile, MagnifyingGlass, Bell, Pulse, CaretRight } from '@phosphor-icons/react';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
 
@@ -18,9 +16,9 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
     const currentUrl = usePage().url;
 
     const navItems = [
-        { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { href: '/admin/dashboard', label: 'Dashboard', icon: SquaresFour },
         { href: '/admin/commissions', label: 'Commission Ledger', icon: Percent },
-        { href: '/admin/bookings', label: 'Master Bookings', icon: CalendarDays },
+        { href: '/admin/bookings', label: 'Master Bookings', icon: CalendarBlank },
         { href: '/admin/owners', label: 'Vehicle Owners', icon: Users },
     ];
 
@@ -34,7 +32,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             {/* Mobile Header */}
             <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-950 text-white px-4 h-16 flex items-center justify-between border-b border-slate-800">
                 <button onClick={() => setSidebarOpen(true)} className="glass-btn-icon p-2 -ml-2 rounded-xl text-slate-300">
-                    <Menu className="w-5 h-5" />
+                    <List className="w-5 h-5" />
                 </button>
                 <Link href="/" className="flex items-center">
                     <BrandLogo theme="dark" size="sm" subtitle="Admin Console" />
@@ -63,7 +61,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                 <header className="hidden lg:flex h-16 bg-slate-950 border-b border-slate-800/80 px-8 items-center justify-between sticky top-0 z-20">
                     <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 rounded-xl px-3.5 py-1.5 text-xs text-slate-400">
-                            <Search className="w-3.5 h-3.5 text-primary-400" />
+                            <MagnifyingGlass className="w-3.5 h-3.5 text-primary-400" />
                             <input
                                 type="text"
                                 placeholder="Search platform bookings, hosts, vehicles..."
@@ -74,7 +72,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 px-3 py-1 bg-primary-700/10 border border-primary-700/30 text-primary-300 rounded-lg text-xs font-semibold">
-                            <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                            <Pulse className="w-3.5 h-3.5 text-emerald-400" />
                             <span>Bohol Live Node • 4% Global Rate</span>
                         </div>
 
@@ -151,7 +149,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                                 <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
                                 <span>{item.label}</span>
                             </div>
-                            {active && <ChevronRight className="w-4 h-4 text-white/70" />}
+                            {active && <CaretRight className="w-4 h-4 text-white/70" />}
                         </Link>
                     );
                 })}
@@ -174,7 +172,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                     as="button"
                     className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 rounded-xl border border-rose-500/20 transition-colors"
                 >
-                    <LogOut className="w-3.5 h-3.5" /> Log Out
+                    <SignOut className="w-3.5 h-3.5" /> Log Out
                 </Link>
             </div>
         </div>

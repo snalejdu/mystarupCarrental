@@ -28,6 +28,15 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->report(function (\Illuminate\Database\QueryException $e) {
+            \Illuminate\Support\Facades\Log::channel('security')->error('Database query anomaly intercepted', [
+                'code' => $e->getCode(),
+                'message' => app()->isProduction() ? 'SQL execution exception' : $e->getMessage(),
+                'ip' => request()?->ip(),
+                'url' => request()?->fullUrl(),
+            ]);
+        });
+
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );

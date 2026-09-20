@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { DollarSign, PhoneCall, Mail, CarFront, CheckCircle2, Percent, TrendingUp } from 'lucide-react';
+import { CurrencyDollar, PhoneCall, EnvelopeSimple, CarProfile, CheckCircle, Percent, TrendUp } from '@phosphor-icons/react';
 import { formatCurrency } from '@/lib/utils';
 
 interface OwnerCommission {
