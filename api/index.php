@@ -29,6 +29,43 @@ if (isset($_GET['diag'])) {
     echo "packages.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/packages.php') ? 'yes' : 'no') . "\n";
     echo "services.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/services.php') ? 'yes' : 'no') . "\n";
     echo "public/index.php exists: " . (file_exists(__DIR__ . '/../public/index.php') ? 'yes' : 'no') . "\n";
+    echo "password_algos: " . implode(', ', function_exists('password_algos') ? password_algos() : ['none']) . "\n";
+    echo "PASSWORD_BCRYPT defined: " . (defined('PASSWORD_BCRYPT') ? 'yes' : 'no') . "\n";
+    echo "PASSWORD_DEFAULT: " . (defined('PASSWORD_DEFAULT') ? PASSWORD_DEFAULT : 'no') . "\n";
+    echo "CRYPT_BLOWFISH: " . (defined('CRYPT_BLOWFISH') ? CRYPT_BLOWFISH : 'not defined') . "\n";
+    try {
+        $h1 = password_hash('test1234', PASSWORD_BCRYPT, ['cost' => 10]);
+        echo "password_hash BCRYPT (cost 10): SUCCESS (" . substr($h1, 0, 10) . "...)\n";
+    } catch (\Throwable $e) {
+        echo "password_hash BCRYPT (cost 10) ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
+    try {
+        $h2 = password_hash('test1234', PASSWORD_BCRYPT, ['cost' => 12]);
+        echo "password_hash BCRYPT (cost 12): SUCCESS (" . substr($h2, 0, 10) . "...)\n";
+    } catch (\Throwable $e) {
+        echo "password_hash BCRYPT (cost 12) ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
+    try {
+        $h3 = password_hash('test1234', PASSWORD_DEFAULT);
+        echo "password_hash DEFAULT: SUCCESS (" . substr($h3, 0, 10) . "...)\n";
+    } catch (\Throwable $e) {
+        echo "password_hash DEFAULT ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
+    if (defined('PASSWORD_ARGON2ID')) {
+        try {
+            $h4 = password_hash('test1234', PASSWORD_ARGON2ID);
+            echo "password_hash ARGON2ID: SUCCESS (" . substr($h4, 0, 10) . "...)\n";
+        } catch (\Throwable $e) {
+            echo "password_hash ARGON2ID ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+        }
+    }
+    try {
+        $hasher = new \Illuminate\Hashing\BcryptHasher();
+        $h5 = $hasher->make('test1234');
+        echo "BcryptHasher->make: SUCCESS (" . substr($h5, 0, 10) . "...)\n";
+    } catch (\Throwable $e) {
+        echo "BcryptHasher->make ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
     exit;
 }
 
