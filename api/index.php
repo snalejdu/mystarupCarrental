@@ -26,9 +26,13 @@ putenv('APP_MAINTENANCE_DRIVER=file');
 $_ENV['APP_MAINTENANCE_DRIVER'] = 'file';
 $_SERVER['APP_MAINTENANCE_DRIVER'] = 'file';
 
-putenv('SESSION_DRIVER=cookie');
-$_ENV['SESSION_DRIVER'] = 'cookie';
-$_SERVER['SESSION_DRIVER'] = 'cookie';
+putenv('SESSION_DRIVER=database');
+$_ENV['SESSION_DRIVER'] = 'database';
+$_SERVER['SESSION_DRIVER'] = 'database';
+
+putenv('SESSION_COOKIE=rentbohol_session');
+$_ENV['SESSION_COOKIE'] = 'rentbohol_session';
+$_SERVER['SESSION_COOKIE'] = 'rentbohol_session';
 
 putenv('CACHE_STORE=array');
 $_ENV['CACHE_STORE'] = 'array';
