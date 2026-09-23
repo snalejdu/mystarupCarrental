@@ -177,14 +177,18 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     </h3>
                                     <p className="text-xs text-slate-500 font-medium">Real-time schedule maintained directly by host.</p>
                                 </div>
-                                <div className="flex items-center gap-3 text-xs font-bold">
+                                <div className="flex flex-wrap items-center gap-3 text-xs font-bold">
                                     <span className="flex items-center gap-1.5 text-emerald-700">
-                                        <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
                                         Available
                                     </span>
-                                    <span className="flex items-center gap-1.5 text-slate-400">
-                                        <span className="w-2 h-2 rounded-full bg-slate-300 inline-block" />
+                                    <span className="flex items-center gap-1.5 text-rose-700">
+                                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" />
                                         Booked
+                                    </span>
+                                    <span className="flex items-center gap-1.5 text-slate-400">
+                                        <span className="w-2.5 h-2.5 rounded-full bg-slate-300 inline-block" />
+                                        Past / Unavailable
                                     </span>
                                 </div>
                             </div>
@@ -534,8 +538,51 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
         : 0;
     const finalTotalPrice = Math.max(0, basePrice - discountAmount + deliveryFee);
 
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    const availabilityMap = useMemo(() => {
+        const map: Record<string, string> = {};
+        availability?.forEach(item => {
+            map[item.date] = item.status;
+        });
+        return map;
+    }, [availability]);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!data.start_date || data.start_date < todayStr) {
+            alert('Please select a pickup date that is today or in the future.');
+            return;
+        }
+        if (!data.end_date || data.end_date <= data.start_date) {
+            alert('Return date must be after pickup date.');
+            return;
+        }
+
+        // Validate that no date in range is booked or blocked or in the past
+        const [sy, sm, sd] = data.start_date.split('-').map(Number);
+        const [ey, em, ed] = data.end_date.split('-').map(Number);
+        const cur = new Date(sy, sm - 1, sd);
+        const end = new Date(ey, em - 1, ed);
+        let conflictDate = '';
+        while (cur <= end) {
+            const y = cur.getFullYear();
+            const m = String(cur.getMonth() + 1).padStart(2, '0');
+            const d = String(cur.getDate()).padStart(2, '0');
+            const ds = `${y}-${m}-${d}`;
+            if (ds < todayStr || availabilityMap[ds] === 'booked' || availabilityMap[ds] === 'blocked') {
+                conflictDate = ds;
+                break;
+            }
+            cur.setDate(cur.getDate() + 1);
+        }
+
+        if (conflictDate) {
+            alert(`Selected date range contains unavailable or past dates (${conflictDate}). Please select available dates.`);
+            return;
+        }
+
         post(`/vehicles/${vehicle.slug}/book`);
     };
 
@@ -557,7 +604,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                             type="date"
                             value={data.start_date}
                             onChange={e => setData('start_date', e.target.value)}
-                            min={new Date().toISOString().split('T')[0]}
+                            min={todayStr}
                             className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
                             required
                         />
@@ -569,7 +616,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                             type="date"
                             value={data.end_date}
                             onChange={e => setData('end_date', e.target.value)}
-                            min={data.start_date || new Date().toISOString().split('T')[0]}
+                            min={data.start_date || todayStr}
                             className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:bg-white font-medium"
                             required
                         />
@@ -695,6 +742,14 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
     const year = selectedMonth.getFullYear();
     const month = selectedMonth.getMonth();
 
+    const today = new Date();
+    const todayYear = today.getFullYear();
+    const todayMonth = today.getMonth();
+    const todayDate = today.getDate();
+    const todayStr = `${todayYear}-${String(todayMonth + 1).padStart(2, '0')}-${String(todayDate).padStart(2, '0')}`;
+
+    const isCurrentMonthOrPast = year < todayYear || (year === todayYear && month <= todayMonth);
+
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDayIndex = new Date(year, month, 1).getDay();
 
@@ -708,7 +763,11 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
         return map;
     }, [availability]);
 
-    const prevMonth = () => onMonthChange(new Date(year, month - 1, 1));
+    const prevMonth = () => {
+        if (!isCurrentMonthOrPast) {
+            onMonthChange(new Date(year, month - 1, 1));
+        }
+    };
     const nextMonth = () => onMonthChange(new Date(year, month + 1, 1));
 
     return (
@@ -718,10 +777,27 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
                     {monthNames[month]} {year}
                 </span>
                 <div className="flex gap-1">
-                    <button onClick={prevMonth} className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Previous month">
+                    <button
+                        type="button"
+                        onClick={prevMonth}
+                        disabled={isCurrentMonthOrPast}
+                        className={`w-11 h-11 flex items-center justify-center rounded-lg transition-colors ${
+                            isCurrentMonthOrPast
+                                ? 'opacity-25 cursor-not-allowed text-slate-300'
+                                : 'hover:bg-slate-100 text-slate-600'
+                        }`}
+                        aria-label="Previous month"
+                        title={isCurrentMonthOrPast ? 'Cannot view past months' : 'Previous month'}
+                    >
                         <CaretLeft className="w-4 h-4" />
                     </button>
-                    <button onClick={nextMonth} className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600" aria-label="Next month">
+                    <button
+                        type="button"
+                        onClick={nextMonth}
+                        className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
+                        aria-label="Next month"
+                        title="Next month"
+                    >
                         <CaretRight className="w-4 h-4" />
                     </button>
                 </div>
@@ -738,16 +814,32 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
                 {Array.from({ length: daysInMonth }).map((_, i) => {
                     const dayNum = i + 1;
                     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+                    const isPast = dateStr < todayStr;
+                    const isToday = dateStr === todayStr;
                     const status = availabilityMap[dateStr] || 'available';
 
                     let bgClass = 'bg-emerald-50 text-emerald-800 border-emerald-200';
-                    if (status === 'booked') bgClass = 'bg-rose-50 text-rose-700 border-rose-200';
-                    if (status === 'blocked') bgClass = 'bg-slate-100 text-slate-400 border-slate-200';
+                    let title = `${monthNames[month]} ${dayNum}, ${year}: Available`;
+
+                    if (isPast) {
+                        bgClass = 'bg-slate-100/80 text-slate-400 border-slate-200 cursor-not-allowed opacity-60';
+                        title = `${monthNames[month]} ${dayNum}, ${year}: Past date (not available)`;
+                    } else if (status === 'booked') {
+                        bgClass = 'bg-rose-50 text-rose-700 border-rose-200 cursor-not-allowed font-medium';
+                        title = `${monthNames[month]} ${dayNum}, ${year}: Booked`;
+                    } else if (status === 'blocked') {
+                        bgClass = 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed';
+                        title = `${monthNames[month]} ${dayNum}, ${year}: Unavailable`;
+                    } else if (isToday) {
+                        bgClass = 'bg-emerald-50 text-emerald-800 border-emerald-500 ring-2 ring-emerald-500/20 font-bold';
+                        title = `${monthNames[month]} ${dayNum}, ${year}: Today (Available)`;
+                    }
 
                     return (
                         <div
                             key={dayNum}
-                            className={`h-8 rounded-lg border flex items-center justify-center text-xs ${bgClass}`}
+                            title={title}
+                            className={`h-8 rounded-lg border flex items-center justify-center text-xs select-none transition-colors ${bgClass}`}
                         >
                             {dayNum}
                         </div>

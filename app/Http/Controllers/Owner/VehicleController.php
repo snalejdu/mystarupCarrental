@@ -75,6 +75,15 @@ class VehicleController extends Controller
             'features' => 'nullable|array',
             'features.*' => 'string|max:100',
             'location' => 'required|in:' . implode(',', config('rentbohol.locations')),
+            'year' => 'nullable|integer|min:1990|max:' . (date('Y') + 1),
+            'plate_number' => 'nullable|string|max:20',
+            'color' => 'nullable|string|max:50',
+            'vin' => 'nullable|string|max:50',
+            'insurance_type' => 'nullable|string|max:64',
+            'insurance_expiry' => 'nullable|date',
+            'minimum_rental_days' => 'nullable|integer|min:1|max:30',
+            'late_fee_per_hour' => 'nullable|numeric|min:0|max:10000',
+            'registration_expiry' => 'nullable|date',
         ]);
 
         // Generate unique slug
@@ -135,19 +144,36 @@ class VehicleController extends Controller
 
         $vehicle->load(['photos' => fn ($q) => $q->orderBy('order')]);
 
-        // Get availability for next 90 days
+        // Get availability for past 12 months up to next 180 days so hosts can review past & future
         $availability = VehicleAvailability::where('vehicle_id', $vehicle->id)
-            ->where('date', '>=', now()->toDateString())
-            ->where('date', '<=', now()->addDays(90)->toDateString())
+            ->where('date', '>=', now()->subMonths(12)->toDateString())
+            ->where('date', '<=', now()->addDays(180)->toDateString())
             ->get()
             ->map(fn ($a) => [
                 'date' => $a->date->format('Y-m-d'),
                 'status' => $a->status,
             ]);
 
+        // Get confirmed, in-progress, and completed bookings for occupancy display (both past and upcoming)
+        $bookings = $vehicle->bookings()
+            ->whereIn('status', ['accepted', 'completed', 'in_progress'])
+            ->select('id', 'token', 'renter_name', 'start_date', 'end_date', 'status', 'total_price')
+            ->orderBy('start_date', 'desc')
+            ->get()
+            ->map(fn ($b) => [
+                'id' => $b->id,
+                'token' => $b->token,
+                'renter_name' => $b->renter_name,
+                'start_date' => $b->start_date->format('Y-m-d'),
+                'end_date' => $b->end_date->format('Y-m-d'),
+                'status' => $b->status,
+                'total_price' => (float) $b->total_price,
+            ]);
+
         return Inertia::render('Owner/Vehicles/Edit', [
             'vehicle' => $vehicle,
             'availability' => $availability,
+            'bookings' => $bookings,
             'locations' => config('rentbohol.locations'),
             'vehicleTypes' => config('rentbohol.vehicle_types'),
         ]);
@@ -184,6 +210,15 @@ class VehicleController extends Controller
             'driver_available' => 'nullable|boolean',
             'location' => 'required|in:' . implode(',', config('rentbohol.locations')),
             'status' => 'sometimes|in:active,inactive,maintenance',
+            'year' => 'nullable|integer|min:1990|max:' . (date('Y') + 1),
+            'plate_number' => 'nullable|string|max:20',
+            'color' => 'nullable|string|max:50',
+            'vin' => 'nullable|string|max:50',
+            'insurance_type' => 'nullable|string|max:64',
+            'insurance_expiry' => 'nullable|date',
+            'minimum_rental_days' => 'nullable|integer|min:1|max:30',
+            'late_fee_per_hour' => 'nullable|numeric|min:0|max:10000',
+            'registration_expiry' => 'nullable|date',
         ]);
 
         $validated['features'] = $validated['features'] ?? [];

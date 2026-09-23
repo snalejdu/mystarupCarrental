@@ -1,7 +1,7 @@
 import { Head, useForm, router, Link } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
 import {
-    Upload, Trash, CaretLeft, CaretRight, Image as ImageIcon, Gauge, Users, Wind, Prohibit, Info, Eye, Star, ArrowSquareOut, MapPin, X, MagnifyingGlassPlus, MagnifyingGlassMinus, ArrowsOutCardinal, CornersOut, CornersIn, ArrowCounterClockwise, SquaresFour, Check, Calendar, LockSimple, CalendarCheck, CalendarX, CheckCircle, Airplane, ShieldCheck, Tag, GasPump, Percent, UserCheck, Pencil, CarProfile } from '@phosphor-icons/react';
+    Upload, Trash, CaretLeft, CaretRight, Image as ImageIcon, Gauge, Users, Wind, Prohibit, Info, Eye, Star, ArrowSquareOut, MapPin, X, MagnifyingGlassPlus, MagnifyingGlassMinus, ArrowsOutCardinal, CornersOut, CornersIn, ArrowCounterClockwise, SquaresFour, Check, Calendar, LockSimple, CalendarCheck, CalendarX, CheckCircle, Airplane, ShieldCheck, Tag, GasPump, Percent, UserCheck, Pencil, CarProfile, ArrowRight } from '@phosphor-icons/react';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { formatCurrency } from '@/lib/utils';
 import { broadcastVehicleUpdate } from '@/lib/vehicleSync';
@@ -9,6 +9,7 @@ import { broadcastVehicleUpdate } from '@/lib/vehicleSync';
 interface Props {
     vehicle: any;
     availability: { date: string; status: string }[];
+    bookings?: any[];
     locations: string[];
     vehicleTypes: string[];
 }
@@ -46,7 +47,7 @@ const DISTANCE_PRESETS = [
     '300 km / day',
 ];
 
-export default function VehicleEdit({ vehicle, availability, locations, vehicleTypes }: Props) {
+export default function VehicleEdit({ vehicle, availability, bookings = [], locations, vehicleTypes }: Props) {
     const [showPovModal, setShowPovModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const { data, setData, put, processing, errors } = useForm<{
@@ -608,6 +609,7 @@ export default function VehicleEdit({ vehicle, availability, locations, vehicleT
                 <AvailabilityManager
                     vehicle={vehicle}
                     availability={availability}
+                    bookings={bookings}
                     changes={calendarChanges}
                     setChanges={setCalendarChanges}
                 />
@@ -1477,31 +1479,109 @@ function RenterPOVModal({ vehicle, onClose }: { vehicle: any; onClose: () => voi
 function AvailabilityManager({
     vehicle,
     availability,
+    bookings = [],
     changes,
     setChanges,
 }: {
     vehicle: any;
     availability: any[];
+    bookings?: any[];
     changes: Record<string, string>;
     setChanges: React.Dispatch<React.SetStateAction<Record<string, string>>>;
 }) {
     const [month, setMonth] = useState(new Date());
+    const [selectedDateDetail, setSelectedDateDetail] = useState<{
+        dateStr: string;
+        info: any;
+        isPast: boolean;
+        isOccupied: boolean;
+    } | null>(null);
 
     const year = month.getFullYear();
     const m = month.getMonth();
     const firstDay = new Date(year, m, 1);
     const daysInMonth = new Date(year, m + 1, 0).getDate();
     const startPad = firstDay.getDay();
-    const today = new Date().toISOString().split('T')[0];
+
+    const todayObj = new Date();
+    const today = `${todayObj.getFullYear()}-${String(todayObj.getMonth() + 1).padStart(2, '0')}-${String(todayObj.getDate()).padStart(2, '0')}`;
 
     const availMap: Record<string, string> = {};
     availability.forEach(a => { availMap[a.date] = a.status; });
 
-    const getStatus = (dateStr: string) => changes[dateStr] || availMap[dateStr] || 'available';
+    // Map bookings to dates for occupancy history and details
+    const occupancyMap = useMemo(() => {
+        const map: Record<string, {
+            bookingId: number;
+            token: string;
+            renterName: string;
+            startDate: string;
+            endDate: string;
+            status: string;
+            totalPrice: number;
+        }> = {};
+
+        bookings?.forEach(b => {
+            if (['accepted', 'completed', 'in_progress'].includes(b.status)) {
+                const [sy, sm, sd] = b.start_date.split('-').map(Number);
+                const [ey, em, ed] = b.end_date.split('-').map(Number);
+                const cur = new Date(sy, sm - 1, sd);
+                const end = new Date(ey, em - 1, ed);
+
+                while (cur <= end) {
+                    const cy = cur.getFullYear();
+                    const cm = String(cur.getMonth() + 1).padStart(2, '0');
+                    const cd = String(cur.getDate()).padStart(2, '0');
+                    const dStr = `${cy}-${cm}-${cd}`;
+                    map[dStr] = {
+                        bookingId: b.id,
+                        token: b.token,
+                        renterName: b.renter_name,
+                        startDate: b.start_date,
+                        endDate: b.end_date,
+                        status: b.status,
+                        totalPrice: b.total_price,
+                    };
+                    cur.setDate(cur.getDate() + 1);
+                }
+            }
+        });
+        return map;
+    }, [bookings]);
+
+    // Monthly occupancy statistics for host
+    const monthStats = useMemo(() => {
+        let occupiedDays = 0;
+        let pastOccupiedDays = 0;
+        let upcomingBookedDays = 0;
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dStr = `${year}-${String(m + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+            const isOcc = Boolean(occupancyMap[dStr] || availMap[dStr] === 'booked');
+            if (isOcc) {
+                occupiedDays++;
+                if (dStr < today) {
+                    pastOccupiedDays++;
+                } else {
+                    upcomingBookedDays++;
+                }
+            }
+        }
+
+        const occupancyRate = Math.round((occupiedDays / daysInMonth) * 100);
+        return { occupiedDays, pastOccupiedDays, upcomingBookedDays, occupancyRate };
+    }, [year, m, daysInMonth, occupancyMap, availMap, today]);
+
+    const getStatus = (dateStr: string) => {
+        if (changes[dateStr]) return changes[dateStr];
+        if (occupancyMap[dateStr] || availMap[dateStr] === 'booked') return 'booked';
+        return availMap[dateStr] || 'available';
+    };
 
     const toggleDate = (dateStr: string) => {
         if (dateStr < today) return;
         const current = getStatus(dateStr);
+        if (current === 'booked') return;
         const next = current === 'available' ? 'blocked' : 'available';
         setChanges(prev => {
             const updated = { ...prev };
@@ -1516,86 +1596,224 @@ function AvailabilityManager({
     };
 
     return (
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-            <h2 className="font-bold text-primary-900 text-lg mb-1">Availability Calendar</h2>
-            <p className="text-sm text-slate-500 mb-5">Click dates to toggle between available and blocked. Booked dates (from confirmed bookings) cannot be changed.</p>
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h2 className="font-bold text-primary-900 text-lg">Availability & Occupancy Calendar</h2>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                        View past occupied days, manage upcoming dates, and click any date to view occupancy details.
+                    </p>
+                </div>
 
-            {/* Centered Month Navigation */}
-            <div className="flex items-center justify-between mb-4 px-2">
+                {/* Monthly Occupancy Pill */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs font-semibold text-slate-700 shrink-0">
+                    <span className="w-2 h-2 rounded-full bg-rose-500 inline-block" />
+                    <span>
+                        {monthStats.occupiedDays} of {daysInMonth} days occupied ({monthStats.occupancyRate}%)
+                    </span>
+                </div>
+            </div>
+
+            {/* Centered Month Navigation with Previous/Next */}
+            <div className="flex items-center justify-between px-2 bg-slate-50/70 p-2.5 rounded-xl border border-slate-200/80">
                 <button
                     type="button"
-                    onClick={() => setMonth(new Date(year, m - 1, 1))}
-                    className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                    onClick={() => {
+                        setMonth(new Date(year, m - 1, 1));
+                        setSelectedDateDetail(null);
+                    }}
+                    className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white transition-all shadow-2xs flex items-center gap-1 text-xs font-bold"
                     aria-label="Previous month"
                 >
-                    <CaretLeft className="w-5 h-5" />
+                    <CaretLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">Prev Month</span>
                 </button>
-                <span className="text-base font-bold text-slate-900">
-                    {month.toLocaleDateString('en-PH', { month: 'long', year: 'numeric' })}
-                </span>
+                <div className="text-center">
+                    <span className="text-base font-bold text-slate-900">
+                        {month.toLocaleDateString('en-PH', { month: 'long', year: 'numeric' })}
+                    </span>
+                    {month < new Date(todayObj.getFullYear(), todayObj.getMonth(), 1) && (
+                        <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                            Historical View
+                        </span>
+                    )}
+                </div>
                 <button
                     type="button"
-                    onClick={() => setMonth(new Date(year, m + 1, 1))}
-                    className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                    onClick={() => {
+                        setMonth(new Date(year, m + 1, 1));
+                        setSelectedDateDetail(null);
+                    }}
+                    className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white transition-all shadow-2xs flex items-center gap-1 text-xs font-bold"
                     aria-label="Next month"
                 >
-                    <CaretRight className="w-5 h-5" />
+                    <span className="hidden sm:inline">Next Month</span>
+                    <CaretRight className="w-4 h-4" />
                 </button>
             </div>
 
             {/* Days Grid */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                    <div key={d} className="text-center text-xs font-semibold text-slate-400 py-1">{d}</div>
+                    <div key={d} className="text-center text-xs font-bold text-slate-400 py-1 uppercase tracking-wider">{d}</div>
                 ))}
                 {Array.from({ length: startPad }).map((_, i) => <div key={`pad-${i}`} />)}
                 {Array.from({ length: daysInMonth }).map((_, i) => {
                     const day = i + 1;
                     const dateStr = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    const status = getStatus(dateStr);
+                    const bookingInfo = occupancyMap[dateStr];
+                    const isOccupiedByBooking = Boolean(bookingInfo);
+                    const isAvailBooked = availMap[dateStr] === 'booked';
+                    const isOccupied = isOccupiedByBooking || isAvailBooked;
                     const isPast = dateStr < today;
-                    const isBooked = status === 'booked';
+                    const isToday = dateStr === today;
                     const isChanged = dateStr in changes;
+                    const status = getStatus(dateStr);
 
                     let bgClass = 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100 hover:border-emerald-400 cursor-pointer shadow-2xs';
+                    let tooltip = `${dateStr}: Available (Click to block)`;
+
                     if (isPast) {
-                        bgClass = 'bg-slate-50 text-slate-300 border-slate-200 cursor-not-allowed opacity-60';
-                    } else if (isBooked) {
-                        bgClass = 'bg-rose-50 text-rose-700 border-rose-300 cursor-not-allowed font-bold';
+                        if (isOccupied) {
+                            bgClass = 'bg-rose-100 text-rose-900 border-rose-300 hover:bg-rose-200 cursor-pointer font-bold shadow-2xs ring-1 ring-rose-300/50';
+                            tooltip = `${dateStr}: Occupied by ${bookingInfo?.renterName || 'Renter'} (Click to view details)`;
+                        } else {
+                            bgClass = 'bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100/80 cursor-pointer';
+                            tooltip = `${dateStr}: Past date (Unoccupied)`;
+                        }
+                    } else if (isOccupied || status === 'booked') {
+                        bgClass = 'bg-rose-50 text-rose-700 border-rose-300 hover:bg-rose-100 cursor-pointer font-bold';
+                        tooltip = `${dateStr}: Booked / Occupied (Click to view details)`;
                     } else if (status === 'blocked') {
                         bgClass = 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200 hover:border-slate-400 cursor-pointer';
+                        tooltip = `${dateStr}: Blocked by host (Click to make available)`;
                     }
+
+                    const isSelected = selectedDateDetail?.dateStr === dateStr;
 
                     return (
                         <button
                             key={day}
                             type="button"
-                            onClick={() => !isPast && !isBooked && toggleDate(dateStr)}
-                            disabled={isPast || isBooked}
-                            className={`text-center py-2 text-xs font-semibold rounded-full border transition-all duration-150 ${bgClass} ${
+                            title={tooltip}
+                            onClick={() => {
+                                if (isPast || isOccupied || status === 'booked') {
+                                    setSelectedDateDetail({
+                                        dateStr,
+                                        info: bookingInfo,
+                                        isPast,
+                                        isOccupied,
+                                    });
+                                } else {
+                                    toggleDate(dateStr);
+                                    setSelectedDateDetail(null);
+                                }
+                            }}
+                            className={`relative text-center py-2 px-1 min-h-[50px] flex flex-col items-center justify-center text-xs font-semibold rounded-xl border transition-all duration-150 ${bgClass} ${
                                 isChanged ? 'ring-2 ring-primary-600 font-bold shadow-xs' : ''
-                            }`}
+                            } ${isToday ? 'ring-2 ring-emerald-500/80' : ''} ${isSelected ? 'ring-2 ring-slate-900 shadow-sm' : ''}`}
                         >
-                            {day}
+                            <span className="leading-tight">{day}</span>
+                            {isOccupied && (
+                                <span className={`block text-[9px] leading-tight font-extrabold uppercase mt-0.5 tracking-tight ${
+                                    isPast ? 'text-rose-800' : 'text-rose-600'
+                                }`}>
+                                    {isPast ? 'Occupied' : 'Booked'}
+                                </span>
+                            )}
+                            {isPast && !isOccupied && (
+                                <span className="block text-[9px] leading-tight font-medium text-slate-400 mt-0.5">
+                                    Past
+                                </span>
+                            )}
                         </button>
                     );
                 })}
             </div>
 
+            {/* Selected Date Occupancy Detail Card */}
+            {selectedDateDetail && (
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 animate-fadeIn flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-start gap-3">
+                        <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
+                            selectedDateDetail.isOccupied
+                                ? 'bg-rose-100 text-rose-700 border border-rose-200'
+                                : 'bg-slate-200 text-slate-600'
+                        }`}>
+                            <CalendarCheck className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <div className="flex items-center gap-2">
+                                <h4 className="text-xs font-bold text-slate-900">
+                                    {new Date(selectedDateDetail.dateStr + 'T00:00:00').toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric' })}
+                                </h4>
+                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                                    selectedDateDetail.isOccupied
+                                        ? selectedDateDetail.isPast
+                                            ? 'bg-rose-100 text-rose-800'
+                                            : 'bg-rose-50 text-rose-700'
+                                        : 'bg-slate-200 text-slate-600'
+                                }`}>
+                                    {selectedDateDetail.isOccupied
+                                        ? (selectedDateDetail.isPast ? 'Historical Occupancy' : 'Active Booking')
+                                        : 'Unoccupied Past Date'}
+                                </span>
+                            </div>
+                            {selectedDateDetail.info ? (
+                                <p className="text-xs text-slate-600 mt-1">
+                                    <span className="font-semibold text-slate-800">Renter:</span> {selectedDateDetail.info.renterName} •{' '}
+                                    <span className="font-semibold text-slate-800">Booking:</span> #{selectedDateDetail.info.token.slice(0, 8)} •{' '}
+                                    <span className="font-semibold text-slate-800">Rental:</span> {selectedDateDetail.info.startDate} to {selectedDateDetail.info.endDate} (₱{Number(selectedDateDetail.info.totalPrice).toLocaleString()})
+                                </p>
+                            ) : selectedDateDetail.isOccupied ? (
+                                <p className="text-xs text-slate-600 mt-1">
+                                    Marked as booked / occupied on vehicle schedule.
+                                </p>
+                            ) : (
+                                <p className="text-xs text-slate-500 mt-1">
+                                    No rental was scheduled for this date.
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-2 self-end sm:self-center">
+                        <Link
+                            href="/owner/bookings"
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors inline-flex items-center gap-1"
+                        >
+                            <span>All Bookings</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                        <button
+                            type="button"
+                            onClick={() => setSelectedDateDetail(null)}
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors"
+                            aria-label="Close details"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {/* Legend & Staged Changes Indicator */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
-                <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-600">
                     <span className="flex items-center gap-1.5">
-                        <span className="w-3.5 h-3.5 rounded-full bg-emerald-100 border border-emerald-400" />
-                        <span>Available</span>
+                        <span className="w-3.5 h-3.5 rounded-md bg-emerald-100 border border-emerald-400" />
+                        <span>Available (Upcoming)</span>
                     </span>
                     <span className="flex items-center gap-1.5">
-                        <span className="w-3.5 h-3.5 rounded-full bg-slate-200 border border-slate-400" />
-                        <span>Blocked</span>
+                        <span className="w-3.5 h-3.5 rounded-md bg-slate-200 border border-slate-400" />
+                        <span>Blocked by Host</span>
                     </span>
                     <span className="flex items-center gap-1.5">
-                        <span className="w-3.5 h-3.5 rounded-full bg-rose-100 border border-rose-400" />
-                        <span>Booked</span>
+                        <span className="w-3.5 h-3.5 rounded-md bg-rose-100 border border-rose-400" />
+                        <span>Occupied / Booked</span>
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <span className="w-3.5 h-3.5 rounded-md bg-slate-50 border border-slate-200" />
+                        <span>Past (Unoccupied)</span>
                     </span>
                 </div>
 

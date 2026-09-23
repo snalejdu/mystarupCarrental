@@ -31,9 +31,19 @@ class BookingController extends Controller
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
             'pickup_preference' => 'nullable|string',
+            'pickup_location' => 'nullable|string|max:255',
+            'dropoff_location' => 'nullable|string|max:255',
+            'pickup_time' => 'nullable|string|max:20',
+            'dropoff_time' => 'nullable|string|max:20',
+            'delivery_address' => 'nullable|string|max:255',
         ]);
 
         $user = auth()->user();
+
+        // Enforce that booking cannot be in the past
+        if ($validated['start_date'] < now()->toDateString()) {
+            return back()->withErrors(['start_date' => 'Pickup date cannot be in the past.']);
+        }
 
         // Prevent host from booking their own vehicle
         if ($vehicle->owner_id === $user->id) {
@@ -43,6 +53,13 @@ class BookingController extends Controller
         // Check vehicle is active
         if ($vehicle->status !== 'active') {
             return back()->withErrors(['vehicle' => 'This vehicle is not currently available.']);
+        }
+
+        $totalDays = now()->parse($validated['start_date'])->diffInDays(now()->parse($validated['end_date']));
+
+        // Enforce vehicle minimum rental days if specified
+        if ($vehicle->minimum_rental_days && $totalDays < $vehicle->minimum_rental_days) {
+            return back()->withErrors(['dates' => "This vehicle requires a minimum booking of {$vehicle->minimum_rental_days} day(s)."]);
         }
 
         // Check dates aren't already booked/blocked
@@ -72,7 +89,6 @@ class BookingController extends Controller
             return back()->withErrors(['dates' => 'These dates overlap with an existing booking.']);
         }
 
-        $totalDays = now()->parse($validated['start_date'])->diffInDays(now()->parse($validated['end_date']));
         $withDelivery = ($validated['pickup_preference'] ?? 'host_location') !== 'host_location';
         $quote = $vehicle->calculatePriceQuote($totalDays, $withDelivery);
 
@@ -86,6 +102,11 @@ class BookingController extends Controller
             'end_date' => $validated['end_date'],
             'total_days' => $totalDays,
             'total_price' => $quote['final_total'],
+            'pickup_location' => $validated['pickup_location'] ?? ($withDelivery ? ($validated['delivery_address'] ?? null) : $vehicle->location),
+            'dropoff_location' => $validated['dropoff_location'] ?? $vehicle->location,
+            'pickup_time' => $validated['pickup_time'] ?? null,
+            'dropoff_time' => $validated['dropoff_time'] ?? null,
+            'delivery_address' => $validated['delivery_address'] ?? null,
             'status' => 'pending',
         ]);
 

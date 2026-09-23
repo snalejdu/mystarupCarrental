@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Vehicle;
 use App\Models\VehicleAvailability;
 use Illuminate\Http\Request;
@@ -144,15 +145,40 @@ class PublicVehicleController extends Controller
             'owner:id,name,avatar',
         ]);
 
-        // Get availability for the next 90 days
-        $availability = VehicleAvailability::where('vehicle_id', $vehicle->id)
+        // Get availability for the next 90 days from vehicle_availability table
+        $dbAvailability = VehicleAvailability::where('vehicle_id', $vehicle->id)
             ->where('date', '>=', now()->toDateString())
             ->where('date', '<=', now()->addDays(90)->toDateString())
-            ->get()
-            ->map(fn ($a) => [
-                'date' => $a->date->format('Y-m-d'),
-                'status' => $a->status,
-            ]);
+            ->get();
+
+        $availabilityMap = [];
+        foreach ($dbAvailability as $a) {
+            $availabilityMap[$a->date->format('Y-m-d')] = $a->status;
+        }
+
+        // Also merge any confirmed or pending active bookings so renters cannot book overlapping dates
+        $activeBookings = Booking::where('vehicle_id', $vehicle->id)
+            ->whereIn('status', ['pending', 'accepted', 'in_progress'])
+            ->where('end_date', '>=', now()->toDateString())
+            ->where('start_date', '<=', now()->addDays(90)->toDateString())
+            ->get();
+
+        foreach ($activeBookings as $b) {
+            $cur = $b->start_date->copy();
+            $end = $b->end_date->copy();
+            while ($cur->lte($end)) {
+                $availabilityMap[$cur->toDateString()] = 'booked';
+                $cur->addDay();
+            }
+        }
+
+        $availability = [];
+        foreach ($availabilityMap as $date => $status) {
+            $availability[] = [
+                'date' => $date,
+                'status' => $status,
+            ];
+        }
 
         // Get ratings via completed bookings — scoped to renter reviews only with safe field mapping
         $ratings = $vehicle->bookings()
