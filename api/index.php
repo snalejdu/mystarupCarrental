@@ -16,50 +16,6 @@ register_shutdown_function(function() {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Diagnostic check
-if (isset($_GET['diag'])) {
-    header('Content-Type: text/plain');
-    echo "=== PHP & LARAVEL DIAGNOSTICS ===\n";
-    echo "PHP Version: " . PHP_VERSION . "\n";
-    echo "getenv BCRYPT_ROUNDS: " . var_export(getenv('BCRYPT_ROUNDS'), true) . "\n";
-    echo "getenv HASH_DRIVER: " . var_export(getenv('HASH_DRIVER'), true) . "\n";
-    echo "\$_ENV BCRYPT_ROUNDS: " . var_export($_ENV['BCRYPT_ROUNDS'] ?? null, true) . "\n";
-    echo "\$_SERVER BCRYPT_ROUNDS: " . var_export($_SERVER['BCRYPT_ROUNDS'] ?? null, true) . "\n";
-    echo "CRYPT_BLOWFISH: " . (defined('CRYPT_BLOWFISH') ? CRYPT_BLOWFISH : 'not defined') . "\n";
-
-    // Direct password_hash tests
-    foreach ([4, 10, 12, '10', '12', '', null] as $cost) {
-        try {
-            $opts = $cost !== null ? ['cost' => $cost] : [];
-            $h = password_hash('test1234', PASSWORD_BCRYPT, $opts);
-            echo "Direct password_hash cost=" . var_export($cost, true) . ": SUCCESS (" . substr($h, 0, 10) . "...)\n";
-        } catch (\Throwable $e) {
-            echo "Direct password_hash cost=" . var_export($cost, true) . " ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-        }
-    }
-
-    // Now test with Laravel booted
-    try {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-        $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
-        $kernel->bootstrap();
-        echo "Laravel Booted: YES\n";
-        echo "config(hashing.driver): " . var_export(config('hashing.driver'), true) . "\n";
-        echo "config(hashing.bcrypt): " . var_export(config('hashing.bcrypt'), true) . "\n";
-
-        try {
-            $h = \Illuminate\Support\Facades\Hash::make('password123');
-            echo "Hash::make: SUCCESS (" . substr($h, 0, 10) . "...)\n";
-        } catch (\Throwable $e) {
-            echo "Hash::make ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-            echo "File: " . $e->getFile() . ":" . $e->getLine() . "\n";
-            echo "Trace:\n" . $e->getTraceAsString() . "\n";
-        }
-    } catch (\Throwable $e) {
-        echo "Laravel Boot ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    exit;
-}
 
 // Forward all incoming Vercel serverless requests to Laravel's public entrypoint
 putenv('VERCEL=1');
