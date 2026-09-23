@@ -40,6 +40,8 @@
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",
     "QUEUE_CONNECTION": "sync",
-    "LOG_CHANNEL": "stderr"
+    "LOG_CHANNEL": "stderr",
+    "HASH_DRIVER": "bcrypt",
+    "BCRYPT_ROUNDS": "10"
   }
 }

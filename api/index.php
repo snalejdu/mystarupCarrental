@@ -19,52 +19,44 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Diagnostic check
 if (isset($_GET['diag'])) {
     header('Content-Type: text/plain');
-    echo "=== PHP DIAGNOSTICS ===\n";
+    echo "=== PHP & LARAVEL DIAGNOSTICS ===\n";
     echo "PHP Version: " . PHP_VERSION . "\n";
-    echo "PDO Drivers: " . implode(', ', PDO::getAvailableDrivers()) . "\n";
-    echo "pdo_sqlite: " . (extension_loaded('pdo_sqlite') ? 'yes' : 'no') . "\n";
-    echo "sqlite3: " . (extension_loaded('sqlite3') ? 'yes' : 'no') . "\n";
-    echo "tmp directory writable: " . (is_writable('/tmp') ? 'yes' : 'no') . "\n";
-    echo "seed.db exists: " . (file_exists(dirname(__DIR__) . '/database/seed.db') ? 'yes (' . filesize(dirname(__DIR__) . '/database/seed.db') . ' bytes)' : 'no') . "\n";
-    echo "packages.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/packages.php') ? 'yes' : 'no') . "\n";
-    echo "services.php exists: " . (file_exists(__DIR__ . '/../bootstrap/cache/services.php') ? 'yes' : 'no') . "\n";
-    echo "public/index.php exists: " . (file_exists(__DIR__ . '/../public/index.php') ? 'yes' : 'no') . "\n";
-    echo "password_algos: " . implode(', ', function_exists('password_algos') ? password_algos() : ['none']) . "\n";
-    echo "PASSWORD_BCRYPT defined: " . (defined('PASSWORD_BCRYPT') ? 'yes' : 'no') . "\n";
-    echo "PASSWORD_DEFAULT: " . (defined('PASSWORD_DEFAULT') ? PASSWORD_DEFAULT : 'no') . "\n";
+    echo "getenv BCRYPT_ROUNDS: " . var_export(getenv('BCRYPT_ROUNDS'), true) . "\n";
+    echo "getenv HASH_DRIVER: " . var_export(getenv('HASH_DRIVER'), true) . "\n";
+    echo "\$_ENV BCRYPT_ROUNDS: " . var_export($_ENV['BCRYPT_ROUNDS'] ?? null, true) . "\n";
+    echo "\$_SERVER BCRYPT_ROUNDS: " . var_export($_SERVER['BCRYPT_ROUNDS'] ?? null, true) . "\n";
     echo "CRYPT_BLOWFISH: " . (defined('CRYPT_BLOWFISH') ? CRYPT_BLOWFISH : 'not defined') . "\n";
-    try {
-        $h1 = password_hash('test1234', PASSWORD_BCRYPT, ['cost' => 10]);
-        echo "password_hash BCRYPT (cost 10): SUCCESS (" . substr($h1, 0, 10) . "...)\n";
-    } catch (\Throwable $e) {
-        echo "password_hash BCRYPT (cost 10) ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    try {
-        $h2 = password_hash('test1234', PASSWORD_BCRYPT, ['cost' => 12]);
-        echo "password_hash BCRYPT (cost 12): SUCCESS (" . substr($h2, 0, 10) . "...)\n";
-    } catch (\Throwable $e) {
-        echo "password_hash BCRYPT (cost 12) ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    try {
-        $h3 = password_hash('test1234', PASSWORD_DEFAULT);
-        echo "password_hash DEFAULT: SUCCESS (" . substr($h3, 0, 10) . "...)\n";
-    } catch (\Throwable $e) {
-        echo "password_hash DEFAULT ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    if (defined('PASSWORD_ARGON2ID')) {
+
+    // Direct password_hash tests
+    foreach ([4, 10, 12, '10', '12', '', null] as $cost) {
         try {
-            $h4 = password_hash('test1234', PASSWORD_ARGON2ID);
-            echo "password_hash ARGON2ID: SUCCESS (" . substr($h4, 0, 10) . "...)\n";
+            $opts = $cost !== null ? ['cost' => $cost] : [];
+            $h = password_hash('test1234', PASSWORD_BCRYPT, $opts);
+            echo "Direct password_hash cost=" . var_export($cost, true) . ": SUCCESS (" . substr($h, 0, 10) . "...)\n";
         } catch (\Throwable $e) {
-            echo "password_hash ARGON2ID ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+            echo "Direct password_hash cost=" . var_export($cost, true) . " ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
         }
     }
+
+    // Now test with Laravel booted
     try {
-        $hasher = new \Illuminate\Hashing\BcryptHasher();
-        $h5 = $hasher->make('test1234');
-        echo "BcryptHasher->make: SUCCESS (" . substr($h5, 0, 10) . "...)\n";
+        $app = require __DIR__ . '/../bootstrap/app.php';
+        $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
+        $kernel->bootstrap();
+        echo "Laravel Booted: YES\n";
+        echo "config(hashing.driver): " . var_export(config('hashing.driver'), true) . "\n";
+        echo "config(hashing.bcrypt): " . var_export(config('hashing.bcrypt'), true) . "\n";
+
+        try {
+            $h = \Illuminate\Support\Facades\Hash::make('password123');
+            echo "Hash::make: SUCCESS (" . substr($h, 0, 10) . "...)\n";
+        } catch (\Throwable $e) {
+            echo "Hash::make ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+            echo "File: " . $e->getFile() . ":" . $e->getLine() . "\n";
+            echo "Trace:\n" . $e->getTraceAsString() . "\n";
+        }
     } catch (\Throwable $e) {
-        echo "BcryptHasher->make ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
+        echo "Laravel Boot ERROR: " . get_class($e) . " - " . $e->getMessage() . "\n";
     }
     exit;
 }
@@ -93,6 +85,14 @@ $_SERVER['CACHE_DRIVER'] = 'array';
 putenv('QUEUE_CONNECTION=sync');
 $_ENV['QUEUE_CONNECTION'] = 'sync';
 $_SERVER['QUEUE_CONNECTION'] = 'sync';
+
+putenv('HASH_DRIVER=bcrypt');
+$_ENV['HASH_DRIVER'] = 'bcrypt';
+$_SERVER['HASH_DRIVER'] = 'bcrypt';
+
+putenv('BCRYPT_ROUNDS=10');
+$_ENV['BCRYPT_ROUNDS'] = '10';
+$_SERVER['BCRYPT_ROUNDS'] = '10';
 
 // Create writable storage structure in /tmp for Vercel
 $storageDirs = [
