@@ -14,6 +14,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->trustProxies(at: '*');
+
         $middleware->web(prepend: [
             \App\Http\Middleware\SecurityHeaders::class,
         ]);
@@ -43,6 +45,11 @@ $app = Application::configure(basePath: dirname(__DIR__))
 
         if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
             $exceptions->render(function (\Throwable $e, Request $request) {
+                if ($e instanceof \Illuminate\Auth\AuthenticationException ||
+                    $e instanceof \Illuminate\Validation\ValidationException ||
+                    $e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+                    return null;
+                }
                 return response(
                     "<h1>Original Exception on Vercel</h1><p><strong>" . get_class($e) . "</strong>: " . htmlspecialchars($e->getMessage()) . "</p><p>" . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p><pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>",
                     500,

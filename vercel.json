@@ -39,6 +39,8 @@
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",
+    "SESSION_SECURE_COOKIE": "true",
+    "APP_URL": "https://mystarup-carrental.vercel.app",
     "QUEUE_CONNECTION": "sync",
     "LOG_CHANNEL": "stderr",
     "HASH_DRIVER": "bcrypt",

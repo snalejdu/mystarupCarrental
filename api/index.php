@@ -94,6 +94,19 @@ putenv('BCRYPT_ROUNDS=10');
 $_ENV['BCRYPT_ROUNDS'] = '10';
 $_SERVER['BCRYPT_ROUNDS'] = '10';
 
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['SERVER_PORT'] = '443';
+$_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+
+putenv('SESSION_SECURE_COOKIE=true');
+$_ENV['SESSION_SECURE_COOKIE'] = 'true';
+$_SERVER['SESSION_SECURE_COOKIE'] = 'true';
+
+$appUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'mystarup-carrental.vercel.app');
+putenv("APP_URL={$appUrl}");
+$_ENV['APP_URL'] = $appUrl;
+$_SERVER['APP_URL'] = $appUrl;
+
 // Create writable storage structure in /tmp for Vercel
 $storageDirs = [
     '/tmp/storage',
