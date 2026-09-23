@@ -25,6 +25,10 @@
       "dest": "/public/$1"
     },
     {
+      "src": "/clear-cookies.html",
+      "dest": "/public/clear-cookies.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
@@ -38,8 +42,9 @@
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
-    "SESSION_DRIVER": "cookie",
+    "SESSION_DRIVER": "database",
     "SESSION_SECURE_COOKIE": "true",
+    "SESSION_COOKIE": "rentbohol_session",
     "APP_URL": "https://mystarup-carrental.vercel.app",
     "QUEUE_CONNECTION": "sync",
     "LOG_CHANNEL": "stderr",

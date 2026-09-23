@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
@@ -15,12 +16,17 @@ class Vehicle extends Model
     use HasFactory;
 
     protected $fillable = [
+        'owner_id',
         'title',
         'slug',
         'description',
         'type',
         'brand',
         'model',
+        'year',
+        'plate_number',
+        'color',
+        'vin',
         'transmission',
         'seats',
         'has_aircon',
@@ -34,8 +40,13 @@ class Vehicle extends Model
         'delivery_fee',
         'discount_three_days',
         'discount_weekly',
+        'minimum_rental_days',
+        'late_fee_per_hour',
         'helmets_included',
         'driver_available',
+        'insurance_type',
+        'insurance_expiry',
+        'registration_expiry',
         'location',
         'status',
     ];
@@ -44,16 +55,21 @@ class Vehicle extends Model
         'price_per_day' => 'decimal:2',
         'security_deposit' => 'decimal:2',
         'delivery_fee' => 'decimal:2',
+        'late_fee_per_hour' => 'decimal:2',
         'delivery_available' => 'boolean',
         'helmets_included' => 'boolean',
         'driver_available' => 'boolean',
         'discount_three_days' => 'integer',
         'discount_weekly' => 'integer',
+        'minimum_rental_days' => 'integer',
+        'year' => 'integer',
         'avg_rating' => 'decimal:1',
         'total_reviews' => 'integer',
         'seats' => 'integer',
         'has_aircon' => 'boolean',
         'features' => 'array',
+        'insurance_expiry' => 'date',
+        'registration_expiry' => 'date',
     ];
 
     /**
@@ -62,6 +78,17 @@ class Vehicle extends Model
      */
     protected static function booted(): void
     {
+        static::saving(function (Vehicle $vehicle) {
+            if (empty($vehicle->owner_id)) {
+                throw new \InvalidArgumentException('A vehicle must have an owner.');
+            }
+
+            $owner = $vehicle->relationLoaded('owner') ? $vehicle->owner : User::find($vehicle->owner_id);
+            if ($owner && $owner->role !== 'owner') {
+                throw new \InvalidArgumentException("Vehicle owner must have the 'owner' role. User #{$owner->id} has role '{$owner->role}'.");
+            }
+        });
+
         static::saved(function (Vehicle $vehicle) {
             if ($vehicle->wasChanged('features') || $vehicle->wasRecentlyCreated) {
                 $vehicle->syncNormalizedFeatures();
@@ -137,6 +164,30 @@ class Vehicle extends Model
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * Get all payments across all bookings for this vehicle.
+     */
+    public function payments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Payment::class, Booking::class);
+    }
+
+    /**
+     * Check if the vehicle's insurance has expired.
+     */
+    public function isInsuranceExpired(): bool
+    {
+        return $this->insurance_expiry !== null && $this->insurance_expiry->isPast();
+    }
+
+    /**
+     * Check if the vehicle's LTO registration has expired.
+     */
+    public function isRegistrationExpired(): bool
+    {
+        return $this->registration_expiry !== null && $this->registration_expiry->isPast();
     }
 
     /**

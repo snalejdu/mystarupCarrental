@@ -86,5 +86,5 @@ php artisan test
 
 ### Default Demo Accounts
 - **Admin**: `admin@rentbohol.com` / `password123`
-- **Owner 1**: `maria@boholrentals.ph` / `password123`
-- **Owner 2**: `juan@panglaowheels.com` / `password123`
+- **Owner (Host)**: `maria@boholrentals.ph` / `password123` (owns the 5 demo fleet vehicles)
+- **Renter**: `renter@gmail.com` / `password123`

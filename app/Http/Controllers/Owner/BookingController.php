@@ -82,7 +82,7 @@ class BookingController extends Controller
     {
         Gate::authorize('view', $booking);
 
-        $booking->load(['vehicle.photos', 'ratings']);
+        $booking->load(['vehicle.photos', 'ratings', 'payments', 'damageReports.reportedBy']);
 
         // Enforce contact visibility at the data level
         $bookingData = $booking->toArray();
@@ -153,11 +153,15 @@ class BookingController extends Controller
     /**
      * Decline a booking.
      */
-    public function decline(Booking $booking)
+    public function decline(Request $request, Booking $booking)
     {
         Gate::authorize('decline', $booking);
 
-        $booking->update(['status' => 'declined']);
+        $booking->update([
+            'status' => 'declined',
+            'declined_at' => now(),
+            'cancellation_reason' => $request->input('cancellation_reason'),
+        ]);
 
         return back()->with('success', 'Booking declined. The dates remain available.');
     }
@@ -186,12 +190,14 @@ class BookingController extends Controller
     /**
      * Cancel an accepted or pending booking by host.
      */
-    public function cancel(Booking $booking)
+    public function cancel(Request $request, Booking $booking)
     {
         Gate::authorize('decline', $booking);
 
         $booking->update([
             'status' => 'cancelled',
+            'cancelled_at' => now(),
+            'cancellation_reason' => $request->input('cancellation_reason'),
         ]);
 
         // Free up dates on the availability calendar if it was booked

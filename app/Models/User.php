@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'google_id'])]
-#[Hidden(['password', 'remember_token', 'driver_license_path', 'google_id'])]
+#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'google_id', 'address', 'date_of_birth', 'emergency_contact_name', 'emergency_contact_phone', 'driver_license_number', 'driver_license_expiry'])]
+#[Hidden(['password', 'remember_token', 'driver_license_path', 'driver_license_number', 'google_id'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -34,6 +34,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user meets a minimum age requirement.
+     */
+    public function isMinimumAge(int $age): bool
+    {
+        if (!$this->date_of_birth) {
+            return false;
+        }
+
+        return $this->date_of_birth->diffInYears(now()) >= $age;
+    }
+
+    /**
+     * Check if the driver license has expired.
+     */
+    public function isLicenseExpired(): bool
+    {
+        return $this->driver_license_expiry !== null && $this->driver_license_expiry->isPast();
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -43,6 +63,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_of_birth' => 'date',
+            'driver_license_expiry' => 'date',
         ];
     }
 

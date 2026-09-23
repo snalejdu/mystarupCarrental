@@ -24,6 +24,16 @@ class Booking extends Model
         'total_days',
         'total_price',
         'status',
+        'pickup_location',
+        'dropoff_location',
+        'pickup_time',
+        'dropoff_time',
+        'delivery_address',
+        'cancelled_at',
+        'declined_at',
+        'cancellation_reason',
+        'owner_notes',
+        'late_fee_charged',
         'checkin_odometer',
         'checkin_fuel',
         'checkin_notes',
@@ -51,10 +61,13 @@ class Booking extends Model
         'total_price' => 'decimal:2',
         'commission_rate' => 'decimal:2',
         'commission_amount' => 'decimal:2',
+        'late_fee_charged' => 'decimal:2',
         'checkout_deposit_refunded' => 'boolean',
         'contact_unlocked_at' => 'datetime',
         'accepted_at' => 'datetime',
         'completed_at' => 'datetime',
+        'cancelled_at' => 'datetime',
+        'declined_at' => 'datetime',
     ];
 
     /**
@@ -133,6 +146,22 @@ class Booking extends Model
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Get the payments for this booking.
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * Get the damage reports for this booking.
+     */
+    public function damageReports(): HasMany
+    {
+        return $this->hasMany(DamageReport::class);
     }
 
     /**

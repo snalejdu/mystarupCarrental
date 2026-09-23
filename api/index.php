@@ -143,6 +143,49 @@ putenv('LOG_CHANNEL=stderr');
 $_ENV['LOG_CHANNEL'] = 'stderr';
 $_SERVER['LOG_CHANNEL'] = 'stderr';
 
+// Ensure sessions table exists for the database session driver
+if (file_exists($tmpDb)) {
+    try {
+        $pdo = new PDO("sqlite:{$tmpDb}");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->exec("CREATE TABLE IF NOT EXISTS sessions (
+            id VARCHAR(255) NOT NULL PRIMARY KEY,
+            user_id BIGINT UNSIGNED NULL,
+            ip_address VARCHAR(45) NULL,
+            user_agent TEXT NULL,
+            payload LONGTEXT NOT NULL,
+            last_activity INT NOT NULL
+        )");
+        $pdo = null;
+    } catch (Exception $e) {
+        // Silently continue - session will fall back gracefully
+    }
+}
+
+// Clear bloated cookies from old cookie-based sessions.
+// If total Cookie header is large, expire all non-essential cookies to prevent 494 on next request.
+$rawCookieHeader = $_SERVER['HTTP_COOKIE'] ?? '';
+if (strlen($rawCookieHeader) > 4000) {
+    $cookieParts = explode(';', $rawCookieHeader);
+    foreach ($cookieParts as $part) {
+        $part = trim($part);
+        if (empty($part)) continue;
+        $eqPos = strpos($part, '=');
+        $cookieName = $eqPos !== false ? substr($part, 0, $eqPos) : $part;
+        $cookieName = trim($cookieName);
+        // Keep only the new session cookie and XSRF token
+        if ($cookieName === 'rentbohol_session' || $cookieName === 'XSRF-TOKEN') {
+            continue;
+        }
+        // Expire old cookie
+        header("Set-Cookie: {$cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/; secure; samesite=lax", false);
+    }
+    // Also clear any old-format session cookies
+    foreach (['laravel_session', 'bohol_car_rental_session', 'rent_bohol_session'] as $oldName) {
+        header("Set-Cookie: {$oldName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/; secure; httponly; samesite=lax", false);
+    }
+}
+
 try {
     require __DIR__ . '/../public/index.php';
 } catch (\Throwable $e) {
