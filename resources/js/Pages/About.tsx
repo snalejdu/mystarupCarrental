@@ -1,7 +1,20 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    UserCircle, CheckCircle, PhoneCall, Lightning, MapPin, CarProfile, CurrencyDollar, Users, ArrowRight, Medal, LockSimple, Money, CalendarCheck } from '@phosphor-icons/react';
+    LuCircleUser,
+    LuCircleCheck,
+    LuPhoneCall,
+    LuZap,
+    LuMapPin,
+    LuCar,
+    LuDollarSign,
+    LuUsers,
+    LuArrowRight,
+    LuMedal,
+    LuLock,
+    LuBanknote,
+    LuCalendarCheck
+} from 'react-icons/lu';
 import DepthCarousel from '@/Components/DepthCarousel';
 
 export default function About() {
@@ -94,7 +107,7 @@ export default function About() {
                         <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-xl bg-teal-600 flex items-center justify-center text-white mb-2">
-                                    <Lightning className="w-6 h-6 text-white" />
+                                    <LuZap className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
                                     <h3 className="font-heading font-bold text-lg text-slate-900">Fast & Instant Requests</h3>
@@ -109,7 +122,7 @@ export default function About() {
                         <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white mb-2">
-                                    <UserCircle className="w-6 h-6 text-white" />
+                                    <LuCircleUser className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
                                     <h3 className="font-heading font-bold text-lg text-slate-900">Reliable Host Contacts</h3>
@@ -124,7 +137,7 @@ export default function About() {
                         <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center text-white mb-2">
-                                    <CurrencyDollar className="w-6 h-6 text-white" />
+                                    <LuDollarSign className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
                                     <h3 className="font-heading font-bold text-lg text-slate-900">Direct Local Pricing</h3>
@@ -153,19 +166,19 @@ export default function About() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-bold pt-8 border-t border-slate-800 relative z-10">
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
+                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>100% Free for Rentees</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
+                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Airport & Port Pickup Sync</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
+                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Fast Mobile Performance</span>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <CheckCircle className="w-5 h-5 text-primary-400 shrink-0" />
+                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
                             <span>Direct Host Communication</span>
                         </div>
                     </div>
@@ -187,7 +200,7 @@ export default function About() {
                         className="glass-btn px-8 py-4 rounded-2xl font-bold text-xs shrink-0 flex items-center gap-2"
                     >
                         <span>Browse Vehicles Now</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <LuArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
 

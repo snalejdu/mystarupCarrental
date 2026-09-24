@@ -1,6 +1,16 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { Lock, ShieldCheck, EyeSlash, FileText, Database, PhoneCall, EnvelopeSimple, CheckCircle, ArrowRight } from '@phosphor-icons/react';
+import {
+    LuLock,
+    LuShieldCheck,
+    LuEyeOff,
+    LuFileText,
+    LuDatabase,
+    LuPhoneCall,
+    LuMail,
+    LuCircleCheck,
+    LuArrowRight
+} from 'react-icons/lu';
 
 export default function PrivacyPolicy() {
     return (
@@ -14,7 +24,7 @@ export default function PrivacyPolicy() {
             <div className="bg-slate-900 text-white py-12 sm:py-16 border-b border-slate-800">
                 <div className="max-w-4xl mx-auto px-6 md:px-8 space-y-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-700/30 text-primary-300 rounded-lg text-xs font-semibold border border-primary-700/40">
-                        <Lock className="w-3.5 h-3.5" /> Privacy & Data Governance
+                        <LuLock className="w-3.5 h-3.5" /> Privacy & Data Governance
                     </span>
                     <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
                         RentalHub Privacy Policy
@@ -33,7 +43,7 @@ export default function PrivacyPolicy() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-primary-700 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center shrink-0 border border-primary-100">
-                                <EyeSlash className="w-5 h-5" />
+                                <LuEyeOff className="w-5 h-5" />
                             </div>
                             <h2>1. Renter Contact Privacy Guarantee</h2>
                         </div>
@@ -42,15 +52,15 @@ export default function PrivacyPolicy() {
                         </p>
                         <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-2 border-primary-500">
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Your mobile phone number and email are <strong>encrypted and hidden from vehicle hosts</strong> while your request is pending review.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Host contact details and renter contact details are <strong>only unlocked</strong> after the host explicitly accepts your booking request.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>If a host declines your request, your contact information is never disclosed to them.</span>
                             </li>
                         </ul>
@@ -60,7 +70,7 @@ export default function PrivacyPolicy() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <Database className="w-5 h-5" />
+                                <LuDatabase className="w-5 h-5" />
                             </div>
                             <h2>2. Information We Collect</h2>
                         </div>
@@ -87,7 +97,7 @@ export default function PrivacyPolicy() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <FileText className="w-5 h-5" />
+                                <LuFileText className="w-5 h-5" />
                             </div>
                             <h2>3. How We Use Your Information</h2>
                         </div>
@@ -109,7 +119,7 @@ export default function PrivacyPolicy() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <ShieldCheck className="w-5 h-5" />
+                                <LuShieldCheck className="w-5 h-5" />
                             </div>
                             <h2>4. Security & Data Rights</h2>
                         </div>
@@ -130,7 +140,7 @@ export default function PrivacyPolicy() {
                                 className="glass-btn-accent px-6 py-3 rounded-xl font-semibold text-xs flex items-center gap-2"
                             >
                                 <span>Contact Privacy Support</span>
-                                <ArrowRight className="w-4 h-4" />
+                                <LuArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

@@ -165,6 +165,15 @@
   * **Motorcycle & Van Category Refinements**: Replaced pedal bicycle (`Bicycle`) with dedicated Phosphor `Motorcycle`, and replaced people/avatars icon (`Users`) with the dedicated Phosphor `Van` component for all Minivan categories and vehicle filters.
   * **0 Leftover Lucide References**: Uninstalled `lucide-react`, verified 0 compilation errors via `npx tsc --noEmit` and production build with Vite.
 
+### Milestone 14: RentalHub Rebrand & React Icons (Lucide) Migration
+* **Location**: Entire frontend and backend (`resources/js`, `public/images/logo`, `app/`, `.agents/AGENTS.md`)
+* **Features**:
+  * **Brand Name & Logo**: Rebranded platform from RentBohol to **RentalHub** ("Rent. Book. Drive.") with modern car + pin + road logo.
+  * **React Icons (`react-icons/lu`)**: Migrated all 28 TSX views and components to use the modern, unified, stroke-consistent Lucide icon set from `react-icons`.
+  * **Cleaned Package Dependencies**: Uninstalled `@phosphor-icons/react`, installed `react-icons`.
+  * **Rule Update**: Updated `.agents/AGENTS.md` to establish `react-icons/lu` as the mandatory icon standard.
+  * **Zero Errors**: Verified with `npx tsc --noEmit`, production Vite build, PHPUnit (67/67 tests passing), and full headless browser verification.
+
 ---
 
 ## 5. Vehicle Distance, Mileage & GPS Tracking Architecture
@@ -237,9 +246,9 @@ CarRental/
 
 ## 7. Instructions for Future AI Assistants
 
-When assisting the user with RentBohol:
+When assisting the user with RentalHub:
 1. **Always read this file first** before proposing changes.
-2. **Never break Phosphor icon compliance**: Do NOT introduce FontAwesome, Heroicons, or raw inline `<svg>` blocks. Strictly use `@phosphor-icons/react`.
+2. **Never break React Icons (Lucide) compliance**: Do NOT introduce FontAwesome or raw inline `<svg>` blocks. Strictly use `react-icons/lu`.
 3. **Preserve live sync**: Ensure any new owner actions invoke `broadcastVehicleUpdate()` from `@/lib/vehicleSync` so renter tabs update without F5.
 4. **Always test with TypeScript**: Run `npx tsc --noEmit` and `npm run build` to verify 0 errors before reporting completion.
 5. **Keep animations smooth**: Adhere to `450ms` - `650ms` deceleration curves for transitions.

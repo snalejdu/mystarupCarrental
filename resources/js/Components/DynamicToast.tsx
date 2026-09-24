@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { CheckCircle, WarningCircle, Warning, Info, X, CreditCard } from '@phosphor-icons/react';
+import { LuCircleAlert, LuTriangleAlert, LuCircleCheck, LuCreditCard, LuInfo, LuX } from 'react-icons/lu';
 
 export interface ToastMessage {
     id: string;
@@ -131,28 +131,28 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                 return {
                     borderLeft: 'border-l-emerald-500',
                     iconBg: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                    icon: <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />,
+                    icon: <LuCircleCheck className="w-5 h-5 text-emerald-400 shrink-0" />,
                     badge: 'bg-emerald-500/20 text-emerald-300',
                 };
             case 'warning':
                 return {
                     borderLeft: 'border-l-amber-500',
                     iconBg: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-                    icon: <Warning className="w-5 h-5 text-amber-400 shrink-0" />,
+                    icon: <LuTriangleAlert className="w-5 h-5 text-amber-400 shrink-0" />,
                     badge: 'bg-amber-500/20 text-amber-300',
                 };
             case 'error':
                 return {
                     borderLeft: 'border-l-rose-500',
                     iconBg: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-                    icon: <WarningCircle className="w-5 h-5 text-rose-400 shrink-0" />,
+                    icon: <LuCircleAlert className="w-5 h-5 text-rose-400 shrink-0" />,
                     badge: 'bg-rose-500/20 text-rose-300',
                 };
             case 'payment':
                 return {
                     borderLeft: 'border-l-teal-400',
                     iconBg: 'bg-teal-500/15 text-teal-300 border-teal-500/30',
-                    icon: <CreditCard className="w-5 h-5 text-teal-300 shrink-0" />,
+                    icon: <LuCreditCard className="w-5 h-5 text-teal-300 shrink-0" />,
                     badge: 'bg-teal-500/20 text-teal-300',
                 };
             case 'info':
@@ -160,7 +160,7 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                 return {
                     borderLeft: 'border-l-sky-500',
                     iconBg: 'bg-sky-500/15 text-sky-400 border-sky-500/30',
-                    icon: <Info className="w-5 h-5 text-sky-400 shrink-0" />,
+                    icon: <LuInfo className="w-5 h-5 text-sky-400 shrink-0" />,
                     badge: 'bg-sky-500/20 text-sky-300',
                 };
         }
@@ -226,7 +226,7 @@ function ToastCard({ toast, onDismiss }: ToastItemProps) {
                 title="Dismiss notification"
                 aria-label="Close notification"
             >
-                <X className="w-4 h-4" />
+                <LuX className="w-4 h-4" />
             </button>
         </div>
     );

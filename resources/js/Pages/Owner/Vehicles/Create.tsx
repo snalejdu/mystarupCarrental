@@ -1,6 +1,18 @@
 import { Head, useForm, router } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
-import { Gauge, Users, Wind, Prohibit, Info, UploadSimple, Image as ImageIcon, X, GasPump, CheckCircle, MapPin } from '@phosphor-icons/react';
+import {
+    LuGauge,
+    LuUsers,
+    LuWind,
+    LuBan,
+    LuInfo,
+    LuUpload,
+    LuImage as ImageIcon,
+    LuX,
+    LuFuel,
+    LuCircleCheck,
+    LuMapPin
+} from 'react-icons/lu';
 import { useState, useRef } from 'react';
 
 const DISTANCE_PRESETS = [
@@ -224,7 +236,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 </span>
                                 {isMotorbike && (
                                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
-                                        <Prohibit className="w-3.5 h-3.5 text-slate-400" />
+                                        <LuBan className="w-3.5 h-3.5 text-slate-400" />
                                         <span>AC N/A for Motorbikes</span>
                                     </span>
                                 )}
@@ -234,7 +246,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 {/* Transmission */}
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <Gauge className="w-3.5 h-3.5 text-primary-700" />
+                                        <LuGauge className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Transmission</span>
                                     </label>
                                     <select
@@ -252,7 +264,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 {/* Fuel Type */}
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <GasPump className="w-3.5 h-3.5 text-primary-700" />
+                                        <LuFuel className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Fuel Type</span>
                                     </label>
                                     <select
@@ -271,7 +283,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 {/* Seats */}
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <Users className="w-3.5 h-3.5 text-primary-700" />
+                                        <LuUsers className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Seats</span>
                                     </label>
                                     <input
@@ -290,7 +302,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 {/* Air Conditioning */}
                                 <div className={isMotorbike ? 'opacity-80' : ''}>
                                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <Wind className="w-3.5 h-3.5 text-primary-700" />
+                                        <LuWind className="w-3.5 h-3.5 text-primary-700" />
                                         <span>AC Unit</span>
                                     </label>
                                     <select
@@ -305,7 +317,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                     </select>
                                     {isMotorbike ? (
                                         <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 font-medium">
-                                            <Info className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                            <LuInfo className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                                             <span>Open-air vehicle</span>
                                         </p>
                                     ) : (
@@ -316,7 +328,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                 {/* Distance / Mileage Limit */}
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <MapPin className="w-3.5 h-3.5 text-primary-700" />
+                                        <LuMapPin className="w-3.5 h-3.5 text-primary-700" />
                                         <span>Distance Limit</span>
                                     </label>
                                     <select
@@ -389,7 +401,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                                     ? 'bg-primary-600 border-primary-600 text-white'
                                                     : 'border-slate-300 bg-white'
                                             }`}>
-                                                {isChecked && <CheckCircle className="w-4 h-4 text-white" />}
+                                                {isChecked && <LuCircleCheck className="w-4 h-4 text-white" />}
                                             </div>
                                         </button>
                                     );
@@ -438,7 +450,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                     className="hidden"
                                 />
                                 <div className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center mx-auto mb-2 text-slate-600 group-hover:text-primary-700 shadow-2xs">
-                                    <UploadSimple className="w-5 h-5" />
+                                    <LuUpload className="w-5 h-5" />
                                 </div>
                                 <p className="text-xs sm:text-sm font-bold text-slate-800">
                                     Click here to select vehicle photos from your device
@@ -460,7 +472,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
                                                 className="absolute top-1.5 right-1.5 min-w-[36px] min-h-[36px] rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md hover:bg-rose-700 transition-colors cursor-pointer"
                                                 aria-label="Remove photo"
                                             >
-                                                <X className="w-4 h-4" />
+                                                <LuX className="w-4 h-4" />
                                             </button>
                                         </div>
                                     ))}

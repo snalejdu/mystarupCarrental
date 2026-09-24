@@ -1,7 +1,19 @@
 import { Head, Link, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    MapPin, Star, Gauge, Wind, Users, CarProfile, Motorcycle, Van, Compass, MagnifyingGlass, Calendar, X } from '@phosphor-icons/react';
+    LuMapPin,
+    LuStar,
+    LuGauge,
+    LuWind,
+    LuUsers,
+    LuCar,
+    LuBike,
+    LuBus,
+    LuCompass,
+    LuSearch,
+    LuCalendar,
+    LuX
+} from 'react-icons/lu';
 import { useState } from 'react';
 import { formatCurrency } from '@/lib/utils';
 
@@ -79,7 +91,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     : 'glass-pill text-slate-700'
                             }`}
                         >
-                            <Compass className="w-4 h-4" />
+                            <LuCompass className="w-4 h-4" />
                             <span>All vehicles</span>
                         </button>
 
@@ -91,7 +103,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     : 'glass-pill text-slate-700'
                             }`}
                         >
-                            <CarProfile className="w-4 h-4" />
+                            <LuCar className="w-4 h-4" />
                             <span>Sedan / Cars</span>
                         </button>
 
@@ -103,7 +115,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     : 'glass-pill text-slate-700'
                             }`}
                         >
-                            <Motorcycle className="w-4 h-4" />
+                            <LuBike className="w-4 h-4" />
                             <span>Motorbikes</span>
                         </button>
 
@@ -115,7 +127,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     : 'glass-pill text-slate-700'
                             }`}
                         >
-                            <CarProfile className="w-4 h-4" />
+                            <LuCar className="w-4 h-4" />
                             <span>Suv (4x4)</span>
                         </button>
 
@@ -127,7 +139,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                     : 'glass-pill text-slate-700'
                             }`}
                         >
-                            <Van className="w-4 h-4" />
+                            <LuBus className="w-4 h-4" />
                             <span>Minivan (15-Seater)</span>
                         </button>
                     </div>
@@ -137,7 +149,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-12 gap-3">
                             {/* Search by Name */}
                             <div className="md:col-span-5 relative">
-                                <MagnifyingGlass className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                 <input
                                     type="text"
                                     value={search}
@@ -186,7 +198,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                         className="glass-btn-icon p-2.5 rounded-xl text-slate-700 text-xs shrink-0"
                                         title="Clear Date Filters"
                                     >
-                                        <X className="w-4 h-4" />
+                                        <LuX className="w-4 h-4" />
                                     </button>
                                 )}
                             </div>
@@ -195,7 +207,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         {/* Date Filter Active Pill */}
                         {(filters.pickup_date || filters.return_date) && (
                             <div className="flex items-center gap-2 text-xs font-semibold text-primary-800 bg-primary-50 px-3 py-1.5 rounded-xl border border-primary-200">
-                                <Calendar className="w-3.5 h-3.5 text-primary-600" />
+                                <LuCalendar className="w-3.5 h-3.5 text-primary-600" />
                                 <span>
                                     Filtering available vehicles for: <b>{filters.pickup_date || 'Any'}</b> to <b>{filters.return_date || 'Any'}</b>
                                 </span>
@@ -261,7 +273,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         </div>
                     ) : (
                         <div className="bg-slate-50 rounded-2xl p-12 text-center border border-slate-200 max-w-md mx-auto space-y-4">
-                            <CarProfile className="w-12 h-12 text-slate-400 mx-auto" />
+                            <LuCar className="w-12 h-12 text-slate-400 mx-auto" />
                             <h3 className="font-semibold text-slate-900 text-base">No vehicles found</h3>
                             <p className="text-sm text-slate-500">Try searching for a different model or clearing category filters.</p>
                             <button
@@ -331,14 +343,14 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-slate-300">
-                        <CarProfile className="w-10 sm:w-16 h-10 sm:h-16" />
+                        <LuCar className="w-10 sm:w-16 h-10 sm:h-16" />
                     </div>
                 )}
 
                 {/* Rating Chip */}
                 {vehicle.avg_rating > 0 && (
                     <div className="absolute top-1.5 right-1.5 sm:top-3 sm:right-3 flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 bg-slate-900/80 text-amber-400 rounded-md text-[9px] sm:text-xs font-semibold shadow-xs">
-                        <Star className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-amber-400" />
+                        <LuStar className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-amber-400" />
                         <span>{Number(vehicle.avg_rating).toFixed(1)}</span>
                     </div>
                 )}
@@ -387,17 +399,17 @@ function ReferenceVehicleCard({ vehicle }: { vehicle: any }) {
             {/* Specs Row — Desktop */}
             <div className="hidden sm:grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-200 my-4 text-xs font-semibold text-slate-600">
                 <div className="flex items-center gap-1.5 justify-center">
-                    <Gauge className="w-3.5 h-3.5 text-primary-600" />
+                    <LuGauge className="w-3.5 h-3.5 text-primary-600" />
                     <span>{transmissionText}</span>
                 </div>
 
                 <div className="flex items-center gap-1.5 justify-center">
-                    <Users className="w-3.5 h-3.5 text-primary-600" />
+                    <LuUsers className="w-3.5 h-3.5 text-primary-600" />
                     <span>{capacityText}</span>
                 </div>
 
                 <div className="flex items-center gap-1.5 justify-center">
-                    <Wind className="w-3.5 h-3.5 text-primary-600" />
+                    <LuWind className="w-3.5 h-3.5 text-primary-600" />
                     <span>{airconText}</span>
                 </div>
             </div>

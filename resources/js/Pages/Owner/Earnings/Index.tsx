@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
-import { CurrencyDollar, Percent, TrendUp, CheckCircle, CalendarBlank, Wallet } from '@phosphor-icons/react';
+import { LuCalendar, LuCircleCheck, LuDollarSign, LuPercent, LuTrendingUp, LuWallet } from 'react-icons/lu';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
@@ -27,7 +27,7 @@ export default function OwnerEarnings({ earnings, statements }: Props) {
                             Net Host Payout (96%)
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-100 shrink-0">
-                            <Wallet className="w-5 h-5" />
+                            <LuWallet className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
@@ -45,7 +45,7 @@ export default function OwnerEarnings({ earnings, statements }: Props) {
                             Gross Rental Value
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center border border-primary-100 shrink-0">
-                            <TrendUp className="w-5 h-5" />
+                            <LuTrendingUp className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
@@ -63,7 +63,7 @@ export default function OwnerEarnings({ earnings, statements }: Props) {
                             Platform Fee (4%)
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center border border-amber-100 shrink-0">
-                            <Percent className="w-5 h-5" />
+                            <LuPercent className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">

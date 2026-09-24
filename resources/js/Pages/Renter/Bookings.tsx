@@ -2,7 +2,31 @@ import { useState, useMemo } from 'react';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    CarProfile, Calendar, MapPin, Phone, EnvelopeSimple, Clock, CheckCircle, WarningCircle, XCircle, Star, ArrowRight, ShieldCheck, User, UploadSimple, ChatCircle, ArrowSquareOut, X, Check, GasPump, Gauge, Warning, CreditCard, Pen, FileText } from '@phosphor-icons/react';
+    LuCar,
+    LuCalendar,
+    LuMapPin,
+    LuPhone,
+    LuMail,
+    LuClock,
+    LuCircleCheck,
+    LuCircleAlert,
+    LuCircleX,
+    LuStar,
+    LuArrowRight,
+    LuShieldCheck,
+    LuUser,
+    LuUpload,
+    LuMessageCircle,
+    LuExternalLink,
+    LuX,
+    LuCheck,
+    LuFuel,
+    LuGauge,
+    LuTriangleAlert,
+    LuCreditCard,
+    LuPenTool,
+    LuFileText
+} from 'react-icons/lu';
 import { formatCurrency } from '@/lib/utils';
 import SignaturePad from '@/Components/SignaturePad';
 import PaymentModal, { PaymentReceipt } from '@/Components/PaymentModal';
@@ -128,25 +152,25 @@ export default function RenterBookings({ bookings, renter }: Props) {
             case 'pending':
                 return (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-800 rounded-xl text-xs font-bold border border-amber-200">
-                        <Clock className="w-3.5 h-3.5" /> PENDING HOST REVIEW
+                        <LuClock className="w-3.5 h-3.5" /> PENDING HOST REVIEW
                     </span>
                 );
             case 'accepted':
                 return (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> CONFIRMED & READY
+                        <LuCircleCheck className="w-3.5 h-3.5 text-emerald-600" /> CONFIRMED & READY
                     </span>
                 );
             case 'completed':
                 return (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-800 rounded-xl text-xs font-bold border border-primary-200">
-                        <ShieldCheck className="w-3.5 h-3.5 text-primary-700" /> TRIP COMPLETED
+                        <LuShieldCheck className="w-3.5 h-3.5 text-primary-700" /> TRIP COMPLETED
                     </span>
                 );
             case 'declined':
                 return (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-rose-50 text-rose-800 rounded-xl text-xs font-bold border border-rose-200">
-                        <XCircle className="w-3.5 h-3.5 text-rose-600" /> CANCELLED
+                        <LuCircleX className="w-3.5 h-3.5 text-rose-600" /> CANCELLED
                     </span>
                 );
             default:
@@ -166,13 +190,13 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="space-y-2">
                             <div className="flex items-center gap-2">
                                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-800 rounded-xl text-xs font-bold border border-primary-200/60">
-                                    <User className="w-3.5 h-3.5" /> Registered Bohol Renter
+                                    <LuUser className="w-3.5 h-3.5" /> Registered Bohol Renter
                                 </span>
 
                                 {/* Driver's License Status Pill */}
                                 {renter.driver_license_status === 'verified' ? (
                                     <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
-                                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                                        <LuCheck className="w-3.5 h-3.5 text-emerald-600" />
                                         <span>Verified Driver</span>
                                     </span>
                                 ) : (
@@ -180,7 +204,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         onClick={() => setShowLicenseModal(true)}
                                         className="inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-xl text-xs font-bold border border-amber-200 transition-colors cursor-pointer"
                                     >
-                                        <UploadSimple className="w-4 h-4 text-amber-700" />
+                                        <LuUpload className="w-4 h-4 text-amber-700" />
                                         <span>Upload Driver's License</span>
                                     </button>
                                 )}
@@ -199,7 +223,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 onClick={() => setShowLicenseModal(true)}
                                 className="min-h-[44px] px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 cursor-pointer"
                             >
-                                <ShieldCheck className="w-4 h-4 text-slate-600" />
+                                <LuShieldCheck className="w-4 h-4 text-slate-600" />
                                 <span>{renter.driver_license_status === 'verified' ? 'Driver License 🪪' : 'Upload License'}</span>
                             </button>
 
@@ -207,7 +231,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 href="/vehicles"
                                 className="glass-btn min-h-[44px] px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
                             >
-                                <CarProfile className="w-4 h-4" />
+                                <LuCar className="w-4 h-4" />
                                 <span>Browse More Vehicles</span>
                             </Link>
                         </div>
@@ -246,7 +270,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         {filteredBookings.length === 0 ? (
                             <div className="bg-white rounded-3xl p-12 text-center border border-slate-200/80 shadow-xs space-y-4">
                                 <div className="w-16 h-16 bg-primary-50 text-primary-700 rounded-2xl flex items-center justify-center mx-auto shadow-2xs">
-                                    <CarProfile className="w-8 h-8" />
+                                    <LuCar className="w-8 h-8" />
                                 </div>
                                 <h3 className="font-bold text-slate-900 text-lg">No {activeTab !== 'all' ? activeTab : ''} Rental Trips</h3>
                                 <p className="text-slate-500 text-xs max-w-sm mx-auto font-medium">
@@ -257,7 +281,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                     className="glass-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs"
                                 >
                                     <span>Browse Bohol Fleet</span>
-                                    <ArrowRight className="w-4 h-4" />
+                                    <LuArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         ) : (
@@ -278,7 +302,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     />
                                                 ) : (
                                                     <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 shrink-0">
-                                                        <CarProfile className="w-8 h-8" />
+                                                        <LuCar className="w-8 h-8" />
                                                     </div>
                                                 )}
                                                 <div>
@@ -290,7 +314,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     </Link>
                                                     <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mt-0.5">
                                                         <span className="flex items-center gap-1 text-primary-700">
-                                                            <MapPin className="w-3.5 h-3.5" />
+                                                            <LuMapPin className="w-3.5 h-3.5" />
                                                             {b.vehicle?.location}, Bohol
                                                         </span>
                                                         <span>•</span>
@@ -309,7 +333,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             <div>
                                                 <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Pickup Date</span>
                                                 <div className="font-bold text-slate-800 flex items-center gap-1.5">
-                                                    <Calendar className="w-4 h-4 text-primary-700" />
+                                                    <LuCalendar className="w-4 h-4 text-primary-700" />
                                                     {b.start_date}
                                                 </div>
                                             </div>
@@ -317,7 +341,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             <div>
                                                 <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Return Date</span>
                                                 <div className="font-bold text-slate-800 flex items-center gap-1.5">
-                                                    <Calendar className="w-4 h-4 text-primary-700" />
+                                                    <LuCalendar className="w-4 h-4 text-primary-700" />
                                                     {b.end_date} ({b.total_days} {b.total_days === 1 ? 'day' : 'days'})
                                                 </div>
                                             </div>
@@ -335,7 +359,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                             <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 space-y-3">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
-                                                        <CheckCircle className="w-4 h-4 text-emerald-600" />
+                                                        <LuCircleCheck className="w-4 h-4 text-emerald-600" />
                                                         Host Contact Details Unlocked!
                                                     </span>
                                                     <span className="text-xs font-semibold text-emerald-700">Coordinate Handover</span>
@@ -350,7 +374,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             rel="noreferrer"
                                                             className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <ChatCircle className="w-4 h-4" />
+                                                            <LuMessageCircle className="w-4 h-4" />
                                                             <span>WhatsApp Host</span>
                                                         </a>
                                                     )}
@@ -361,7 +385,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             href={`tel:${b.owner_contact.phone}`}
                                                             className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs cursor-pointer"
                                                         >
-                                                            <Phone className="w-4 h-4 text-emerald-600" />
+                                                            <LuPhone className="w-4 h-4 text-emerald-600" />
                                                             <span>Call ({b.owner_contact.phone})</span>
                                                         </a>
                                                     )}
@@ -373,9 +397,9 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                         rel="noreferrer"
                                                         className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl font-bold text-xs transition-colors border border-emerald-200 shadow-2xs cursor-pointer"
                                                     >
-                                                        <MapPin className="w-4 h-4 text-primary-700" />
+                                                        <LuMapPin className="w-4 h-4 text-primary-700" />
                                                         <span>Open Pickup on Google Maps</span>
-                                                        <ArrowSquareOut className="w-3.5 h-3.5 text-slate-400" />
+                                                        <LuExternalLink className="w-3.5 h-3.5 text-slate-400" />
                                                     </a>
                                                 </div>
                                             </div>
@@ -411,7 +435,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     <div className="flex items-center gap-2 text-primary-900 font-bold">
                                                         <div className="flex items-center text-amber-500">
                                                             {[...Array(b.renter_rating.stars)].map((_, i) => (
-                                                                <Star key={i} className="w-4 h-4 fill-amber-400" />
+                                                                <LuStar key={i} className="w-4 h-4 fill-amber-400" />
                                                             ))}
                                                         </div>
                                                         <span>You rated this rental {b.renter_rating.stars}/5 Stars</span>
@@ -429,7 +453,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             onClick={() => setRatingBooking(b)}
                                                             className="glass-btn min-h-[44px] px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer"
                                                         >
-                                                            <Star className="w-4 h-4" />
+                                                            <LuStar className="w-4 h-4" />
                                                             <span>Leave a Review</span>
                                                         </button>
                                                     </>
@@ -440,7 +464,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         {/* Pending Status Explanation */}
                                         {b.status === 'pending' && (
                                             <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3">
-                                                <WarningCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                                <LuCircleAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                                 <p className="text-xs text-amber-900 font-medium leading-relaxed">
                                                     The vehicle owner has been notified via SMS/Email and is reviewing your dates. Once accepted, their direct WhatsApp and phone number will unlock here!
                                                 </p>
@@ -455,7 +479,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 font-bold text-primary-700 hover:text-primary-800 rounded-xl bg-slate-50 sm:bg-transparent"
                                                 >
                                                     <span>View Status Page</span>
-                                                    <ArrowRight className="w-4 h-4" />
+                                                    <LuArrowRight className="w-4 h-4" />
                                                 </Link>
 
                                                 {(b.status === 'confirmed' || b.status === 'accepted') && (
@@ -465,7 +489,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             onClick={() => setPaymentBooking(b)}
                                                             className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <CreditCard className="w-4 h-4 text-emerald-600" />
+                                                            <LuCreditCard className="w-4 h-4 text-emerald-600" />
                                                             <span>Pay via GCash / Maya</span>
                                                         </button>
 
@@ -477,7 +501,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                             }}
                                                             className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-800 font-bold border border-primary-200 transition-colors shadow-2xs cursor-pointer"
                                                         >
-                                                            <Pen className="w-4 h-4 text-primary-600" />
+                                                            <LuPenTool className="w-4 h-4 text-primary-600" />
                                                             <span>{b.signature_data ? 'View Handover Sign-off' : 'Sign Digital Handover'}</span>
                                                         </button>
                                                     </>
@@ -509,11 +533,11 @@ export default function RenterBookings({ bookings, renter }: Props) {
                     <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-4 shadow-xl border border-slate-200">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <ShieldCheck className="w-5 h-5 text-primary-700" />
+                                <LuShieldCheck className="w-5 h-5 text-primary-700" />
                                 <h3 className="font-extrabold text-base text-slate-900">Driver's License Verification</h3>
                             </div>
                             <button onClick={() => setShowLicenseModal(false)} className="text-slate-400 hover:text-slate-600 p-1">
-                                <X className="w-5 h-5" />
+                                <LuX className="w-5 h-5" />
                             </button>
                         </div>
 
@@ -533,7 +557,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                         <form onSubmit={handleLicenseSubmit} className="space-y-4">
                             <div className="border-2 border-dashed border-slate-200 hover:border-primary-400 rounded-2xl p-6 text-center space-y-2 cursor-pointer transition-colors bg-slate-50/50">
-                                <UploadSimple className="w-8 h-8 text-primary-700 mx-auto" />
+                                <LuUpload className="w-8 h-8 text-primary-700 mx-auto" />
                                 <label className="block text-xs font-bold text-slate-700 cursor-pointer">
                                     <span>Select License Photo</span>
                                     <input
@@ -579,11 +603,11 @@ export default function RenterBookings({ bookings, renter }: Props) {
                     <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-4 shadow-xl border border-slate-200">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <Star className="w-5 h-5 text-amber-500 fill-amber-400" />
+                                <LuStar className="w-5 h-5 text-amber-500 fill-amber-400" />
                                 <h3 className="font-extrabold text-base text-slate-900">Rate Your Rental Trip</h3>
                             </div>
                             <button onClick={() => setRatingBooking(null)} className="text-slate-400 hover:text-slate-600 p-1">
-                                <X className="w-5 h-5" />
+                                <LuX className="w-5 h-5" />
                             </button>
                         </div>
 
@@ -602,7 +626,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                         className="min-w-[44px] min-h-[44px] flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                                         aria-label={`${star} stars`}
                                     >
-                                        <Star
+                                        <LuStar
                                             className={`w-8 h-8 ${
                                                 star <= reviewData.stars
                                                     ? 'text-amber-400 fill-amber-400'
@@ -682,7 +706,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                             <div className="flex items-center gap-2.5">
                                 <div className="w-8 h-8 rounded-xl bg-primary-50 border border-primary-200 flex items-center justify-center text-primary-700">
-                                    <FileText className="w-4 h-4" />
+                                    <LuFileText className="w-4 h-4" />
                                 </div>
                                 <div>
                                     <h3 className="font-extrabold text-base text-slate-900">Digital Vehicle Handover Checklist</h3>
@@ -695,7 +719,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 className="text-slate-400 hover:text-slate-600 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
                                 aria-label="Close modal"
                             >
-                                <X className="w-5 h-5" />
+                                <LuX className="w-5 h-5" />
                             </button>
                         </div>
 
@@ -703,7 +727,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                             <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                                 <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
-                                    <GasPump className="w-4 h-4 text-primary-600" />
+                                    <LuFuel className="w-4 h-4 text-primary-600" />
                                     <span>Fuel Level</span>
                                 </label>
                                 <select
@@ -720,7 +744,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                             <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                                 <label className="flex items-center gap-1.5 font-bold text-slate-700 mb-1">
-                                    <Gauge className="w-4 h-4 text-primary-600" />
+                                    <LuGauge className="w-4 h-4 text-primary-600" />
                                     <span>Odometer Reading</span>
                                 </label>
                                 <input
@@ -738,19 +762,19 @@ export default function RenterBookings({ bookings, renter }: Props) {
                             <span className="font-bold text-slate-700 block text-xs">Condition Verified</span>
                             <div className="grid grid-cols-2 gap-2 text-xs text-slate-600">
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                    <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Spare Tire & Jack</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                    <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>OR/CR Registration</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                    <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Clean Interior & AC</span>
                                 </label>
                                 <label className="flex items-center gap-1.5">
-                                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                    <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                     <span>Headlights & Horn</span>
                                 </label>
                             </div>

@@ -1,7 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { CalendarBlank, Funnel, User } from '@phosphor-icons/react';
+import { LuCalendar, LuFilter, LuUser } from 'react-icons/lu';
 
 interface Props {
     bookings: any;
@@ -20,7 +20,7 @@ export default function AdminBookings({ bookings, filters }: Props) {
             {/* Filter Pills */}
             <div className="flex items-center gap-2 mb-6 bg-slate-950 p-2.5 rounded-xl border border-slate-800 overflow-x-auto">
                 <span className="text-xs font-semibold text-slate-400 px-2 flex items-center gap-1.5 shrink-0">
-                    <Funnel className="w-3.5 h-3.5 text-primary-400" /> Filter:
+                    <LuFilter className="w-3.5 h-3.5 text-primary-400" /> Filter:
                 </span>
                 {['', 'pending', 'accepted', 'completed', 'declined'].map((s) => (
                     <button
@@ -79,7 +79,7 @@ export default function AdminBookings({ bookings, filters }: Props) {
                                         </td>
                                         <td className="py-4 px-3">
                                             <div className="font-semibold text-white flex items-center gap-1.5">
-                                                <User className="w-3.5 h-3.5 text-primary-400" />
+                                                <LuUser className="w-3.5 h-3.5 text-primary-400" />
                                                 <span>{b.renter_name}</span>
                                             </div>
                                             {b.renter_email && (

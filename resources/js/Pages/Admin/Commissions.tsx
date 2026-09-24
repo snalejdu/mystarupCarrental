@@ -1,6 +1,14 @@
 import { Head } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { CurrencyDollar, PhoneCall, EnvelopeSimple, CarProfile, CheckCircle, Percent, TrendUp } from '@phosphor-icons/react';
+import {
+    LuDollarSign,
+    LuPhoneCall,
+    LuMail,
+    LuCar,
+    LuCircleCheck,
+    LuPercent,
+    LuTrendingUp
+} from 'react-icons/lu';
 import { formatCurrency } from '@/lib/utils';
 
 interface OwnerCommission {
@@ -31,7 +39,7 @@ export default function CommissionsPage({ owners }: Props) {
             <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 sm:p-8 mb-6 sm:mb-8 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
                 <div className="space-y-1">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-700/20 text-primary-300 rounded-lg text-xs font-semibold border border-primary-700/30">
-                        <Percent className="w-3.5 h-3.5" /> 4% Global Platform Rate
+                        <LuPercent className="w-3.5 h-3.5" /> 4% Global Platform Rate
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight pt-2">
                         {formatCurrency(totalCommissionOwed)} Total Commission

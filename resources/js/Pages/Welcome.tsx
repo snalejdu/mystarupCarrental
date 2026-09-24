@@ -2,7 +2,31 @@ import { Head, Link, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import {
-    CarProfile, MapPin, Calendar, MagnifyingGlass, ArrowRight, ShieldCheck, Star, Users, Medal, LockSimple, Money, CalendarCheck, Gauge, Wind, Motorcycle, Van, Compass, User, PhoneCall, ChatCircle, Camera, CaretDown, Question, GasPump } from '@phosphor-icons/react';
+    LuCar,
+    LuMapPin,
+    LuCalendar,
+    LuSearch,
+    LuArrowRight,
+    LuShieldCheck,
+    LuStar,
+    LuUsers,
+    LuMedal,
+    LuLock,
+    LuBanknote,
+    LuCalendarCheck,
+    LuGauge,
+    LuWind,
+    LuBike,
+    LuBus,
+    LuCompass,
+    LuUser,
+    LuPhoneCall,
+    LuMessageCircle,
+    LuCamera,
+    LuChevronDown,
+    LuCircleHelp,
+    LuFuel
+} from 'react-icons/lu';
 import { formatCurrency } from '@/lib/utils';
 import BlurText from '@/Components/BlurText';
 import ShinyText from '@/Components/ShinyText';
@@ -178,22 +202,22 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     className="glass-btn px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-2 group cursor-pointer"
                                 >
                                     <ShinyText speed={3} className="text-white font-semibold">Book Your Vehicle Now</ShinyText>
-                                    <ArrowRight className="w-4 h-4 text-teal-200 group-hover:translate-x-1 transition-transform" />
+                                    <LuArrowRight className="w-4 h-4 text-teal-200 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </div>
 
                             {/* Authentic Bohol Island Guarantees */}
                             <div className="pt-3 sm:pt-6 flex flex-wrap items-center gap-y-1.5 sm:gap-y-2.5 gap-x-4 sm:gap-x-6 text-[10px] sm:text-xs text-slate-600 font-medium border-t border-slate-100">
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <ShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
+                                    <LuShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
                                     <span>Verified Boholano Hosts</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <MapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
+                                    <LuMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
                                     <span>Panglao & Tagbilaran Delivery</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <CalendarCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
+                                    <LuCalendarCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
                                     <span>Zero Platform Booking Fees</span>
                                 </div>
                             </div>
@@ -223,7 +247,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     <div className="text-white space-y-1 w-full pointer-events-auto">
                                         <div className="flex items-center justify-between">
                                             <span className="inline-flex items-center gap-1 text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-2.5 py-0.5 rounded-md border border-accent-500/30">
-                                                <MapPin className="w-3 h-3" /> {TOURIST_SPOTS[spotIndex].location}
+                                                <LuMapPin className="w-3 h-3" /> {TOURIST_SPOTS[spotIndex].location}
                                             </span>
                                             <span className="text-[11px] font-semibold text-slate-300">
                                                 {spotIndex + 1} / {TOURIST_SPOTS.length}
@@ -285,7 +309,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 <p className="text-[10px] sm:text-xs text-slate-500 font-medium">Instant direct owner requests — zero renter commissions</p>
                             </div>
                             <span className="text-xs font-semibold text-emerald-700 hidden sm:inline-flex items-center gap-1.5">
-                                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                                <LuShieldCheck className="w-4 h-4 text-emerald-600" />
                                 <span>Zero Renter Fees</span>
                             </span>
                         </div>
@@ -351,7 +375,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     type="submit"
                                     className="glass-btn w-full py-2.5 rounded-lg font-semibold text-xs sm:text-sm flex items-center justify-center gap-2"
                                 >
-                                    <MagnifyingGlass className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
+                                    <LuSearch className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                                     <span>Find Vehicle</span>
                                 </button>
                             </div>
@@ -378,35 +402,35 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <GlassIcons
                                 items={[
                                     {
-                                        icon: <Compass className="w-6 h-6" />,
+                                        icon: <LuCompass className="w-6 h-6" />,
                                         color: 'teal',
                                         label: 'All Vehicles',
                                         customClass: !activeFilter ? 'is-active' : '',
                                         onClick: () => setActiveFilter(null),
                                     },
                                     {
-                                        icon: <CarProfile className="w-6 h-6" />,
+                                        icon: <LuCar className="w-6 h-6" />,
                                         color: 'blue',
                                         label: 'Sedans / Cars',
                                         customClass: activeFilter === 'car' ? 'is-active' : '',
                                         onClick: () => setActiveFilter('car'),
                                     },
                                     {
-                                        icon: <Motorcycle className="w-6 h-6" />,
+                                        icon: <LuBike className="w-6 h-6" />,
                                         color: 'coral',
                                         label: 'Motorbikes',
                                         customClass: activeFilter === 'motorbike' ? 'is-active' : '',
                                         onClick: () => setActiveFilter('motorbike'),
                                     },
                                     {
-                                        icon: <CarProfile className="w-6 h-6" />,
+                                        icon: <LuCar className="w-6 h-6" />,
                                         color: 'green',
                                         label: 'SUV (4x4)',
                                         customClass: activeFilter === 'suv' ? 'is-active' : '',
                                         onClick: () => setActiveFilter('suv'),
                                     },
                                     {
-                                        icon: <Van className="w-6 h-6" />,
+                                        icon: <LuBus className="w-6 h-6" />,
                                         color: 'purple',
                                         label: 'Minivans',
                                         customClass: activeFilter === 'van' ? 'is-active' : '',
@@ -434,7 +458,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                         <div className="bg-slate-100 rounded-xl sm:rounded-2xl aspect-[4/3] sm:aspect-[16/10] overflow-hidden relative border border-slate-100 mb-2 sm:mb-4">
                                             {/* Top-Left Brand / Type Badge */}
                                             <div className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2.5 py-0.5 sm:py-1 bg-slate-900/90 text-white rounded-md text-[8px] sm:text-[10px] font-bold uppercase tracking-wider z-10 shadow-xs">
-                                                <CarProfile className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary-400" />
+                                                <LuCar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary-400" />
                                                 <span>{v.brand || v.type}</span>
                                             </div>
 
@@ -452,7 +476,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                                 />
                                             ) : (
                                                 <div className="w-full h-full flex flex-col items-center justify-center text-slate-300">
-                                                    <CarProfile className="w-10 sm:w-12 h-10 sm:h-12 stroke-[1.2]" />
+                                                    <LuCar className="w-10 sm:w-12 h-10 sm:h-12 stroke-[1.2]" />
                                                 </div>
                                             )}
                                         </div>
@@ -463,7 +487,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                                 {v.title}
                                             </h3>
                                             <div className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-500 font-medium mt-0.5 sm:mt-1 truncate">
-                                                <MapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-slate-400 shrink-0" />
+                                                <LuMapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-slate-400 shrink-0" />
                                                 <span className="truncate">{v.location}, Bohol</span>
                                             </div>
                                         </div>
@@ -471,17 +495,17 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                         {/* Specs Row — Desktop (Full) */}
                                         <div className="hidden sm:flex flex-wrap items-center gap-1.5 sm:gap-2 py-2.5 sm:py-3.5 border-y border-slate-200/70 my-2 sm:my-3 text-[11px] sm:text-xs text-slate-600 font-semibold">
                                             <div className="flex items-center gap-1">
-                                                <Users className="w-3.5 h-3.5 text-slate-400" />
+                                                <LuUsers className="w-3.5 h-3.5 text-slate-400" />
                                                 <span>{v.seats || 5} Seats</span>
                                             </div>
                                             <span>•</span>
                                             <div className="flex items-center gap-1">
-                                                <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                                                <LuGauge className="w-3.5 h-3.5 text-slate-400" />
                                                 <span className="capitalize">{v.transmission || 'Auto'}</span>
                                             </div>
                                             <span>•</span>
                                             <div className="flex items-center gap-1">
-                                                <GasPump className="w-3.5 h-3.5 text-slate-400" />
+                                                <LuFuel className="w-3.5 h-3.5 text-slate-400" />
                                                 <span className="capitalize">{v.fuel_type || 'Gasoline'}</span>
                                             </div>
                                         </div>
@@ -508,7 +532,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
 
                                             {/* Middle Star Rating Circular Badge */}
                                             <div className="px-2.5 py-1 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-800 flex items-center gap-1 shadow-xs shrink-0">
-                                                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                                                <LuStar className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                                                 <span>{v.avg_rating > 0 ? Number(v.avg_rating).toFixed(1) : 'New'}</span>
                                             </div>
 
@@ -530,7 +554,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                                 <span className="text-[8px] text-slate-400 font-semibold block">per day</span>
                                             </div>
                                             <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-white border border-slate-200 rounded-full text-[9px] font-bold text-slate-800 shadow-xs">
-                                                <Star className="w-2.5 h-2.5 text-amber-500 fill-amber-500" />
+                                                <LuStar className="w-2.5 h-2.5 text-amber-500 fill-amber-500" />
                                                 <span>{v.avg_rating > 0 ? Number(v.avg_rating).toFixed(1) : 'New'}</span>
                                             </div>
                                         </div>
@@ -567,7 +591,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             className="glass-btn inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-xs"
                         >
                             <span>Browse All {stats.total_vehicles} Vehicles</span>
-                            <ArrowRight className="w-4 h-4" />
+                            <LuArrowRight className="w-4 h-4" />
                         </Link>
                     </div>
 
@@ -638,7 +662,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     </span>
                                     <div className="absolute bottom-3 left-3 right-3">
                                         <div className="flex items-center gap-1.5 text-white font-bold text-xs truncate">
-                                            <MapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                                            <LuMapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                                             <span className="truncate">{spot.label}</span>
                                         </div>
                                     </div>
@@ -671,22 +695,22 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 mt-6 sm:mt-12">
                         {[
                             {
-                                icon: <LockSimple className="w-5 h-5 text-white" />,
+                                icon: <LuLock className="w-5 h-5 text-white" />,
                                 title: 'Direct Owner Booking',
                                 desc: 'Encrypted contact privacy. No renter account required to inquire.'
                             },
                             {
-                                icon: <Money className="w-5 h-5 text-white" />,
+                                icon: <LuBanknote className="w-5 h-5 text-white" />,
                                 title: 'Zero Renter Commission',
                                 desc: 'Transparent daily rates direct from Bohol hosts with zero surprise fees.'
                             },
                             {
-                                icon: <CalendarCheck className="w-5 h-5 text-white" />,
+                                icon: <LuCalendarCheck className="w-5 h-5 text-white" />,
                                 title: 'Real-Time Availability',
                                 desc: 'Instant calendar blockouts prevent double bookings and lost chats.'
                             },
                             {
-                                icon: <Medal className="w-5 h-5 text-white" />,
+                                icon: <LuMedal className="w-5 h-5 text-white" />,
                                 title: 'Verified Local Hosts',
                                 desc: 'Authentic community reviews and direct handover support across Bohol.'
                             }
@@ -742,7 +766,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Browse clean sedans, 15-seat vans, or scooters listed by local Bohol hosts.',
                                 link: '/vehicles',
                                 action: 'Browse fleet models',
-                                icon: <CarProfile className="w-4 h-4 text-teal-300" />,
+                                icon: <LuCar className="w-4 h-4 text-teal-300" />,
                                 badgeBg: 'bg-teal-500/15 border-teal-500/30 text-teal-300',
                                 glowColor: 'border-slate-800/80 hover:border-teal-500/50',
                                 isAnchor: false,
@@ -753,7 +777,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Pick trip dates and pickup spot. Contact details stay private until host accepts.',
                                 link: '#booking-form',
                                 action: 'Instant date lock',
-                                icon: <CalendarCheck className="w-4 h-4 text-emerald-300" />,
+                                icon: <LuCalendarCheck className="w-4 h-4 text-emerald-300" />,
                                 badgeBg: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300',
                                 glowColor: 'border-slate-800/80 hover:border-emerald-500/50',
                                 isAnchor: true,
@@ -764,7 +788,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Once accepted, phone details unlock for 1-tap calls and easy Bohol pier/airport handover.',
                                 link: '/contact',
                                 action: 'Direct host link',
-                                icon: <ShieldCheck className="w-4 h-4 text-amber-300" />,
+                                icon: <LuShieldCheck className="w-4 h-4 text-amber-300" />,
                                 badgeBg: 'bg-amber-500/15 border-amber-500/30 text-amber-300',
                                 glowColor: 'border-slate-800/80 hover:border-amber-500/50',
                                 isAnchor: false,
@@ -785,7 +809,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                             <span className="text-[10px] font-extrabold font-mono tracking-wider uppercase text-teal-400">
                                                 STEP {item.step}
                                             </span>
-                                            <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-teal-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                                            <LuArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-teal-300 group-hover:translate-x-0.5 transition-all shrink-0" />
                                         </div>
                                         <h3 className="font-bold text-sm text-white group-hover:text-teal-300 transition-colors leading-tight mt-0.5">
                                             {item.title}
@@ -832,7 +856,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                             <div className="glass-3d-badge">
                                                 <span className="glass-3d-badge__back" aria-hidden="true" />
                                                 <span className="glass-3d-badge__front" aria-hidden="true">
-                                                    <CarProfile className="w-5 h-5 text-white" />
+                                                    <LuCar className="w-5 h-5 text-white" />
                                                 </span>
                                             </div>
                                             <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-primary-500/10 text-primary-300 border border-primary-500/25">
@@ -850,7 +874,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     </div>
                                     <div className="pt-4 mt-6 border-t border-slate-800/90 flex items-center justify-between text-xs font-semibold text-teal-400 group-hover:text-teal-300 transition-colors">
                                         <span>Browse fleet models</span>
-                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                        <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </SpotlightCard>
                             </Link>
@@ -878,7 +902,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                             <div className="glass-3d-badge glass-3d-badge--emerald">
                                                 <span className="glass-3d-badge__back" aria-hidden="true" />
                                                 <span className="glass-3d-badge__front" aria-hidden="true">
-                                                    <CalendarCheck className="w-5 h-5 text-white" />
+                                                    <LuCalendarCheck className="w-5 h-5 text-white" />
                                                 </span>
                                             </div>
                                             <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">
@@ -896,7 +920,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     </div>
                                     <div className="pt-4 mt-6 border-t border-slate-800/90 flex items-center justify-between text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors">
                                         <span>Instant date lock</span>
-                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                        <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </SpotlightCard>
                             </a>
@@ -914,7 +938,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                             <div className="glass-3d-badge glass-3d-badge--amber">
                                                 <span className="glass-3d-badge__back" aria-hidden="true" />
                                                 <span className="glass-3d-badge__front" aria-hidden="true">
-                                                    <ShieldCheck className="w-5 h-5 text-white" />
+                                                    <LuShieldCheck className="w-5 h-5 text-white" />
                                                 </span>
                                             </div>
                                             <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-amber-500/10 text-amber-300 border border-amber-500/25">
@@ -932,7 +956,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     </div>
                                     <div className="pt-4 mt-6 border-t border-slate-800/90 flex items-center justify-between text-xs font-semibold text-amber-400 group-hover:text-amber-300 transition-colors">
                                         <span>1-Tap direct host link</span>
-                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                        <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </SpotlightCard>
                             </Link>
@@ -988,11 +1012,11 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
                                     <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
-                                        <Question className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <LuCircleHelp className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Can foreign tourists drive in Bohol with home license?</span>
                                 </span>
-                                <CaretDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
+                                <LuChevronDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
                             </summary>
                             <div className="text-slate-600 mt-2 sm:mt-4 text-[11px] sm:text-base leading-relaxed pl-8 sm:pl-12.5 space-y-1.5 sm:space-y-2 border-t border-slate-100 pt-2 sm:pt-3">
                                 <p>
@@ -1008,11 +1032,11 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
                                     <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
-                                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <LuMapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Can the vehicle be delivered to Panglao Airport or Tagbilaran Port?</span>
                                 </span>
-                                <CaretDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
+                                <LuChevronDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
                             </summary>
                             <div className="text-slate-600 mt-2 sm:mt-4 text-[11px] sm:text-base leading-relaxed pl-8 sm:pl-12.5 space-y-1.5 sm:space-y-2 border-t border-slate-100 pt-2 sm:pt-3">
                                 <p>
@@ -1028,11 +1052,11 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
                                     <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
-                                        <ShieldCheck className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <LuShieldCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Are helmets required for motorcycle and scooter rentals?</span>
                                 </span>
-                                <CaretDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
+                                <LuChevronDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
                             </summary>
                             <div className="text-slate-600 mt-2 sm:mt-4 text-[11px] sm:text-base leading-relaxed pl-8 sm:pl-12.5 space-y-1.5 sm:space-y-2 border-t border-slate-100 pt-2.5 sm:pt-3">
                                 <p>
@@ -1048,11 +1072,11 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
                                     <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
-                                        <Money className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <LuBanknote className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">How does the security deposit work?</span>
                                 </span>
-                                <CaretDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
+                                <LuChevronDown className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-400 group-open:rotate-180 group-open:text-teal-600 transition-transform shrink-0" />
                             </summary>
                             <div className="text-slate-600 mt-2 sm:mt-4 text-[11px] sm:text-base leading-relaxed pl-8 sm:pl-12.5 space-y-1.5 sm:space-y-2 border-t border-slate-100 pt-2 sm:pt-3">
                                 <p>
@@ -1075,7 +1099,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             href="/contact"
                             className="glass-btn px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-semibold shrink-0 flex items-center gap-1"
                         >
-                            <ChatCircle className="w-3.5 h-3.5" />
+                            <LuMessageCircle className="w-3.5 h-3.5" />
                             <span>Contact Support</span>
                         </Link>
                     </div>
@@ -1108,7 +1132,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     href="/contact"
                                     className="glass-btn-outline px-3 sm:px-7 py-2 sm:py-4 text-white rounded-lg sm:rounded-2xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 hover:border-teal-400/60 transition-all text-center whitespace-nowrap"
                                 >
-                                    <ChatCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400 shrink-0" />
+                                    <LuMessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400 shrink-0" />
                                     <span>Message Us</span>
                                 </Link>
 
@@ -1124,7 +1148,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     className="glass-btn-accent px-3 sm:px-8 py-2 sm:py-4 rounded-lg sm:rounded-2xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 group cursor-pointer shadow-lg hover:shadow-teal-500/30 transition-all text-center whitespace-nowrap"
                                 >
                                     <ShinyText speed={2.5} className="text-white font-semibold">Rent Now</ShinyText>
-                                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-1 transition-transform shrink-0" />
+                                    <LuArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-1 transition-transform shrink-0" />
                                 </a>
                             </div>
                         </div>

@@ -6,8 +6,25 @@ import LoadingScreen from '@/Components/LoadingScreen';
 import GlassIcons from '@/Components/GlassIcons';
 import DriftWall from '@/Components/DriftWall';
 import AccordionGallery from '@/Components/AccordionGallery';
-import { 
-    Play, Sliders, Stack, ArrowsClockwise, CheckCircle, FileText, Book, Heart, Cloud, PencilSimple, ChartBar, Car, Bus, Motorcycle, Key, ShieldCheck, Compass } from '@phosphor-icons/react';
+import {
+    LuPlay,
+    LuSlidersHorizontal,
+    LuLayers,
+    LuRefreshCw,
+    LuCircleCheck,
+    LuFileText,
+    LuBook,
+    LuHeart,
+    LuCloud,
+    LuPencil,
+    LuChartBar,
+    LuCar,
+    LuBus,
+    LuBike,
+    LuKey,
+    LuShieldCheck,
+    LuCompass
+} from 'react-icons/lu';
 
 export default function AnimationPreview() {
     const [activeSize, setActiveSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('lg');
@@ -50,7 +67,7 @@ export default function AnimationPreview() {
                     {/* Controls Panel */}
                     <div className="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
                         <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100">
-                            <Sliders className="w-5 h-5 text-teal-600" />
+                            <LuSlidersHorizontal className="w-5 h-5 text-teal-600" />
                             <h2 className="text-lg font-bold text-slate-800">Animation Controls</h2>
                         </div>
 
@@ -124,7 +141,7 @@ export default function AnimationPreview() {
                                 onClick={triggerFullscreenDemo}
                                 className="w-full py-3 px-4 rounded-xl bg-primary-700 hover:bg-primary-800 text-white text-sm font-semibold transition-all shadow-md shadow-primary-700/25 flex items-center justify-center gap-2 group"
                             >
-                                <Play className="w-4 h-4 text-teal-200 group-hover:scale-110 transition-transform" />
+                                <LuPlay className="w-4 h-4 text-teal-200 group-hover:scale-110 transition-transform" />
                                 Test Fullscreen Modal Loading Screen (3s)
                             </button>
                         </div>
@@ -155,7 +172,7 @@ export default function AnimationPreview() {
                         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-teal-50 text-teal-600 rounded-xl">
-                                    <Stack className="w-6 h-6" />
+                                    <LuLayers className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-slate-800 text-sm">Direct SVG Vector Asset</h3>
@@ -179,7 +196,7 @@ export default function AnimationPreview() {
                 {/* Features & Best Practices */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
+                        <LuCircleCheck className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Infinite Vector Crispness</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Crafted in pure scalable vector format with embedded keyframes. Stays sharp on 4K & mobile Retina displays at zero bandwidth overhead (&lt;3KB).
@@ -187,7 +204,7 @@ export default function AnimationPreview() {
                     </div>
 
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
+                        <LuCircleCheck className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Zero Dependencies</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Runs on native CSS animations without heavy external Lottie Web player scripts, ensuring instant page load speed and smooth 60fps rendering.
@@ -195,7 +212,7 @@ export default function AnimationPreview() {
                     </div>
 
                     <div className="p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
-                        <CheckCircle className="w-5 h-5 text-teal-600 mb-2" />
+                        <LuCircleCheck className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Bohol Theme Synergy</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                             Matched to RentalHub's coastal teal palette with suspension physics, high-speed road lane markers, and night-drive headlight projections.
@@ -323,12 +340,12 @@ export default function AnimationPreview() {
                     <div className="relative min-h-[480px] flex items-center justify-center p-4 bg-slate-950/60 rounded-2xl border border-slate-800/80">
                         <GlassIcons
                             items={[
-                                { icon: <FileText className="w-6 h-6" />, color: 'blue', label: 'Files' },
-                                { icon: <Book className="w-6 h-6" />, color: 'purple', label: 'Books' },
-                                { icon: <Heart className="w-6 h-6" />, color: 'red', label: 'Health' },
-                                { icon: <Cloud className="w-6 h-6" />, color: 'indigo', label: 'Weather' },
-                                { icon: <PencilSimple className="w-6 h-6" />, color: 'orange', label: 'Notes' },
-                                { icon: <ChartBar className="w-6 h-6" />, color: 'green', label: 'Stats' },
+                                { icon: <LuFileText className="w-6 h-6" />, color: 'blue', label: 'Files' },
+                                { icon: <LuBook className="w-6 h-6" />, color: 'purple', label: 'Books' },
+                                { icon: <LuHeart className="w-6 h-6" />, color: 'red', label: 'Health' },
+                                { icon: <LuCloud className="w-6 h-6" />, color: 'indigo', label: 'Weather' },
+                                { icon: <LuPencil className="w-6 h-6" />, color: 'orange', label: 'Notes' },
+                                { icon: <LuChartBar className="w-6 h-6" />, color: 'green', label: 'Stats' },
                             ]}
                         />
                     </div>

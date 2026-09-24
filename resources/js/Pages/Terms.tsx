@@ -1,7 +1,21 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { 
-    FileText, ShieldCheck, Compass, GasPump, Warning, CloudRain, Key, Car, CheckCircle, PhoneCall, ArrowRight, MapPin, CalendarCheck, Question } from '@phosphor-icons/react';
+import {
+    LuFileText,
+    LuShieldCheck,
+    LuCompass,
+    LuFuel,
+    LuTriangleAlert,
+    LuCloudRain,
+    LuKey,
+    LuCar,
+    LuCircleCheck,
+    LuPhoneCall,
+    LuArrowRight,
+    LuMapPin,
+    LuCalendarCheck,
+    LuCircleHelp
+} from 'react-icons/lu';
 
 export default function Terms() {
     return (
@@ -18,7 +32,7 @@ export default function Terms() {
             <div className="bg-slate-900 text-white py-12 sm:py-16 border-b border-slate-800">
                 <div className="max-w-4xl mx-auto px-6 md:px-8 space-y-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-500/10 text-teal-300 rounded-lg text-xs font-semibold border border-teal-500/25">
-                        <FileText className="w-3.5 h-3.5 text-teal-400" /> Rental Agreement & Marketplace Standards
+                        <LuFileText className="w-3.5 h-3.5 text-teal-400" /> Rental Agreement & Marketplace Standards
                     </span>
                     <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
                         Terms and Conditions
@@ -37,7 +51,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 border border-teal-100">
-                                <ShieldCheck className="w-5 h-5" />
+                                <LuShieldCheck className="w-5 h-5" />
                             </div>
                             <h2>1. Driver Eligibility and License Requirements</h2>
                         </div>
@@ -64,11 +78,11 @@ export default function Terms() {
                         </div>
                         <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-2 border-teal-500">
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                                 <span>Minimum driving age is 18 years for scooters/motorbikes and 21 years for cars, vans, and SUVs.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                                 <span>The primary renter must be present at vehicle pickup and is legally responsible for the vehicle during the rental period.</span>
                             </li>
                         </ul>
@@ -78,13 +92,13 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-100">
-                                <Compass className="w-5 h-5" />
+                                <LuCompass className="w-5 h-5" />
                             </div>
                             <h2>2. Island Boundary Restrictions and No-Ferry Policy</h2>
                         </div>
                         <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 space-y-2 text-amber-900">
                             <div className="flex items-center gap-2 font-bold text-sm">
-                                <Warning className="w-4 h-4 text-amber-600 shrink-0" />
+                                <LuTriangleAlert className="w-4 h-4 text-amber-600 shrink-0" />
                                 <span>Strict Bohol Island Boundary Enforcement</span>
                             </div>
                             <p className="text-xs sm:text-sm text-amber-800 leading-relaxed">
@@ -93,11 +107,11 @@ export default function Terms() {
                         </div>
                         <ul className="space-y-2.5 text-sm text-slate-700 pl-4 border-l-2 border-amber-400">
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                 <span><strong>No RoRo Ferry Transport:</strong> Loading rented vehicles onto Roll-on/Roll-off (RoRo) ferries, barges, or cargo vessels to travel outside Bohol (e.g. to Cebu, Dumaguete, Siquijor, Leyte, or Mindanao) is strictly prohibited without prior written authorization from the host.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                 <span><strong>GPS Monitoring Disclosure:</strong> In accordance with the Philippine Data Privacy Act of 2012 (RA 10173), vehicles are equipped with GPS telemetry solely for roadside safety, theft prevention, and island perimeter verification.</span>
                             </li>
                         </ul>
@@ -107,7 +121,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <GasPump className="w-5 h-5" />
+                                <LuFuel className="w-5 h-5" />
                             </div>
                             <h2>3. Vehicle Handover Checklist and Fuel Policy</h2>
                         </div>
@@ -136,7 +150,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <Key className="w-5 h-5" />
+                                <LuKey className="w-5 h-5" />
                             </div>
                             <h2>4. Security Deposit and Return Inspection</h2>
                         </div>
@@ -145,11 +159,11 @@ export default function Terms() {
                         </p>
                         <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-2 border-slate-300">
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Deposits (typically ₱1,000 to ₱3,000 for sedans/SUVs, or ₱500 for scooters) are handled directly between host and renter at physical handover.</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>The full deposit is refunded immediately upon return inspection when the vehicle is returned clean, with matching fuel, and free of damage.</span>
                             </li>
                         </ul>
@@ -159,7 +173,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 border border-teal-100">
-                                <Car className="w-5 h-5" />
+                                <LuCar className="w-5 h-5" />
                             </div>
                             <h2>5. Road Safety, Speed Limits, and Helmet Laws</h2>
                         </div>
@@ -185,7 +199,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-5">
                         <div className="flex items-center gap-3 text-teal-700 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 border border-teal-100">
-                                <CloudRain className="w-5 h-5" />
+                                <LuCloudRain className="w-5 h-5" />
                             </div>
                             <h2>6. Typhoon and Coast Guard Weather Guarantee</h2>
                         </div>
@@ -203,7 +217,7 @@ export default function Terms() {
                     <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 space-y-4">
                         <div className="flex items-center gap-3 text-slate-900 font-bold text-lg">
                             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                                <Question className="w-5 h-5" />
+                                <LuCircleHelp className="w-5 h-5" />
                             </div>
                             <h2>7. Platform Marketplace Role</h2>
                         </div>
@@ -226,7 +240,7 @@ export default function Terms() {
                                 className="glass-btn px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2"
                             >
                                 <span>Contact Support</span>
-                                <ArrowRight className="w-4 h-4 text-teal-200" />
+                                <LuArrowRight className="w-4 h-4 text-teal-200" />
                             </Link>
                         </div>
                     </div>

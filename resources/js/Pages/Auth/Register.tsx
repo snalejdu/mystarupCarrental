@@ -1,6 +1,6 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { Eye, EyeSlash, UserCheck, CarProfile } from '@phosphor-icons/react';
+import { LuCar, LuEye, LuEyeOff, LuUserCheck } from 'react-icons/lu';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { useState } from 'react';
 
@@ -59,7 +59,7 @@ export default function Register() {
                                                 : 'text-slate-600 hover:text-slate-900'
                                         }`}
                                     >
-                                        <UserCheck className="w-4 h-4 text-teal-600 shrink-0" />
+                                        <LuUserCheck className="w-4 h-4 text-teal-600 shrink-0" />
                                         <span>Rent a Vehicle</span>
                                     </button>
 
@@ -72,7 +72,7 @@ export default function Register() {
                                                 : 'text-slate-600 hover:text-slate-900'
                                         }`}
                                     >
-                                        <CarProfile className="w-4 h-4 text-teal-600 shrink-0" />
+                                        <LuCar className="w-4 h-4 text-teal-600 shrink-0" />
                                         <span>List My Vehicle</span>
                                     </button>
                                 </div>
@@ -140,7 +140,7 @@ export default function Register() {
                                             className="w-11 h-11 flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
                                             aria-label={showPassword ? 'Hide password' : 'Show password'}
                                         >
-                                            {showPassword ? <EyeSlash className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                            {showPassword ? <LuEyeOff className="w-5 h-5" /> : <LuEye className="w-5 h-5" />}
                                         </button>
                                     </div>
                                     {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}

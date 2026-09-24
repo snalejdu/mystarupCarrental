@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { List, X, CarProfile, User, SignOut, CaretDown, PhoneCall } from '@phosphor-icons/react';
+import { LuCar, LuChevronDown, LuLogOut, LuMenu, LuPhoneCall, LuUser, LuX } from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
 import { useVehicleAutoSync } from '@/lib/vehicleSync';
@@ -112,7 +112,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                 href="tel:+63385018888"
                                 className="glass-btn-outline-light flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-primary-700 text-xs font-semibold"
                             >
-                                <PhoneCall className="w-3.5 h-3.5" />
+                                <LuPhoneCall className="w-3.5 h-3.5" />
                                 <span>(038) 501-8888</span>
                             </a>
 
@@ -126,7 +126,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                             {auth.user.name?.[0] || 'U'}
                                         </div>
                                         <span>{auth.user.name}</span>
-                                        <CaretDown className="w-3.5 h-3.5 text-slate-400" />
+                                        <LuChevronDown className="w-3.5 h-3.5 text-slate-400" />
                                     </button>
 
                                     {userMenuOpen && (
@@ -161,7 +161,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                             )}
                                             <hr className="my-1 border-slate-100" />
                                             <Link href="/logout" method="post" as="button" className="w-full text-left block px-4 py-2 text-sm font-medium text-rose-600 hover:bg-rose-50">
-                                                <span className="flex items-center gap-2"><SignOut className="w-3.5 h-3.5" /> Log Out</span>
+                                                <span className="flex items-center gap-2"><LuLogOut className="w-3.5 h-3.5" /> Log Out</span>
                                             </Link>
                                         </div>
                                     )}
@@ -182,7 +182,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                 className="glass-btn-icon p-2 rounded-lg text-slate-700"
                             >
-                                {mobileMenuOpen ? <X className="w-6 h-6" /> : <List className="w-6 h-6" />}
+                                {mobileMenuOpen ? <LuX className="w-6 h-6" /> : <LuMenu className="w-6 h-6" />}
                             </button>
                         </div>
                     </div>
@@ -221,7 +221,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                             </Link>
                         )}
                         <a href="tel:+63385018888" className="flex items-center gap-2 py-2 text-sm font-medium text-primary-700">
-                            <PhoneCall className="w-4 h-4" /> (038) 501-8888
+                            <LuPhoneCall className="w-4 h-4" /> (038) 501-8888
                         </a>
 
                         {auth?.user ? (
@@ -286,7 +286,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                             <div className="pt-2 sm:hidden border-t border-slate-800/80">
                                 <h4 className="text-[10px] font-bold uppercase text-slate-300 tracking-wider mb-1">Support 24/7</h4>
                                 <a href="tel:+63385018888" className="flex items-center gap-1.5 text-primary-400 font-medium text-[11px] hover:underline">
-                                    <PhoneCall className="w-3 h-3 shrink-0" /> (038) 501-8888
+                                    <LuPhoneCall className="w-3 h-3 shrink-0" /> (038) 501-8888
                                 </a>
                                 <p className="text-[10px] text-slate-400 mt-0.5">support@RentalHub.ph</p>
                             </div>
@@ -297,7 +297,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                             <h4 className="text-xs font-bold uppercase text-slate-300 tracking-wider mb-5">Customer Support</h4>
                             <div className="space-y-3 text-sm text-slate-400">
                                 <a href="tel:+63385018888" className="flex items-center gap-2 text-primary-300 font-medium hover:underline">
-                                    <PhoneCall className="w-3.5 h-3.5" /> (038) 501-8888
+                                    <LuPhoneCall className="w-3.5 h-3.5" /> (038) 501-8888
                                 </a>
                                 <p className="text-xs text-slate-400">support@RentalHub.ph</p>
                             </div>

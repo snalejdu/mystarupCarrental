@@ -1,7 +1,21 @@
 import { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { CheckCircle, Clock, XCircle, Star, MapPin, Calendar, Phone, EnvelopeSimple, User, CreditCard, ShareNetwork, Copy, ShieldCheck } from '@phosphor-icons/react';
+import {
+    LuCircleCheck,
+    LuClock,
+    LuCircleX,
+    LuStar,
+    LuMapPin,
+    LuCalendar,
+    LuPhone,
+    LuMail,
+    LuUser,
+    LuCreditCard,
+    LuShare2,
+    LuCopy,
+    LuShieldCheck
+} from 'react-icons/lu';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import PaymentModal from '@/Components/PaymentModal';
 import { triggerToast } from '@/Components/DynamicToast';
@@ -17,35 +31,35 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
 
     const statusConfig: Record<string, { icon: any; color: string; bg: string; label: string; message: string }> = {
         pending: {
-            icon: Clock,
+            icon: LuClock,
             color: 'text-amber-600',
             bg: 'bg-amber-50/80 border-amber-200/80 text-amber-900',
             label: 'Pending Host Review',
             message: 'Your booking request is being reviewed by the vehicle owner. You\'ll be notified once they respond.',
         },
         accepted: {
-            icon: CheckCircle,
+            icon: LuCircleCheck,
             color: 'text-emerald-600',
             bg: 'bg-emerald-50/80 border-emerald-200/80 text-emerald-900',
             label: 'Accepted & Confirmed!',
             message: 'Great news! The host accepted your reservation. Direct contact details and instant checkout are now unlocked below.',
         },
         declined: {
-            icon: XCircle,
+            icon: LuCircleX,
             color: 'text-rose-600',
             bg: 'bg-rose-50/80 border-rose-200/80 text-rose-900',
             label: 'Declined',
             message: 'Unfortunately, the owner was unable to accept this booking. The dates are still available for other vehicles.',
         },
         completed: {
-            icon: CheckCircle,
+            icon: LuCircleCheck,
             color: 'text-teal-600',
             bg: 'bg-teal-50/80 border-teal-200/80 text-teal-900',
             label: 'Rental Completed',
             message: 'This rental has been completed. Thank you for traveling with RentalHub!',
         },
         cancelled: {
-            icon: XCircle,
+            icon: LuCircleX,
             color: 'text-slate-600',
             bg: 'bg-slate-50 border-slate-200 text-slate-800',
             label: 'Cancelled',
@@ -89,7 +103,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                                     onClick={copyTrackingLink}
                                     className="glass-btn-outline-light min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-slate-700 text-xs font-semibold cursor-pointer"
                                 >
-                                    <Copy className="w-4 h-4" />
+                                    <LuCopy className="w-4 h-4" />
                                     <span>Copy Link</span>
                                 </button>
                             </div>
@@ -104,7 +118,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-wider mb-2">
-                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-200" />
+                                    <LuCircleCheck className="w-3.5 h-3.5 text-emerald-200" />
                                     {isPaid ? 'Payment Confirmed' : 'Payment Ready'}
                                 </span>
                                 <h3 className="text-base sm:text-lg font-bold">
@@ -123,7 +137,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                                     onClick={() => setShowPaymentModal(true)}
                                     className="glass-btn-accent min-h-[48px] px-6 py-3 font-bold rounded-2xl text-xs sm:text-sm shrink-0 flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                                 >
-                                    <CreditCard className="w-4 h-4 text-white" />
+                                    <LuCreditCard className="w-4 h-4 text-white" />
                                     <span>Pay {formatCurrency(Number(booking.total_price))}</span>
                                 </button>
                             )}
@@ -135,19 +149,19 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                 {ownerContact && (
                     <div className="apple-card bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 mb-6 shadow-xs">
                         <h2 className="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
-                            <User className="w-4 h-4 text-primary-700" />
+                            <LuUser className="w-4 h-4 text-primary-700" />
                             Verified Host Contact Details
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                             <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                                <User className="w-4 h-4 text-slate-400 shrink-0" />
+                                <LuUser className="w-4 h-4 text-slate-400 shrink-0" />
                                 <div>
                                     <span className="text-xs text-slate-400 uppercase font-semibold block">Vehicle Host</span>
                                     <span className="text-xs font-bold text-slate-800">{ownerContact.name}</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                                <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
+                                <LuPhone className="w-4 h-4 text-emerald-600 shrink-0" />
                                 <div>
                                     <span className="text-xs text-slate-400 uppercase font-semibold block">Direct Mobile / Viber</span>
                                     <a href={`tel:${ownerContact.phone}`} className="min-h-[44px] inline-flex items-center text-xs font-bold text-primary-700 hover:underline">
@@ -175,7 +189,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                             <div>
                                 <h3 className="font-semibold text-sm sm:text-base text-[var(--color-primary-900)]">{booking.vehicle.title}</h3>
                                 <p className="text-xs sm:text-sm text-[var(--color-sand-500)] flex items-center gap-1 mt-0.5">
-                                    <MapPin className="w-3.5 h-3.5 shrink-0" /> {booking.vehicle.location}, Bohol
+                                    <LuMapPin className="w-3.5 h-3.5 shrink-0" /> {booking.vehicle.location}, Bohol
                                 </p>
                             </div>
                         </div>
@@ -185,14 +199,14 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Pickup Date</p>
                             <p className="font-medium text-xs sm:text-sm flex items-center gap-1.5 mt-0.5">
-                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
+                                <LuCalendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
                                 {formatDate(booking.start_date)}
                             </p>
                         </div>
                         <div>
                             <p className="text-xs text-[var(--color-sand-500)] uppercase tracking-wider">Return Date</p>
                             <p className="font-medium text-xs sm:text-sm flex items-center gap-1.5 mt-0.5">
-                                <Calendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
+                                <LuCalendar className="w-4 h-4 text-[var(--color-primary-600)] shrink-0" />
                                 {formatDate(booking.end_date)}
                             </p>
                         </div>
@@ -266,7 +280,7 @@ function RatingForm({ token }: { token: string }) {
                                 className="min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none cursor-pointer"
                                 aria-label={`${star} star rating`}
                             >
-                                <Star
+                                <LuStar
                                     className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors ${
                                         star <= data.stars
                                             ? 'text-yellow-400 fill-yellow-400'

@@ -1,7 +1,19 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import {
-    CarProfile, CalendarBlank, Wallet, Plus, ShieldCheck, ArrowsLeftRight, SignOut, List, X, CaretRight, Compass, FileText } from '@phosphor-icons/react';
+    LuCar,
+    LuCalendar,
+    LuWallet,
+    LuPlus,
+    LuShieldCheck,
+    LuArrowLeftRight,
+    LuLogOut,
+    LuMenu,
+    LuX,
+    LuChevronRight,
+    LuCompass,
+    LuFileText
+} from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
 
@@ -16,14 +28,14 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
     const currentUrl = usePage().url;
 
     const navItems = [
-        { href: '/owner/vehicles', label: 'My Vehicles', icon: CarProfile },
-        { href: '/owner/bookings', label: 'Bookings', icon: CalendarBlank },
-        { href: '/owner/earnings', label: 'Earnings & Payouts', icon: Wallet },
+        { href: '/owner/vehicles', label: 'My Vehicles', icon: LuCar },
+        { href: '/owner/bookings', label: 'Bookings', icon: LuCalendar },
+        { href: '/owner/earnings', label: 'Earnings & Payouts', icon: LuWallet },
     ];
 
     const secondaryNavItems = [
-        { href: '/vehicles', label: 'View Marketplace', icon: Compass },
-        { href: '/terms', label: 'Bohol Rental Rules', icon: FileText },
+        { href: '/vehicles', label: 'View Marketplace', icon: LuCompass },
+        { href: '/terms', label: 'Bohol Rental Rules', icon: LuFileText },
     ];
 
     const isActive = (href: string) => currentUrl.startsWith(href);
@@ -40,7 +52,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                     className="glass-btn-icon touch-target rounded-xl text-slate-700 -ml-2"
                     aria-label="Open Sidebar"
                 >
-                    <List className="w-6 h-6" />
+                    <LuMenu className="w-6 h-6" />
                 </button>
                 <Link href="/" className="flex items-center">
                     <BrandLogo size="sm" subtitle="Host Hub" />
@@ -50,7 +62,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                     className="touch-target text-teal-700 font-semibold text-xs flex items-center gap-1"
                     title="List New Vehicle"
                 >
-                    <Plus className="w-5 h-5" />
+                    <LuPlus className="w-5 h-5" />
                 </Link>
             </div>
 
@@ -105,7 +117,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                         href="/owner/vehicles"
                         className={`flex flex-col items-center justify-center h-full touch-target transition-colors ${currentUrl.startsWith('/owner/vehicles') && !currentUrl.includes('/create') ? 'text-teal-700 font-bold' : 'text-slate-500 hover:text-slate-900'}`}
                     >
-                        <CarProfile className="w-5 h-5" weight={currentUrl.startsWith('/owner/vehicles') && !currentUrl.includes('/create') ? 'fill' : 'regular'} />
+                        <LuCar className="w-5 h-5" />
                         <span className="text-xs mt-0.5 font-medium">Fleet</span>
                     </Link>
 
@@ -113,7 +125,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                         href="/owner/bookings"
                         className={`flex flex-col items-center justify-center h-full touch-target transition-colors ${currentUrl.startsWith('/owner/bookings') ? 'text-teal-700 font-bold' : 'text-slate-500 hover:text-slate-900'}`}
                     >
-                        <CalendarBlank className="w-5 h-5" weight={currentUrl.startsWith('/owner/bookings') ? 'fill' : 'regular'} />
+                        <LuCalendar className="w-5 h-5" />
                         <span className="text-xs mt-0.5 font-medium">Bookings</span>
                     </Link>
 
@@ -121,7 +133,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                         href="/owner/earnings"
                         className={`flex flex-col items-center justify-center h-full touch-target transition-colors ${currentUrl.startsWith('/owner/earnings') ? 'text-teal-700 font-bold' : 'text-slate-500 hover:text-slate-900'}`}
                     >
-                        <Wallet className="w-5 h-5" weight={currentUrl.startsWith('/owner/earnings') ? 'fill' : 'regular'} />
+                        <LuWallet className="w-5 h-5" />
                         <span className="text-xs mt-0.5 font-medium">Earnings</span>
                     </Link>
 
@@ -129,7 +141,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
                         href="/owner/vehicles/create"
                         className={`flex flex-col items-center justify-center h-full touch-target transition-colors ${currentUrl.includes('/owner/vehicles/create') ? 'text-teal-700 font-bold' : 'text-slate-500 hover:text-slate-900'}`}
                     >
-                        <Plus className="w-5 h-5" weight={currentUrl.includes('/owner/vehicles/create') ? 'bold' : 'regular'} />
+                        <LuPlus className="w-5 h-5" />
                         <span className="text-xs mt-0.5 font-medium">Add Car</span>
                     </Link>
                 </div>
@@ -149,7 +161,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                     </Link>
                     {onClose && (
                         <button onClick={onClose} className="glass-btn-icon touch-target rounded-lg text-slate-500 hover:text-slate-800" aria-label="Close sidebar">
-                            <X className="w-5 h-5" />
+                            <LuX className="w-5 h-5" />
                         </button>
                     )}
                 </div>
@@ -170,7 +182,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                     onClick={onClose}
                     className="flex items-center justify-center gap-2 w-full min-h-[44px] py-2.5 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 active:scale-[0.98] text-white font-semibold text-xs shadow-xs hover:shadow-md transition-all group"
                 >
-                    <Plus className="w-4 h-4 text-teal-200 group-hover:rotate-90 transition-transform duration-300" />
+                    <LuPlus className="w-4 h-4 text-teal-200 group-hover:rotate-90 transition-transform duration-300" />
                     <span>List New Vehicle</span>
                 </Link>
             </div>
@@ -224,7 +236,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                                     <item.icon className="w-4 h-4 text-slate-400" />
                                     <span>{item.label}</span>
                                 </div>
-                                <CaretRight className="w-3 h-3 text-slate-300" />
+                                <LuChevronRight className="w-3 h-3 text-slate-300" />
                             </Link>
                         ))}
                     </nav>
@@ -234,7 +246,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                 <div className="p-3 rounded-2xl border border-teal-100/90 bg-gradient-to-br from-teal-50/80 via-white to-emerald-50/40 shadow-2xs space-y-1.5">
                     <div className="flex items-center gap-1.5">
                         <div className="w-5 h-5 rounded-md bg-teal-600/10 text-teal-700 flex items-center justify-center shrink-0">
-                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <LuShieldCheck className="w-3.5 h-3.5" />
                         </div>
                         <span className="text-xs font-bold text-slate-900">Island Shield</span>
                     </div>
@@ -247,7 +259,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                         className="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-800 touch-target-compact"
                     >
                         <span>Review Guidelines</span>
-                        <CaretRight className="w-3 h-3" />
+                        <LuChevronRight className="w-3 h-3" />
                     </Link>
                 </div>
             </div>
@@ -277,7 +289,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                         as="button"
                         className="w-full flex items-center justify-center gap-2 min-h-[44px] px-3 py-2 text-xs font-semibold text-teal-800 bg-white hover:bg-teal-50 border border-teal-200/80 hover:border-teal-300 rounded-xl transition-all shadow-2xs group"
                     >
-                        <ArrowsLeftRight className="w-3.5 h-3.5 text-teal-600 group-hover:rotate-180 transition-transform duration-300" />
+                        <LuArrowLeftRight className="w-3.5 h-3.5 text-teal-600 group-hover:rotate-180 transition-transform duration-300" />
                         <span>Switch to Renter Mode</span>
                     </Link>
 
@@ -287,7 +299,7 @@ function SidebarContent({ navItems, secondaryNavItems, isActive, auth, onClose }
                         as="button"
                         className="w-full flex items-center justify-center gap-1.5 min-h-[44px] px-3 py-1 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50/80 rounded-lg transition-colors group"
                     >
-                        <SignOut className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                        <LuLogOut className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
                         <span>Log Out</span>
                     </Link>
                 </div>

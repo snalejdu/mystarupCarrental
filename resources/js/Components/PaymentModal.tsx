@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, ShieldCheck, CreditCard, QrCode, DeviceMobile, ArrowRight, DownloadSimple, Copy, Buildings } from '@phosphor-icons/react';
+import {
+    LuX,
+    LuCircleCheck,
+    LuShieldCheck,
+    LuCreditCard,
+    LuQrCode,
+    LuSmartphone,
+    LuArrowRight,
+    LuDownload,
+    LuCopy,
+    LuBuilding
+} from 'react-icons/lu';
 import { triggerToast } from './DynamicToast';
 
 interface PaymentModalProps {
@@ -98,7 +109,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                 <div className="bg-slate-900 text-white px-5 sm:px-6 py-4 flex items-center justify-between relative overflow-hidden shrink-0">
                     <div className="flex items-center gap-2.5 relative z-10">
                         <div className="w-8 h-8 rounded-xl bg-primary-600/30 border border-primary-500/40 flex items-center justify-center text-primary-300">
-                            <ShieldCheck className="w-5 h-5" />
+                            <LuShieldCheck className="w-5 h-5" />
                         </div>
                         <div>
                             <h3 className="font-bold text-sm tracking-tight">RentalHub Secure Checkout</h3>
@@ -112,7 +123,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                         className="glass-btn-icon touch-target rounded-xl text-slate-400 hover:text-white transition-colors relative z-10"
                         aria-label="Close Checkout"
                     >
-                        <X className="w-5 h-5" />
+                        <LuX className="w-5 h-5" />
                     </button>
                 </div>
 
@@ -120,7 +131,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                     /* ── SUCCESS RECEIPT SCREEN ── */
                     <div className="p-6 sm:p-8 space-y-5 text-center overflow-y-auto flex-1">
                         <div className="w-16 h-16 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center mx-auto text-emerald-600 animate-spring-scale">
-                            <CheckCircle className="w-8 h-8" />
+                            <LuCircleCheck className="w-8 h-8" />
                         </div>
 
                         <div>
@@ -145,7 +156,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                         className="touch-target p-1 rounded hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-colors"
                                         title="Copy reference"
                                     >
-                                        <Copy className="w-3.5 h-3.5" />
+                                        <LuCopy className="w-3.5 h-3.5" />
                                     </button>
                                 </div>
                             </div>
@@ -208,7 +219,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                             : 'glass-pill text-slate-700'
                                     }`}
                                 >
-                                    <DeviceMobile className="w-5 h-5" />
+                                    <LuSmartphone className="w-5 h-5" />
                                     <span className="text-xs font-bold">GCash</span>
                                 </button>
 
@@ -221,7 +232,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                             : 'glass-pill text-slate-700'
                                     }`}
                                 >
-                                    <QrCode className="w-5 h-5" />
+                                    <LuQrCode className="w-5 h-5" />
                                     <span className="text-xs font-bold">Maya</span>
                                 </button>
 
@@ -234,7 +245,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                             : 'glass-pill text-slate-700'
                                     }`}
                                 >
-                                    <CreditCard className="w-5 h-5" />
+                                    <LuCreditCard className="w-5 h-5" />
                                     <span className="text-xs font-bold">Card</span>
                                 </button>
                             </div>
@@ -256,7 +267,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-3 text-base sm:text-sm font-mono text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none min-h-[48px]"
                                 />
                                 <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                                    <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
+                                    <LuShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
                                     <span>You will receive an instant OTP authorization SMS.</span>
                                 </div>
                             </div>
@@ -267,7 +278,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                                 <div className="w-28 h-28 bg-white rounded-xl border border-slate-200 mx-auto flex items-center justify-center p-2 shadow-inner">
                                     {/* Mock Maya Dynamic QR Box */}
                                     <div className="w-full h-full border-2 border-dashed border-emerald-400 rounded-lg flex flex-col items-center justify-center text-emerald-600">
-                                        <QrCode className="w-10 h-10" />
+                                        <LuQrCode className="w-10 h-10" />
                                         <span className="text-xs font-bold mt-1">SCAN VIA MAYA</span>
                                     </div>
                                 </div>
@@ -330,7 +341,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                             ) : (
                                 <>
                                     <span>Pay {formattedAmount} Now</span>
-                                    <ArrowRight className="w-4 h-4" />
+                                    <LuArrowRight className="w-4 h-4" />
                                 </>
                             )}
                         </button>

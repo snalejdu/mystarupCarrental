@@ -1,21 +1,22 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    MapPin,
-    EnvelopeSimple,
-    PhoneCall,
-    Clock,
-    PaperPlaneTilt,
-    CheckCircle,
-    ArrowRight,
-    User,
-    Car,
-    ChatCircleDots,
-    WhatsappLogo,
-    CaretDown,
-    Sparkle,
-    ShieldCheck,
-} from '@phosphor-icons/react';
+    LuMapPin,
+    LuMail,
+    LuPhoneCall,
+    LuClock,
+    LuSend,
+    LuCircleCheck,
+    LuArrowRight,
+    LuUser,
+    LuCar,
+    LuCircleHelp,
+    LuMessageSquare,
+    LuMessageSquareDot,
+    LuChevronDown,
+    LuSparkles,
+    LuShieldCheck
+} from 'react-icons/lu';
 
 export default function Contact() {
     const { data, setData, post, processing, errors, reset, wasSuccessful } = useForm({
@@ -57,7 +58,7 @@ export default function Contact() {
                 <div className="flex items-center justify-between">
                     <div>
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200/70 text-teal-700 text-xs font-bold tracking-wide uppercase">
-                            <Sparkle className="w-3 h-3 text-teal-600" weight="fill" />
+                            <LuSparkles className="w-3 h-3 text-teal-600 fill-teal-600" />
                             24/7 Island Care
                         </span>
                         <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
@@ -69,7 +70,7 @@ export default function Contact() {
                         href="tel:+639171234567"
                         className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-700 font-bold text-xs active:scale-95 transition-transform shadow-2xs"
                     >
-                        <PhoneCall className="w-3.5 h-3.5 text-emerald-600" weight="bold" />
+                        <LuPhoneCall className="w-3.5 h-3.5 text-emerald-600 stroke-[2.5]" />
                         <span>Call</span>
                     </a>
                 </div>
@@ -87,7 +88,7 @@ export default function Contact() {
                     className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
                     <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <WhatsappLogo className="w-4 h-4" weight="bold" />
+                        <LuMessageSquare className="w-4 h-4 stroke-[2.5]" />
                     </div>
                     <div className="min-w-0">
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp</div>
@@ -100,7 +101,7 @@ export default function Contact() {
                     className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
                     <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <EnvelopeSimple className="w-4 h-4" weight="bold" />
+                        <LuMail className="w-4 h-4 stroke-[2.5]" />
                     </div>
                     <div className="min-w-0">
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email</div>
@@ -119,7 +120,7 @@ export default function Contact() {
                     <div className="lg:col-span-7 bg-white p-4 sm:p-8 rounded-2xl border border-slate-200/90 shadow-xs sm:shadow-sm space-y-3 sm:space-y-5">
                         <div className="space-y-1 sm:space-y-2">
                             <div className="flex items-center gap-2">
-                                <ChatCircleDots className="w-4 h-4 text-teal-600 shrink-0 sm:hidden" weight="bold" />
+                                <LuMessageSquareDot className="w-4 h-4 text-teal-600 shrink-0 sm:hidden" />
                                 <h2 className="text-base sm:text-3xl font-extrabold text-slate-900 leading-snug">
                                     <span className="sm:hidden">Send Us An Inquiry</span>
                                     <span className="hidden sm:inline">We'd Love to Hear From You</span>
@@ -132,7 +133,7 @@ export default function Contact() {
 
                         {wasSuccessful && (
                             <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2">
-                                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                                <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                                 <span>Thank you! Your message has been sent to RentalHub support.</span>
                             </div>
                         )}
@@ -145,7 +146,7 @@ export default function Contact() {
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                        <User className="w-4 h-4" />
+                                        <LuUser className="w-4 h-4" />
                                     </div>
                                     <input
                                         type="text"
@@ -166,7 +167,7 @@ export default function Contact() {
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                            <EnvelopeSimple className="w-4 h-4" />
+                                            <LuMail className="w-4 h-4" />
                                         </div>
                                         <input
                                             type="email"
@@ -185,7 +186,7 @@ export default function Contact() {
                                     </label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                            <PhoneCall className="w-4 h-4" />
+                                            <LuPhoneCall className="w-4 h-4" />
                                         </div>
                                         <input
                                             type="text"
@@ -205,7 +206,7 @@ export default function Contact() {
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                        <Car className="w-4 h-4" />
+                                        <LuCar className="w-4 h-4" />
                                     </div>
                                     <select
                                         value={data.vehicle_type}
@@ -218,7 +219,7 @@ export default function Contact() {
                                         <option value="suv">SUV (4x4)</option>
                                     </select>
                                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
-                                        <CaretDown className="w-4 h-4" />
+                                        <LuChevronDown className="w-4 h-4" />
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +244,7 @@ export default function Contact() {
                                  disabled={processing}
                                  className="glass-btn w-full min-h-[48px] py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-teal-700/10 active:scale-[0.99] transition-all"
                             >
-                                <PaperPlaneTilt className="w-4 h-4" weight="bold" />
+                                <LuSend className="w-4 h-4 stroke-[2.5]" />
                                 <span>{processing ? 'Sending...' : 'Send Message'}</span>
                             </button>
                         </form>
@@ -270,7 +271,7 @@ export default function Contact() {
                         <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
                             <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center shrink-0">
-                                    <MapPin className="w-4 h-4 text-amber-600" />
+                                    <LuMapPin className="w-4 h-4 text-amber-600" />
                                 </div>
                                 <div className="min-w-0">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Address</span>
@@ -280,7 +281,7 @@ export default function Contact() {
 
                             <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-teal-500/10 border border-teal-500/25 flex items-center justify-center shrink-0">
-                                    <EnvelopeSimple className="w-4 h-4 text-teal-600" />
+                                    <LuMail className="w-4 h-4 text-teal-600" />
                                 </div>
                                 <div className="min-w-0">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Email</span>
@@ -290,7 +291,7 @@ export default function Contact() {
 
                             <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center shrink-0">
-                                    <PhoneCall className="w-4 h-4 text-emerald-600" />
+                                    <LuPhoneCall className="w-4 h-4 text-emerald-600" />
                                 </div>
                                 <div className="min-w-0">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hotline</span>
@@ -300,7 +301,7 @@ export default function Contact() {
 
                             <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-teal-500/10 border border-teal-500/25 flex items-center justify-center shrink-0">
-                                    <Clock className="w-4 h-4 text-teal-600" />
+                                    <LuClock className="w-4 h-4 text-teal-600" />
                                 </div>
                                 <div className="min-w-0">
                                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hours</span>
@@ -328,7 +329,7 @@ export default function Contact() {
                         className="glass-btn min-h-[48px] px-6 py-3 sm:px-8 sm:py-3.5 rounded-xl font-semibold text-sm shrink-0 flex items-center gap-2 w-full sm:w-auto justify-center"
                     >
                         <span>Browse Vehicles Now</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <LuArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
 

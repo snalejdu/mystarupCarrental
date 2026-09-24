@@ -1,7 +1,20 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import {
-    Shield, SquaresFour, Percent, CalendarBlank, Users, SignOut, List, X, CarProfile, MagnifyingGlass, Bell, Pulse, CaretRight } from '@phosphor-icons/react';
+    LuShield,
+    LuLayoutGrid,
+    LuPercent,
+    LuCalendar,
+    LuUsers,
+    LuLogOut,
+    LuMenu,
+    LuX,
+    LuCar,
+    LuSearch,
+    LuBell,
+    LuActivity,
+    LuChevronRight
+} from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
 
@@ -16,10 +29,10 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
     const currentUrl = usePage().url;
 
     const navItems = [
-        { href: '/admin/dashboard', label: 'Dashboard', icon: SquaresFour },
-        { href: '/admin/commissions', label: 'Commission Ledger', icon: Percent },
-        { href: '/admin/bookings', label: 'Master Bookings', icon: CalendarBlank },
-        { href: '/admin/owners', label: 'Vehicle Owners', icon: Users },
+        { href: '/admin/dashboard', label: 'Dashboard', icon: LuLayoutGrid },
+        { href: '/admin/commissions', label: 'Commission Ledger', icon: LuPercent },
+        { href: '/admin/bookings', label: 'Master Bookings', icon: LuCalendar },
+        { href: '/admin/owners', label: 'Vehicle Owners', icon: LuUsers },
     ];
 
     const isActive = (href: string) => currentUrl.startsWith(href);
@@ -36,7 +49,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                     className="glass-btn-icon touch-target rounded-xl text-slate-300 -ml-2"
                     aria-label="Open Admin Menu"
                 >
-                    <List className="w-6 h-6" />
+                    <LuMenu className="w-6 h-6" />
                 </button>
                 <Link href="/" className="flex items-center">
                     <BrandLogo theme="dark" size="sm" subtitle="Admin Console" />
@@ -65,7 +78,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                 <header className="hidden lg:flex h-16 bg-slate-950 border-b border-slate-800/80 px-8 items-center justify-between sticky top-0 z-20">
                     <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 rounded-xl px-3.5 py-1.5 text-xs text-slate-400">
-                            <MagnifyingGlass className="w-3.5 h-3.5 text-primary-400" />
+                            <LuSearch className="w-3.5 h-3.5 text-primary-400" />
                             <input
                                 type="text"
                                 placeholder="Search platform bookings, hosts, vehicles..."
@@ -76,14 +89,14 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 px-3 py-1 bg-primary-700/10 border border-primary-700/30 text-primary-300 rounded-lg text-xs font-semibold">
-                            <Pulse className="w-3.5 h-3.5 text-emerald-400" />
+                            <LuActivity className="w-3.5 h-3.5 text-emerald-400" />
                             <span>Bohol Live Node • 4% Global Rate</span>
                         </div>
 
                         <div className="h-4 w-px bg-slate-800" />
 
                         <button className="glass-btn-icon p-2 rounded-lg text-slate-400 hover:text-white" aria-label="Notifications">
-                            <Bell className="w-4 h-4" />
+                            <LuBell className="w-4 h-4" />
                         </button>
                     </div>
                 </header>
@@ -125,7 +138,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                 </Link>
                 {onClose && (
                     <button onClick={onClose} className="glass-btn-icon touch-target rounded-xl text-slate-400" aria-label="Close menu">
-                        <X className="w-5 h-5" />
+                        <LuX className="w-5 h-5" />
                     </button>
                 )}
             </div>
@@ -153,7 +166,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                                 <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
                                 <span>{item.label}</span>
                             </div>
-                            {active && <CaretRight className="w-4 h-4 text-white/70" />}
+                            {active && <LuChevronRight className="w-4 h-4 text-white/70" />}
                         </Link>
                     );
                 })}
@@ -176,7 +189,7 @@ function AdminSidebarContent({ navItems, isActive, auth, onClose }: any) {
                     as="button"
                     className="w-full flex items-center justify-center gap-2 min-h-[44px] px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 rounded-xl border border-rose-500/20 transition-colors"
                 >
-                    <SignOut className="w-3.5 h-3.5" /> Log Out
+                    <LuLogOut className="w-3.5 h-3.5" /> Log Out
                 </Link>
             </div>
         </div>

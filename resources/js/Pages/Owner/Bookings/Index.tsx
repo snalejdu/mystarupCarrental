@@ -1,7 +1,21 @@
 import { Head, Link, router } from '@inertiajs/react';
 import OwnerLayout from '@/Layouts/OwnerLayout';
 import {
-    Calendar, CheckCircle, XCircle, Clock, MapPin, Phone, EnvelopeSimple, User, ShieldCheck, Prohibit, ArrowRight, Check, WarningCircle, ChatCircle } from '@phosphor-icons/react';
+    LuCalendar,
+    LuCircleCheck,
+    LuCircleX,
+    LuClock,
+    LuMapPin,
+    LuPhone,
+    LuMail,
+    LuUser,
+    LuShieldCheck,
+    LuBan,
+    LuArrowRight,
+    LuCheck,
+    LuCircleAlert,
+    LuMessageCircle
+} from 'react-icons/lu';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -134,7 +148,7 @@ export default function BookingsIndex({ bookings }: Props) {
                 {/* Bookings List */}
                 {filteredBookings.length === 0 ? (
                     <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center shadow-xs">
-                        <Calendar className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                        <LuCalendar className="w-10 h-10 text-slate-300 mx-auto mb-2" />
                         <h3 className="font-bold text-base text-slate-900 mb-0.5">No {filter !== 'all' ? filter : ''} bookings found</h3>
                         <p className="text-slate-500 text-xs font-medium">When rental requests match this category, they will appear here.</p>
                     </div>
@@ -176,7 +190,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                 {booking.vehicle?.title || 'Vehicle Rental'}
                                             </h4>
                                             <p className="text-xs text-slate-500 flex items-center gap-1 font-medium mt-0.5">
-                                                <MapPin className="w-3 h-3 text-primary-600 shrink-0" />
+                                                <LuMapPin className="w-3 h-3 text-primary-600 shrink-0" />
                                                 <span className="truncate">{booking.vehicle?.location}, Bohol</span>
                                             </p>
                                         </div>
@@ -215,7 +229,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                     <div>
                                         <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Renter</span>
                                         <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5 truncate">
-                                            <User className="w-3 h-3 text-slate-400 shrink-0" />
+                                            <LuUser className="w-3 h-3 text-slate-400 shrink-0" />
                                             <span className="truncate">{booking.renter_display_name}</span>
                                         </span>
                                     </div>
@@ -224,7 +238,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                     <div>
                                         <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">Rental Dates</span>
                                         <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5">
-                                            <Calendar className="w-3 h-3 text-primary-600 shrink-0" />
+                                            <LuCalendar className="w-3 h-3 text-primary-600 shrink-0" />
                                             <span>{formatDate(booking.start_date)} – {formatDate(booking.end_date)}</span>
                                         </span>
                                         <span className="text-xs text-slate-500 font-medium">({booking.total_days} {booking.total_days === 1 ? 'day' : 'days'})</span>
@@ -252,7 +266,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 {(isAccepted || isCompleted) && (
                                     <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl px-3.5 py-2.5 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                                         <div className="flex items-center gap-1.5 font-bold text-emerald-900">
-                                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                                            <LuShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                                             <span>Renter Contact Details</span>
                                         </div>
                                         <div className="flex items-center gap-2 flex-wrap text-xs">
@@ -269,7 +283,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     className="min-h-[44px] inline-flex items-center gap-1.5 text-emerald-800 hover:text-emerald-950 font-bold transition-colors bg-emerald-100 hover:bg-emerald-200 px-3 py-2 rounded-xl border border-emerald-300 shadow-2xs"
                                                     title="Chat with renter on WhatsApp"
                                                 >
-                                                    <ChatCircle className="w-4 h-4 text-emerald-700" />
+                                                    <LuMessageCircle className="w-4 h-4 text-emerald-700" />
                                                     <span>WhatsApp</span>
                                                 </a>
                                             )}
@@ -281,7 +295,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     className="min-h-[44px] inline-flex items-center gap-1.5 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-2xs"
                                                     title="Direct Phone Call"
                                                 >
-                                                    <Phone className="w-4 h-4 text-emerald-600" />
+                                                    <LuPhone className="w-4 h-4 text-emerald-600" />
                                                     <span>{booking.renter_phone}</span>
                                                 </a>
                                             )}
@@ -293,7 +307,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                     className="min-h-[44px] inline-flex items-center gap-1.5 text-slate-700 hover:text-primary-700 font-semibold transition-colors bg-white px-3 py-2 rounded-xl border border-emerald-200 shadow-2xs"
                                                     title="Send Email"
                                                 >
-                                                    <EnvelopeSimple className="w-4 h-4 text-emerald-600" />
+                                                    <LuMail className="w-4 h-4 text-emerald-600" />
                                                     <span className="truncate max-w-[200px]">{booking.renter_email}</span>
                                                 </a>
                                             )}
@@ -305,7 +319,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 {isCancelled && (
                                     <div className="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-600 flex items-center justify-between gap-2">
                                         <div className="flex items-center gap-1.5">
-                                            <Prohibit className="w-3.5 h-3.5 text-rose-500" />
+                                            <LuBan className="w-3.5 h-3.5 text-rose-500" />
                                             <span className="font-semibold text-slate-700">
                                                 {booking.status === 'declined' ? 'Booking request declined' : 'Booking was cancelled'}
                                             </span>
@@ -318,7 +332,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                 {isPending && (
                                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2 border-t border-slate-100">
                                         <span className="text-xs text-amber-700 font-medium flex items-center gap-1">
-                                            <Clock className="w-3.5 h-3.5 shrink-0" />
+                                            <LuClock className="w-3.5 h-3.5 shrink-0" />
                                             <span>Accepting unlocks verified phone & email</span>
                                         </span>
                                         <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -354,7 +368,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                             onClick={() => handleComplete(booking.id)}
                                             className="w-full sm:w-auto min-h-[48px] px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-colors shadow-2xs flex items-center justify-center gap-1.5"
                                         >
-                                            <Check className="w-3.5 h-3.5" />
+                                            <LuCheck className="w-3.5 h-3.5" />
                                             <span>Mark Rental Completed</span>
                                         </button>
                                     </div>

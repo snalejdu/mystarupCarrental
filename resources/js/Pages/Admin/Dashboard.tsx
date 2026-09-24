@@ -1,7 +1,18 @@
 import { Head, Link } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import {
-    Users, CarProfile, CalendarCheck, CurrencyDollar, TrendUp, Clock, CheckCircle, ArrowUpRight, Shield, MapPin, ArrowRight } from '@phosphor-icons/react';
+    LuUsers,
+    LuCar,
+    LuCalendarCheck,
+    LuDollarSign,
+    LuTrendingUp,
+    LuClock,
+    LuCircleCheck,
+    LuArrowUpRight,
+    LuShield,
+    LuMapPin,
+    LuArrowRight
+} from 'react-icons/lu';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
 interface Props {
@@ -34,7 +45,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Total Commission (4%)
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-primary-700/20 text-primary-300 flex items-center justify-center border border-primary-700/30 shrink-0">
-                            <CurrencyDollar className="w-5 h-5" />
+                            <LuDollarSign className="w-5 h-5" />
                         </div>
                     </div>
                     <div className="flex items-baseline justify-between">
@@ -42,7 +53,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             {formatCurrency(Number(stats.total_commission))}
                         </p>
                         <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-0.5">
-                            <ArrowUpRight className="w-3 h-3" /> +14.2%
+                            <LuArrowUpRight className="w-3 h-3" /> +14.2%
                         </span>
                     </div>
                     <p className="text-xs text-slate-400 font-medium mt-2">
@@ -57,7 +68,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Completed Volume
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
-                            <TrendUp className="w-5 h-5" />
+                            <LuTrendingUp className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -75,7 +86,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Vehicle Hosts
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-primary-700/20 text-primary-300 flex items-center justify-center border border-primary-700/30 shrink-0">
-                            <Users className="w-5 h-5" />
+                            <LuUsers className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -93,7 +104,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                             Active Fleet
                         </span>
                         <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20 shrink-0">
-                            <CarProfile className="w-5 h-5" />
+                            <LuCar className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -125,7 +136,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                         <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30 shrink-0">
-                                    <Clock className="w-4 h-4" />
+                                    <LuClock className="w-4 h-4" />
                                 </div>
                                 <div>
                                     <span className="font-semibold text-xs text-white block">Pending Requests</span>
@@ -141,7 +152,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                         <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shrink-0">
-                                    <CalendarCheck className="w-4 h-4" />
+                                    <LuCalendarCheck className="w-4 h-4" />
                                 </div>
                                 <div>
                                     <span className="font-semibold text-xs text-white block">Confirmed / Active</span>
@@ -157,7 +168,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                         <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-primary-700/20 text-primary-300 flex items-center justify-center border border-primary-700/30 shrink-0">
-                                    <CheckCircle className="w-4 h-4" />
+                                    <LuCircleCheck className="w-4 h-4" />
                                 </div>
                                 <div>
                                     <span className="font-semibold text-xs text-white block">Completed Trips</span>
@@ -185,22 +196,22 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
                         <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
-                            <MapPin className="w-4 h-4 text-primary-400 mx-auto mb-1.5" />
+                            <LuMapPin className="w-4 h-4 text-primary-400 mx-auto mb-1.5" />
                             <span className="text-xs font-semibold text-white block">Tagbilaran</span>
                             <span className="text-xs text-slate-400 font-semibold">Airport / Pier</span>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
-                            <MapPin className="w-4 h-4 text-emerald-400 mx-auto mb-1.5" />
+                            <LuMapPin className="w-4 h-4 text-emerald-400 mx-auto mb-1.5" />
                             <span className="text-xs font-semibold text-white block">Panglao</span>
                             <span className="text-xs text-slate-400 font-semibold">Alona Beach</span>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
-                            <MapPin className="w-4 h-4 text-amber-400 mx-auto mb-1.5" />
+                            <LuMapPin className="w-4 h-4 text-amber-400 mx-auto mb-1.5" />
                             <span className="text-xs font-semibold text-white block">Dauis</span>
                             <span className="text-xs text-slate-400 font-semibold">Bohol Coast</span>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
-                            <MapPin className="w-4 h-4 text-accent-400 mx-auto mb-1.5" />
+                            <LuMapPin className="w-4 h-4 text-accent-400 mx-auto mb-1.5" />
                             <span className="text-xs font-semibold text-white block">Loboc</span>
                             <span className="text-xs text-slate-400 font-semibold">River Tourism</span>
                         </div>
@@ -231,7 +242,7 @@ export default function AdminDashboard({ stats, recentBookings }: Props) {
                         className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-semibold text-primary-300 hover:text-primary-200 transition-colors self-start sm:self-auto"
                     >
                         <span>View Master Bookings</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <LuArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
 

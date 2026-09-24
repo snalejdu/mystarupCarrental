@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { ArrowCounterClockwise, Check, Pen, ShieldCheck } from '@phosphor-icons/react';
+import { LuCheck, LuPenTool, LuRotateCcw, LuShieldCheck } from 'react-icons/lu';
 
 interface SignaturePadProps {
     onSave: (dataUrl: string) => void;
@@ -157,7 +157,7 @@ export default function SignaturePad({
             <div className="flex items-center justify-between">
                 <div>
                     <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-                        <Pen className="w-3.5 h-3.5 text-primary-700" />
+                        <LuPenTool className="w-3.5 h-3.5 text-primary-700" />
                         <span>{title}</span>
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5 font-medium">
@@ -167,7 +167,7 @@ export default function SignaturePad({
 
                 {hasSignature && (
                     <div className="flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <LuCheck className="w-3.5 h-3.5 text-emerald-600" />
                         <span>Signed</span>
                     </div>
                 )}
@@ -199,7 +199,7 @@ export default function SignaturePad({
             {/* Footer with Legal Tag & Action Controls */}
             <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
                 <div className="flex items-center gap-1 text-xs text-slate-400 font-medium">
-                    <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
+                    <LuShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
                     <span>Cryptographically timestamped handover signature</span>
                 </div>
 
@@ -210,7 +210,7 @@ export default function SignaturePad({
                         disabled={!hasSignature}
                         className="apple-press touch-target px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 disabled:opacity-40 cursor-pointer shadow-2xs"
                     >
-                        <ArrowCounterClockwise className="w-3.5 h-3.5" />
+                        <LuRotateCcw className="w-3.5 h-3.5" />
                         <span>Clear</span>
                     </button>
                 </div>

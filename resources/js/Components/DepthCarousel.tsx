@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import './DepthCarousel.css';
 
 export interface DepthCarouselItem {
@@ -408,7 +408,7 @@ export default function DepthCarousel({
                         aria-label="Previous slide"
                         onClick={() => navigateBy(-1)}
                     >
-                        <CaretLeft className="w-5 h-5" weight="bold" />
+                        <LuChevronLeft className="w-5 h-5 stroke-[2.5]" />
                     </button>
                     <button
                         type="button"
@@ -416,7 +416,7 @@ export default function DepthCarousel({
                         aria-label="Next slide"
                         onClick={() => navigateBy(1)}
                     >
-                        <CaretRight className="w-5 h-5" weight="bold" />
+                        <LuChevronRight className="w-5 h-5 stroke-[2.5]" />
                     </button>
                 </>
             )}

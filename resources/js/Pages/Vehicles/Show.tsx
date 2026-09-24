@@ -1,7 +1,37 @@
 import { Head, useForm, Link, usePage } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    MapPin, Star, Calendar, CaretLeft, CaretRight, Phone, User, EnvelopeSimple, PaperPlaneTilt, CarProfile, Wind, ShieldCheck, Users, Thermometer, CheckCircle, ArrowRight, ArrowLeft, Airplane, GasPump, Tag, Percent, Check, Info, Motorcycle, LockSimple, UserCheck, CaretDown, Question, ChatCircle, Compass } from '@phosphor-icons/react';
+    LuMapPin,
+    LuStar,
+    LuCalendar,
+    LuChevronLeft,
+    LuChevronRight,
+    LuPhone,
+    LuUser,
+    LuMail,
+    LuSend,
+    LuCar,
+    LuWind,
+    LuShieldCheck,
+    LuUsers,
+    LuThermometer,
+    LuCircleCheck,
+    LuArrowRight,
+    LuArrowLeft,
+    LuPlane,
+    LuFuel,
+    LuTag,
+    LuPercent,
+    LuCheck,
+    LuInfo,
+    LuBike,
+    LuLock,
+    LuUserCheck,
+    LuChevronDown,
+    LuCircleHelp,
+    LuMessageCircle,
+    LuCompass
+} from 'react-icons/lu';
 import { useState, useMemo } from 'react';
 import { formatCurrency } from '@/lib/utils';
 
@@ -48,7 +78,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                         href="/vehicles"
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-primary-700 transition-colors group"
                     >
-                        <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+                        <LuArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
                         <span>Back to all vehicles</span>
                     </Link>
                 </div>
@@ -68,7 +98,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     {vehicle.brand} {vehicle.model}
                                 </h1>
                                 <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5 font-medium">
-                                    <MapPin className="w-3.5 h-3.5 text-primary-700 shrink-0" />
+                                    <LuMapPin className="w-3.5 h-3.5 text-primary-700 shrink-0" />
                                     <span>{vehicle.location}, Bohol</span>
                                     <span className="text-slate-300">•</span>
                                     <span>Host verified</span>
@@ -108,14 +138,14 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                                     className="absolute left-2.5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
                                                     aria-label="Previous photo"
                                                 >
-                                                    <CaretLeft className="w-5 h-5" />
+                                                    <LuChevronLeft className="w-5 h-5" />
                                                 </button>
                                                 <button
                                                     onClick={() => setCurrentPhoto(p => (p < vehicle.photos.length - 1 ? p + 1 : 0))}
                                                     className="absolute right-2.5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
                                                     aria-label="Next photo"
                                                 >
-                                                    <CaretRight className="w-5 h-5" />
+                                                    <LuChevronRight className="w-5 h-5" />
                                                 </button>
                                             </>
                                         )}
@@ -125,7 +155,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     </>
                                 ) : (
                                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-500 text-xs">
-                                        <CarProfile className="w-10 h-10 mb-2 opacity-30 text-white" />
+                                        <LuCar className="w-10 h-10 mb-2 opacity-30 text-white" />
                                         <span>No photos provided yet</span>
                                     </div>
                                 )}
@@ -204,7 +234,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                     Renter Reviews & Ratings
                                 </h3>
                                 <div className="flex items-center gap-1 text-xs font-bold text-slate-900">
-                                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                                    <LuStar className="w-4 h-4 fill-amber-400 text-amber-400" />
                                     <span>{vehicle.avg_rating || '5.0'}</span>
                                     <span className="text-slate-400 font-normal">({vehicle.total_reviews || ratings.length} reviews)</span>
                                 </div>
@@ -218,7 +248,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                                 <span className="text-xs font-bold text-slate-900">{rating.renter_name || 'Verified Renter'}</span>
                                                 <div className="flex items-center gap-0.5">
                                                     {Array.from({ length: 5 }).map((_, i) => (
-                                                        <Star
+                                                        <LuStar
                                                             key={i}
                                                             className={`w-3 h-3 ${
                                                                 i < rating.rating
@@ -259,7 +289,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                             <div className="grid grid-cols-2 gap-2">
                                 {/* Transmission */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <CarProfile className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuCar className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Transmission</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.transmission ? (vehicle.transmission.charAt(0).toUpperCase() + vehicle.transmission.slice(1)) : 'Automatic'}
@@ -268,21 +298,21 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                                 {/* Fuel */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <Wind className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuWind className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Fuel</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">{vehicle.fuel_type || 'Unleaded Gas'}</p>
                                 </div>
 
                                 {/* Pickup Location */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <MapPin className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuMapPin className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Location</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">{vehicle.location}</p>
                                 </div>
 
                                 {/* Air Conditioner */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <Thermometer className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuThermometer className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Air Conditioner</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.has_aircon === false ? 'No (Non-Aircon)' : 'Yes (Cold AC)'}
@@ -291,7 +321,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                                 {/* Seats */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <Users className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuUsers className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Seats</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.seats ? `${vehicle.seats} Seats` : (vehicle.type === 'van' ? '15 Seats' : vehicle.type === 'motorbike' ? '2 Seats' : '5 Seats')}
@@ -300,7 +330,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                                 {/* Distance */}
                                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-0.5">
-                                    <MapPin className="w-4 h-4 text-primary-600 mb-0.5" />
+                                    <LuMapPin className="w-4 h-4 text-primary-600 mb-0.5" />
                                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Distance</p>
                                     <p className="text-xs font-bold text-slate-900 truncate">
                                         {vehicle.distance_limit || 'Unlimited'}
@@ -314,7 +344,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 className="glass-btn-accent w-full min-h-[48px] py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 shadow-xs"
                             >
                                 <span>{vehicle.type === 'motorbike' ? 'Rent this scooter' : 'Rent a car'}</span>
-                                <ArrowRight className="w-4 h-4" />
+                                <LuArrowRight className="w-4 h-4" />
                             </button>
 
                             {/* VEHICLE EQUIPMENT & INCLUSIONS CHECKLIST */}
@@ -325,7 +355,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 <div className="grid grid-cols-2 gap-y-2 gap-x-3">
                                     {displayFeatures.map((feature: string, idx: number) => (
                                         <div key={idx} className="flex items-center gap-1.5 text-xs font-medium text-slate-700">
-                                            <CheckCircle className="w-3.5 h-3.5 text-primary-600 shrink-0" />
+                                            <LuCircleCheck className="w-3.5 h-3.5 text-primary-600 shrink-0" />
                                             <span className="truncate">{feature}</span>
                                         </div>
                                     ))}
@@ -336,14 +366,14 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                         {/* RENTAL TERMS & HOST POLICIES CARD */}
                         <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs space-y-3">
                             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                                <ShieldCheck className="w-4 h-4 text-primary-600" />
+                                <LuShieldCheck className="w-4 h-4 text-primary-600" />
                                 <span>Host Rental Terms & Inclusions</span>
                             </h3>
 
                             <div className="space-y-2 text-xs">
                                 {/* Driver License */}
                                 <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
-                                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                    <LuShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">Valid Driver's License Required</span>
                                         <span className="text-slate-500 text-xs">Philippine License or International Permit at handover.</span>
@@ -352,7 +382,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                                 {/* Security Deposit */}
                                 <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
-                                    <Tag className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
+                                    <LuTag className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">
                                             Refundable Deposit: {vehicle.security_deposit > 0 ? formatCurrency(vehicle.security_deposit) : '₱0 (No Deposit)'}
@@ -363,7 +393,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
 
                                 {/* Fuel Policy */}
                                 <div className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg border border-slate-100">
-                                    <GasPump className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                    <LuFuel className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="font-bold text-slate-800 block text-xs">
                                             Fuel Policy: {vehicle.fuel_policy === 'full_to_full' ? 'Full-to-Full' : 'Same-to-Same'}
@@ -375,7 +405,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 {/* Delivery */}
                                 {vehicle.delivery_available && (
                                     <div className="flex items-start gap-2 p-2.5 bg-primary-50/70 rounded-lg border border-primary-100">
-                                        <Airplane className="w-4 h-4 text-primary-700 shrink-0 mt-0.5" />
+                                        <LuPlane className="w-4 h-4 text-primary-700 shrink-0 mt-0.5" />
                                         <div>
                                             <span className="font-bold text-primary-900 block text-xs">
                                                 Airport & Port Delivery {vehicle.delivery_fee > 0 ? `(${formatCurrency(vehicle.delivery_fee)})` : '(FREE)'}
@@ -410,7 +440,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                 className="inline-flex items-center gap-1 text-xs font-bold text-primary-700 hover:text-primary-800 transition-colors group"
                             >
                                 <span>View All</span>
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
 
@@ -437,7 +467,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
                                             {/* Rating Pill on Photo */}
                                             {v.avg_rating > 0 && (
                                                 <div className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 flex items-center gap-0.5 px-1.5 py-0.5 bg-slate-900/80 text-amber-400 rounded-md text-[9px] sm:text-xs font-semibold shadow-xs">
-                                                    <Star className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-amber-400" />
+                                                    <LuStar className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-amber-400" />
                                                     <span>{Number(v.avg_rating).toFixed(1)}</span>
                                                 </div>
                                             )}
@@ -628,7 +658,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                 {vehicle.delivery_available && (
                     <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1">
-                            <Airplane className="w-3.5 h-3.5 text-primary-700" />
+                            <LuPlane className="w-3.5 h-3.5 text-primary-700" />
                             <span>Pickup Location Preference</span>
                         </label>
                         <select
@@ -655,7 +685,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                         {discountPercent > 0 && (
                             <div className="flex items-center justify-between text-xs text-emerald-700 font-bold bg-emerald-100/70 px-2 py-1 rounded-md border border-emerald-200">
                                 <span className="flex items-center gap-1">
-                                    <Percent className="w-3 h-3" />
+                                    <LuPercent className="w-3 h-3" />
                                     <span>{discountPercent}% Multi-Day Vacation Discount</span>
                                 </span>
                                 <span>-{formatCurrency(discountAmount)}</span>
@@ -722,7 +752,7 @@ function BookingForm({ vehicle, availability }: { vehicle: any; availability: an
                     disabled={processing}
                     className="w-full min-h-[48px] py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-colors shadow-xs disabled:opacity-50"
                 >
-                    <PaperPlaneTilt className="w-4 h-4" />
+                    <LuSend className="w-4 h-4" />
                     <span>{processing ? 'Submitting Request...' : 'Send Booking Request to Host'}</span>
                 </button>
 
@@ -789,7 +819,7 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
                         aria-label="Previous month"
                         title={isCurrentMonthOrPast ? 'Cannot view past months' : 'Previous month'}
                     >
-                        <CaretLeft className="w-4 h-4" />
+                        <LuChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                         type="button"
@@ -798,7 +828,7 @@ function AvailabilityCalendar({ availability, selectedMonth, onMonthChange }: { 
                         aria-label="Next month"
                         title="Next month"
                     >
-                        <CaretRight className="w-4 h-4" />
+                        <LuChevronRight className="w-4 h-4" />
                     </button>
                 </div>
             </div>
