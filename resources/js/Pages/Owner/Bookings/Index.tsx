@@ -56,7 +56,7 @@ export default function BookingsIndex({ bookings }: Props) {
 
     return (
         <OwnerLayout title="Booking Requests">
-            <Head title="Booking Requests — RentBohol Host" />
+            <Head title="Booking Requests — RentalHub Host" />
 
             <div className="space-y-4">
                 {/* Header Toolbar & Category Filter Tabs */}
@@ -263,7 +263,7 @@ export default function BookingsIndex({ bookings }: Props) {
                                                         let p = booking.renter_phone.replace(/[^0-9]/g, '');
                                                         if (p.startsWith('09')) p = '639' + p.slice(2);
                                                         return p;
-                                                    })()}?text=${encodeURIComponent(`Hi ${booking.renter_display_name}, I am your host on RentBohol for your ${booking.vehicle?.title || 'rental vehicle'} booking!`)}`}
+                                                    })()}?text=${encodeURIComponent(`Hi ${booking.renter_display_name}, I am your host on RentalHub for your ${booking.vehicle?.title || 'rental vehicle'} booking!`)}`}
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     className="min-h-[44px] inline-flex items-center gap-1.5 text-emerald-800 hover:text-emerald-950 font-bold transition-colors bg-emerald-100 hover:bg-emerald-200 px-3 py-2 rounded-xl border border-emerald-300 shadow-2xs"

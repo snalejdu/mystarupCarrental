@@ -61,16 +61,16 @@ class RegisterController extends Controller
             // Prevent open redirect: only allow safe local paths
             if (str_starts_with($intended, '/') && !str_starts_with($intended, '//') && !str_contains($intended, '\\')) {
                 return redirect($intended)
-                    ->with('success', 'Welcome to RentBohol! Complete your reservation below.');
+                    ->with('success', 'Welcome to RentalHub! Complete your reservation below.');
             }
         }
 
         if ($user->isRenter()) {
             return redirect()->route('renter.bookings')
-                ->with('success', 'Welcome to RentBohol! You can track all your vehicle rentals here.');
+                ->with('success', 'Welcome to RentalHub! You can track all your vehicle rentals here.');
         }
 
         return redirect()->route('owner.dashboard')
-            ->with('success', 'Welcome to RentBohol! Start by listing your first vehicle.');
+            ->with('success', 'Welcome to RentalHub! Start by listing your first vehicle.');
     }
 }

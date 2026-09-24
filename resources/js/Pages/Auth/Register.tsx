@@ -28,7 +28,7 @@ export default function Register() {
 
     return (
         <PublicLayout>
-            <Head title="Create Account — RentBohol" />
+            <Head title="Create Account — RentalHub" />
             <div className="py-4 sm:py-12 bg-slate-50 sm:bg-slate-100 flex items-center justify-center p-3 sm:p-6 lg:p-8 font-sans min-h-[calc(100vh-140px)]">
                 {/* Split Screen Card Container */}
                 <div className="w-full max-w-6xl bg-white rounded-2xl sm:rounded-3xl shadow-sm sm:shadow-lg border border-slate-200/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-0 lg:min-h-[680px]">
@@ -161,7 +161,7 @@ export default function Register() {
 
                                 {/* Terms Notice */}
                                 <p className="text-xs text-slate-500 pt-0.5 leading-relaxed">
-                                    By registering, you agree to RentBohol's{' '}
+                                    By registering, you agree to RentalHub's{' '}
                                     <Link href="/terms" className="text-teal-600 font-semibold hover:underline">
                                         Terms & Conditions
                                     </Link>{' '}
@@ -263,7 +263,7 @@ export default function Register() {
 
                             {/* Footer */}
                             <div className="flex justify-between items-center text-xs text-slate-400 font-medium border-t border-slate-700 pt-4 mt-8">
-                                <span>RentBohol Platform</span>
+                                <span>RentalHub Platform</span>
                                 <span>Tagbilaran • Panglao • Dauis</span>
                             </div>
                         </div>

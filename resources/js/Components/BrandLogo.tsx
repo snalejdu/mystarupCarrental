@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 interface BrandLogoProps {
     /**
-     * 'full': Badge + Typography (RentBohol)
+     * 'full': Badge + Typography (RentalHub)
      * 'icon': Standalone Circular Badge Emblem
      * 'badge': Large Centered Badge
      */
@@ -70,13 +70,13 @@ export default function BrandLogo({
         return (
             <div className={`flex flex-col items-center text-center ${className}`}>
                 <div
-                    className={`relative rounded-full overflow-hidden transition-all duration-300 ${
+                    className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
                         interactive ? 'hover:scale-105 hover:drop-shadow-lg' : ''
                     } ${emblemSizeMap[size]}`}
                 >
                     <img
-                        src="/images/logo/logo-circle.png"
-                        alt="RentBohol All Vehicle Rentals"
+                        src="/images/logo/rentalhub-logo.png"
+                        alt="RentalHub — Rent. Book. Drive."
                         className="w-full h-full object-contain"
                     />
                 </div>
@@ -97,23 +97,23 @@ export default function BrandLogo({
                 className
             )}
         >
-            {/* Option 1 Tourist Van Emblem Badge (Transparent Circle) */}
+            {/* RentalHub Logo Emblem */}
             <div
-                className={`relative shrink-0 rounded-full overflow-hidden transition-all duration-300 ${
+                className={`relative shrink-0 rounded-2xl overflow-hidden transition-all duration-300 ${
                     interactive ? 'group-hover:scale-105 group-hover:drop-shadow-md' : ''
                 } ${emblemSizeMap[size]}`}
             >
                 {!imgError ? (
                     <img
-                        src="/images/logo/logo-circle.png"
-                        alt="RentBohol"
+                        src="/images/logo/rentalhub-logo.png"
+                        alt="RentalHub"
                         onError={() => setImgError(true)}
                         className="w-full h-full object-contain"
                     />
                 ) : (
                     /* Fallback vector if image not loaded */
-                    <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center text-teal-400 font-bold text-xs">
-                        RB
+                    <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center text-teal-400 font-bold text-xs">
+                        RH
                     </div>
                 )}
             </div>
@@ -126,9 +126,9 @@ export default function BrandLogo({
                             isDark ? 'text-white' : 'text-slate-900'
                         }`}
                     >
-                        Rent
+                        Rental
                         <span className="bg-gradient-to-r from-teal-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent">
-                            Bohol
+                            Hub
                         </span>
                     </div>
 
@@ -143,7 +143,7 @@ export default function BrandLogo({
                         <span
                             className={`text-slate-400 font-semibold tracking-wide text-xs uppercase hidden sm:block`}
                         >
-                            All Vehicle Rentals
+                            Rent. Book. Drive.
                         </span>
                     )}
                 </div>

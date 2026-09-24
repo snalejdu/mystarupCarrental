@@ -1406,7 +1406,7 @@ function RenterPOVModal({ vehicle, onClose }: { vehicle: any; onClose: () => voi
                                     <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mb-2 shadow-2xs">
                                         <ImageIcon className="w-7 h-7 text-primary-700" />
                                     </div>
-                                    <span className="text-xs font-bold text-slate-600 capitalize">{vehicle.brand || 'RentBohol'} {vehicle.model || vehicle.type}</span>
+                                    <span className="text-xs font-bold text-slate-600 capitalize">{vehicle.brand || 'RentalHub'} {vehicle.model || vehicle.type}</span>
                                     <span className="text-xs text-slate-400 font-medium">Upload photos to display listing image</span>
                                 </div>
                             )}
@@ -1450,7 +1450,7 @@ function RenterPOVModal({ vehicle, onClose }: { vehicle: any; onClose: () => voi
                     </div>
 
                     <div className="flex items-center justify-between text-xs text-slate-500 px-1">
-                        <span>Host: {vehicle.user?.name || 'Verified RentBohol Host'}</span>
+                        <span>Host: {vehicle.user?.name || 'Verified RentalHub Host'}</span>
                         <a
                             href={`/vehicles/${vehicle.slug}`}
                             target="_blank"

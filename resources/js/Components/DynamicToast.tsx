@@ -20,7 +20,7 @@ interface ToastItemProps {
 export function triggerToast(toast: Omit<ToastMessage, 'id'>) {
     if (typeof window !== 'undefined') {
         const id = Math.random().toString(36).substring(2, 9);
-        window.dispatchEvent(new CustomEvent('rentbohol:toast', { detail: { ...toast, id } }));
+        window.dispatchEvent(new CustomEvent('RentalHub:toast', { detail: { ...toast, id } }));
     }
 }
 
@@ -255,8 +255,8 @@ export default function DynamicToast() {
             });
         };
 
-        window.addEventListener('rentbohol:toast', handleToast);
-        return () => window.removeEventListener('rentbohol:toast', handleToast);
+        window.addEventListener('RentalHub:toast', handleToast);
+        return () => window.removeEventListener('RentalHub:toast', handleToast);
     }, []);
 
     const removeToast = useCallback((id: string) => {

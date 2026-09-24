@@ -95,7 +95,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                             <div>
                                 <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{title}</h1>
                                 <p className="text-slate-400 text-xs font-medium mt-1">
-                                    RentBohol Platform Management & Revenue Console
+                                    RentalHub Platform Management & Revenue Console
                                 </p>
                             </div>
 

@@ -17,8 +17,8 @@ export function initAuthSync(initialUserId?: string | number | null) {
 
     // Store active user in localStorage on init
     try {
-        localStorage.setItem('rentbohol_active_user_id', currentIdStr);
-        localStorage.setItem('rentbohol_auth_timestamp', String(Date.now()));
+        localStorage.setItem('RentalHub_active_user_id', currentIdStr);
+        localStorage.setItem('RentalHub_auth_timestamp', String(Date.now()));
     } catch {
         // Handle private browsing or storage disabled
     }
@@ -26,7 +26,7 @@ export function initAuthSync(initialUserId?: string | number | null) {
     // Initialize BroadcastChannel
     try {
         if ('BroadcastChannel' in window) {
-            broadcastChannel = new BroadcastChannel('rentbohol_auth_sync');
+            broadcastChannel = new BroadcastChannel('RentalHub_auth_sync');
             broadcastChannel.onmessage = (event) => {
                 if (event.data && event.data.type === 'AUTH_STATE_CHANGE') {
                     handleAuthChangeFromOtherTab(event.data.userId);
@@ -39,7 +39,7 @@ export function initAuthSync(initialUserId?: string | number | null) {
 
     // Listen to localStorage storage events across tabs
     window.addEventListener('storage', (e) => {
-        if (e.key === 'rentbohol_active_user_id' && e.newValue) {
+        if (e.key === 'RentalHub_active_user_id' && e.newValue) {
             handleAuthChangeFromOtherTab(e.newValue);
         }
     });
@@ -47,7 +47,7 @@ export function initAuthSync(initialUserId?: string | number | null) {
     // Check on tab focus / visibility change
     const checkStateOnFocus = () => {
         try {
-            const stored = localStorage.getItem('rentbohol_active_user_id');
+            const stored = localStorage.getItem('RentalHub_active_user_id');
             if (stored && stored !== currentIdStr) {
                 handleAuthChangeFromOtherTab(stored);
             }
@@ -69,8 +69,8 @@ export function notifyAuthStateChange(newUserId?: string | number | null) {
     currentTabUserId = newUserId ?? null;
 
     try {
-        localStorage.setItem('rentbohol_active_user_id', idStr);
-        localStorage.setItem('rentbohol_auth_timestamp', String(Date.now()));
+        localStorage.setItem('RentalHub_active_user_id', idStr);
+        localStorage.setItem('RentalHub_auth_timestamp', String(Date.now()));
 
         if (broadcastChannel) {
             broadcastChannel.postMessage({

@@ -35,7 +35,7 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
         'phone' => 'nullable|string|max:50',
         'message' => 'required|string|max:5000',
     ]);
-    return back()->with('success', 'Thank you! Your message has been sent to RentBohol support.');
+    return back()->with('success', 'Thank you! Your message has been sent to RentalHub support.');
 })->name('contact.send')->middleware('throttle:contact');
 
 // Booking request — public, rate-limited for submissions

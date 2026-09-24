@@ -2,8 +2,8 @@ import { useEffect, useRef, useCallback } from 'react';
 import { router } from '@inertiajs/react';
 import { triggerToast } from '@/Components/DynamicToast';
 
-export const VEHICLE_SYNC_CHANNEL = 'rentbohol-vehicle-sync';
-export const VEHICLE_SYNC_STORAGE_KEY = 'rentbohol_last_vehicle_sync';
+export const VEHICLE_SYNC_CHANNEL = 'RentalHub-vehicle-sync';
+export const VEHICLE_SYNC_STORAGE_KEY = 'RentalHub_last_vehicle_sync';
 
 export interface VehicleSyncMessage {
     type: 'VEHICLE_UPDATED';
@@ -59,7 +59,7 @@ export function broadcastVehicleUpdate(payload: {
 
     // 3. Custom DOM event on window (for any in-page listeners)
     try {
-        window.dispatchEvent(new CustomEvent('rentbohol:vehicle-sync', { detail: message }));
+        window.dispatchEvent(new CustomEvent('RentalHub:vehicle-sync', { detail: message }));
     } catch (e) {
         // Fallback safely
     }

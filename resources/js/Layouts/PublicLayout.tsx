@@ -288,7 +288,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                 <a href="tel:+63385018888" className="flex items-center gap-1.5 text-primary-400 font-medium text-[11px] hover:underline">
                                     <PhoneCall className="w-3 h-3 shrink-0" /> (038) 501-8888
                                 </a>
-                                <p className="text-[10px] text-slate-400 mt-0.5">support@rentbohol.ph</p>
+                                <p className="text-[10px] text-slate-400 mt-0.5">support@RentalHub.ph</p>
                             </div>
                         </div>
 
@@ -299,13 +299,13 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                 <a href="tel:+63385018888" className="flex items-center gap-2 text-primary-300 font-medium hover:underline">
                                     <PhoneCall className="w-3.5 h-3.5" /> (038) 501-8888
                                 </a>
-                                <p className="text-xs text-slate-400">support@rentbohol.ph</p>
+                                <p className="text-xs text-slate-400">support@RentalHub.ph</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="border-t border-slate-800 pt-3 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[10px] sm:text-xs gap-2 sm:gap-4 text-center sm:text-left">
-                        <p>© {new Date().getFullYear()} RentBohol. All rights reserved.</p>
+                        <p>© {new Date().getFullYear()} RentalHub. All rights reserved.</p>
                         <div className="flex items-center gap-3 sm:gap-6">
                             <Link href="/terms" className="hover:text-slate-300 transition-colors">
                                 Terms & Conditions

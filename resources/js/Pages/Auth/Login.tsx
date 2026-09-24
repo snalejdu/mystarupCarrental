@@ -34,7 +34,7 @@ export default function Login() {
 
     return (
         <PublicLayout>
-            <Head title="Sign In — RentBohol" />
+            <Head title="Sign In — RentalHub" />
 
             <div className="py-4 sm:py-12 bg-slate-50 sm:bg-slate-100 flex items-center justify-center p-3 sm:p-6 lg:p-8 font-sans min-h-[calc(100vh-140px)]">
                 {/* Split Screen Card Container */}
@@ -167,7 +167,7 @@ export default function Login() {
 
                                 <button
                                     type="button"
-                                    onClick={() => fillDemoUser('admin@rentbohol.com')}
+                                    onClick={() => fillDemoUser('admin@RentalHub.com')}
                                     className="glass-pill min-h-[44px] px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 flex items-center justify-center gap-2 active:scale-98 transition-transform cursor-pointer"
                                 >
                                     <Shield className="w-4 h-4 text-amber-500 shrink-0" />
@@ -201,7 +201,7 @@ export default function Login() {
                             <div className="space-y-4 max-w-lg">
                                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white">
                                     Welcome back to{' '}
-                                    <span className="text-primary-300">RentBohol</span>
+                                    <span className="text-primary-300">RentalHub</span>
                                 </h2>
 
                                 <p className="text-slate-300 text-sm leading-relaxed max-w-md">
@@ -231,7 +231,7 @@ export default function Login() {
 
                             {/* Footer */}
                             <div className="flex justify-between items-center text-xs text-slate-400 font-medium border-t border-slate-700 pt-4 mt-8">
-                                <span>RentBohol Platform</span>
+                                <span>RentalHub Platform</span>
                                 <span>Tagbilaran • Panglao • Dauis</span>
                             </div>
                         </div>

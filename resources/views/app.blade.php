@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicons & Browser Tab Icons (RentBohol Brand Logo - All Vehicles Transparent Circle) -->
+    <!-- Favicons & Browser Tab Icons (RentalHub Brand Logo) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
@@ -183,8 +183,8 @@
             </div>
 
             <div style="margin-top: 14px;">
-                <div style="color: #0f172a; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em;">Rent<span style="color: #0d9488;">Bohol</span></div>
-                <div style="color: #64748b; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; margin-top: 4px; font-weight: 500;">Loading island vehicles & availability...</div>
+                <div style="color: #0f172a; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em;">Rental<span style="color: #0d9488;">Hub</span></div>
+                <div style="color: #64748b; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; margin-top: 4px; font-weight: 500;">Loading vehicles & availability...</div>
             </div>
 
             <div style="margin-top: 16px; width: 130px; height: 3.5px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 999px; margin-left: auto; margin-right: auto; overflow: hidden; position: relative;">

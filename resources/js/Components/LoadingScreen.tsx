@@ -26,7 +26,7 @@ interface LoadingScreenProps {
 
 export default function LoadingScreen({
     show = true,
-    title = 'RentBohol',
+    title = 'RentalHub',
     subtitle = 'Finding the best island vehicles for you...',
     brandText = 'Island Mobility Made Simple',
     fullscreen = true,

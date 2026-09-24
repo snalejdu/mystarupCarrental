@@ -25,7 +25,7 @@ export default function CommissionsPage({ owners }: Props) {
 
     return (
         <AdminLayout title="Commission Ledger">
-            <Head title="Commission Ledger — RentBohol Admin" />
+            <Head title="Commission Ledger — RentalHub Admin" />
 
             {/* Banner Overview */}
             <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 sm:p-8 mb-6 sm:mb-8 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">

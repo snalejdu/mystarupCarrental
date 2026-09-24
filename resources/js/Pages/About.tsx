@@ -8,8 +8,8 @@ export default function About() {
     return (
         <PublicLayout>
             <Head>
-                <title>About Us — RentBohol</title>
-                <meta name="description" content="Learn about RentBohol, the fast, reliable, and efficient website connecting travelers directly with local Boholano vehicle owners." />
+                <title>About Us — RentalHub</title>
+                <meta name="description" content="Learn about RentalHub, the fast, reliable, and efficient website connecting travelers directly with local Boholano vehicle owners." />
             </Head>
 
             {/* Header Banner */}
@@ -36,7 +36,7 @@ export default function About() {
 
                         <div className="space-y-5 text-slate-600 text-base leading-relaxed font-medium">
                             <p>
-                                RentBohol was created to solve a common challenge across Bohol Island: finding and booking a rental vehicle used to mean endless phone calls, unreturned social media messages, and last-minute double-booking headaches.
+                                RentalHub was created to solve a common challenge across Bohol Island: finding and booking a rental vehicle used to mean endless phone calls, unreturned social media messages, and last-minute double-booking headaches.
                             </p>
 
                             <p>
@@ -50,10 +50,10 @@ export default function About() {
                         <div className="relative w-full h-[440px] sm:h-[480px]">
                             <DepthCarousel
                                 items={[
-                                    { image: '/images/hero/car-fleet-option1.png', alt: 'RentBohol Fleet Handshake 1' },
-                                    { image: '/images/hero/car-fleet-option2.png', alt: 'RentBohol Fleet Handshake 2' },
-                                    { image: '/images/hero/car-fleet-option3.png', alt: 'RentBohol Fleet Handshake 3' },
-                                    { image: '/images/hero/car-fleet-option4.png', alt: 'RentBohol Fleet Handshake 4' },
+                                    { image: '/images/hero/car-fleet-option1.png', alt: 'RentalHub Fleet Handshake 1' },
+                                    { image: '/images/hero/car-fleet-option2.png', alt: 'RentalHub Fleet Handshake 2' },
+                                    { image: '/images/hero/car-fleet-option3.png', alt: 'RentalHub Fleet Handshake 3' },
+                                    { image: '/images/hero/car-fleet-option4.png', alt: 'RentalHub Fleet Handshake 4' },
                                     { image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=1000', alt: 'Bohol Coastline' }
                                 ]}
                                 cardWidth={290}
@@ -82,7 +82,7 @@ export default function About() {
                             Core Solution
                         </p>
                         <h2 className="font-heading text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
-                            How RentBohol Solves The Challenge
+                            How RentalHub Solves The Challenge
                         </h2>
                         <p className="text-slate-500 text-sm sm:text-base font-medium leading-relaxed">
                             Eliminating communication delays and double-booking stress for everyone.
@@ -147,7 +147,7 @@ export default function About() {
                             Helping Boholanos Build an Efficient & Reliable Rental Service
                         </h2>
                         <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
-                            For local Boholano vehicle hosts, RentBohol provides a modern, high-speed website to showcase their vehicles without needing complicated tech setups. We empower local car, van, and scooter owners across Tagbilaran, Panglao, Dauis, Loboc, and beyond to manage their rental schedules efficiently and earn sustainable income.
+                            For local Boholano vehicle hosts, RentalHub provides a modern, high-speed website to showcase their vehicles without needing complicated tech setups. We empower local car, van, and scooter owners across Tagbilaran, Panglao, Dauis, Loboc, and beyond to manage their rental schedules efficiently and earn sustainable income.
                         </p>
                     </div>
 

@@ -19,7 +19,7 @@ class NotificationService
             return;
         }
 
-        $message = "RentBohol Host Alert: You have a new rental request for {$vehicle->title} from {$booking->start_date} to {$booking->end_date}. Log in to review & accept!";
+        $message = "RentalHub Host Alert: You have a new rental request for {$vehicle->title} from {$booking->start_date} to {$booking->end_date}. Log in to review & accept!";
 
         Log::channel('single')->info('SMS & Email Notification to Host', [
             'to_phone' => $owner->phone,
@@ -40,7 +40,7 @@ class NotificationService
         $hostPhone = $owner->phone ?? '(038) 501-8888';
         $hostName = $owner->name ?? 'Host';
 
-        $message = "RentBohol Trip Confirmed! Your request for {$vehicle->title} was ACCEPTED. Contact Host {$hostName} at {$hostPhone} for pickup details.";
+        $message = "RentalHub Trip Confirmed! Your request for {$vehicle->title} was ACCEPTED. Contact Host {$hostName} at {$hostPhone} for pickup details.";
 
         Log::channel('single')->info('SMS & Email Notification to Renter', [
             'to_phone' => $booking->renter_contact,

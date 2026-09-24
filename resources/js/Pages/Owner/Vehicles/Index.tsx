@@ -41,7 +41,7 @@ export default function VehiclesIndex({ vehicles }: Props) {
 
     return (
         <OwnerLayout title="My Vehicles">
-            <Head title="My Vehicles — RentBohol Host" />
+            <Head title="My Vehicles — RentalHub Host" />
 
             {/* Header Toolbar */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-2xs">

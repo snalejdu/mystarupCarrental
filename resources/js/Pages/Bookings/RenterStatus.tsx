@@ -42,7 +42,7 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
             color: 'text-teal-600',
             bg: 'bg-teal-50/80 border-teal-200/80 text-teal-900',
             label: 'Rental Completed',
-            message: 'This rental has been completed. Thank you for traveling with RentBohol!',
+            message: 'This rental has been completed. Thank you for traveling with RentalHub!',
         },
         cancelled: {
             icon: XCircle,

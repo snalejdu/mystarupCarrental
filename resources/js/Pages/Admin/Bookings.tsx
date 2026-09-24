@@ -15,7 +15,7 @@ export default function AdminBookings({ bookings, filters }: Props) {
 
     return (
         <AdminLayout title="Master Bookings Ledger">
-            <Head title="Master Bookings — RentBohol Admin" />
+            <Head title="Master Bookings — RentalHub Admin" />
 
             {/* Filter Pills */}
             <div className="flex items-center gap-2 mb-6 bg-slate-950 p-2.5 rounded-xl border border-slate-800 overflow-x-auto">

@@ -35,7 +35,7 @@ export default function VehicleShow({ vehicle, availability, ratings, otherVehic
     return (
         <PublicLayout>
             <Head>
-                <title>{`${vehicle.title} — Rent in ${vehicle.location}, Bohol | RentBohol`}</title>
+                <title>{`${vehicle.title} — Rent in ${vehicle.location}, Bohol | RentalHub`}</title>
                 <meta name="description" content={`Rent ${vehicle.title} in ${vehicle.location}, Bohol for ${formatCurrency(vehicle.price_per_day)}/day. Unlimited mileage & local owner booking.`} />
             </Head>
 

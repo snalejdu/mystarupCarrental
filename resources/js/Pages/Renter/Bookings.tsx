@@ -156,7 +156,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
     return (
         <PublicLayout>
-            <Head title="My Rental Trips — RentBohol" />
+            <Head title="My Rental Trips — RentalHub" />
 
             <div className="min-h-screen bg-slate-50/70 py-8 sm:py-10">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -345,7 +345,7 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                                     {/* 1-Click WhatsApp */}
                                                     {b.owner_contact.phone && (
                                                         <a
-                                                            href={`https://wa.me/${formatPhone(b.owner_contact.phone)}?text=${encodeURIComponent(`Hi ${b.owner_contact.name}, I am your renter on RentBohol for ${b.vehicle?.title || 'the vehicle'} from ${b.start_date} to ${b.end_date}!`)}`}
+                                                            href={`https://wa.me/${formatPhone(b.owner_contact.phone)}?text=${encodeURIComponent(`Hi ${b.owner_contact.name}, I am your renter on RentalHub for ${b.vehicle?.title || 'the vehicle'} from ${b.start_date} to ${b.end_date}!`)}`}
                                                             target="_blank"
                                                             rel="noreferrer"
                                                             className="min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-2xs cursor-pointer"

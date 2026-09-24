@@ -16,7 +16,7 @@ interface Props {
 export default function OwnerEarnings({ earnings, statements }: Props) {
     return (
         <OwnerLayout title="Earnings & Payout Statement">
-            <Head title="Earnings & Commission — RentBohol Host" />
+            <Head title="Earnings & Commission — RentalHub Host" />
 
             {/* Overview Metric Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-8">

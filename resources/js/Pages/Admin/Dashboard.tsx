@@ -23,7 +23,7 @@ interface Props {
 export default function AdminDashboard({ stats, recentBookings }: Props) {
     return (
         <AdminLayout title="Platform Analytics">
-            <Head title="Admin Dashboard — RentBohol" />
+            <Head title="Admin Dashboard — RentalHub" />
 
             {/* Top Stat Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-6 sm:mb-8">
