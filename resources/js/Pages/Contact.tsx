@@ -68,9 +68,9 @@ export default function Contact() {
                     {/* Instant Call Button */}
                     <a
                         href="tel:+639171234567"
-                        className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-700 font-bold text-xs active:scale-95 transition-transform shadow-2xs"
+                        className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs shadow-md shadow-emerald-600/20 active:scale-95 transition-all ring-1 ring-white/20"
                     >
-                        <LuPhoneCall className="w-3.5 h-3.5 text-emerald-600 stroke-[2.5]" />
+                        <LuPhoneCall className="w-3.5 h-3.5 stroke-[2.5]" />
                         <span>Call</span>
                     </a>
                 </div>
@@ -85,26 +85,32 @@ export default function Contact() {
                     href="https://wa.me/639171234567"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
+                    className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
-                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <LuMessageSquare className="w-4 h-4 stroke-[2.5]" />
+                    <div className="relative shrink-0">
+                        <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 opacity-20 blur-xs" />
+                        <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-xs shadow-emerald-600/25 ring-1 ring-white/30">
+                            <LuMessageSquare className="w-4 h-4 stroke-[2.2]" />
+                        </div>
                     </div>
                     <div className="min-w-0">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp</div>
+                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">WhatsApp</div>
                         <div className="text-xs font-bold text-slate-900 truncate">Chat Instantly</div>
                     </div>
                 </a>
 
                 <a
                     href="mailto:support@RentalHub.ph"
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
+                    className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
-                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-600 flex items-center justify-center shrink-0 border border-teal-500/20">
-                        <LuMail className="w-4 h-4 stroke-[2.5]" />
+                    <div className="relative shrink-0">
+                        <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 opacity-20 blur-xs" />
+                        <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 via-teal-600 to-cyan-600 text-white flex items-center justify-center shadow-xs shadow-teal-600/25 ring-1 ring-white/30">
+                            <LuMail className="w-4 h-4 stroke-[2.2]" />
+                        </div>
                     </div>
                     <div className="min-w-0">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email</div>
+                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email</div>
                         <div className="text-xs font-bold text-slate-900 truncate">support@RentalHub.ph</div>
                     </div>
                 </a>
@@ -268,44 +274,64 @@ export default function Contact() {
                         </div>
 
                         {/* Contact details list — 2x2 Grid on Mobile, Single Column on Desktop */}
-                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
-                            <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center shrink-0">
-                                    <LuMapPin className="w-4 h-4 text-amber-600" />
+                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3">
+                            {/* Address Card */}
+                            <div className="group relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-amber-400/60 hover:shadow-md hover:shadow-amber-500/5 transition-all duration-300 flex items-center gap-3 sm:gap-4 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-500/5 to-transparent rounded-bl-full pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+                                <div className="relative shrink-0">
+                                    <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 opacity-20 blur-xs group-hover:opacity-40 transition-opacity" />
+                                    <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-500 text-white flex items-center justify-center shadow-xs shadow-amber-600/25 ring-1 ring-white/30 group-hover:scale-105 group-hover:-rotate-2 transition-all duration-300">
+                                        <LuMapPin className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] drop-shadow-xs" />
+                                    </div>
                                 </div>
-                                <div className="min-w-0">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Address</span>
-                                    <span className="text-xs sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">CPG Ave, Tagbilaran</span>
-                                </div>
-                            </div>
-
-                            <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-teal-500/10 border border-teal-500/25 flex items-center justify-center shrink-0">
-                                    <LuMail className="w-4 h-4 text-teal-600" />
-                                </div>
-                                <div className="min-w-0">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Email</span>
-                                    <a href="mailto:support@RentalHub.ph" className="text-xs sm:text-sm font-bold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@RentalHub.ph</a>
+                                <div className="min-w-0 relative z-10">
+                                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">Address</span>
+                                    <span className="text-xs sm:text-sm font-extrabold text-slate-900 block truncate sm:whitespace-normal">CPG Ave, Tagbilaran</span>
                                 </div>
                             </div>
 
-                            <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center shrink-0">
-                                    <LuPhoneCall className="w-4 h-4 text-emerald-600" />
+                            {/* Email Card */}
+                            <div className="group relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-400/60 hover:shadow-md hover:shadow-teal-500/5 transition-all duration-300 flex items-center gap-3 sm:gap-4 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-teal-500/5 to-transparent rounded-bl-full pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+                                <div className="relative shrink-0">
+                                    <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 opacity-20 blur-xs group-hover:opacity-40 transition-opacity" />
+                                    <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-teal-500 via-teal-600 to-cyan-600 text-white flex items-center justify-center shadow-xs shadow-teal-600/25 ring-1 ring-white/30 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300">
+                                        <LuMail className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] drop-shadow-xs" />
+                                    </div>
                                 </div>
-                                <div className="min-w-0">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hotline</span>
-                                    <a href="tel:+639171234567" className="text-xs sm:text-sm font-bold text-slate-900 hover:text-emerald-600 transition-colors block truncate">(038) 501-8888</a>
+                                <div className="min-w-0 relative z-10">
+                                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">Email</span>
+                                    <a href="mailto:support@RentalHub.ph" className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@RentalHub.ph</a>
                                 </div>
                             </div>
 
-                            <div className="group p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-teal-400/60 transition-all duration-300 flex items-center gap-2.5 sm:gap-4">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-teal-500/10 border border-teal-500/25 flex items-center justify-center shrink-0">
-                                    <LuClock className="w-4 h-4 text-teal-600" />
+                            {/* Hotline Card */}
+                            <div className="group relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-emerald-400/60 hover:shadow-md hover:shadow-emerald-500/5 transition-all duration-300 flex items-center gap-3 sm:gap-4 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-bl-full pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+                                <div className="relative shrink-0">
+                                    <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 opacity-20 blur-xs group-hover:opacity-40 transition-opacity" />
+                                    <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-xs shadow-emerald-600/25 ring-1 ring-white/30 group-hover:scale-105 group-hover:-rotate-2 transition-all duration-300">
+                                        <LuPhoneCall className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] drop-shadow-xs" />
+                                    </div>
                                 </div>
-                                <div className="min-w-0">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Hours</span>
-                                    <span className="text-xs sm:text-sm font-bold text-slate-900 block truncate sm:whitespace-normal">7:00 AM – 10:00 PM</span>
+                                <div className="min-w-0 relative z-10">
+                                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">Hotline</span>
+                                    <a href="tel:+639171234567" className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-emerald-600 transition-colors block truncate">(038) 501-8888</a>
+                                </div>
+                            </div>
+
+                            {/* Hours Card */}
+                            <div className="group relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-cyan-400/60 hover:shadow-md hover:shadow-cyan-500/5 transition-all duration-300 flex items-center gap-3 sm:gap-4 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-bl-full pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+                                <div className="relative shrink-0">
+                                    <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-teal-600 to-cyan-600 opacity-20 blur-xs group-hover:opacity-40 transition-opacity" />
+                                    <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-teal-600 via-cyan-600 to-teal-700 text-white flex items-center justify-center shadow-xs shadow-cyan-600/25 ring-1 ring-white/30 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300">
+                                        <LuClock className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] drop-shadow-xs" />
+                                    </div>
+                                </div>
+                                <div className="min-w-0 relative z-10">
+                                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">Hours</span>
+                                    <span className="text-xs sm:text-sm font-extrabold text-slate-900 block truncate sm:whitespace-normal">7:00 AM – 10:00 PM</span>
                                 </div>
                             </div>
                         </div>
