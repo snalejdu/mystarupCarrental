@@ -1,19 +1,14 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    LuCircleUser,
-    LuCircleCheck,
-    LuPhoneCall,
     LuZap,
-    LuMapPin,
-    LuCar,
-    LuDollarSign,
-    LuUsers,
-    LuArrowRight,
-    LuMedal,
-    LuLock,
-    LuBanknote,
-    LuCalendarCheck
+    LuHandshake,
+    LuBadgePercent,
+    LuShieldCheck,
+    LuPlane,
+    LuSmartphone,
+    LuMessagesSquare,
+    LuArrowRight
 } from 'react-icons/lu';
 import DepthCarousel from '@/Components/DepthCarousel';
 
@@ -103,45 +98,87 @@ export default function About() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                        {/* Card 1: Fast */}
-                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-xl bg-teal-600 flex items-center justify-center text-white mb-2">
-                                    <LuZap className="w-6 h-6 text-white" />
+                        {/* Card 1: Fast & Instant Requests */}
+                        <div className="group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-xl hover:shadow-teal-900/5 hover:border-teal-500/40 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                            {/* Ambient corner glow */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-500/10 via-cyan-500/5 to-transparent rounded-bl-full pointer-events-none transition-transform duration-500 group-hover:scale-125" />
+
+                            <div className="space-y-5 relative z-10">
+                                <div className="flex items-center justify-between">
+                                    <div className="relative">
+                                        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 opacity-25 blur-md group-hover:opacity-50 transition-opacity duration-300" />
+                                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 via-teal-600 to-cyan-600 text-white flex items-center justify-center shadow-md shadow-teal-600/30 ring-1 ring-white/30 group-hover:scale-105 group-hover:-rotate-2 transition-all duration-300">
+                                            <LuZap className="w-7 h-7 stroke-[2.2] drop-shadow-xs" />
+                                        </div>
+                                    </div>
+                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200/70 text-[11px] font-bold text-teal-700 tracking-wide uppercase">
+                                        Instant Sync
+                                    </span>
                                 </div>
+
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900">Fast & Instant Requests</h3>
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                    <h3 className="font-heading font-extrabold text-xl text-slate-900 tracking-tight group-hover:text-teal-950 transition-colors">
+                                        Fast & Instant Requests
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                                         No more waiting hours for replies. Rentees submit trip dates in seconds, and vehicle hosts receive instant notifications to review and accept requests.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Card 2: Reliable */}
-                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white mb-2">
-                                    <LuCircleUser className="w-6 h-6 text-white" />
+                        {/* Card 2: Reliable Host Contacts */}
+                        <div className="group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-xl hover:shadow-emerald-900/5 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                            {/* Ambient corner glow */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent rounded-bl-full pointer-events-none transition-transform duration-500 group-hover:scale-125" />
+
+                            <div className="space-y-5 relative z-10">
+                                <div className="flex items-center justify-between">
+                                    <div className="relative">
+                                        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 opacity-25 blur-md group-hover:opacity-50 transition-opacity duration-300" />
+                                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/30 ring-1 ring-white/30 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300">
+                                            <LuHandshake className="w-7 h-7 stroke-[2.2] drop-shadow-xs" />
+                                        </div>
+                                    </div>
+                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 text-[11px] font-bold text-emerald-700 tracking-wide uppercase">
+                                        Verified Hosts
+                                    </span>
                                 </div>
+
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900">Reliable Host Contacts</h3>
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                    <h3 className="font-heading font-extrabold text-xl text-slate-900 tracking-tight group-hover:text-emerald-950 transition-colors">
+                                        Reliable Host Contacts
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                                         Once a booking request is accepted, direct contact phone numbers and emails unlock immediately for 1-tap calls and easy island pickup coordination.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Card 3: Direct Pricing */}
-                        <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center text-white mb-2">
-                                    <LuDollarSign className="w-6 h-6 text-white" />
+                        {/* Card 3: Direct Local Pricing */}
+                        <div className="group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-xl hover:shadow-teal-900/5 hover:border-teal-500/40 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                            {/* Ambient corner glow */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-600/10 via-emerald-500/5 to-transparent rounded-bl-full pointer-events-none transition-transform duration-500 group-hover:scale-125" />
+
+                            <div className="space-y-5 relative z-10">
+                                <div className="flex items-center justify-between">
+                                    <div className="relative">
+                                        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-600 opacity-25 blur-md group-hover:opacity-50 transition-opacity duration-300" />
+                                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-700 text-white flex items-center justify-center shadow-md shadow-teal-700/30 ring-1 ring-white/30 group-hover:scale-105 group-hover:-rotate-2 transition-all duration-300">
+                                            <LuBadgePercent className="w-7 h-7 stroke-[2.2] drop-shadow-xs" />
+                                        </div>
+                                    </div>
+                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200/70 text-[11px] font-bold text-teal-800 tracking-wide uppercase">
+                                        0% Middleman
+                                    </span>
                                 </div>
+
                                 <div className="space-y-2">
-                                    <h3 className="font-heading font-bold text-lg text-slate-900">Direct Local Pricing</h3>
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                    <h3 className="font-heading font-extrabold text-xl text-slate-900 tracking-tight group-hover:text-teal-950 transition-colors">
+                                        Direct Local Pricing
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                                         Rentees get transparent daily rates set directly by local Boholano owners with zero middleman markups or surprise booking fees.
                                     </p>
                                 </div>
@@ -164,22 +201,33 @@ export default function About() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-bold pt-8 border-t border-slate-800 relative z-10">
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
-                            <span>100% Free for Rentees</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-bold pt-8 border-t border-slate-800/80 relative z-10">
+                        <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 flex items-center gap-3.5 backdrop-blur-md transition-all duration-200 group/pill">
+                            <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 group-hover/pill:scale-105 transition-transform">
+                                <LuShieldCheck className="w-5 h-5 text-emerald-400" />
+                            </div>
+                            <span className="font-semibold text-slate-200">100% Free for Rentees</span>
                         </div>
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
-                            <span>Airport & Port Pickup Sync</span>
+
+                        <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 flex items-center gap-3.5 backdrop-blur-md transition-all duration-200 group/pill">
+                            <div className="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center shrink-0 group-hover/pill:scale-105 transition-transform">
+                                <LuPlane className="w-5 h-5 text-cyan-400" />
+                            </div>
+                            <span className="font-semibold text-slate-200">Airport & Port Pickup Sync</span>
                         </div>
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
-                            <span>Fast Mobile Performance</span>
+
+                        <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 flex items-center gap-3.5 backdrop-blur-md transition-all duration-200 group/pill">
+                            <div className="w-9 h-9 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center shrink-0 group-hover/pill:scale-105 transition-transform">
+                                <LuSmartphone className="w-5 h-5 text-teal-300" />
+                            </div>
+                            <span className="font-semibold text-slate-200">Fast Mobile Performance</span>
                         </div>
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 backdrop-blur-md">
-                            <LuCircleCheck className="w-5 h-5 text-primary-400 shrink-0" />
-                            <span>Direct Host Communication</span>
+
+                        <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 flex items-center gap-3.5 backdrop-blur-md transition-all duration-200 group/pill">
+                            <div className="w-9 h-9 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center shrink-0 group-hover/pill:scale-105 transition-transform">
+                                <LuMessagesSquare className="w-5 h-5 text-teal-400" />
+                            </div>
+                            <span className="font-semibold text-slate-200">Direct Host Communication</span>
                         </div>
                     </div>
                 </div>
