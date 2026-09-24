@@ -4,6 +4,18 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Immediate diagnostic probe if requested via query parameter
+if (isset($_GET['__diagnostic'])) {
+    header('Content-Type: text/plain');
+    echo "=== Vercel Serverless Diagnostic ===\n";
+    echo "PHP Version: " . PHP_VERSION . "\n";
+    echo "Vendor Autoload: " . (file_exists(__DIR__ . '/../vendor/autoload.php') ? 'EXISTS' : 'MISSING') . "\n";
+    echo "Seed DB: " . (file_exists(dirname(__DIR__) . '/database/seed.db') ? 'EXISTS (' . filesize(dirname(__DIR__) . '/database/seed.db') . ' bytes)' : 'MISSING') . "\n";
+    echo "Tmp Writable: " . (is_writable('/tmp') ? 'YES' : 'NO') . "\n";
+    echo "Time: " . date('Y-m-d H:i:s') . "\n";
+    exit;
+}
+
 register_shutdown_function(function() {
     $error = error_get_last();
     if ($error !== null && in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE])) {
@@ -16,11 +28,26 @@ register_shutdown_function(function() {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-
 // Forward all incoming Vercel serverless requests to Laravel's public entrypoint
 putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
+
+putenv('APP_KEY=base64:SGe084z0okoksW0WXyFebDKAZ9umXMfWnYBVU79MTlI=');
+$_ENV['APP_KEY'] = 'base64:SGe084z0okoksW0WXyFebDKAZ9umXMfWnYBVU79MTlI=';
+$_SERVER['APP_KEY'] = 'base64:SGe084z0okoksW0WXyFebDKAZ9umXMfWnYBVU79MTlI=';
+
+putenv('APP_ENV=production');
+$_ENV['APP_ENV'] = 'production';
+$_SERVER['APP_ENV'] = 'production';
+
+putenv('APP_DEBUG=true');
+$_ENV['APP_DEBUG'] = 'true';
+$_SERVER['APP_DEBUG'] = 'true';
+
+putenv('DB_CONNECTION=sqlite');
+$_ENV['DB_CONNECTION'] = 'sqlite';
+$_SERVER['DB_CONNECTION'] = 'sqlite';
 
 putenv('APP_MAINTENANCE_DRIVER=file');
 $_ENV['APP_MAINTENANCE_DRIVER'] = 'file';
@@ -125,17 +152,26 @@ if (file_exists($srcPackages)) {
 $tmpServices = '/tmp/services.php';
 $srcServices = __DIR__ . '/../bootstrap/cache/services.php';
 if (file_exists($srcServices)) {
-    @copy($srcServices, $tmpServices);
-    putenv("APP_SERVICES_CACHE={$tmpServices}");
-    $_ENV['APP_SERVICES_CACHE'] = $tmpServices;
-    $_SERVER['APP_SERVICES_CACHE'] = $tmpServices;
+    $raw = require $srcServices;
+    if (is_array($raw)) {
+        if (!empty($raw['providers'])) {
+            $raw['providers'] = array_values(array_filter($raw['providers'], fn($p) => class_exists($p)));
+        }
+        if (!empty($raw['eager'])) {
+            $raw['eager'] = array_values(array_filter($raw['eager'], fn($p) => class_exists($p)));
+        }
+        @file_put_contents($tmpServices, '<?php return ' . var_export($raw, true) . ';');
+        putenv("APP_SERVICES_CACHE={$tmpServices}");
+        $_ENV['APP_SERVICES_CACHE'] = $tmpServices;
+        $_SERVER['APP_SERVICES_CACHE'] = $tmpServices;
+    }
 }
 
 // Ensure SQLite database exists in /tmp and is fully populated
 $tmpDb = '/tmp/database.sqlite';
 $seedDb = dirname(__DIR__) . '/database/seed.db';
-if (!file_exists($tmpDb)) {
-    if (file_exists($seedDb)) {
+if (!file_exists($tmpDb) || filesize($tmpDb) === 0) {
+    if (file_exists($seedDb) && filesize($seedDb) > 0) {
         @copy($seedDb, $tmpDb);
         @chmod($tmpDb, 0666);
     } else {
@@ -152,7 +188,7 @@ $_ENV['LOG_CHANNEL'] = 'stderr';
 $_SERVER['LOG_CHANNEL'] = 'stderr';
 
 // Ensure sessions table exists for the database session driver
-if (file_exists($tmpDb)) {
+if (file_exists($tmpDb) && filesize($tmpDb) > 0) {
     try {
         $pdo = new PDO("sqlite:{$tmpDb}");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -201,5 +237,6 @@ try {
     header('Content-Type: text/html');
     echo "<h1>Unhandled Exception in public/index.php</h1>";
     echo "<p><strong>" . get_class($e) . "</strong>: " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p>File: " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
     echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
 }
