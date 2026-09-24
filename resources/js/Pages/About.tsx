@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
-    UserCircle, CheckCircle, PhoneCall, Lightning, MapPin, CarProfile, Tag, Users, ArrowRight, Medal, LockSimple, Money, CalendarCheck } from '@phosphor-icons/react';
+    UserCircle, CheckCircle, PhoneCall, Lightning, MapPin, CarProfile, CurrencyDollar, Users, ArrowRight, Medal, LockSimple, Money, CalendarCheck } from '@phosphor-icons/react';
 import DepthCarousel from '@/Components/DepthCarousel';
 
 export default function About() {
@@ -123,8 +123,8 @@ export default function About() {
                         {/* Card 3: Direct Pricing */}
                         <div className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
                             <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center text-white mb-2">
-                                    <Tag className="w-6 h-6 text-white" />
+                                <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center text-white mb-2">
+                                    <CurrencyDollar className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="space-y-2">
                                     <h3 className="font-heading font-bold text-lg text-slate-900">Direct Local Pricing</h3>
