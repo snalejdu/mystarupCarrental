@@ -92,11 +92,7 @@ class AppServiceProvider extends ServiceProvider
     protected function configurePasswordDefaults(): void
     {
         Password::defaults(function () {
-            $rule = Password::min(8);
-
-            return app()->isProduction()
-                ? $rule->letters()->mixedCase()->numbers()->uncompromised()
-                : $rule;
+            return Password::min(8);
         });
     }
 
