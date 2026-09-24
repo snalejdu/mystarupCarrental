@@ -43,6 +43,8 @@
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "database",
+    "SESSION_LIFETIME": "120",
+    "SESSION_EXPIRE_ON_CLOSE": "false",
     "SESSION_SECURE_COOKIE": "true",
     "SESSION_COOKIE": "rentbohol_session",
     "APP_URL": "https://mystarup-carrental.vercel.app",

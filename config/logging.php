@@ -127,7 +127,15 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
-        'security' => [
+        'security' => env('VERCEL') ? [
+            'driver' => 'monolog',
+            'level' => 'info',
+            'handler' => StreamHandler::class,
+            'handler_with' => [
+                'stream' => 'php://stderr',
+            ],
+            'processors' => [PsrLogMessageProcessor::class],
+        ] : [
             'driver' => 'daily',
             'path' => storage_path('logs/security.log'),
             'level' => 'info',

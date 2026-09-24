@@ -49,12 +49,16 @@ class RegisterController extends Controller
             ->whereNull('renter_id')
             ->update(['renter_id' => $user->id]);
 
-        Log::channel('security')->info('New user registered', [
-            'user_id' => $user->id,
-            'email' => $user->email,
-            'role' => $user->role,
-            'ip' => $request->ip(),
-        ]);
+        try {
+            Log::channel('security')->info('New user registered', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'role' => $user->role,
+                'ip' => $request->ip(),
+            ]);
+        } catch (\Throwable $e) {
+            // Silently fallback if filesystem is read-only
+        }
 
         if ($request->filled('intended')) {
             $intended = $request->input('intended');

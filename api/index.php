@@ -34,6 +34,14 @@ putenv('SESSION_COOKIE=rentbohol_session');
 $_ENV['SESSION_COOKIE'] = 'rentbohol_session';
 $_SERVER['SESSION_COOKIE'] = 'rentbohol_session';
 
+putenv('SESSION_LIFETIME=120');
+$_ENV['SESSION_LIFETIME'] = '120';
+$_SERVER['SESSION_LIFETIME'] = '120';
+
+putenv('SESSION_EXPIRE_ON_CLOSE=false');
+$_ENV['SESSION_EXPIRE_ON_CLOSE'] = 'false';
+$_SERVER['SESSION_EXPIRE_ON_CLOSE'] = 'false';
+
 putenv('CACHE_STORE=array');
 $_ENV['CACHE_STORE'] = 'array';
 $_SERVER['CACHE_STORE'] = 'array';
@@ -126,7 +134,7 @@ if (file_exists($srcServices)) {
 // Ensure SQLite database exists in /tmp and is fully populated
 $tmpDb = '/tmp/database.sqlite';
 $seedDb = dirname(__DIR__) . '/database/seed.db';
-if (!file_exists($tmpDb) || (file_exists($seedDb) && filesize($tmpDb) < filesize($seedDb))) {
+if (!file_exists($tmpDb)) {
     if (file_exists($seedDb)) {
         @copy($seedDb, $tmpDb);
         @chmod($tmpDb, 0666);

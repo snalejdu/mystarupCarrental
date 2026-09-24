@@ -7,18 +7,21 @@ import { useState } from 'react';
 export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [isGoogleSigningIn, setIsGoogleSigningIn] = useState(false);
+    const initialRole = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('role') === 'owner' ? 'owner' : 'renter';
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
         phone: '',
-        role: 'renter', // default role
+        role: initialRole,
         password: '',
         password_confirmation: '',
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post('/register');
+        post('/register', {
+            preserveScroll: true,
+        });
     };
 
     const handleGoogleSignIn = () => {
