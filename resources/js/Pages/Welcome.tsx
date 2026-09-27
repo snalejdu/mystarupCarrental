@@ -224,8 +224,8 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         </div>
 
                         {/* Right Hero Column — 3-Second Auto-Rotating Bohol Tourist Destinations Photo Frame */}
-                        <div className="lg:col-span-5 relative">
-                            <div className="relative z-10 aspect-[16/9] sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 border border-slate-200 shadow-xl group">
+                        <div className="lg:col-span-5 relative max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
+                            <div className="relative z-10 aspect-[16/9] sm:aspect-[4/3] rounded-xl sm:rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-lg sm:shadow-xl group">
 
                                 {/* Main Active Image with Smooth Fade — Click to advance & reset timer */}
                                 {TOURIST_SPOTS.map((spot, idx) => (
@@ -243,32 +243,32 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 ))}
 
                                 {/* Bottom Overlay Caption */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent z-10 flex items-end p-6 pointer-events-none">
-                                    <div className="text-white space-y-1 w-full pointer-events-auto">
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent z-10 flex items-end p-3 sm:p-4 md:p-6 pointer-events-none">
+                                    <div className="text-white space-y-0.5 sm:space-y-1 w-full pointer-events-auto">
                                         <div className="flex items-center justify-between">
-                                            <span className="inline-flex items-center gap-1 text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-2.5 py-0.5 rounded-md border border-accent-500/30">
-                                                <LuMapPin className="w-3 h-3" /> {TOURIST_SPOTS[spotIndex].location}
+                                            <span className="inline-flex items-center gap-1 text-[9px] sm:text-[11px] md:text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-1.5 sm:px-2.5 py-0.5 rounded sm:rounded-md border border-accent-500/30">
+                                                <LuMapPin className="w-2.5 sm:w-3 h-2.5 sm:h-3" /> {TOURIST_SPOTS[spotIndex].location}
                                             </span>
-                                            <span className="text-[11px] font-semibold text-slate-300">
+                                            <span className="text-[9px] sm:text-[11px] font-semibold text-slate-300">
                                                 {spotIndex + 1} / {TOURIST_SPOTS.length}
                                             </span>
                                         </div>
 
-                                        <h3 className="text-xl font-bold text-white tracking-tight">
+                                        <h3 className="text-sm sm:text-lg md:text-xl font-bold text-white tracking-tight leading-snug">
                                             {TOURIST_SPOTS[spotIndex].title}
                                         </h3>
-                                        <p className="text-xs text-slate-300 font-medium line-clamp-1">
+                                        <p className="text-[10px] sm:text-xs text-slate-300 font-medium line-clamp-1 leading-tight">
                                             {TOURIST_SPOTS[spotIndex].description}
                                         </p>
 
                                         {/* Progress Dot Indicators */}
-                                        <div className="flex items-center gap-1.5 pt-2">
+                                        <div className="flex items-center gap-1 sm:gap-1.5 pt-1 sm:pt-2">
                                             {TOURIST_SPOTS.map((_, i) => (
                                                 <button
                                                     key={i}
                                                     onClick={() => goToSlide(i)}
-                                                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                                        i === spotIndex ? 'w-6 bg-primary-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                                                    className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                                                        i === spotIndex ? 'w-4 sm:w-6 bg-primary-400' : 'w-1 sm:w-1.5 bg-white/40 hover:bg-white/70'
                                                     }`}
                                                 />
                                             ))}
@@ -278,13 +278,13 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             </div>
 
                             {/* Destination Thumbnail Quick Selector Bar Below Frame */}
-                            <div className="grid grid-cols-5 gap-1.5 sm:gap-2 mt-2 sm:mt-3">
+                            <div className="grid grid-cols-5 gap-1 sm:gap-2 mt-1.5 sm:mt-3">
                                 {TOURIST_SPOTS.map((s, i) => (
                                     <button
                                         key={s.title}
                                         onClick={() => goToSlide(i)}
-                                        className={`relative rounded-lg overflow-hidden aspect-[4/3] border transition-all cursor-pointer ${
-                                            i === spotIndex ? 'border-primary-500 ring-2 ring-primary-300 scale-105' : 'border-slate-200 opacity-60 hover:opacity-100'
+                                        className={`relative rounded-md sm:rounded-lg overflow-hidden aspect-[4/3] border transition-all cursor-pointer ${
+                                            i === spotIndex ? 'border-primary-500 ring-1.5 sm:ring-2 ring-primary-300 scale-105' : 'border-slate-200 opacity-60 hover:opacity-100'
                                         }`}
                                     >
                                         <img src={s.image} alt={s.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
