@@ -131,28 +131,40 @@ export default function CarLoadingAnimation({
                             {/* Front Wheel */}
                             <g transform="translate(258, 138)">
                                 <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" strokeWidth="1.5" />
-                                <circle cx="0" cy="0" r="11" fill="#475569" />
+                                <circle cx="0" cy="0" r="11" fill="#334155" />
+                                {/* Red Brembo-Style Sport Caliper (stationary indicator) */}
+                                <path d="M -7 -6 A 9 9 0 0 1 -2 -9 L -1 -7 A 7 7 0 0 0 -5 -5 Z" fill="#ef4444" />
                                 <g className="rb-wheel">
-                                    <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" strokeWidth="1" />
-                                    <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" strokeWidth="2" />
-                                    <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" strokeWidth="2" />
-                                    <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" strokeWidth="1.5" />
-                                    <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" strokeWidth="1.5" />
-                                    <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+                                    <circle cx="0" cy="0" r="8.5" fill="#1e293b" stroke="#64748b" strokeWidth="1" />
+                                    {/* 5 Directional Sport Alloy Spokes */}
+                                    <path d="M 0 0 Q 3 -4 0 -7.5" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q 5.5 -0.5 7.1 -2.3" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q 4 4.5 4.4 6.1" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q -2.5 5.5 -4.4 6.1" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q -5.5 -0.5 -7.1 -2.3" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    {/* Hub Cap with Amber Sport Accent Dot for Clear Forward Rotation Tracking */}
+                                    <circle cx="0" cy="0" r="2.8" fill="#0d9488" stroke="#f8fafc" strokeWidth="0.8" />
+                                    <circle cx="4.8" cy="-4.8" r="1.1" fill="#f59e0b" />
                                 </g>
                             </g>
 
                             {/* Rear Wheel */}
                             <g transform="translate(138, 138)">
                                 <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" strokeWidth="1.5" />
-                                <circle cx="0" cy="0" r="11" fill="#475569" />
+                                <circle cx="0" cy="0" r="11" fill="#334155" />
+                                {/* Red Brembo-Style Sport Caliper (stationary indicator) */}
+                                <path d="M -7 -6 A 9 9 0 0 1 -2 -9 L -1 -7 A 7 7 0 0 0 -5 -5 Z" fill="#ef4444" />
                                 <g className="rb-wheel">
-                                    <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" strokeWidth="1" />
-                                    <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" strokeWidth="2" />
-                                    <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" strokeWidth="2" />
-                                    <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" strokeWidth="1.5" />
-                                    <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" strokeWidth="1.5" />
-                                    <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+                                    <circle cx="0" cy="0" r="8.5" fill="#1e293b" stroke="#64748b" strokeWidth="1" />
+                                    {/* 5 Directional Sport Alloy Spokes */}
+                                    <path d="M 0 0 Q 3 -4 0 -7.5" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q 5.5 -0.5 7.1 -2.3" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q 4 4.5 4.4 6.1" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q -2.5 5.5 -4.4 6.1" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    <path d="M 0 0 Q -5.5 -0.5 -7.1 -2.3" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                    {/* Hub Cap with Amber Sport Accent Dot for Clear Forward Rotation Tracking */}
+                                    <circle cx="0" cy="0" r="2.8" fill="#0d9488" stroke="#f8fafc" strokeWidth="0.8" />
+                                    <circle cx="4.8" cy="-4.8" r="1.1" fill="#f59e0b" />
                                 </g>
                             </g>
                         </g>
@@ -174,9 +186,9 @@ export default function CarLoadingAnimation({
                 </div>
             )}
 
-            {/* Smooth indeterminate mini-bar */}
+            {/* Smooth indeterminate mini-bar running left-to-right */}
             <div className="mt-4 w-32 h-1 bg-slate-100 rounded-full overflow-hidden relative">
-                <div className="h-full bg-gradient-to-r from-primary-400 via-primary-500 to-teal-400 rounded-full animate-[marquee_2s_ease-in-out_infinite] w-1/2" />
+                <div className="h-full bg-gradient-to-r from-primary-400 via-primary-500 to-teal-400 rounded-full w-1/2 animate-[progress_1.6s_ease-in-out_infinite]" />
             </div>
         </div>
     );

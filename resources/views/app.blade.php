@@ -67,9 +67,9 @@
                 100% { transform: translate3d(300%, 0, 0); }
             }
 
-            .rb-car { animation: rbSuspension 0.65s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; transform-origin: 190px 130px; will-change: transform; }
-            .rb-wheel { animation: rbWheelSpin 0.35s linear infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
-            .rb-road { animation: rbRoadMove 0.32s linear infinite; will-change: transform; }
+            .rb-car { animation: rbSuspension 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; transform-origin: 190px 130px; will-change: transform; }
+            .rb-wheel { animation: rbWheelSpin 0.55s linear infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+            .rb-road { animation: rbRoadMove 0.44s linear infinite; will-change: transform; }
             .rb-wind-1 { animation: rbWindFlow 0.5s ease-out infinite; will-change: transform, opacity; }
             .rb-wind-2 { animation: rbWindFlow 0.65s ease-out 0.15s infinite; will-change: transform, opacity; }
             .rb-wind-3 { animation: rbWindFlow 0.45s ease-out 0.3s infinite; will-change: transform, opacity; }
@@ -168,28 +168,40 @@
                         <!-- Front Wheel -->
                         <g transform="translate(258, 138)">
                             <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
-                            <circle cx="0" cy="0" r="11" fill="#475569" />
+                            <circle cx="0" cy="0" r="11" fill="#334155" />
+                            <!-- Red Brembo-Style Sport Caliper (stationary indicator) -->
+                            <path d="M -7 -6 A 9 9 0 0 1 -2 -9 L -1 -7 A 7 7 0 0 0 -5 -5 Z" fill="#ef4444" />
                             <g class="rb-wheel">
-                                <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" stroke-width="1" />
-                                <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" stroke-width="2" />
-                                <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" stroke-width="2" />
-                                <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" stroke-width="1.5" />
-                                <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" stroke-width="1.5" />
-                                <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+                                <circle cx="0" cy="0" r="8.5" fill="#1e293b" stroke="#64748b" stroke-width="1" />
+                                <!-- 5 Directional Sport Alloy Spokes -->
+                                <path d="M 0 0 Q 3 -4 0 -7.5" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q 5.5 -0.5 7.1 -2.3" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q 4 4.5 4.4 6.1" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q -2.5 5.5 -4.4 6.1" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q -5.5 -0.5 -7.1 -2.3" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <!-- Hub Cap with Amber Sport Accent Dot for Clear Forward Rotation Tracking -->
+                                <circle cx="0" cy="0" r="2.8" fill="#0d9488" stroke="#f8fafc" stroke-width="0.8" />
+                                <circle cx="4.8" cy="-4.8" r="1.1" fill="#f59e0b" />
                             </g>
                         </g>
 
                         <!-- Rear Wheel -->
                         <g transform="translate(138, 138)">
                             <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
-                            <circle cx="0" cy="0" r="11" fill="#475569" />
+                            <circle cx="0" cy="0" r="11" fill="#334155" />
+                            <!-- Red Brembo-Style Sport Caliper (stationary indicator) -->
+                            <path d="M -7 -6 A 9 9 0 0 1 -2 -9 L -1 -7 A 7 7 0 0 0 -5 -5 Z" fill="#ef4444" />
                             <g class="rb-wheel">
-                                <circle cx="0" cy="0" r="8.5" fill="#334155" stroke="#94a3b8" stroke-width="1" />
-                                <line x1="-7" y1="0" x2="7" y2="0" stroke="#f1f5f9" stroke-width="2" />
-                                <line x1="0" y1="-7" x2="0" y2="7" stroke="#f1f5f9" stroke-width="2" />
-                                <line x1="-5" y1="-5" x2="5" y2="5" stroke="#f1f5f9" stroke-width="1.5" />
-                                <line x1="-5" y1="5" x2="5" y2="-5" stroke="#f1f5f9" stroke-width="1.5" />
-                                <circle cx="0" cy="0" r="3" fill="#2dd4bf" />
+                                <circle cx="0" cy="0" r="8.5" fill="#1e293b" stroke="#64748b" stroke-width="1" />
+                                <!-- 5 Directional Sport Alloy Spokes -->
+                                <path d="M 0 0 Q 3 -4 0 -7.5" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q 5.5 -0.5 7.1 -2.3" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q 4 4.5 4.4 6.1" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q -2.5 5.5 -4.4 6.1" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path d="M 0 0 Q -5.5 -0.5 -7.1 -2.3" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <!-- Hub Cap with Amber Sport Accent Dot for Clear Forward Rotation Tracking -->
+                                <circle cx="0" cy="0" r="2.8" fill="#0d9488" stroke="#f8fafc" stroke-width="0.8" />
+                                <circle cx="4.8" cy="-4.8" r="1.1" fill="#f59e0b" />
                             </g>
                         </g>
                     </g>
