@@ -50,6 +50,7 @@ class OverallSystemFunctionalityTest extends TestCase
             'email' => $hostEmail,
             'phone' => '09171112233',
             'role' => 'owner',
+            'driver_license_number' => 'N01-99-999999',
             'password' => 'Password123!',
             'password_confirmation' => 'Password123!',
         ]);

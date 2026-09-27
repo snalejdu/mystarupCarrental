@@ -16,8 +16,8 @@ class OwnerVehicleTest extends TestCase
     {
         $renter = User::factory()->renter()->create();
 
-        $this->actingAs($renter)->get('/owner/vehicles')->assertRedirect('/');
-        $this->actingAs($renter)->get('/owner/vehicles/create')->assertRedirect('/');
+        $this->actingAs($renter)->get('/owner/vehicles')->assertRedirect(route('settings.index'));
+        $this->actingAs($renter)->get('/owner/vehicles/create')->assertRedirect(route('settings.index'));
     }
 
     public function test_owner_can_view_their_vehicles(): void

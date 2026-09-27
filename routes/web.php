@@ -54,6 +54,10 @@ Route::post('/booking/{token}/rate', [BookingController::class, 'renterRate'])
     ->middleware('throttle:rating')
     ->whereUuid('token');
 
+Route::post('/booking/{token}/pay', [BookingController::class, 'renterPay'])
+    ->name('booking.pay')
+    ->whereUuid('token');
+
 // Photo serving route (for local dev without signed URLs)
 Route::get('/photos/{photo}', function (App\Models\VehiclePhoto $photo) {
     return app(ImageService::class)->serve($photo->path);
@@ -114,6 +118,7 @@ Route::middleware(['auth', 'throttle:global'])->prefix('renter')->name('renter.'
     })->name('license.photo');
 
     Route::post('/bookings/{booking}/rate', [\App\Http\Controllers\RenterBookingController::class, 'rate'])->name('bookings.rate')->middleware('throttle:rating');
+    Route::post('/bookings/{booking}/pay', [\App\Http\Controllers\RenterBookingController::class, 'recordPayment'])->name('bookings.pay');
     Route::post('/bookings/{booking}/handover', [\App\Http\Controllers\RenterBookingController::class, 'updateHandover'])->name('bookings.handover');
     Route::post('/bookings/{booking}/cancel', [\App\Http\Controllers\RenterBookingController::class, 'cancel'])->name('bookings.cancel');
 });

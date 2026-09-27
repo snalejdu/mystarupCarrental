@@ -14,7 +14,8 @@ import {
     LuCreditCard,
     LuShare2,
     LuCopy,
-    LuShieldCheck
+    LuShieldCheck,
+    LuPrinter
 } from 'react-icons/lu';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import PaymentModal from '@/Components/PaymentModal';
@@ -131,7 +132,16 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                                 </p>
                             </div>
 
-                            {!isPaid && (
+                            {isPaid ? (
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPaymentModal(true)}
+                                    className="glass-btn-outline-light min-h-[48px] px-5 py-2.5 font-bold rounded-2xl text-xs sm:text-sm shrink-0 flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto bg-white/20 hover:bg-white/30 text-white border border-white/30"
+                                >
+                                    <LuPrinter className="w-4 h-4 text-white" />
+                                    <span>View Official E-Receipt</span>
+                                </button>
+                            ) : (
                                 <button
                                     type="button"
                                     onClick={() => setShowPaymentModal(true)}
@@ -236,17 +246,40 @@ export default function RenterStatus({ booking, ownerContact }: Props) {
                 <PaymentModal
                     show={showPaymentModal}
                     onClose={() => setShowPaymentModal(false)}
+                    payEndpoint={`/booking/${booking.token}/pay`}
+                    initialReceipt={
+                        isPaid
+                            ? {
+                                  referenceNumber: booking.payment?.reference_number || `PAY-BOHOL-${booking.id}`,
+                                  paidAmount: Number(booking.payment?.amount || booking.total_price),
+                                  paymentMethod: (booking.payment?.method as any) || 'gcash',
+                                  paidAt: booking.payment?.paid_at || 'Verified & Confirmed',
+                                  bookingId: booking.id,
+                                  vehicleName: booking.vehicle?.title || 'Island Rental Vehicle',
+                                  status: 'paid',
+                              }
+                            : null
+                    }
                     booking={{
                         id: booking.id,
+                        token: booking.token,
                         vehicle_name: booking.vehicle?.title || 'Island Rental Vehicle',
                         total_price: Number(booking.total_price),
+                        security_deposit: Number(booking.vehicle?.security_deposit || 0),
                         start_date: booking.start_date,
                         end_date: booking.end_date,
                         days: booking.total_days,
+                        host_name: ownerContact?.name || booking.vehicle?.owner?.name || 'Local Host',
                     }}
                     onPaymentSuccess={(receipt) => {
                         setIsPaid(true);
                         setShowPaymentModal(false);
+                        triggerToast({
+                            title: 'Reservation Secured & Paid!',
+                            description: `Reference: ${receipt.referenceNumber}. Your host has been notified.`,
+                            type: 'success',
+                            duration: 5000,
+                        });
                     }}
                 />
             )}

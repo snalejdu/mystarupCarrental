@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import {
@@ -27,7 +27,8 @@ import {
     LuPenTool,
     LuFileText,
     LuSettings,
-    LuSparkles
+    LuSparkles,
+    LuPrinter
 } from 'react-icons/lu';
 import { formatCurrency } from '@/lib/utils';
 import SignaturePad from '@/Components/SignaturePad';
@@ -61,6 +62,14 @@ interface BookingItem {
         comment?: string;
     };
     is_paid?: boolean;
+    payment?: {
+        id?: number;
+        reference_number: string;
+        method: string;
+        amount: number;
+        paid_at: string;
+        status: string;
+    } | null;
     signature_data?: string;
 }
 
@@ -76,11 +85,18 @@ interface Props {
 }
 
 export default function RenterBookings({ bookings, renter }: Props) {
+    const [localBookings, setLocalBookings] = useState<BookingItem[]>(bookings);
+
+    useEffect(() => {
+        setLocalBookings(bookings);
+    }, [bookings]);
+
     const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'confirmed' | 'completed' | 'cancelled'>('all');
     const [showLicenseModal, setShowLicenseModal] = useState(false);
     const [ratingBooking, setRatingBooking] = useState<BookingItem | null>(null);
     const [cancellingId, setCancellingId] = useState<number | null>(null);
     const [paymentBooking, setPaymentBooking] = useState<BookingItem | null>(null);
+    const [viewReceiptData, setViewReceiptData] = useState<PaymentReceipt | null>(null);
     const [handoverBooking, setHandoverBooking] = useState<BookingItem | null>(null);
     const [handoverSignature, setHandoverSignature] = useState<string>('');
     const [handoverFuel, setHandoverFuel] = useState<string>('Full (8/8)');
@@ -101,18 +117,18 @@ export default function RenterBookings({ bookings, renter }: Props) {
     });
 
     const counts = useMemo(() => ({
-        all: bookings.length,
-        accepted: bookings.filter(b => b.status === 'accepted').length,
-        pending: bookings.filter(b => b.status === 'pending').length,
-        completed: bookings.filter(b => b.status === 'completed').length,
-        cancelled: bookings.filter(b => b.status === 'declined').length,
-    }), [bookings]);
+        all: localBookings.length,
+        accepted: localBookings.filter(b => b.status === 'accepted').length,
+        pending: localBookings.filter(b => b.status === 'pending').length,
+        completed: localBookings.filter(b => b.status === 'completed').length,
+        cancelled: localBookings.filter(b => b.status === 'declined').length,
+    }), [localBookings]);
 
     const filteredBookings = useMemo(() => {
-        if (activeTab === 'all') return bookings;
-        if (activeTab === 'cancelled') return bookings.filter(b => b.status === 'declined');
-        return bookings.filter(b => b.status === activeTab);
-    }, [bookings, activeTab]);
+        if (activeTab === 'all') return localBookings;
+        if (activeTab === 'cancelled') return localBookings.filter(b => b.status === 'declined');
+        return localBookings.filter(b => b.status === activeTab);
+    }, [localBookings, activeTab]);
 
     const handleCancel = (bookingId: number) => {
         if (!confirm('Are you sure you want to cancel this pending booking request? The host will be notified.')) return;
@@ -120,6 +136,20 @@ export default function RenterBookings({ bookings, renter }: Props) {
         router.post(`/renter/bookings/${bookingId}/cancel`, {}, {
             onFinish: () => setCancellingId(null),
         });
+    };
+
+    const handleViewReceipt = (b: BookingItem) => {
+        const method = (b.payment?.method as any) || 'gcash';
+        setViewReceiptData({
+            referenceNumber: b.payment?.reference_number || `PAY-BOHOL-${b.id}`,
+            paidAmount: Number(b.payment?.amount || b.total_price),
+            paymentMethod: method,
+            paidAt: b.payment?.paid_at || 'Verified & Confirmed',
+            bookingId: b.id,
+            vehicleName: b.vehicle?.title || 'Island Rental Vehicle',
+            status: 'paid',
+        });
+        setPaymentBooking(b);
     };
 
     const handleLicenseSubmit = (e: React.FormEvent) => {
@@ -518,14 +548,40 @@ export default function RenterBookings({ bookings, renter }: Props) {
 
                                                 {(b.status === 'confirmed' || b.status === 'accepted') && (
                                                     <>
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => setPaymentBooking(b)}
-                                                            className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition-colors shadow-2xs cursor-pointer"
-                                                        >
-                                                            <LuCreditCard className="w-4 h-4 text-emerald-600" />
-                                                            <span>Pay via GCash / Maya</span>
-                                                        </button>
+                                                        {b.is_paid ? (
+                                                            <div className="inline-flex flex-wrap items-center gap-2">
+                                                                <div className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-xs font-bold shadow-2xs">
+                                                                    <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                                                                    <span>Paid via {(b.payment?.method || 'GCash').toUpperCase()}</span>
+                                                                    {b.payment?.reference_number && (
+                                                                        <span className="font-mono text-slate-500 font-normal text-[11px] truncate max-w-[120px]">
+                                                                            #{b.payment.reference_number}
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleViewReceipt(b)}
+                                                                    className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
+                                                                    title="View Official E-Receipt"
+                                                                >
+                                                                    <LuPrinter className="w-3.5 h-3.5 text-slate-500" />
+                                                                    <span>Receipt</span>
+                                                                </button>
+                                                            </div>
+                                                        ) : (
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    setViewReceiptData(null);
+                                                                    setPaymentBooking(b);
+                                                                }}
+                                                                className="apple-press min-h-[44px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-colors shadow-2xs cursor-pointer"
+                                                            >
+                                                                <LuCreditCard className="w-4 h-4" />
+                                                                <span>Pay via GCash / Maya</span>
+                                                            </button>
+                                                        )}
 
                                                         <button
                                                             type="button"
@@ -709,23 +765,51 @@ export default function RenterBookings({ bookings, renter }: Props) {
             {paymentBooking && (
                 <PaymentModal
                     show={Boolean(paymentBooking)}
-                    onClose={() => setPaymentBooking(null)}
+                    onClose={() => {
+                        setPaymentBooking(null);
+                        setViewReceiptData(null);
+                    }}
+                    payEndpoint={`/renter/bookings/${paymentBooking.id}/pay`}
+                    initialReceipt={viewReceiptData}
                     booking={{
                         id: paymentBooking.id,
+                        token: paymentBooking.token,
                         vehicle_name: paymentBooking.vehicle?.title || 'Island Rental Vehicle',
-                        total_price: paymentBooking.total_price,
+                        total_price: Number(paymentBooking.total_price),
+                        security_deposit: Number(paymentBooking.vehicle?.security_deposit || 0),
                         start_date: paymentBooking.start_date,
                         end_date: paymentBooking.end_date,
                         days: paymentBooking.total_days,
+                        host_name: paymentBooking.vehicle?.owner?.name || paymentBooking.owner_contact?.name || 'Local Host',
                     }}
                     onPaymentSuccess={(receipt) => {
+                        setLocalBookings(prev =>
+                            prev.map(item => {
+                                if (item.id === paymentBooking.id) {
+                                    return {
+                                        ...item,
+                                        is_paid: true,
+                                        status: item.status === 'pending' ? 'accepted' : item.status,
+                                        payment: {
+                                            reference_number: receipt.referenceNumber,
+                                            method: receipt.paymentMethod,
+                                            amount: receipt.paidAmount,
+                                            paid_at: receipt.paidAt,
+                                            status: 'confirmed',
+                                        },
+                                    };
+                                }
+                                return item;
+                            })
+                        );
                         triggerToast({
-                            title: 'Reservation Secured!',
+                            title: 'Reservation Secured & Paid!',
                             description: `Reference: ${receipt.referenceNumber}. Your host has been notified.`,
                             type: 'success',
                             duration: 5000,
                         });
                         setPaymentBooking(null);
+                        setViewReceiptData(null);
                     }}
                 />
             )}

@@ -26,7 +26,7 @@ class RenterBookingController extends Controller
             ->update(['renter_id' => $user->id]);
 
         $bookings = Booking::where('renter_id', $user->id)
-            ->with(['vehicle' => fn ($q) => $q->with('photos', 'owner'), 'ratings'])
+            ->with(['vehicle' => fn ($q) => $q->with('photos', 'owner'), 'ratings', 'payments'])
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($booking) {
@@ -39,6 +39,17 @@ class RenterBookingController extends Controller
                     'total_days' => $booking->total_days,
                     'total_price' => $booking->total_price,
                     'status' => $booking->status,
+                    'is_paid' => $booking->isPaid(),
+                    'payment' => $booking->latestPayment() ? [
+                        'id' => $booking->latestPayment()->id,
+                        'reference_number' => $booking->latestPayment()->reference_number,
+                        'method' => $booking->latestPayment()->method,
+                        'amount' => (float) $booking->latestPayment()->amount,
+                        'paid_at' => $booking->latestPayment()->paid_at?->format('M d, Y h:i A') ?? $booking->latestPayment()->created_at->format('M d, Y h:i A'),
+                        'status' => $booking->latestPayment()->status,
+                        'type' => $booking->latestPayment()->type,
+                        'notes' => $booking->latestPayment()->notes,
+                    ] : null,
                     'checkin_odometer' => $booking->checkin_odometer,
                     'checkin_fuel' => $booking->checkin_fuel,
                     'checkin_notes' => $booking->checkin_notes,
@@ -177,5 +188,53 @@ class RenterBookingController extends Controller
         $booking->update(['status' => 'declined']);
 
         return back()->with('success', 'Booking request cancelled successfully.');
+    }
+
+    /**
+     * Record and confirm rental payment for a booking.
+     */
+    public function recordPayment(Request $request, Booking $booking)
+    {
+        $user = $request->user() ?: auth()->user();
+        if (!$user) {
+            abort(401);
+        }
+
+        if ($booking->renter_id !== $user->id && $booking->renter_email !== $user->email) {
+            abort(403, 'Unauthorized booking payment.');
+        }
+
+        $validated = $request->validate([
+            'method' => 'required|string|in:gcash,maya,card,bank_transfer,qrph',
+            'reference_number' => 'nullable|string|max:100',
+            'amount' => 'nullable|numeric|min:1',
+            'notes' => 'nullable|string|max:500',
+        ]);
+
+        $reference = $validated['reference_number'] ?: ('PAY-BOHOL-' . strtoupper(\Illuminate\Support\Str::random(8)));
+        $amount = $validated['amount'] ?? $booking->total_price;
+
+        $payment = \App\Models\Payment::create([
+            'booking_id' => $booking->id,
+            'payer_id' => $user->id,
+            'type' => 'rental',
+            'method' => $validated['method'],
+            'amount' => $amount,
+            'reference_number' => $reference,
+            'status' => 'confirmed',
+            'paid_at' => now(),
+            'confirmed_by' => $booking->vehicle?->owner_id,
+            'notes' => $validated['notes'] ?? ('Instant payment verified via ' . strtoupper($validated['method'])),
+        ]);
+
+        // If booking status was pending, upgrade to accepted upon payment
+        if ($booking->status === 'pending') {
+            $booking->status = 'accepted';
+            $booking->accepted_at = now();
+        }
+        $booking->contact_unlocked_at = $booking->contact_unlocked_at ?? now();
+        $booking->save();
+
+        return back()->with('success', '🎉 Payment of ₱' . number_format($amount, 2) . ' confirmed via ' . strtoupper($validated['method']) . '! Reference #' . $reference);
     }
 }

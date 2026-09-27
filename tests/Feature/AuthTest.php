@@ -42,6 +42,7 @@ class AuthTest extends TestCase
             'email' => 'pedro.host@example.com',
             'phone' => '09181112233',
             'role' => 'owner',
+            'driver_license_number' => 'N01-23-456789',
             'password' => 'SecurePass123!',
             'password_confirmation' => 'SecurePass123!',
         ]);
@@ -133,7 +134,10 @@ class AuthTest extends TestCase
 
     public function test_authenticated_user_can_switch_roles_between_renter_and_owner(): void
     {
-        $user = User::factory()->create(['role' => 'renter']);
+        $user = User::factory()->create([
+            'role' => 'renter',
+            'driver_license_number' => 'N01-23-456789',
+        ]);
 
         // Switch to owner
         $response1 = $this->actingAs($user)->post('/user/switch-role');
@@ -179,9 +183,9 @@ class AuthTest extends TestCase
     {
         $renter = User::factory()->create(['role' => 'renter']);
 
-        // Renter attempting owner route
+        // Renter attempting owner route gets redirected to Settings to upload license
         $ownerAttempt = $this->actingAs($renter)->get('/owner/vehicles');
-        $ownerAttempt->assertRedirect('/');
+        $ownerAttempt->assertRedirect(route('settings.index'));
 
         // Renter attempting admin route
         $adminAttempt = $this->actingAs($renter)->get('/admin/dashboard');

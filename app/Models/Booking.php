@@ -157,6 +157,28 @@ class Booking extends Model
     }
 
     /**
+     * Check if this booking has a confirmed rental payment.
+     */
+    public function isPaid(): bool
+    {
+        return $this->payments()
+            ->where('status', 'confirmed')
+            ->whereIn('type', ['rental', 'deposit'])
+            ->exists();
+    }
+
+    /**
+     * Get the latest confirmed payment.
+     */
+    public function latestPayment(): ?Payment
+    {
+        return $this->payments()
+            ->where('status', 'confirmed')
+            ->latest('paid_at')
+            ->first();
+    }
+
+    /**
      * Get the damage reports for this booking.
      */
     public function damageReports(): HasMany
