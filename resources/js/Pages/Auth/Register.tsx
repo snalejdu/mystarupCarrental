@@ -1,6 +1,6 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import { LuCar, LuEye, LuEyeOff, LuUserCheck } from 'react-icons/lu';
+import { LuCar, LuEye, LuEyeOff, LuUserCheck, LuIdCard, LuUpload, LuShieldCheck } from 'react-icons/lu';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { useState } from 'react';
 
@@ -8,13 +8,24 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [isGoogleSigningIn, setIsGoogleSigningIn] = useState(false);
     const initialRole = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('role') === 'owner' ? 'owner' : 'renter';
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm<{
+        name: string;
+        email: string;
+        phone: string;
+        role: 'renter' | 'owner';
+        password: string;
+        password_confirmation: string;
+        driver_license_number: string;
+        driver_license_photo: File | null;
+    }>({
         name: '',
         email: '',
         phone: '',
         role: initialRole,
         password: '',
         password_confirmation: '',
+        driver_license_number: '',
+        driver_license_photo: null,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -51,7 +62,10 @@ export default function Register() {
 
                             {/* Role Selector Pills */}
                             <div className="mb-4 sm:mb-6">
-                                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Account Type</label>
+                                <div className="flex items-center justify-between mb-2">
+                                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider">Account Type</label>
+                                    <span className="text-xs text-teal-600 font-medium">Host is optional — upgrade anytime</span>
+                                </div>
                                 <div className="grid grid-cols-2 gap-2 sm:gap-3 p-1.5 bg-slate-100 rounded-xl border border-slate-200">
                                     <button
                                         type="button"
@@ -63,7 +77,7 @@ export default function Register() {
                                         }`}
                                     >
                                         <LuUserCheck className="w-4 h-4 text-teal-600 shrink-0" />
-                                        <span>Rent a Vehicle</span>
+                                        <span>Renter (Default)</span>
                                     </button>
 
                                     <button
@@ -76,7 +90,7 @@ export default function Register() {
                                         }`}
                                     >
                                         <LuCar className="w-4 h-4 text-teal-600 shrink-0" />
-                                        <span>List My Vehicle</span>
+                                        <span>Host (Optional)</span>
                                     </button>
                                 </div>
                             </div>
@@ -161,6 +175,68 @@ export default function Register() {
                                         required
                                     />
                                 </div>
+
+                                {/* Host Qualification Requirement (Optional during registration or in Settings) */}
+                                {data.role === 'owner' ? (
+                                    <div className="p-4 bg-teal-50/80 border border-teal-200/90 rounded-2xl space-y-3.5 animate-fade-in">
+                                        <div className="flex items-start gap-2.5">
+                                            <div className="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                                <LuIdCard className="w-4 h-4" />
+                                            </div>
+                                            <div>
+                                                <h4 className="text-xs font-bold text-teal-950 uppercase tracking-wider">Host Qualification</h4>
+                                                <p className="text-xs text-teal-800 leading-relaxed mt-0.5">
+                                                    The only qualification to list vehicles on Waypt is a valid <b>Driver's License</b>. You can also skip this and register as a renter first, then upgrade anytime in your <b>Account Settings</b>!
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                                                Driver's License Number <span className="text-red-500">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={data.driver_license_number}
+                                                onChange={e => setData('driver_license_number', e.target.value)}
+                                                className="w-full h-11 px-3.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 uppercase font-mono"
+                                                placeholder="e.g. G01-12-345678"
+                                                required={data.role === 'owner'}
+                                            />
+                                            {errors.driver_license_number && (
+                                                <p className="text-xs text-red-500 mt-1 font-sans">{errors.driver_license_number}</p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                                                Driver's License Photo (Optional)
+                                            </label>
+                                            <label className="flex items-center gap-2 px-3.5 py-2.5 bg-white border border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-teal-500 transition-colors">
+                                                <LuUpload className="w-4 h-4 text-teal-600 shrink-0" />
+                                                <span className="text-xs text-slate-600 truncate">
+                                                    {data.driver_license_photo ? data.driver_license_photo.name : 'Upload front photo of license (JPG, PNG, WebP)'}
+                                                </span>
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={e => setData('driver_license_photo', e.target.files?.[0] || null)}
+                                                    className="hidden"
+                                                />
+                                            </label>
+                                            {errors.driver_license_photo && (
+                                                <p className="text-xs text-red-500 mt-1">{errors.driver_license_photo}</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="p-3 bg-slate-50 border border-slate-200/90 rounded-xl flex items-center gap-2.5 text-xs text-slate-600">
+                                        <LuShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
+                                        <span>
+                                            <b>Want to host?</b> It's optional! You can upgrade anytime in your <b>Settings</b> with just a driver's license.
+                                        </span>
+                                    </div>
+                                )}
 
                                 {/* Terms Notice */}
                                 <p className="text-xs text-slate-500 pt-0.5 leading-relaxed">

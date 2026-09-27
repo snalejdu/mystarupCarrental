@@ -7,6 +7,7 @@ use App\Http\Controllers\Owner\BookingController as OwnerBookingController;
 use App\Http\Controllers\Owner\VehicleController as OwnerVehicleController;
 use App\Http\Controllers\PublicVehicleController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\SettingsController;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,12 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', 'throttle:global'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::post('/user/switch-role', [LoginController::class, 'switchRole'])->name('user.switch-role');
+
+    // Account Settings & Host Qualification
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile');
+    Route::post('/settings/host/apply', [SettingsController::class, 'becomeHost'])->name('settings.become-host')->middleware('throttle:upload');
+    Route::post('/settings/host/toggle', [SettingsController::class, 'toggleHostRole'])->name('settings.toggle-host');
 });
 
 /*

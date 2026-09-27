@@ -10,12 +10,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'google_id', 'address', 'date_of_birth', 'emergency_contact_name', 'emergency_contact_phone', 'driver_license_number', 'driver_license_expiry'])]
+#[Fillable(['name', 'email', 'phone', 'password', 'role', 'avatar', 'driver_license_path', 'driver_license_status', 'google_id', 'address', 'date_of_birth', 'emergency_contact_name', 'emergency_contact_phone', 'driver_license_number', 'driver_license_expiry'])]
 #[Hidden(['password', 'remember_token', 'driver_license_path', 'driver_license_number', 'google_id'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * Check if user is qualified to be a host (has valid driver's license).
+     */
+    public function isHostQualified(): bool
+    {
+        return !empty($this->driver_license_path) || !empty($this->driver_license_number);
+    }
 
     /**
      * Check if renter's driver license is verified.

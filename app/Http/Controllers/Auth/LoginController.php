@@ -158,6 +158,13 @@ class LoginController extends Controller
         }
 
         $newRole = $user->role === 'owner' ? 'renter' : 'owner';
+
+        // Switching to Host mode requires valid Driver's License qualification
+        if ($newRole === 'owner' && !$user->isHostQualified()) {
+            return redirect()->route('settings.index')
+                ->with('warning', 'To activate your Host account, please submit your Driver\'s License in Settings.');
+        }
+
         $user->role = $newRole;
         $user->save();
 

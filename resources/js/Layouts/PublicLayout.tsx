@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { LuCar, LuChevronDown, LuLogOut, LuMenu, LuPhoneCall, LuUser, LuX } from 'react-icons/lu';
+import { LuCar, LuChevronDown, LuLogOut, LuMenu, LuPhoneCall, LuUser, LuX, LuSettings, LuSparkles, LuArrowLeftRight } from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
 import { useVehicleAutoSync } from '@/lib/vehicleSync';
@@ -130,41 +130,72 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                                     </button>
 
                                     {userMenuOpen && (
-                                        <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border border-slate-200 py-1 animate-fade-in z-50">
+                                        <>
+                                            <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
+                                            <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 py-1.5 animate-fade-in z-50 overflow-hidden">
                                             {auth.user.role === 'admin' ? (
-                                                <Link href="/admin/dashboard" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-primary-50 hover:text-primary-700">
+                                                <Link href="/admin/dashboard" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700">
                                                     Admin Dashboard
                                                 </Link>
                                             ) : auth.user.role === 'renter' ? (
-                                                <Link href="/renter/bookings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-primary-50 hover:text-primary-700">
+                                                <Link href="/renter/bookings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700">
                                                     My Rental Trips
                                                 </Link>
                                             ) : (
                                                 <>
-                                                    <Link href="/owner/vehicles" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-primary-50 hover:text-primary-700">
+                                                    <Link href="/owner/vehicles" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700">
                                                         My Vehicles
                                                     </Link>
-                                                    <Link href="/owner/bookings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-primary-50 hover:text-primary-700">
+                                                    <Link href="/owner/bookings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700">
                                                         Booking Requests
                                                     </Link>
                                                 </>
                                             )}
-                                            {auth.user.role !== 'admin' && (
+
+                                            <Link href="/settings" className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700 border-t border-slate-100">
+                                                <LuSettings className="w-3.5 h-3.5 text-slate-500" />
+                                                <span>Account Settings</span>
+                                            </Link>
+
+                                            {auth.user.role === 'owner' ? (
                                                 <Link
                                                     href="/user/switch-role"
                                                     method="post"
                                                     as="button"
-                                                    className="w-full text-left block px-4 py-2 text-xs font-semibold text-primary-700 hover:bg-primary-50 border-t border-slate-100"
+                                                    className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs font-semibold text-teal-700 hover:bg-teal-50 border-t border-slate-100"
                                                 >
-                                                    {auth.user.role === 'owner' ? '🔄 Switch to Renter Mode' : '🔄 Switch to Host Mode'}
+                                                    <LuArrowLeftRight className="w-3.5 h-3.5 text-teal-600" />
+                                                    <span>Switch to Renter Mode</span>
                                                 </Link>
-                                            )}
+                                            ) : auth.user.role === 'renter' ? (
+                                                auth.user.is_host_qualified ? (
+                                                    <Link
+                                                        href="/user/switch-role"
+                                                        method="post"
+                                                        as="button"
+                                                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs font-semibold text-teal-700 hover:bg-teal-50 border-t border-slate-100"
+                                                    >
+                                                        <LuArrowLeftRight className="w-3.5 h-3.5 text-teal-600" />
+                                                        <span>Switch to Host Mode</span>
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        href="/settings"
+                                                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs font-semibold text-teal-700 hover:bg-teal-50 border-t border-slate-100"
+                                                    >
+                                                        <LuSparkles className="w-3.5 h-3.5 text-teal-600" />
+                                                        <span>Become a Host (License 🪪)</span>
+                                                    </Link>
+                                                )
+                                            ) : null}
+
                                             <hr className="my-1 border-slate-100" />
                                             <Link href="/logout" method="post" as="button" className="w-full text-left block px-4 py-2 text-sm font-medium text-rose-600 hover:bg-rose-50">
                                                 <span className="flex items-center gap-2"><LuLogOut className="w-3.5 h-3.5" /> Log Out</span>
                                             </Link>
                                         </div>
-                                    )}
+                                    </>
+                                )}
                                 </div>
                             ) : (
                                 <Link
@@ -219,6 +250,33 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                             <Link href="/register?role=owner" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
                                 List Your Vehicle
                             </Link>
+                        )}
+                        {auth?.user && (
+                            <>
+                                <Link href="/settings" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100 flex items-center justify-between">
+                                    <span>Account Settings</span>
+                                    <LuSettings className="w-4 h-4 text-slate-500" />
+                                </Link>
+
+                                {auth.user.role === 'owner' ? (
+                                    <Link href="/user/switch-role" method="post" as="button" className="w-full text-left py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
+                                        <span>Switch to Renter Mode</span>
+                                        <LuArrowLeftRight className="w-4 h-4 text-teal-600" />
+                                    </Link>
+                                ) : auth.user.role === 'renter' ? (
+                                    auth.user.is_host_qualified ? (
+                                        <Link href="/user/switch-role" method="post" as="button" className="w-full text-left py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
+                                            <span>Switch to Host Mode</span>
+                                            <LuArrowLeftRight className="w-4 h-4 text-teal-600" />
+                                        </Link>
+                                    ) : (
+                                        <Link href="/settings" className="block py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
+                                            <span>Become a Host (License 🪪)</span>
+                                            <LuSparkles className="w-4 h-4 text-teal-600" />
+                                        </Link>
+                                    )
+                                ) : null}
+                            </>
                         )}
                         <a href="tel:+63385018888" className="flex items-center gap-2 py-2 text-sm font-medium text-primary-700">
                             <LuPhoneCall className="w-4 h-4" /> (038) 501-8888

@@ -12,7 +12,8 @@ import {
     LuX,
     LuChevronRight,
     LuCompass,
-    LuFileText
+    LuFileText,
+    LuSettings
 } from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
@@ -34,6 +35,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
     ];
 
     const secondaryNavItems = [
+        { href: '/settings', label: 'Account Settings', icon: LuSettings },
         { href: '/vehicles', label: 'View Marketplace', icon: LuCompass },
         { href: '/terms', label: 'Bohol Rental Rules', icon: LuFileText },
     ];

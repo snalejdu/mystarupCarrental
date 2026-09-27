@@ -18,7 +18,8 @@ class EnsureOwner
         }
 
         if ($request->user()->role !== 'owner') {
-            return redirect('/')->with('error', 'Host access required. Redirected to home page.');
+            return redirect()->route('settings.index')
+                ->with('warning', 'Host access requires an active Host account. Submit your driver\'s license in Settings to qualify!');
         }
 
         return $next($request);

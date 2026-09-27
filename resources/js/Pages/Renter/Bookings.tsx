@@ -25,7 +25,9 @@ import {
     LuTriangleAlert,
     LuCreditCard,
     LuPenTool,
-    LuFileText
+    LuFileText,
+    LuSettings,
+    LuSparkles
 } from 'react-icons/lu';
 import { formatCurrency } from '@/lib/utils';
 import SignaturePad from '@/Components/SignaturePad';
@@ -219,6 +221,14 @@ export default function RenterBookings({ bookings, renter }: Props) {
                         </div>
 
                         <div className="flex flex-wrap gap-2.5">
+                            <Link
+                                href="/settings"
+                                className="min-h-[44px] px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 cursor-pointer"
+                            >
+                                <LuSettings className="w-4 h-4 text-slate-600" />
+                                <span>Settings</span>
+                            </Link>
+
                             <button
                                 onClick={() => setShowLicenseModal(true)}
                                 className="min-h-[44px] px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 cursor-pointer"
@@ -232,9 +242,33 @@ export default function RenterBookings({ bookings, renter }: Props) {
                                 className="glass-btn min-h-[44px] px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2"
                             >
                                 <LuCar className="w-4 h-4" />
-                                <span>Browse More Vehicles</span>
+                                <span>Browse Vehicles</span>
                             </Link>
                         </div>
+                    </div>
+
+                    {/* Host Opportunity Banner */}
+                    <div className="bg-gradient-to-r from-teal-50 via-teal-50/70 to-emerald-50/80 border border-teal-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
+                                <LuSparkles className="w-5 h-5" />
+                            </div>
+                            <div>
+                                <h4 className="text-xs sm:text-sm font-extrabold text-teal-950">
+                                    Own a vehicle in Bohol? Become a Waypt Host
+                                </h4>
+                                <p className="text-[11px] sm:text-xs text-teal-800/90 mt-0.5">
+                                    Host qualification is simple: <b>just a valid driver's license</b>. Set your own prices and keep 96% of your earnings.
+                                </p>
+                            </div>
+                        </div>
+                        <Link
+                            href="/settings"
+                            className="min-h-[40px] px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-xs shrink-0 flex items-center gap-1.5 transition-colors shadow-2xs"
+                        >
+                            <span>Host Settings</span>
+                            <LuArrowRight className="w-3.5 h-3.5" />
+                        </Link>
                     </div>
 
                     {/* Filter Tabs */}

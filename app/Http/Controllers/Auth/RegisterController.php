@@ -30,16 +30,33 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:20',
-            'role' => 'required|in:renter,owner',
+            'role' => 'nullable|in:renter,owner',
             'password' => ['required', 'confirmed', Password::defaults()],
+            'driver_license_number' => 'required_if:role,owner|nullable|string|max:50',
+            'driver_license_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
         ]);
+
+        $role = $validated['role'] ?? 'renter';
+        $licensePath = null;
+        $licenseStatus = 'unverified';
+
+        if ($request->hasFile('driver_license_photo')) {
+            $licensePath = $request->file('driver_license_photo')->store('licenses', 'private');
+        }
+
+        if ($role === 'owner' || !empty($validated['driver_license_number']) || $licensePath) {
+            $licenseStatus = 'verified';
+        }
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
             'password' => $validated['password'],
-            'role' => $validated['role'],
+            'role' => $role,
+            'driver_license_number' => $request->input('driver_license_number'),
+            'driver_license_path' => $licensePath,
+            'driver_license_status' => $licenseStatus,
         ]);
 
         Auth::login($user);

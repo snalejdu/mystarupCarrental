@@ -36,6 +36,8 @@ class HandleInertiaRequests extends Middleware
                     'phone' => $request->user()->phone,
                     'role' => $request->user()->role,
                     'avatar' => $request->user()->avatar,
+                    'is_host_qualified' => $request->user()->isHostQualified(),
+                    'driver_license_status' => $request->user()->driver_license_status ?? 'unverified',
                 ] : null,
             ],
             'flash' => [
