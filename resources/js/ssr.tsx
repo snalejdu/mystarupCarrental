@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import createServer from '@inertiajs/react/server';
 
-const appName = import.meta.env.VITE_APP_NAME || 'RentalHub';
+const appName = import.meta.env.VITE_APP_NAME || 'Waypt';
 
 createServer((page) =>
     createInertiaApp({

@@ -246,7 +246,7 @@ CarRental/
 
 ## 7. Instructions for Future AI Assistants
 
-When assisting the user with RentalHub:
+When assisting the user with Waypt:
 1. **Always read this file first** before proposing changes.
 2. **Never break React Icons (Lucide) compliance**: Do NOT introduce FontAwesome or raw inline `<svg>` blocks. Strictly use `react-icons/lu`.
 3. **Preserve live sync**: Ensure any new owner actions invoke `broadcastVehicleUpdate()` from `@/lib/vehicleSync` so renter tabs update without F5.

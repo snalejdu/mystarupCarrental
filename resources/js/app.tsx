@@ -4,7 +4,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import '../css/app.css';
 import { initAuthSync, notifyAuthStateChange } from './lib/authSync';
 
-const appName = import.meta.env.VITE_APP_NAME || 'RentalHub';
+const appName = import.meta.env.VITE_APP_NAME || 'Waypt';
 
 createInertiaApp({
     title: (title) => title ? `${title} | ${appName}` : appName,

@@ -16,8 +16,8 @@ export default function PrivacyPolicy() {
     return (
         <PublicLayout>
             <Head>
-                <title>Privacy Policy — RentalHub</title>
-                <meta name="description" content="Read RentalHub's Privacy Policy. Learn how we protect renter phone numbers, handle vehicle host data, and maintain 100% transparent direct booking privacy in Bohol." />
+                <title>Privacy Policy — Waypt</title>
+                <meta name="description" content="Read Waypt's Privacy Policy. Learn how we protect renter phone numbers, handle vehicle host data, and maintain 100% transparent direct booking privacy in Bohol." />
             </Head>
 
             {/* Header Banner */}
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
                         <LuLock className="w-3.5 h-3.5" /> Privacy & Data Governance
                     </span>
                     <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-                        RentalHub Privacy Policy
+                        Waypt Privacy Policy
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                         Last updated: August 13, 2026. Your privacy and contact protection are core to how our marketplace operates.
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
                             <h2>1. Renter Contact Privacy Guarantee</h2>
                         </div>
                         <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                            RentalHub is built to protect renters from spam calls and unsolicited messages. When you submit a vehicle rental request:
+                            Waypt is built to protect renters from spam calls and unsolicited messages. When you submit a vehicle rental request:
                         </p>
                         <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-2 border-primary-500">
                             <li className="flex items-start gap-2">

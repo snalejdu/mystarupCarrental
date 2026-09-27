@@ -48,14 +48,14 @@ export default function AnimationPreview() {
                 show={showFullscreen}
                 title="Confirming Reservation"
                 subtitle="Locking vehicle calendar dates and notifying owner... (Auto-closes in 3s)"
-                brandText="RentalHub Live Booking"
+                brandText="Waypt Live Booking"
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {/* Hero Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
                     <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                        RentalHub Animated Car Loader
+                        Waypt Animated Car Loader
                     </h1>
                     <p className="mt-3 text-base sm:text-lg text-slate-600">
                         Interactive preview of the vector SVG animation, inline React loading components, and fullscreen modal overlays.
@@ -215,7 +215,7 @@ export default function AnimationPreview() {
                         <LuCircleCheck className="w-5 h-5 text-teal-600 mb-2" />
                         <h3 className="font-bold text-slate-800 text-sm mb-1">Bohol Theme Synergy</h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
-                            Matched to RentalHub's coastal teal palette with suspension physics, high-speed road lane markers, and night-drive headlight projections.
+                            Matched to Waypt's coastal teal palette with suspension physics, high-speed road lane markers, and night-drive headlight projections.
                         </p>
                     </div>
                 </div>

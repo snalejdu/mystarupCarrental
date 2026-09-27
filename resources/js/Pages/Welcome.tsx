@@ -167,7 +167,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
     return (
         <PublicLayout>
             <Head>
-                <title>RentalHub — Bohol Vehicle Rental Marketplace</title>
+                <title>Waypt — Bohol Vehicle Rental Marketplace</title>
                 <meta name="description" content="Experience Bohol road like never before. Rent cars, vans, motorbikes, and SUVs directly from verified local owners in Tagbilaran, Panglao, Dauis & Loboc." />
             </Head>
 
@@ -604,7 +604,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                     {/* Section Header */}
                     <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-2 sm:space-y-3">
                         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                            Why RentalHub is the Best Choice for Your Trip
+                            Why Waypt is the Best Choice for Your Trip
                         </h2>
                         <p className="text-slate-600 text-xs sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
                             Explore iconic Bohol destinations with direct, verified vehicle owners.
@@ -750,7 +750,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             HOW IT WORKS
                         </p>
                         <h2 className="text-xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-snug">
-                            How RentalHub Works in 3 Easy Steps
+                            How Waypt Works in 3 Easy Steps
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-base leading-relaxed max-w-xl mx-auto">
                             From Tagbilaran Airport to Panglao beaches — direct rental booking made effortless.
@@ -1063,7 +1063,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                     Yes. Philippine law strictly mandates DOT/ICC-certified helmets for both the driver and passenger on all public roads and coastal highways across Bohol.
                                 </p>
                                 <p className="text-[10px] sm:text-xs text-slate-500">
-                                    All scooter and motorcycle rentals on RentalHub include <span className="font-semibold text-slate-800">2 sanitized helmets</span> provided by the host at no extra charge.
+                                    All scooter and motorcycle rentals on Waypt include <span className="font-semibold text-slate-800">2 sanitized helmets</span> provided by the host at no extra charge.
                                 </p>
                             </div>
                         </details>

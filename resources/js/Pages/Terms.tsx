@@ -21,7 +21,7 @@ export default function Terms() {
     return (
         <PublicLayout>
             <Head>
-                <title>Terms and Conditions | RentalHub</title>
+                <title>Terms and Conditions | Waypt</title>
                 <meta 
                     name="description" 
                     content="Official Terms and Conditions for renting vehicles in Bohol. Read rental guidelines, license requirements, island boundary rules, and cancellation policies." 
@@ -183,7 +183,7 @@ export default function Terms() {
                             </p>
                             <ul className="list-disc pl-5 space-y-2 text-slate-700">
                                 <li>
-                                    <strong>Mandatory Helmet Law (RA 10054):</strong> Motorcycle drivers and passengers must wear approved safety helmets at all times. Two clean helmets are included with every motorbike rental on RentalHub.
+                                    <strong>Mandatory Helmet Law (RA 10054):</strong> Motorcycle drivers and passengers must wear approved safety helmets at all times. Two clean helmets are included with every motorbike rental on Waypt.
                                 </li>
                                 <li>
                                     <strong>Speed Limits:</strong> 30 km/h in crowded town centers and school zones; 50 km/h on provincial highways; 60 km/h on open coastal roads (Panglao Circumferential Road).
@@ -222,7 +222,7 @@ export default function Terms() {
                             <h2>7. Platform Marketplace Role</h2>
                         </div>
                         <p className="text-slate-600 text-sm leading-relaxed">
-                            RentalHub acts as a direct software platform connecting verified Bohol vehicle hosts with travelers. Rental agreements and vehicle handovers are executed directly between hosts and renters. We do not charge renters booking fees or commission markups.
+                            Waypt acts as a direct software platform connecting verified Bohol vehicle hosts with travelers. Rental agreements and vehicle handovers are executed directly between hosts and renters. We do not charge renters booking fees or commission markups.
                         </p>
                     </div>
 

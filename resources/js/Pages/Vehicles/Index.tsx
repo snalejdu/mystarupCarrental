@@ -64,7 +64,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
     return (
         <PublicLayout>
             <Head>
-                <title>Select a Vehicle Group — RentalHub</title>
+                <title>Select a Vehicle Group — Waypt</title>
                 <meta name="description" content="Choose your Bohol rental vehicle: Sedans, 15-seater group vans, scooters, motorbikes, and 4x4 SUVs directly from local hosts." />
             </Head>
 

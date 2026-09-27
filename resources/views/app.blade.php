@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicons & Browser Tab Icons (RentalHub Brand Logo) -->
+    <!-- Favicons & Browser Tab Icons (Waypt Brand Logo) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=4">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Waypt">
+    <meta property="og:title" content="Waypt — Bohol Vehicle Rental Marketplace">
+    <meta property="og:description" content="Find your way across Bohol with verified self-drive & chauffeur car, van, and motorbike rentals.">
+    <meta property="og:image" content="/images/logo/waypt-logo.png">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Waypt — Bohol Vehicle Rental Marketplace">
+    <meta name="twitter:description" content="Find your way across Bohol with verified self-drive & chauffeur car, van, and motorbike rentals.">
+    <meta name="twitter:image" content="/images/logo/waypt-logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -183,7 +197,7 @@
             </div>
 
             <div style="margin-top: 14px;">
-                <div style="color: #0f172a; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em;">Rental<span style="color: #0d9488;">Hub</span></div>
+                <div style="color: #0f172a; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em;">Way<span style="color: #0d9488;">pt</span></div>
                 <div style="color: #64748b; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; margin-top: 4px; font-weight: 500;">Loading vehicles & availability...</div>
             </div>
 

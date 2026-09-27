@@ -150,7 +150,7 @@ export default function VehicleCreate({ locations, vehicleTypes }: Props) {
 
     return (
         <OwnerLayout title="List a New Vehicle">
-            <Head title="List a New Vehicle — RentalHub Host" />
+            <Head title="List a New Vehicle — Waypt Host" />
 
             <div className="max-w-2xl">
                 <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">

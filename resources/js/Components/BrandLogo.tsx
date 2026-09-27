@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 interface BrandLogoProps {
     /**
-     * 'full': Badge + Typography (RentalHub)
+     * 'full': Badge + Typography (Waypt)
      * 'icon': Standalone Circular Badge Emblem
      * 'badge': Large Centered Badge
      */
@@ -75,8 +75,8 @@ export default function BrandLogo({
                     } ${emblemSizeMap[size]}`}
                 >
                     <img
-                        src="/images/logo/rentalhub-logo.png"
-                        alt="RentalHub — Rent. Book. Drive."
+                        src="/images/logo/waypt-logo.png"
+                        alt="Waypt — Find Your Way."
                         className="w-full h-full object-contain"
                     />
                 </div>
@@ -97,7 +97,7 @@ export default function BrandLogo({
                 className
             )}
         >
-            {/* RentalHub Logo Emblem */}
+            {/* Waypt Logo Emblem */}
             <div
                 className={`relative shrink-0 rounded-2xl overflow-hidden transition-all duration-300 ${
                     interactive ? 'group-hover:scale-105 group-hover:drop-shadow-md' : ''
@@ -105,15 +105,15 @@ export default function BrandLogo({
             >
                 {!imgError ? (
                     <img
-                        src="/images/logo/rentalhub-logo.png"
-                        alt="RentalHub"
+                        src="/images/logo/waypt-logo.png"
+                        alt="Waypt"
                         onError={() => setImgError(true)}
                         className="w-full h-full object-contain"
                     />
                 ) : (
                     /* Fallback vector if image not loaded */
                     <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center text-teal-400 font-bold text-xs">
-                        RH
+                        W
                     </div>
                 )}
             </div>
@@ -126,9 +126,9 @@ export default function BrandLogo({
                             isDark ? 'text-white' : 'text-slate-900'
                         }`}
                     >
-                        Rental
+                        Way
                         <span className="bg-gradient-to-r from-teal-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent">
-                            Hub
+                            pt
                         </span>
                     </div>
 
@@ -143,7 +143,7 @@ export default function BrandLogo({
                         <span
                             className={`text-slate-400 font-semibold tracking-wide text-xs uppercase hidden sm:block`}
                         >
-                            Rent. Book. Drive.
+                            Find Your Way.
                         </span>
                     )}
                 </div>

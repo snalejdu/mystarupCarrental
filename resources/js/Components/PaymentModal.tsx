@@ -112,7 +112,7 @@ export default function PaymentModal({ show, onClose, onPaymentSuccess, booking 
                             <LuShieldCheck className="w-5 h-5" />
                         </div>
                         <div>
-                            <h3 className="font-bold text-sm tracking-tight">RentalHub Secure Checkout</h3>
+                            <h3 className="font-bold text-sm tracking-tight">Waypt Secure Checkout</h3>
                             <p className="text-xs text-slate-400">256-Bit Encrypted Island Payment Gateway</p>
                         </div>
                     </div>

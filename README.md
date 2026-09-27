@@ -1,6 +1,6 @@
-# RentBohol — Vehicle Rental Marketplace for Bohol, Philippines
+# Waypt — Vehicle Rental Marketplace for Bohol, Philippines
 
-**RentBohol** is a vehicle rental marketplace specifically built for Bohol, Philippines (Tagbilaran, Panglao, Dauis, Loboc, Carmen, etc.). It replaces informal Facebook group postings with an organized booking platform featuring a privacy-first **hidden contact until accepted** mechanic.
+**Waypt** is a vehicle rental marketplace specifically built for Bohol, Philippines (Tagbilaran, Panglao, Dauis, Loboc, Carmen, etc.). It replaces informal Facebook group postings with an organized booking platform featuring a privacy-first **hidden contact until accepted** mechanic.
 
 ---
 
@@ -85,6 +85,6 @@ php artisan test
    ```
 
 ### Default Demo Accounts
-- **Admin**: `admin@rentbohol.com` / `password123`
+- **Admin**: `admin@waypt.com` / `password123`
 - **Owner (Host)**: `maria@boholrentals.ph` / `password123` (owns the 5 demo fleet vehicles)
 - **Renter**: `renter@gmail.com` / `password123`

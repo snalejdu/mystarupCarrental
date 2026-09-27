@@ -37,7 +37,7 @@ export default function Contact() {
     return (
         <PublicLayout>
             <Head>
-                <title>Contact Us — RentalHub</title>
+                <title>Contact Us — Waypt</title>
                 <meta name="description" content="Have questions about vehicle rentals, airport delivery, or listing your car in Bohol? Contact our Tagbilaran customer care team 24/7." />
             </Head>
 
@@ -100,7 +100,7 @@ export default function Contact() {
                 </a>
 
                 <a
-                    href="mailto:support@RentalHub.ph"
+                    href="mailto:support@waypt.ph"
                     className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs active:scale-[0.98] transition-all hover:border-teal-400 min-h-[48px]"
                 >
                     <div className="relative shrink-0">
@@ -111,7 +111,7 @@ export default function Contact() {
                     </div>
                     <div className="min-w-0">
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email</div>
-                        <div className="text-xs font-bold text-slate-900 truncate">support@RentalHub.ph</div>
+                        <div className="text-xs font-bold text-slate-900 truncate">support@waypt.ph</div>
                     </div>
                 </a>
             </div>
@@ -140,7 +140,7 @@ export default function Contact() {
                         {wasSuccessful && (
                             <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2">
                                 <LuCircleCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                                <span>Thank you! Your message has been sent to RentalHub support.</span>
+                                <span>Thank you! Your message has been sent to Waypt support.</span>
                             </div>
                         )}
 
@@ -301,7 +301,7 @@ export default function Contact() {
                                 </div>
                                 <div className="min-w-0 relative z-10">
                                     <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">Email</span>
-                                    <a href="mailto:support@RentalHub.ph" className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@RentalHub.ph</a>
+                                    <a href="mailto:support@waypt.ph" className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-teal-600 transition-colors block truncate">support@waypt.ph</a>
                                 </div>
                             </div>
 

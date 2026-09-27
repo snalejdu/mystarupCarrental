@@ -25,7 +25,7 @@
       "dest": "/public/animations/$1"
     },
     {
-      "src": "/(favicon.*|robots.txt|apple-touch-icon.png)",
+      "src": "/(favicon.*|robots.txt|apple-touch-icon.png|manifest.json)",
       "dest": "/public/$1"
     },
     {
@@ -38,6 +38,7 @@
     }
   ],
   "env": {
+    "APP_NAME": "Waypt",
     "APP_KEY": "base64:SGe084z0okoksW0WXyFebDKAZ9umXMfWnYBVU79MTlI=",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
@@ -50,7 +51,7 @@
     "SESSION_LIFETIME": "120",
     "SESSION_EXPIRE_ON_CLOSE": "false",
     "SESSION_SECURE_COOKIE": "true",
-    "SESSION_COOKIE": "rentbohol_session",
+    "SESSION_COOKIE": "waypt_session",
     "APP_URL": "https://mystarup-carrental.vercel.app",
     "QUEUE_CONNECTION": "sync",
     "LOG_CHANNEL": "stderr",
