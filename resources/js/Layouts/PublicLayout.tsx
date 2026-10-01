@@ -1,8 +1,9 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import { LuCar, LuChevronDown, LuLogOut, LuMenu, LuPhoneCall, LuUser, LuX, LuSettings, LuSparkles, LuArrowLeftRight } from 'react-icons/lu';
+import { LuCar, LuChevronDown, LuLogOut, LuPhoneCall, LuUser, LuSettings, LuSparkles, LuArrowLeftRight } from 'react-icons/lu';
 import DynamicToast from '@/Components/DynamicToast';
 import BrandLogo from '@/Components/BrandLogo';
+import MobileBottomNav from '@/Components/MobileBottomNav';
 import { useVehicleAutoSync } from '@/lib/vehicleSync';
 
 interface PublicLayoutProps {
@@ -12,7 +13,6 @@ interface PublicLayoutProps {
 export default function PublicLayout({ children }: PublicLayoutProps) {
     const { auth, vehicle } = usePage<any>().props;
     const currentUrl = usePage().url;
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
     // Real-time zero-refresh vehicle synchronization for renter views
@@ -207,106 +207,17 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                             )}
                         </div>
 
-                        {/* Mobile Menu Button */}
-                        <div className="flex md:hidden items-center gap-2">
-                            <button
-                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="glass-btn-icon p-2 rounded-lg text-slate-700"
-                            >
-                                {mobileMenuOpen ? <LuX className="w-6 h-6" /> : <LuMenu className="w-6 h-6" />}
-                            </button>
-                        </div>
                     </div>
                 </nav>
-
-                {/* Mobile Drawer */}
-                {mobileMenuOpen && (
-                    <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
-                        <Link href="/" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                            Home
-                        </Link>
-                        <Link href="/vehicles" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                            Vehicles
-                        </Link>
-                        {!auth?.user && (
-                            <>
-                                <Link href="/about" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                                    About Us
-                                </Link>
-                                <Link href="/contact" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                                    Contact Us
-                                </Link>
-                            </>
-                        )}
-                        {auth?.user?.role === 'owner' ? (
-                            <Link href="/owner/vehicles" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                                Host Dashboard
-                            </Link>
-                        ) : auth?.user?.role === 'renter' ? (
-                            <Link href="/renter/bookings" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                                My Trips
-                            </Link>
-                        ) : (
-                            <Link href="/register?role=owner" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100">
-                                List Your Vehicle
-                            </Link>
-                        )}
-                        {auth?.user && (
-                            <>
-                                <Link href="/settings" className="block py-2 text-sm font-medium text-slate-800 border-b border-slate-100 flex items-center justify-between">
-                                    <span>Account Settings</span>
-                                    <LuSettings className="w-4 h-4 text-slate-500" />
-                                </Link>
-
-                                {auth.user.role === 'owner' ? (
-                                    <Link href="/user/switch-role" method="post" as="button" className="w-full text-left py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
-                                        <span>Switch to Renter Mode</span>
-                                        <LuArrowLeftRight className="w-4 h-4 text-teal-600" />
-                                    </Link>
-                                ) : auth.user.role === 'renter' ? (
-                                    auth.user.is_host_qualified ? (
-                                        <Link href="/user/switch-role" method="post" as="button" className="w-full text-left py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
-                                            <span>Switch to Host Mode</span>
-                                            <LuArrowLeftRight className="w-4 h-4 text-teal-600" />
-                                        </Link>
-                                    ) : (
-                                        <Link href="/settings" className="block py-2 text-sm font-semibold text-teal-700 border-b border-slate-100 flex items-center justify-between">
-                                            <span>Become a Host (License 🪪)</span>
-                                            <LuSparkles className="w-4 h-4 text-teal-600" />
-                                        </Link>
-                                    )
-                                ) : null}
-                            </>
-                        )}
-                        <a href="tel:+63385018888" className="flex items-center gap-2 py-2 text-sm font-medium text-primary-700">
-                            <LuPhoneCall className="w-4 h-4" /> (038) 501-8888
-                        </a>
-
-                        {auth?.user ? (
-                            <Link href="/logout" method="post" as="button" className="w-full text-left py-2 text-sm font-medium text-rose-600">
-                                Log Out ({auth.user.name})
-                            </Link>
-                        ) : (
-                            <div className="flex gap-2 pt-2">
-                                <Link href="/login" className="glass-btn flex-1 py-2.5 rounded-lg font-semibold text-center text-sm">
-                                    Log In
-                                </Link>
-                                <Link href="/register" className="glass-btn-accent flex-1 py-2.5 rounded-lg font-semibold text-center text-sm">
-                                    Sign Up
-                                </Link>
-                            </div>
-                        )}
-                    </div>
-                )}
             </header>
 
             {/* Main Page Content */}
-            <main className="flex-1">
+            <main className="flex-1 pb-28 md:pb-0">
                 {children}
             </main>
 
             {/* Footer */}
-            <footer className="bg-slate-900 text-white py-6 sm:py-16 lg:py-20 border-t border-slate-800">
+            <footer className="bg-slate-900 text-white pt-6 pb-28 sm:py-16 lg:py-20 border-t border-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 space-y-4 sm:space-y-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-10 lg:gap-12">
                         {/* Brand & Bio */}
@@ -377,6 +288,8 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                 </div>
             </footer>
 
+            {/* Mobile Bottom Navigation Bar (md:hidden) */}
+            <MobileBottomNav />
         </div>
     );
 }
