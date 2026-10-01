@@ -1,5 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
+import GlassIcons from '@/Components/GlassIcons';
+import { CustomDatePicker } from '@/Components/Form/CustomDatePicker';
 import {
     LuMapPin,
     LuStar,
@@ -81,149 +83,127 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                         </p>
                     </div>
 
-                    {/* Filter Category Tabs */}
-                    <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 py-2">
-                        <button
-                            onClick={() => applyFilter('type', null)}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
-                                !activeType
-                                    ? 'glass-pill-active'
-                                    : 'glass-pill text-slate-700'
-                            }`}
-                        >
-                            <LuCompass className="w-4 h-4" />
-                            <span>All vehicles</span>
-                        </button>
+                    {/* Filter Category Tabs — Glass Icons (same as landing page) */}
+                    <GlassIcons
+                        items={[
+                            {
+                                icon: <LuCompass className="w-6 h-6" />,
+                                color: 'teal',
+                                label: 'All Vehicles',
+                                customClass: !activeType ? 'is-active' : '',
+                                onClick: () => applyFilter('type', null),
+                            },
+                            {
+                                icon: <LuCar className="w-6 h-6" />,
+                                color: 'blue',
+                                label: 'Sedans / Cars',
+                                customClass: activeType === 'car' ? 'is-active' : '',
+                                onClick: () => applyFilter('type', 'car'),
+                            },
+                            {
+                                icon: <LuBike className="w-6 h-6" />,
+                                color: 'coral',
+                                label: 'Motorbikes',
+                                customClass: activeType === 'motorbike' ? 'is-active' : '',
+                                onClick: () => applyFilter('type', 'motorbike'),
+                            },
+                            {
+                                icon: <LuCar className="w-6 h-6" />,
+                                color: 'green',
+                                label: 'SUV (4x4)',
+                                customClass: activeType === 'suv' ? 'is-active' : '',
+                                onClick: () => applyFilter('type', 'suv'),
+                            },
+                            {
+                                icon: <LuBus className="w-6 h-6" />,
+                                color: 'purple',
+                                label: 'Minivans',
+                                customClass: activeType === 'van' ? 'is-active' : '',
+                                onClick: () => applyFilter('type', 'van'),
+                            },
+                        ]}
+                    />
 
-                        <button
-                            onClick={() => applyFilter('type', 'car')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
-                                activeType === 'car'
-                                    ? 'glass-pill-active'
-                                    : 'glass-pill text-slate-700'
-                            }`}
-                        >
-                            <LuCar className="w-4 h-4" />
-                            <span>Sedan / Cars</span>
-                        </button>
+                    {/* Search & Sub-Filter Bar — Compact Card (matches landing page style) */}
+                    <div className="w-full bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-sm border border-slate-200">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-2.5 sm:mb-4 pb-2 sm:pb-3 border-b border-slate-100">
+                            <div>
+                                <h3 className="text-sm sm:text-lg font-bold text-slate-900">
+                                    Search & Filter
+                                </h3>
+                                <p className="text-[10px] sm:text-xs text-slate-500 font-medium">Find the perfect ride for your Bohol trip</p>
+                            </div>
+                            {(filters.pickup_date || filters.return_date) && (
+                                <button onClick={clearDates} className="text-[10px] sm:text-xs font-semibold text-primary-600 hover:text-primary-800 underline">
+                                    Reset Dates
+                                </button>
+                            )}
+                        </div>
 
-                        <button
-                            onClick={() => applyFilter('type', 'motorbike')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
-                                activeType === 'motorbike'
-                                    ? 'glass-pill-active'
-                                    : 'glass-pill text-slate-700'
-                            }`}
-                        >
-                            <LuBike className="w-4 h-4" />
-                            <span>Motorbikes</span>
-                        </button>
-
-                        <button
-                            onClick={() => applyFilter('type', 'suv')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
-                                activeType === 'suv'
-                                    ? 'glass-pill-active'
-                                    : 'glass-pill text-slate-700'
-                            }`}
-                        >
-                            <LuCar className="w-4 h-4" />
-                            <span>Suv (4x4)</span>
-                        </button>
-
-                        <button
-                            onClick={() => applyFilter('type', 'van')}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold ${
-                                activeType === 'van'
-                                    ? 'glass-pill-active'
-                                    : 'glass-pill text-slate-700'
-                            }`}
-                        >
-                            <LuBus className="w-4 h-4" />
-                            <span>Minivan (15-Seater)</span>
-                        </button>
-                    </div>
-
-                    {/* Search & Sub-Filter Bar */}
-                    <div className="w-full bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-                        <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-12 gap-3">
-                            {/* Search by Name */}
-                            <div className="md:col-span-5 relative">
-                                <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <form onSubmit={handleSearch} className="space-y-2.5 sm:space-y-3">
+                            {/* Search Input */}
+                            <div className="relative">
+                                <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                                 <input
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Search by vehicle name (e.g. Toyota Vios, NMAX)..."
-                                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
+                                    placeholder="Search by vehicle name (e.g. Toyota Vios)"
+                                    className="w-full pl-9 pr-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl border border-slate-200 bg-slate-50/60 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
                                 />
                             </div>
 
-                            {/* Pickup Date */}
-                            <div className="md:col-span-3 relative">
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Pickup Date</label>
-                                <input
-                                    type="date"
-                                    value={pickupDate}
-                                    min={new Date().toISOString().split('T')[0]}
-                                    onChange={(e) => setPickupDate(e.target.value)}
-                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
-                                />
+                            {/* Dates Row */}
+                            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                                <div>
+                                    <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Pickup Date</label>
+                                    <CustomDatePicker
+                                        value={pickupDate}
+                                        onChange={setPickupDate}
+                                        minDate={new Date().toISOString()}
+                                        placeholder="Add Date"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Return Date</label>
+                                    <CustomDatePicker
+                                        value={returnDate}
+                                        onChange={setReturnDate}
+                                        minDate={pickupDate || new Date().toISOString()}
+                                        placeholder="Add Date"
+                                    />
+                                </div>
                             </div>
 
-                            {/* Return Date */}
-                            <div className="md:col-span-3 relative">
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider absolute -top-2 left-3 bg-slate-50 px-1 z-10">Return Date</label>
-                                <input
-                                    type="date"
-                                    value={returnDate}
-                                    min={pickupDate || new Date().toISOString().split('T')[0]}
-                                    onChange={(e) => setReturnDate(e.target.value)}
-                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 font-medium"
-                                />
-                            </div>
-
-                            {/* Search Submit Button */}
-                            <div className="md:col-span-1 flex gap-1.5">
-                                <button
-                                    type="submit"
-                                    className="glass-btn w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1 shrink-0"
-                                >
-                                    <span>Find</span>
-                                </button>
-                                {(pickupDate || returnDate) && (
-                                    <button
-                                        type="button"
-                                        onClick={clearDates}
-                                        className="glass-btn-icon p-2.5 rounded-xl text-slate-700 text-xs shrink-0"
-                                        title="Clear Date Filters"
-                                    >
-                                        <LuX className="w-4 h-4" />
-                                    </button>
-                                )}
-                            </div>
+                            {/* Submit Button */}
+                            <button
+                                type="submit"
+                                className="glass-btn w-full py-2.5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm"
+                            >
+                                <LuSearch className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
+                                <span>Find Vehicle</span>
+                            </button>
                         </form>
 
                         {/* Date Filter Active Pill */}
                         {(filters.pickup_date || filters.return_date) && (
-                            <div className="flex items-center gap-2 text-xs font-semibold text-primary-800 bg-primary-50 px-3 py-1.5 rounded-xl border border-primary-200">
-                                <LuCalendar className="w-3.5 h-3.5 text-primary-600" />
-                                <span>
-                                    Filtering available vehicles for: <b>{filters.pickup_date || 'Any'}</b> to <b>{filters.return_date || 'Any'}</b>
+                            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold text-primary-800 bg-primary-50 px-2.5 py-1.5 rounded-lg border border-primary-200 mt-2.5">
+                                <LuCalendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary-600 shrink-0" />
+                                <span className="truncate">
+                                    Filtering: <b>{filters.pickup_date || 'Any'}</b> to <b>{filters.return_date || 'Any'}</b>
                                 </span>
-                                <button onClick={clearDates} className="ml-auto text-primary-600 hover:text-primary-800 text-[11px] underline">
-                                    Reset Dates
-                                </button>
                             </div>
                         )}
 
-                        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200/80 text-xs">
+                        {/* Transmission & Sort Row */}
+                        <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2.5 sm:pt-3 border-t border-slate-100 mt-2.5 sm:mt-3 text-xs">
                             {/* Transmission Pills */}
-                            <div className="flex items-center gap-2">
-                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Transmission:</span>
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[9px] sm:text-[10px]">Transmission:</span>
                                 <button
                                     onClick={() => applyFilter('transmission', null)}
-                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                    className={`px-2.5 sm:px-3 py-1 rounded-md font-semibold text-[10px] sm:text-xs ${
                                         !filters.transmission ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -231,7 +211,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'automatic')}
-                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                    className={`px-2.5 sm:px-3 py-1 rounded-md font-semibold text-[10px] sm:text-xs ${
                                         filters.transmission === 'automatic' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -239,7 +219,7 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                                 </button>
                                 <button
                                     onClick={() => applyFilter('transmission', 'manual')}
-                                    className={`px-3 py-1 rounded-md font-semibold ${
+                                    className={`px-2.5 sm:px-3 py-1 rounded-md font-semibold text-[10px] sm:text-xs ${
                                         filters.transmission === 'manual' ? 'glass-pill-active' : 'glass-pill text-slate-600'
                                     }`}
                                 >
@@ -248,17 +228,17 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
                             </div>
 
                             {/* Sort Dropdown */}
-                            <div className="flex items-center gap-2">
-                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Sort By:</span>
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                                <span className="font-semibold text-slate-500 uppercase tracking-wider text-[9px] sm:text-[10px]">Sort:</span>
                                 <select
                                     value={filters.sort || 'newest'}
                                     onChange={(e) => applyFilter('sort', e.target.value)}
-                                    className="px-3 py-1.5 rounded-md border border-slate-200 bg-white text-xs text-slate-700 font-semibold focus:outline-none focus:ring-1 focus:ring-primary-500"
+                                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-slate-200 bg-white text-[10px] sm:text-xs text-slate-700 font-semibold focus:outline-none focus:ring-1 focus:ring-primary-500"
                                 >
                                     <option value="newest">Newly Listed</option>
                                     <option value="rating">Highest Rated ⭐</option>
-                                    <option value="price_asc">Price: Low to High</option>
-                                    <option value="price_desc">Price: High to Low</option>
+                                    <option value="price_asc">Price: Low → High</option>
+                                    <option value="price_desc">Price: High → Low</option>
                                 </select>
                             </div>
                         </div>
@@ -266,11 +246,23 @@ export default function VehiclesIndex({ vehicles, filters, locations, vehicleTyp
 
                     {/* Vehicle Cards Grid */}
                     {vehicles.data.length > 0 ? (
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-8 pt-4">
+                        <>
+                            {/* Section Header */}
+                            <div className="pt-2 sm:pt-4">
+                                <h2 className="text-base sm:text-xl font-bold text-slate-900 tracking-tight">
+                                    Available Vehicles
+                                    <span className="text-slate-400 font-semibold text-xs sm:text-sm ml-1.5">({vehicles.total})</span>
+                                </h2>
+                                <p className="text-[10px] sm:text-xs text-slate-500 font-medium mt-0.5">
+                                    Browse and book directly from verified Bohol hosts
+                                </p>
+                            </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-8">
                             {vehicles.data.map((vehicle: any) => (
                                 <ReferenceVehicleCard key={vehicle.id} vehicle={vehicle} />
                             ))}
                         </div>
+                        </>
                     ) : (
                         <div className="bg-slate-50 rounded-2xl p-12 text-center border border-slate-200 max-w-md mx-auto space-y-4">
                             <LuCar className="w-12 h-12 text-slate-400 mx-auto" />

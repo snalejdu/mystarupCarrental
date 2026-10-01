@@ -34,7 +34,7 @@ const GlassIcons: React.FC<GlassIconsProps> = ({ items = [], className = '' }) =
   };
 
   return (
-    <div className={`icon-btns ${className}`}>
+    <div className={`icon-btns scrollable-row ${className}`}>
       {items.map((item, index) => (
         <button
           key={index}

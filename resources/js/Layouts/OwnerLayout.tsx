@@ -48,7 +48,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
             <DynamicToast />
 
             {/* Mobile header */}
-            <div className="lg:hidden sticky top-0 z-50 bg-white border-b border-slate-200 px-4 h-14 flex items-center justify-between pt-safe">
+            <div className="lg:hidden sticky top-0 z-50 bg-white/75 backdrop-blur-md backdrop-saturate-150 border-b border-slate-300 px-4 h-14 flex items-center justify-between pt-safe">
                 <button
                     onClick={() => setSidebarOpen(true)}
                     className="glass-btn-icon touch-target rounded-xl text-slate-700 -ml-2"
@@ -112,7 +112,7 @@ export default function OwnerLayout({ children, title }: OwnerLayoutProps) {
             {/* Mobile Bottom Navigation Bar (Host Quick Access) */}
             <nav
                 aria-label="Host Quick Navigation"
-                className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-lg pb-safe"
+                className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/75 backdrop-blur-md backdrop-saturate-150 border-t border-slate-300 shadow-lg pb-safe"
             >
                 <div className="grid grid-cols-4 h-14 items-center px-2">
                     <Link

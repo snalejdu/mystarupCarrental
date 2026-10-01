@@ -35,6 +35,8 @@ import SpotlightCard from '@/Components/SpotlightCard';
 import AuroraBackground from '@/Components/AuroraBackground';
 import GlassIcons, { GlassIconsItem } from '@/Components/GlassIcons';
 import AccordionGallery, { AccordionGalleryItem } from '@/Components/AccordionGallery';
+import { CustomSelect } from '@/Components/Form/CustomSelect';
+import { CustomDatePicker } from '@/Components/Form/CustomDatePicker';
 interface Props {
     featuredVehicles: any[];
     stats: {
@@ -172,60 +174,59 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
             </Head>
 
             {/* HERO SECTION — Split Layout (Left: Copy & CTA, Right: Hero Car Bleed Image) */}
-            <section className="bg-white py-6 sm:py-12 lg:py-20 border-b border-slate-100 overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <section className="bg-white py-3 sm:py-12 lg:py-20 border-b border-slate-100 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-3.5 sm:px-6 md:px-8 lg:px-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-8 lg:gap-12 items-center">
 
                         {/* Left Hero Column */}
-                        <div className="lg:col-span-7 space-y-3 sm:space-y-6">
-                            {/* Live Island Marketplace Micro-Status */}
-                            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold text-slate-700">
-                                <span className="font-bold text-slate-800">Verified Bohol Host Network</span>
-                                <span className="text-slate-300">•</span>
-                                <span className="text-teal-700 font-medium">Direct Island Rentals</span>
-                            </div>
-
-                            <h1 className="font-heading text-[1.65rem] sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.15]">
+                        <div className="lg:col-span-7 space-y-2.5 sm:space-y-6">
+                            <h1 className="font-heading text-[1.35rem] xs:text-[1.5rem] sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.18] sm:leading-[1.15]">
                                 <BlurText text="Rent Vehicles Direct From Bohol Hosts" delay={65} className="font-bold text-slate-900" />
-                                <br />
-                                <span className="text-accent-500">For Your Island Trip</span>
+                                <br className="hidden sm:inline" />
+                                <span className="text-accent-500 block sm:inline sm:ml-2">For Your Island Trip</span>
                             </h1>
 
-                            <p className="text-slate-600 text-xs sm:text-lg max-w-xl leading-relaxed">
+                            <p className="text-slate-600 text-[11.5px] sm:text-base lg:text-lg max-w-xl leading-snug sm:leading-relaxed">
                                 Experience total freedom across Tagbilaran, Panglao, Dauis, and Loboc. Reserve clean sedans, 15-seater group vans, scooters, or 4x4 SUVs directly from verified Boholano vehicle owners.
                             </p>
 
-                            {/* CTA Row */}
-                            <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
-                                <a
-                                    href="#booking-form"
-                                    className="glass-btn px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-2 group cursor-pointer"
-                                >
-                                    <ShinyText speed={3} className="text-white font-semibold">Book Your Vehicle Now</ShinyText>
-                                    <LuArrowRight className="w-4 h-4 text-teal-200 group-hover:translate-x-1 transition-transform" />
-                                </a>
+                            {/* Authentic Bohol Island Guarantees */}
+                            <div className="grid grid-cols-3 gap-1.5 sm:gap-3 py-2 sm:py-3 border-y border-slate-100 max-w-xl">
+                                <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-teal-50/50 sm:bg-transparent border border-teal-100/60 sm:border-none text-center sm:text-left">
+                                    <div className="w-6 h-6 rounded-full bg-teal-100/80 text-teal-700 flex items-center justify-center shrink-0">
+                                        <LuShieldCheck className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="text-[9px] sm:text-xs font-semibold text-slate-700 leading-tight">Verified Boholano Hosts</span>
+                                </div>
+                                <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-teal-50/50 sm:bg-transparent border border-teal-100/60 sm:border-none text-center sm:text-left">
+                                    <div className="w-6 h-6 rounded-full bg-teal-100/80 text-teal-700 flex items-center justify-center shrink-0">
+                                        <LuMapPin className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="text-[9px] sm:text-xs font-semibold text-slate-700 leading-tight">Panglao & Tagbilaran Delivery</span>
+                                </div>
+                                <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-teal-50/50 sm:bg-transparent border border-teal-100/60 sm:border-none text-center sm:text-left">
+                                    <div className="w-6 h-6 rounded-full bg-teal-100/80 text-teal-700 flex items-center justify-center shrink-0">
+                                        <LuCalendarCheck className="w-3.5 h-3.5" />
+                                    </div>
+                                    <span className="text-[9px] sm:text-xs font-semibold text-slate-700 leading-tight">Zero Platform Booking Fees</span>
+                                </div>
                             </div>
 
-                            {/* Authentic Bohol Island Guarantees */}
-                            <div className="pt-3 sm:pt-6 flex flex-wrap items-center gap-y-1.5 sm:gap-y-2.5 gap-x-4 sm:gap-x-6 text-[10px] sm:text-xs text-slate-600 font-medium border-t border-slate-100">
-                                <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <LuShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
-                                    <span>Verified Boholano Hosts</span>
-                                </div>
-                                <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <LuMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
-                                    <span>Panglao & Tagbilaran Delivery</span>
-                                </div>
-                                <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <LuCalendarCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-600 shrink-0" />
-                                    <span>Zero Platform Booking Fees</span>
-                                </div>
+                            {/* CTA Row */}
+                            <div className="pt-0.5 sm:pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+                                <a
+                                    href="#booking-form"
+                                    className="glass-btn w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 group cursor-pointer shadow-sm hover:shadow-md"
+                                >
+                                    <ShinyText speed={3} className="text-white font-semibold">Book Your Vehicle Now</ShinyText>
+                                    <LuArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-teal-200 group-hover:translate-x-1 transition-transform" />
+                                </a>
                             </div>
                         </div>
 
                         {/* Right Hero Column — 3-Second Auto-Rotating Bohol Tourist Destinations Photo Frame */}
                         <div className="lg:col-span-5 relative max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
-                            <div className="relative z-10 aspect-[16/9] sm:aspect-[4/3] rounded-xl sm:rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-lg sm:shadow-xl group">
+                            <div className="relative z-10 aspect-[16/8.5] sm:aspect-[4/3] rounded-xl sm:rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-md sm:shadow-xl group">
 
                                 {/* Main Active Image with Smooth Fade — Click to advance & reset timer */}
                                 {TOURIST_SPOTS.map((spot, idx) => (
@@ -243,32 +244,32 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 ))}
 
                                 {/* Bottom Overlay Caption */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent z-10 flex items-end p-3 sm:p-4 md:p-6 pointer-events-none">
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent z-10 flex items-end p-2.5 sm:p-4 md:p-6 pointer-events-none">
                                     <div className="text-white space-y-0.5 sm:space-y-1 w-full pointer-events-auto">
                                         <div className="flex items-center justify-between">
-                                            <span className="inline-flex items-center gap-1 text-[9px] sm:text-[11px] md:text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-1.5 sm:px-2.5 py-0.5 rounded sm:rounded-md border border-accent-500/30">
+                                            <span className="inline-flex items-center gap-1 text-[8.5px] sm:text-[11px] md:text-xs font-bold text-accent-400 uppercase tracking-wider bg-accent-500/20 px-1.5 sm:px-2.5 py-0.5 rounded sm:rounded-md border border-accent-500/30">
                                                 <LuMapPin className="w-2.5 sm:w-3 h-2.5 sm:h-3" /> {TOURIST_SPOTS[spotIndex].location}
                                             </span>
-                                            <span className="text-[9px] sm:text-[11px] font-semibold text-slate-300">
+                                            <span className="text-[8.5px] sm:text-[11px] font-semibold text-slate-300">
                                                 {spotIndex + 1} / {TOURIST_SPOTS.length}
                                             </span>
                                         </div>
 
-                                        <h3 className="text-sm sm:text-lg md:text-xl font-bold text-white tracking-tight leading-snug">
+                                        <h3 className="text-xs sm:text-lg md:text-xl font-bold text-white tracking-tight leading-snug">
                                             {TOURIST_SPOTS[spotIndex].title}
                                         </h3>
-                                        <p className="text-[10px] sm:text-xs text-slate-300 font-medium line-clamp-1 leading-tight">
+                                        <p className="text-[9.5px] sm:text-xs text-slate-300 font-medium line-clamp-1 leading-tight">
                                             {TOURIST_SPOTS[spotIndex].description}
                                         </p>
 
                                         {/* Progress Dot Indicators */}
-                                        <div className="flex items-center gap-1 sm:gap-1.5 pt-1 sm:pt-2">
+                                        <div className="flex items-center gap-1 sm:gap-1.5 pt-0.5 sm:pt-2">
                                             {TOURIST_SPOTS.map((_, i) => (
                                                 <button
                                                     key={i}
                                                     onClick={() => goToSlide(i)}
                                                     className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                                        i === spotIndex ? 'w-4 sm:w-6 bg-primary-400' : 'w-1 sm:w-1.5 bg-white/40 hover:bg-white/70'
+                                                        i === spotIndex ? 'w-3.5 sm:w-6 bg-primary-400' : 'w-1 sm:w-1.5 bg-white/40 hover:bg-white/70'
                                                     }`}
                                                 />
                                             ))}
@@ -278,12 +279,12 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             </div>
 
                             {/* Destination Thumbnail Quick Selector Bar Below Frame */}
-                            <div className="grid grid-cols-5 gap-1 sm:gap-2 mt-1.5 sm:mt-3">
+                            <div className="grid grid-cols-5 gap-1 sm:gap-2 mt-1 sm:mt-3">
                                 {TOURIST_SPOTS.map((s, i) => (
                                     <button
                                         key={s.title}
                                         onClick={() => goToSlide(i)}
-                                        className={`relative rounded-md sm:rounded-lg overflow-hidden aspect-[4/3] border transition-all cursor-pointer ${
+                                        className={`relative rounded sm:rounded-lg overflow-hidden aspect-[16/10] sm:aspect-[4/3] border transition-all cursor-pointer ${
                                             i === spotIndex ? 'border-primary-500 ring-1.5 sm:ring-2 ring-primary-300 scale-105' : 'border-slate-200 opacity-60 hover:opacity-100'
                                         }`}
                                     >
@@ -298,10 +299,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
             </section>
 
             {/* SEARCH / BOOKING FORM SECTION (Preserved Below Hero as a Stronger UX Pattern) */}
-            <section id="booking-form" className="py-4 sm:py-8 bg-slate-50 border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-                    <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-sm border border-slate-200">
-                        <div className="flex items-center justify-between mb-3 sm:mb-6 pb-2.5 sm:pb-4 border-b border-slate-100">
+            <section id="booking-form" className="py-4 sm:py-6 bg-slate-50 border-b border-slate-200">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6">
+                    <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-sm border border-slate-200">
+                        <div className="flex items-center justify-between mb-2.5 sm:mb-4 pb-2 sm:pb-3 border-b border-slate-100">
                             <div>
                                 <h3 className="text-sm sm:text-lg font-bold text-slate-900">
                                     Search Available Vehicles in Bohol
@@ -314,66 +315,64 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             </span>
                         </div>
 
-                        <form onSubmit={handleSearchSubmit} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4">
-                            {/* Car Type */}
-                            <div>
-                                <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Vehicle Type</label>
-                                <select
-                                    value={bookingType}
-                                    onChange={(e) => setBookingType(e.target.value)}
-                                    className="w-full px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-base sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 focus:bg-white transition-colors"
-                                >
-                                    <option value="">All Vehicle Types</option>
-                                    {vehicleTypes.map((t) => (
-                                        <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
-                                    ))}
-                                </select>
-                            </div>
-
+                        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4">
                             {/* Pickup Location */}
-                            <div>
+                            <div className="col-span-1 sm:col-span-1 lg:col-span-1">
                                 <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Pickup Location</label>
-                                <select
-                                    value={pickupLoc}
-                                    onChange={(e) => setPickupLoc(e.target.value)}
-                                    className="w-full px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-lg border border-slate-200 bg-slate-50 text-base sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 focus:bg-white transition-colors"
-                                >
-                                    <option value="">Municipality</option>
-                                    {locations.map((loc) => (
-                                        <option key={loc} value={loc}>{loc}, Bohol</option>
-                                    ))}
-                                </select>
+                                <div className="relative">
+                                    <CustomSelect
+                                        value={pickupLoc}
+                                        onChange={setPickupLoc}
+                                        options={locations.map(loc => ({ label: `${loc}, Bohol`, value: loc }))}
+                                        placeholder="Municipality"
+                                        icon={<LuMapPin className="h-3.5 w-3.5" />}
+                                    />
+                                </div>
                             </div>
 
-                            {/* Pickup Date */}
-                            <div>
-                                <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Pickup Date</label>
-                                <input
-                                    type="date"
-                                    value={pickupDate}
-                                    onChange={(e) => setPickupDate(e.target.value)}
-                                    min={new Date().toISOString().split('T')[0]}
-                                    className="w-full px-2.5 sm:px-3 py-2 sm:py-2 rounded-lg border border-slate-200 bg-slate-50 text-base sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 focus:bg-white"
-                                />
+                            {/* Car Type */}
+                            <div className="col-span-1 sm:col-span-1 lg:col-span-1">
+                                <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Vehicle Type</label>
+                                <div className="relative">
+                                    <CustomSelect
+                                        value={bookingType}
+                                        onChange={setBookingType}
+                                        options={vehicleTypes.map(t => ({ label: t.charAt(0).toUpperCase() + t.slice(1), value: t }))}
+                                        placeholder="All Vehicle Types"
+                                        icon={<LuCar className="h-3.5 w-3.5" />}
+                                    />
+                                </div>
                             </div>
 
-                            {/* Return Date */}
-                            <div>
-                                <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Return Date</label>
-                                <input
-                                    type="date"
-                                    value={returnDate}
-                                    onChange={(e) => setReturnDate(e.target.value)}
-                                    min={pickupDate || new Date().toISOString().split('T')[0]}
-                                    className="w-full px-2.5 sm:px-3 py-2 sm:py-2 rounded-lg border border-slate-200 bg-slate-50 text-base sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500 focus:bg-white"
-                                />
+                            {/* Dates Container for Mobile */}
+                            <div className="col-span-1 sm:col-span-2 lg:col-span-2 grid grid-cols-2 gap-2.5 sm:gap-4">
+                                {/* Pickup Date */}
+                                <div>
+                                    <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Pickup Date</label>
+                                    <CustomDatePicker
+                                        value={pickupDate}
+                                        onChange={setPickupDate}
+                                        minDate={new Date().toISOString()}
+                                        placeholder="Add Date"
+                                    />
+                                </div>
+                                {/* Return Date */}
+                                <div>
+                                    <label className="block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1 sm:mb-1.5">Return Date</label>
+                                    <CustomDatePicker
+                                        value={returnDate}
+                                        onChange={setReturnDate}
+                                        minDate={pickupDate || new Date().toISOString()}
+                                        placeholder="Add Date"
+                                    />
+                                </div>
                             </div>
 
                             {/* Submit Button */}
-                            <div className="flex items-end col-span-2 lg:col-span-1">
+                            <div className="col-span-1 sm:col-span-2 lg:col-span-1 flex items-end mt-1 sm:mt-0">
                                 <button
                                     type="submit"
-                                    className="glass-btn w-full py-2.5 rounded-lg font-semibold text-xs sm:text-sm flex items-center justify-center gap-2"
+                                    className="glass-btn w-full py-2.5 sm:py-2.5 rounded-xl sm:rounded-lg font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm"
                                 >
                                     <LuSearch className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                                     <span>Find Vehicle</span>
@@ -691,8 +690,8 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         </p>
                     </div>
 
-                    {/* 4 Feature Pillars Grid (2x2 on Mobile, 4-Cols on Desktop) */}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 mt-6 sm:mt-12">
+                    {/* 4 Feature Pillars Grid (1-Col Horizontal on Mobile, 4-Cols Vertical on Desktop) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mt-6 sm:mt-12">
                         {[
                             {
                                 icon: <LuLock className="w-5 h-5 text-white" />,
@@ -718,19 +717,26 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                             <AnimatedContent key={i} delay={i * 80} direction="up" distance={15}>
                                 <SpotlightCard
                                     spotlightColor="rgba(13, 148, 136, 0.12)"
-                                    className="h-full flex flex-col p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-300/60 transition-all duration-300"
+                                    className="h-full flex flex-row sm:flex-col items-center sm:items-start gap-3.5 sm:gap-0 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-teal-300/60 transition-all duration-300"
                                 >
-                                    {/* 3D Dual-Layer Squircle Glass Icon Badge (React Bits Design) */}
-                                    <div className="glass-3d-badge mb-2 sm:mb-3.5">
-                                        <span className="glass-3d-badge__back" aria-hidden="true" />
-                                        <span className="glass-3d-badge__front" aria-hidden="true">
-                                            {feature.icon}
-                                        </span>
+                                    {/* 3D Glass Icon Badge (No Drop Shadow) */}
+                                    <div className="shrink-0 mb-0 sm:mb-3.5">
+                                        <div className="glass-3d-badge">
+                                            <span 
+                                                className="glass-3d-badge__front" 
+                                                aria-hidden="true" 
+                                                style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                            >
+                                                {feature.icon}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <h4 className="font-bold text-slate-900 text-xs sm:text-base leading-snug">{feature.title}</h4>
-                                    <p className="text-[10px] sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium line-clamp-3 sm:line-clamp-none">
-                                        {feature.desc}
-                                    </p>
+                                    <div className="flex-1">
+                                        <h4 className="font-bold text-slate-900 text-xs sm:text-base leading-snug">{feature.title}</h4>
+                                        <p className="text-[10px] sm:text-sm text-slate-600 mt-1 sm:mt-1.5 leading-relaxed font-medium">
+                                            {feature.desc}
+                                        </p>
+                                    </div>
                                 </SpotlightCard>
                             </AnimatedContent>
                         ))}
@@ -766,7 +772,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Browse clean sedans, 15-seat vans, or scooters listed by local Bohol hosts.',
                                 link: '/vehicles',
                                 action: 'Browse fleet models',
-                                icon: <LuCar className="w-4 h-4 text-teal-300" />,
+                                icon: <LuCar className="w-4 h-4 text-white" />,
                                 badgeBg: 'bg-teal-500/15 border-teal-500/30 text-teal-300',
                                 glowColor: 'border-slate-800/80 hover:border-teal-500/50',
                                 isAnchor: false,
@@ -777,7 +783,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Pick trip dates and pickup spot. Contact details stay private until host accepts.',
                                 link: '#booking-form',
                                 action: 'Instant date lock',
-                                icon: <LuCalendarCheck className="w-4 h-4 text-emerald-300" />,
+                                icon: <LuCalendarCheck className="w-4 h-4 text-white" />,
                                 badgeBg: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300',
                                 glowColor: 'border-slate-800/80 hover:border-emerald-500/50',
                                 isAnchor: true,
@@ -788,7 +794,7 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 desc: 'Once accepted, phone details unlock for 1-tap calls and easy Bohol pier/airport handover.',
                                 link: '/contact',
                                 action: 'Direct host link',
-                                icon: <LuShieldCheck className="w-4 h-4 text-amber-300" />,
+                                icon: <LuShieldCheck className="w-4 h-4 text-white" />,
                                 badgeBg: 'bg-amber-500/15 border-amber-500/30 text-amber-300',
                                 glowColor: 'border-slate-800/80 hover:border-amber-500/50',
                                 isAnchor: false,
@@ -798,7 +804,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                                 <div className={`relative group p-3.5 rounded-xl bg-slate-900/90 border ${item.glowColor} transition-all duration-300 flex items-center gap-3.5 shadow-md active:scale-[0.99]`}>
                                     {/* Numbered Icon Badge */}
                                     <div className="flex items-center gap-2 shrink-0">
-                                        <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shadow-xs ${item.badgeBg}`}>
+                                        <div 
+                                            className="w-10 h-10 rounded-[12px] flex items-center justify-center bg-gradient-to-br from-[#0d9488] to-[#059669]"
+                                            style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                        >
                                             {item.icon}
                                         </div>
                                     </div>
@@ -1011,7 +1020,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         <details className="group p-2.5 sm:p-6 bg-white/80 hover:bg-white rounded-xl sm:rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer open:bg-white open:border-teal-500/50 open:shadow-md">
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
-                                    <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
+                                    <span 
+                                        className="w-6 h-6 sm:w-9 sm:h-9 rounded-[8px] sm:rounded-[12px] bg-gradient-to-br from-[#0d9488] to-[#059669] text-white flex items-center justify-center shrink-0 transition-all duration-300 group-open:scale-105"
+                                        style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                    >
                                         <LuCircleHelp className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Can foreign tourists drive in Bohol with home license?</span>
@@ -1031,7 +1043,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         <details className="group p-2.5 sm:p-6 bg-white/80 hover:bg-white rounded-xl sm:rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer open:bg-white open:border-teal-500/50 open:shadow-md">
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
-                                    <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
+                                    <span 
+                                        className="w-6 h-6 sm:w-9 sm:h-9 rounded-[8px] sm:rounded-[12px] bg-gradient-to-br from-[#0d9488] to-[#059669] text-white flex items-center justify-center shrink-0 transition-all duration-300 group-open:scale-105"
+                                        style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                    >
                                         <LuMapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Can the vehicle be delivered to Panglao Airport or Tagbilaran Port?</span>
@@ -1051,7 +1066,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         <details className="group p-2.5 sm:p-6 bg-white/80 hover:bg-white rounded-xl sm:rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer open:bg-white open:border-teal-500/50 open:shadow-md">
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
-                                    <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
+                                    <span 
+                                        className="w-6 h-6 sm:w-9 sm:h-9 rounded-[8px] sm:rounded-[12px] bg-gradient-to-br from-[#0d9488] to-[#059669] text-white flex items-center justify-center shrink-0 transition-all duration-300 group-open:scale-105"
+                                        style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                    >
                                         <LuShieldCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">Are helmets required for motorcycle and scooter rentals?</span>
@@ -1071,7 +1089,10 @@ export default function Welcome({ featuredVehicles, stats, locations, vehicleTyp
                         <details className="group p-2.5 sm:p-6 bg-white/80 hover:bg-white rounded-xl sm:rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer open:bg-white open:border-teal-500/50 open:shadow-md">
                             <summary className="font-bold text-slate-900 text-xs sm:text-lg flex items-center justify-between list-none gap-2 sm:gap-4">
                                 <span className="flex items-center gap-2 sm:gap-3.5 min-w-0">
-                                    <span className="w-6 h-6 sm:w-9 sm:h-9 rounded-md sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center shrink-0 group-open:bg-teal-600 group-open:text-white transition-colors">
+                                    <span 
+                                        className="w-6 h-6 sm:w-9 sm:h-9 rounded-[8px] sm:rounded-[12px] bg-gradient-to-br from-[#0d9488] to-[#059669] text-white flex items-center justify-center shrink-0 transition-all duration-300 group-open:scale-105"
+                                        style={{ boxShadow: 'inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.7)' }}
+                                    >
                                         <LuBanknote className="w-3 h-3 sm:w-4 sm:h-4" />
                                     </span>
                                     <span className="leading-snug text-xs sm:text-lg font-semibold text-slate-800">How does the security deposit work?</span>

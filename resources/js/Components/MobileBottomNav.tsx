@@ -363,7 +363,7 @@ export default function MobileBottomNav() {
                 aria-label="Mobile Navigation"
                 className="fixed bottom-0 left-0 right-0 z-40 md:hidden pointer-events-none pb-[env(safe-area-inset-bottom)]"
             >
-                <div className="mx-3 mb-3 pointer-events-auto bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-200/90 px-1 py-1.5">
+                <div className="mx-3 mb-3 pointer-events-auto bg-white/65 backdrop-blur-xl backdrop-saturate-150 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-slate-300 px-1 py-1.5">
                     <div className="grid grid-cols-5 items-center">
                         {/* 1. Home Tab */}
                         <Link

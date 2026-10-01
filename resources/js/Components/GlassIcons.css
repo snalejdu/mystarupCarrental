@@ -1,10 +1,12 @@
 .icon-btns {
-  display: grid;
-  grid-gap: 4em;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5em 4em;
   margin: auto;
-  padding: 2.5em 0;
-  overflow: visible;
+  padding: 2.5em 1rem 3.5em 1rem;
+  width: 100%;
 }
 
 .icon-btns-flex {
@@ -133,13 +135,48 @@
   color: #0f766e;
 }
 
-@media (min-width: 768px) {
-  .icon-btns {
-    grid-template-columns: repeat(3, 1fr);
+/* Mobile-friendly single compact row (no scrolling, scaled to fit, wide tap spacing) */
+@media (max-width: 768px) {
+  .icon-btns.scrollable-row {
+    flex-wrap: nowrap !important;
+    justify-content: space-evenly !important;
+    overflow: visible !important;
+    padding: 0.5rem 0.25rem 2.5rem 0.25rem !important;
+    gap: 1.25rem !important; /* increased spacing for pressing */
+    width: 100% !important;
+  }
+  
+  .icon-btns.scrollable-row .icon-btn {
+    flex: 0 1 auto !important;
+    font-size: 9.5px !important; /* Smaller icons to accommodate bigger gaps */
+    width: 4.5em !important;
+    height: 4.5em !important;
+    margin: 0 !important;
+  }
+
+  .icon-btns.scrollable-row .icon-btn__back,
+  .icon-btns.scrollable-row .icon-btn__front {
+    border-radius: 1.25em !important;
+  }
+
+  .icon-btns.scrollable-row .icon-btn__icon {
+    width: 1.8em !important;
+    height: 1.8em !important;
+  }
+
+  .icon-btns.scrollable-row .icon-btn__label {
+    font-size: 9.5px !important; /* Fixed readable font size */
+    top: 108% !important;
+    right: -2em !important;
+    left: -2em !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    letter-spacing: -0.02em !important;
   }
 }
 
-/* Mobile-friendly wrapped glass icons — zero clipping, all 5 visible */
+/* Kept for legacy compatibility if .icon-btns-flex is used elsewhere */
 @media (max-width: 640px) {
   .icon-btns-flex {
     display: flex;

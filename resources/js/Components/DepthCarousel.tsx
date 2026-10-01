@@ -30,6 +30,7 @@ export interface DepthCarouselProps {
     loop?: boolean;
     showControls?: boolean;
     showIndicators?: boolean;
+    disableSwipe?: boolean;
     onChange?: (index: number, item: DepthCarouselItem) => void;
     className?: string;
 }
@@ -67,6 +68,7 @@ export default function DepthCarousel({
     loop = true,
     showControls = true,
     showIndicators = true,
+    disableSwipe = false,
     onChange,
     className = ''
 }: DepthCarouselProps) {
@@ -362,16 +364,16 @@ export default function DepthCarousel({
     return (
         <div
             ref={rootRef}
-            className={`depth-carousel ${className}`.trim()}
+            className={`depth-carousel ${disableSwipe ? 'depth-carousel--no-swipe' : ''} ${className}`.trim()}
             style={{ '--dc-perspective': `${perspective}px` } as React.CSSProperties}
             role="group"
             aria-roledescription="carousel"
             aria-label="Depth carousel"
             tabIndex={0}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerEnd}
-            onPointerCancel={onPointerEnd}
+            onPointerDown={disableSwipe ? undefined : onPointerDown}
+            onPointerMove={disableSwipe ? undefined : onPointerMove}
+            onPointerUp={disableSwipe ? undefined : onPointerEnd}
+            onPointerCancel={disableSwipe ? undefined : onPointerEnd}
             onKeyDown={onKeyDown}
         >
             <div className="depth-carousel__stage" ref={stageRef}>
@@ -406,7 +408,10 @@ export default function DepthCarousel({
                         type="button"
                         className="depth-carousel__arrow depth-carousel__arrow--prev"
                         aria-label="Previous slide"
-                        onClick={() => navigateBy(-1)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigateBy(-1);
+                        }}
                     >
                         <LuChevronLeft className="w-5 h-5 stroke-[2.5]" />
                     </button>
@@ -414,7 +419,10 @@ export default function DepthCarousel({
                         type="button"
                         className="depth-carousel__arrow depth-carousel__arrow--next"
                         aria-label="Next slide"
-                        onClick={() => navigateBy(1)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigateBy(1);
+                        }}
                     >
                         <LuChevronRight className="w-5 h-5 stroke-[2.5]" />
                     </button>

@@ -29,7 +29,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
             <DynamicToast />
 
             {/* Top Navigation Header (GPU Layer Promoted) */}
-            <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-2xs" style={{ transform: 'translateZ(0)' }}>
+            <header className="sticky top-0 z-50 bg-white/75 backdrop-blur-md backdrop-saturate-150 border-b border-slate-300 shadow-2xs" style={{ transform: 'translateZ(0)' }}>
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Brand Logo */}
